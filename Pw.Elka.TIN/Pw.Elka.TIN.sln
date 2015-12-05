@@ -6,10 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64CBB83B-44C6-406D-98A6-60DE5D1DEF43}"
 	ProjectSection(SolutionItems) = preProject
 		dokumentacja.docx = dokumentacja.docx
+		Protokół SMTP - notatki.docx = Protokół SMTP - notatki.docx
 		przepływy wstępne.jpg = przepływy wstępne.jpg
 		regulamin.docx = regulamin.docx
 		TextFile1.txt = TextFile1.txt
-		..\..\..\..\Desktop\TINuseCase.docx = ..\..\..\..\Desktop\TINuseCase.docx
+		TINuseCase.docx = TINuseCase.docx
 		VisioDiagrams.vsdx = VisioDiagrams.vsdx
 	EndProjectSection
 EndProject
