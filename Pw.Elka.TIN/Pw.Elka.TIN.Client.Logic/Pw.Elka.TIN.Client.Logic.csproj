@@ -41,13 +41,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Model\Communicates\ClientAuthCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupAddressAddCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupAddressRemoveCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupCreateCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupDeleteCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupGetAllCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientGroupGetOneCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientMessageCreateCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientMessageDeleteCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientMessageGetAllCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientMessageGetOneCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientMessageModifyCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientPasswordChangeCommunicate.cs" />
+    <Compile Include="Model\Communicates\ClientSendCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerAuthCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerAckCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorBadContentCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorBadGroupCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorBadMessageCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorBadRequestCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorBusyCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorNotAuthorizedCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerErrorServerNotAvailableCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerGroupGetAllCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerGroupGetOneCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerMessageGetAllCommunicate.cs" />
+    <Compile Include="Model\Communicates\ServerMessageGetOneCommunicate.cs" />
     <Compile Include="XorCipher.cs" />
     <Compile Include="Interfaces\ILayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TCPLayer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Model\Parsers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
