@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Interfaces
 {
-    interface IDecipher
+    interface ILayer
     {
-        void decipher(byte[] buffer);
+        byte[] Receive();
+        void Send(byte[] buffer);
     }
 }

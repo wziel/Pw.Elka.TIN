@@ -8,27 +8,18 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic
 {
-    internal class TCPLayer : ITCPLayer
+    internal class TCPLayer : ILayer
     {
         private int _port;
         private string _ipAddress;
-        private IDecipher _cipher;
         private TcpClient _tcpClient;
         private NetworkStream _networkStream;
 
-        public bool IsConnected
-        {
-            get;
-            private set;
-        }
-
-        public TCPLayer(int port, string ipAddress, IDecipher cipher)
+        public TCPLayer(int port, string ipAddress)
         {
             _port = port;
             _ipAddress = ipAddress;
-            _cipher = cipher;
             _tcpClient = new TcpClient();
-            IsConnected = false;
         }
 
         public void Connect()
@@ -44,7 +35,7 @@ namespace Pw.Elka.TIN.Client.Logic
             _networkStream.Write(data, 0, length + 2);
         }
 
-        public void Receive()
+        public byte[] Receive()
         {
             byte[] buffer = new byte[2];
             _networkStream.Read(buffer, 0, 2);
@@ -52,7 +43,8 @@ namespace Pw.Elka.TIN.Client.Logic
 
             buffer = new byte[length];
             _networkStream.Read(buffer, 0, length);
-            _cipher.decipher(buffer);
+
+            return buffer;
         }
     }
 }
