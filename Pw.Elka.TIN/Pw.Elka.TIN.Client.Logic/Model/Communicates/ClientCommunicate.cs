@@ -2,7 +2,8 @@
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    internal class ServerAckCommunicate : ServerCommunicate
+    abstract internal class ClientCommunicate
     {
+        abstract internal byte[] GetBytes();
     }
 }

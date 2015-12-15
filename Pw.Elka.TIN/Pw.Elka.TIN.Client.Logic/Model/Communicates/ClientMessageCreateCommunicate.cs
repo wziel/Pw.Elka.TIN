@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Pw.Elka.TIN.Client.Logic.Model.Parsers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    public class ClientMessageCreateCommunicate
+    internal class ClientMessageCreateCommunicate : ClientCommunicate
     {
         public string MessageTemplate { get; set; }
         public string MessageName { get; set; }
-
+        
+        internal override byte[] GetBytes()
+        {
+            return ASIAParserData.GetClientCommunicationCodeByType<ClientMessageCreateCommunicate>()
+            .Concat(ASIAStringParser.GetBytes(MessageTemplate))
+            .Concat(ASIAStringParser.GetBytes(MessageName))
+            .ToArray();
+        }
     }
 }

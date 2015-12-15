@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Pw.Elka.TIN.Client.Logic.Model.Parsers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    public class ClientMessageModifyCommunicate
+    internal class ClientMessageModifyCommunicate : ClientCommunicate
     {
         public int MessageID { get; set; }
         public string MessageTemplate { get; set; }
         public string MessageName { get; set; }
-
+        
+        internal override byte[] GetBytes()
+        {
+            return ASIAParserData.GetClientCommunicationCodeByType<ClientMessageModifyCommunicate>()
+            .Concat(ASIAIntParser.GetBytes(MessageID))
+            .Concat(ASIAStringParser.GetBytes(MessageTemplate))
+            .Concat(ASIAStringParser.GetBytes(MessageName))
+            .ToArray();
+        }
     }
 }

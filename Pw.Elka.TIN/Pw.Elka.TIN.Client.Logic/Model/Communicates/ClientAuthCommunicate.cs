@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Pw.Elka.TIN.Client.Logic.Model.Parsers;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    public class ClientAuthCommunicate
+    internal class ClientAuthCommunicate : ClientCommunicate
     {
         public string Login { get; set; }
         public string Passwhash { get; set; }
+
+        internal override byte[] GetBytes()
+        {
+            return ASIAParserData.GetClientCommunicationCodeByType<ClientAuthCommunicate>()
+            .Concat(ASIAStringParser.GetBytes(Login))
+            .Concat(ASIAStringParser.GetBytes(Passwhash))
+            .ToArray();
+        }
     }
 }

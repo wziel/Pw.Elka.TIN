@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Pw.Elka.TIN.Client.Logic.Model.Parsers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    public class ClientGroupAddressRemoveCommunicate
+    internal class ClientGroupAddressRemoveCommunicate : ClientCommunicate
     {
         public int AddressID { get; set; }
+
+        internal override byte[] GetBytes()
+        {
+            return ASIAParserData.GetClientCommunicationCodeByType<ClientGroupAddressRemoveCommunicate>()
+            .Concat(ASIAIntParser.GetBytes(AddressID))
+            .ToArray();
+        }
     }
 }

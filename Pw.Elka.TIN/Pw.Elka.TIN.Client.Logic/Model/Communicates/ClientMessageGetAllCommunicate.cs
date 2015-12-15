@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pw.Elka.TIN.Client.Logic.Model.Parsers;
 
 namespace Pw.Elka.TIN.Client.Logic.Model.Communicates
 {
-    public class ClientMessageGetAllCommunicate
+    internal class ClientMessageGetAllCommunicate : ClientCommunicate
     {
+
+        internal override byte[] GetBytes()
+        {
+            return ASIAParserData.GetClientCommunicationCodeByType<ClientMessageGetAllCommunicate>();
+        }
     }
 }
