@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{b5bfed00-7f03-411d-b036-0531b3e68e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{7c291f1a-2f05-4a83-b15c-aeb3daa7bea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\DAL">
+      <UniqueIdentifier>{44725689-2d55-4402-975b-4d21bfd07011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ClientSession">
+      <UniqueIdentifier>{6695a069-7853-4d07-9d56-3ecb7d2dca6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Cipher">
+      <UniqueIdentifier>{a2da03b3-d39d-4689-8e25-53427521a4d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\MessagesQueue">
+      <UniqueIdentifier>{2c8b12e0-f633-4e13-8b4b-7d97f53b567f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\TcpLayer">
+      <UniqueIdentifier>{22f6b4e7-2f36-424c-9068-07a84d0cfcd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\RootManager">
+      <UniqueIdentifier>{8748bd46-05bd-4264-a15a-aa9bb61cd32f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\SmtpLayer">
+      <UniqueIdentifier>{b94b3a6d-dad3-451b-b79a-eae2e78ebea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\SessionListener">
+      <UniqueIdentifier>{44b07ca1-d824-426e-b5b3-c18f9c825f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shared">
+      <UniqueIdentifier>{fce7df74-c572-4bb4-92a8-fda9e9198d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{98c92cd4-44d9-43d9-8636-b67f417032fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Cipher">
+      <UniqueIdentifier>{8fd61e4c-2b76-4d59-bdcb-8423a319110c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ClientSession">
+      <UniqueIdentifier>{9ede6541-b0dc-46e7-90af-990b97154214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\DAL">
+      <UniqueIdentifier>{504d9ca2-9361-41dc-b8f9-6f7e46d228d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\MessagesQueue">
+      <UniqueIdentifier>{23588520-91da-4694-8436-77e2c5024fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\RootManager">
+      <UniqueIdentifier>{0fe58a51-65cb-48b8-be06-faf42426de61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\SessionListener">
+      <UniqueIdentifier>{df2d5544-e280-4319-b88d-e8ef2398abcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\SmtpLayer">
+      <UniqueIdentifier>{90f5918a-9b3c-4612-a333-7eb9923c6c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\TcpLayer">
+      <UniqueIdentifier>{6c982969-6ec3-4272-b553-f93d23449822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shared">
+      <UniqueIdentifier>{fbf8391b-c557-48fd-aa89-7493dfd10a0d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ICipherManager.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientCreator.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientDAL.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientManager.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientSession.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientSessionManager.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IDAL.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ILayer.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ISessionListener.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ISmtpLayer.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ITcpLayerManager.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\AddressModel.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\ClientModel.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\GroupModel.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\MessageModel.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\SessionState.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\SmtpMessage.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\Cipher\Cipher.h">
+      <Filter>Header Files\Components\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\ClientSession\ClientSession.h">
+      <Filter>Header Files\Components\ClientSession</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\DAL\DAL.h">
+      <Filter>Header Files\Components\DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\MessagesQueue\MessagesQueue.h">
+      <Filter>Header Files\Components\MessagesQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h">
+      <Filter>Header Files\Components\SessionListener</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\RootManager\RootManager.h">
+      <Filter>Header Files\Components\RootManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\TcpLayer\TcpLayer.h">
+      <Filter>Header Files\Components\TcpLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h">
+      <Filter>Header Files\Components\SmtpLayer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source Files\Shared\AddressModel.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Shared\ClientModel.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Shared\GroupModel.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Shared\MessageModel.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Shared\SmtpMessage.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
+      <Filter>Source Files\Components\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\ClientSession\ClientSession.cpp">
+      <Filter>Source Files\Components\ClientSession</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\DAL\DAL.cpp">
+      <Filter>Source Files\Components\DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\MessagesQueue\MessagesQueue.cpp">
+      <Filter>Source Files\Components\MessagesQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\RootManager\RootManager.cpp">
+      <Filter>Source Files\Components\RootManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\SessionListener\SessionListener.cpp">
+      <Filter>Source Files\Components\SessionListener</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp">
+      <Filter>Source Files\Components\SmtpLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp">
+      <Filter>Source Files\Components\TcpLayer</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
