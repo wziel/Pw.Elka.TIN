@@ -13,6 +13,7 @@ namespace Pw.Elka.TIN.Client.Logic
         private SessionLayer _session;
         private XorCipher _cipher;
         private TCPLayer _tcp;
+        private string _salt;
 
         public App(string serverAddress, int serverPort)
         {
@@ -29,14 +30,12 @@ namespace Pw.Elka.TIN.Client.Logic
         public ServerCommunicate Authorize(string login, string password)
         {
             var auth = (ServerAuthCommunicate)_session.ReceiveCommunicate();
-
-            //todo get salt (is it int or string? aska Asia)
-            throw new NotImplementedException();
+            _salt = auth.Salt;
 
             _session.SendCommunicate(new ClientAuthCommunicate()
             {
                 Login = login,
-                Passwhash = DJBHash.GetHash(password, 0)
+                Passwhash = Hashing.GetDJBHash(password + _salt)
             });
             return _session.ReceiveCommunicate();
         }
@@ -151,9 +150,12 @@ namespace Pw.Elka.TIN.Client.Logic
 
         public ServerCommunicate PasswordChange(string oldPassword, string newPassword)
         {
-
-            //todo - the same as in authorize method, ask Asia what is salt
-            throw new NotImplementedException();
+            _session.SendCommunicate(new ClientPasswordChangeCommunicate()
+            {
+                PasswordHash = Hashing.GetDJBHash(oldPassword + _salt),
+                NewPasswordHash = Hashing.GetXoredString(newPassword)
+            });
+            return _session.ReceiveCommunicate();
         }
     }
 }

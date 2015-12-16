@@ -70,12 +70,12 @@
     <Compile Include="Communicates\ServerGroupGetOneCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetAllCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetOneCommunicate.cs" />
-    <Compile Include="Hash\DJBHash.cs" />
+    <Compile Include="Hash\Hashing.cs" />
+    <Compile Include="Parsers\ASIAIntListParser.cs" />
     <Compile Include="Parsers\ASIAServerCommunicateParser.cs" />
     <Compile Include="Parsers\ASIAStringListParser.cs" />
     <Compile Include="Parsers\ASIAStringParser.cs" />
     <Compile Include="Parsers\ASIAParserData.cs" />
-    <Compile Include="Parsers\ASIAIntListParser.cs" />
     <Compile Include="Parsers\ASIAIntParser.cs" />
     <Compile Include="SessionLayer.cs" />
     <Compile Include="XorCipher.cs" />
