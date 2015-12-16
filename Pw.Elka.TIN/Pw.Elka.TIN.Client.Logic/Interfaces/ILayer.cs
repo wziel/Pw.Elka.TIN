@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Interfaces
 {
-    interface ILayer
+    internal interface ILayer
     {
         byte[] Receive();
         void Send(byte[] buffer);
