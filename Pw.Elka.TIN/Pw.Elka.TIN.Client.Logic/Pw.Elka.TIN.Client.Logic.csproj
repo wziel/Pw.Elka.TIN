@@ -66,6 +66,7 @@
     <Compile Include="Communicates\ServerErrorBusyCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorNotAuthorizedCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorServerNotAvailableCommunicate.cs" />
+    <Compile Include="Communicates\ServerGroupAddressGetOneCommunicate.cs" />
     <Compile Include="Communicates\ServerGroupGetAllCommunicate.cs" />
     <Compile Include="Communicates\ServerGroupGetOneCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetAllCommunicate.cs" />

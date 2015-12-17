@@ -8,7 +8,7 @@ namespace Pw.Elka.TIN.Client.Logic.Communicates
         public int GroupID { get; set; }
         public string GroupName { get; set; }
         public List<int> AddressID { get; set; }
-        public List<int> AddressValuse { get; set; }
+        public List<string> AddressValuse { get; set; }
 
         public override void SetFieldsFrom(byte[] bytes)
         {
@@ -24,7 +24,7 @@ namespace Pw.Elka.TIN.Client.Logic.Communicates
             AddressID = ASIAIntListParser.GetList(bytes, startIndex, out newStartIndex);
             startIndex = newStartIndex;
 
-            AddressValuse = ASIAIntListParser.GetList(bytes, startIndex, out newStartIndex);
+            AddressValuse = ASIAStringListParser.GetList(bytes, startIndex, out newStartIndex);
             startIndex = newStartIndex;
         }
     }
