@@ -28,9 +28,6 @@
     <Filter Include="Source Files\Components\Cipher">
       <UniqueIdentifier>{a2da03b3-d39d-4689-8e25-53427521a4d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\MessagesQueue">
-      <UniqueIdentifier>{2c8b12e0-f633-4e13-8b4b-7d97f53b567f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components\TcpLayer">
       <UniqueIdentifier>{22f6b4e7-2f36-424c-9068-07a84d0cfcd7}</UniqueIdentifier>
     </Filter>
@@ -57,9 +54,6 @@
     </Filter>
     <Filter Include="Header Files\Components\DAL">
       <UniqueIdentifier>{504d9ca2-9361-41dc-b8f9-6f7e46d228d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\MessagesQueue">
-      <UniqueIdentifier>{23588520-91da-4694-8436-77e2c5024fe7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Components\RootManager">
       <UniqueIdentifier>{0fe58a51-65cb-48b8-be06-faf42426de61}</UniqueIdentifier>
@@ -141,9 +135,6 @@
     <ClInclude Include="Header Files\Components\DAL\DAL.h">
       <Filter>Header Files\Components\DAL</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Components\MessagesQueue\MessagesQueue.h">
-      <Filter>Header Files\Components\MessagesQueue</Filter>
-    </ClInclude>
     <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h">
       <Filter>Header Files\Components\SessionListener</Filter>
     </ClInclude>
@@ -155,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h">
       <Filter>Header Files\Components\SmtpLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Shared\MessagesQueue.h">
+      <Filter>Header Files\Shared</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +176,6 @@
     <ClCompile Include="Source Files\Components\DAL\DAL.cpp">
       <Filter>Source Files\Components\DAL</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Components\MessagesQueue\MessagesQueue.cpp">
-      <Filter>Source Files\Components\MessagesQueue</Filter>
-    </ClCompile>
     <ClCompile Include="Source Files\Components\RootManager\RootManager.cpp">
       <Filter>Source Files\Components\RootManager</Filter>
     </ClCompile>
@@ -196,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp">
       <Filter>Source Files\Components\TcpLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Shared\MessagesQueue.cpp">
+      <Filter>Source Files\Shared</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
