@@ -121,7 +121,6 @@
     <ClInclude Include="Header Files\Components\Cipher\Cipher.h" />
     <ClInclude Include="Header Files\Components\ClientSession\ClientSession.h" />
     <ClInclude Include="Header Files\Components\DAL\DAL.h" />
-    <ClInclude Include="Header Files\Components\MessagesQueue\MessagesQueue.h" />
     <ClInclude Include="Header Files\Components\RootManager\RootManager.h" />
     <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h" />
     <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h" />
@@ -142,14 +141,15 @@
     <ClInclude Include="Header Files\Shared\ClientModel.h" />
     <ClInclude Include="Header Files\Shared\GroupModel.h" />
     <ClInclude Include="Header Files\Shared\MessageModel.h" />
+    <ClInclude Include="Header Files\Shared\MessagesQueue.h" />
     <ClInclude Include="Header Files\Shared\SessionState.h" />
     <ClInclude Include="Header Files\Shared\SmtpMessage.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\ClientSession.cpp" />
     <ClCompile Include="Source Files\Components\DAL\DAL.cpp" />
-    <ClCompile Include="Source Files\Components\MessagesQueue\MessagesQueue.cpp" />
     <ClCompile Include="Source Files\Components\RootManager\RootManager.cpp" />
     <ClCompile Include="Source Files\Components\SessionListener\SessionListener.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
@@ -158,6 +158,7 @@
     <ClCompile Include="Source Files\Shared\ClientModel.cpp" />
     <ClCompile Include="Source Files\Shared\GroupModel.cpp" />
     <ClCompile Include="Source Files\Shared\MessageModel.cpp" />
+    <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
     <ClCompile Include="Source Files\Shared\SmtpMessage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
