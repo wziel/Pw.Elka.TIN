@@ -2,7 +2,7 @@
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerAuthCommunicate : ServerCommunicate
+    internal class ServerAuthCommunicate : ServerCommunicate
     {
         public string Salt { get; set; }
 

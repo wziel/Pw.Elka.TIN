@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pw.Elka.TIN.Client.WPF.Model
+namespace Pw.Elka.TIN.Client.Logic.Models
 {
-    internal class MessageModel
+    public class AddressModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Content { get; set; }
+        public string Value { get; set; }
+        public string AdresseeName { get; set; }
     }
 }

@@ -55,10 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppDAL.cs" />
-    <Compile Include="Model\AddressModel.cs" />
-    <Compile Include="Model\GroupModel.cs" />
-    <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="AppDAL.cs" />
     <Compile Include="Communicates\ClientAddressAddCommunicate.cs" />
     <Compile Include="Communicates\ClientAddressGetAllCommunicate.cs" />
     <Compile Include="Communicates\ClientAddressRemoveCommunicate.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="Communicates\ServerMessageGetAllCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetOneCommunicate.cs" />
     <Compile Include="Hash\Hashing.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\GroupModel.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Parsers\ASIAIntListParser.cs" />
     <Compile Include="Parsers\ASIAServerCommunicateParser.cs" />
     <Compile Include="Parsers\ASIAStringListParser.cs" />

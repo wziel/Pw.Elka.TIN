@@ -2,7 +2,7 @@
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerAckCommunicate : ServerCommunicate
+    internal class ServerAckCommunicate : ServerCommunicate
     {
     }
 }

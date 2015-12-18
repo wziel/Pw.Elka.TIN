@@ -2,7 +2,7 @@
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerMessageGetOneCommunicate : ServerCommunicate
+    internal class ServerMessageGetOneCommunicate : ServerCommunicate
     {
         public int MessageID { get; set; }
         public string MessageTemplate { get; set; }

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerAddressGetAllCommunicate: ServerAckCommunicate
+    internal class ServerAddressGetAllCommunicate: ServerAckCommunicate
     {
         public List<int> AddressIds { get; set; }
         public List<string> AddressValues { get; set; }
+        public List<string> AddressNames { get; set; }
 
         public override void SetFieldsFrom(byte[] bytes)
         {
@@ -21,6 +22,9 @@ namespace Pw.Elka.TIN.Client.Logic.Communicates
             startIndex = newStartIndex;
 
             AddressValues = ASIAStringListParser.GetList(bytes, startIndex, out newStartIndex);
+            startIndex = newStartIndex;
+
+            AddressNames = ASIAStringListParser.GetList(bytes, startIndex, out newStartIndex);
             startIndex = newStartIndex;
         }
     }

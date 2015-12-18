@@ -27,7 +27,7 @@ namespace Pw.Elka.TIN.Client.Logic
             _tcp.Connect();
         }
 
-        public ServerCommunicate Authorize(string login, string password)
+        internal ServerCommunicate Authorize(string login, string password)
         {
             var auth = (ServerAuthCommunicate)_session.ReceiveCommunicate();
             _salt = auth.Salt;
@@ -40,7 +40,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate MessageCreate(string template, string name)
+        internal ServerCommunicate MessageCreate(string template, string name)
         {
             _session.SendCommunicate(new ClientMessageCreateCommunicate()
             {
@@ -50,7 +50,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate MessageModyify(string template, string name, int id)
+        internal ServerCommunicate MessageModyify(string template, string name, int id)
         {
             _session.SendCommunicate(new ClientMessageModifyCommunicate()
             {
@@ -61,7 +61,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate MessageDelete(int id)
+        internal ServerCommunicate MessageDelete(int id)
         {
             _session.SendCommunicate(new ClientMessageDeleteCommunicate()
             {
@@ -70,13 +70,13 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate MessageGetAll()
+        internal ServerCommunicate MessageGetAll()
         {
             _session.SendCommunicate(new ClientMessageGetAllCommunicate());
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate MessageGetOne(int id)
+        internal ServerCommunicate MessageGetOne(int id)
         {
             _session.SendCommunicate(new ClientMessageGetOneCommunicate()
             {
@@ -85,7 +85,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate GroupCreate(string name)
+        internal ServerCommunicate GroupCreate(string name)
         {
             _session.SendCommunicate(new ClientGroupCreateCommunicate()
             {
@@ -94,7 +94,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate GroupDelete(int id)
+        internal ServerCommunicate GroupDelete(int id)
         {
             _session.SendCommunicate(new ClientGroupDeleteCommunicate()
             {
@@ -103,7 +103,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate GroupGetOne(int id)
+        internal ServerCommunicate GroupGetOne(int id)
         {
             _session.SendCommunicate(new ClientGroupGetOneCommunicate()
             {
@@ -112,32 +112,33 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate GroupGetAll()
+        internal ServerCommunicate GroupGetAll()
         {
             _session.SendCommunicate(new ClientGroupGetAllCommunicate());
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate GroupAddressAdd(int groupid, string addressValue)
+        internal ServerCommunicate GroupAddressAdd(int groupid, int addressId)
         {
             _session.SendCommunicate(new ClientGroupAddressAddCommunicate()
             {
                 GroupID = groupid,
-                AddressID = addressValue
-            });
-            return _session.ReceiveCommunicate();
-        }
-
-        public ServerCommunicate GroupAddressRemove(int addressId)
-        {
-            _session.SendCommunicate(new ClientGroupAddressRemoveCommunicate()
-            {
                 AddressID = addressId
             });
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate Send(int groupId, int messageId, List<string>templateValues)
+        internal ServerCommunicate GroupAddressRemove(int groupId, int addressId)
+        {
+            _session.SendCommunicate(new ClientGroupAddressRemoveCommunicate()
+            {
+                AddressID = addressId,
+                GroupID = groupId
+            });
+            return _session.ReceiveCommunicate();
+        }
+
+        internal ServerCommunicate Send(int groupId, int messageId, List<string>templateValues)
         {
             _session.SendCommunicate(new ClientSendCommunicate()
             {
@@ -148,13 +149,38 @@ namespace Pw.Elka.TIN.Client.Logic
             return _session.ReceiveCommunicate();
         }
 
-        public ServerCommunicate PasswordChange(string oldPassword, string newPassword)
+        internal ServerCommunicate PasswordChange(string oldPassword, string newPassword)
         {
             _session.SendCommunicate(new ClientPasswordChangeCommunicate()
             {
                 PasswordHash = Hashing.GetDJBHash(oldPassword + _salt),
                 NewPasswordHash = Hashing.GetXoredString(newPassword)
             });
+            return _session.ReceiveCommunicate();
+        }
+
+        internal ServerCommunicate AddressAdd(string addressValue, string addresseeName)
+        {
+            _session.SendCommunicate(new ClientAddressAddCommunicate()
+            {
+                AddressValue = addressValue,
+                AddresseeName = addresseeName
+            });
+            return _session.ReceiveCommunicate();
+        }
+
+        internal ServerCommunicate AddressRemove(int addressId)
+        {
+            _session.SendCommunicate(new ClientAddressRemoveCommunicate()
+            {
+                AddressID = addressId
+            });
+            return _session.ReceiveCommunicate();
+        }
+
+        internal ServerCommunicate AddressGetAll()
+        {
+            _session.SendCommunicate(new ClientAddressGetAllCommunicate());
             return _session.ReceiveCommunicate();
         }
     }

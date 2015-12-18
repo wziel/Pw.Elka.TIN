@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pw.Elka.TIN.Client.WPF.Model
+namespace Pw.Elka.TIN.Client.Logic.Models
 {
-    internal class GroupModel
+    public class GroupModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

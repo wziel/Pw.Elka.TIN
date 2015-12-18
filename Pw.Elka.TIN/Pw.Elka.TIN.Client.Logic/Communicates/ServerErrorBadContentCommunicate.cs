@@ -2,7 +2,7 @@
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerErrorBadContentCommunicate : ServerCommunicate
+    internal class ServerErrorBadContentCommunicate : ServerCommunicate
     {
     }
 }

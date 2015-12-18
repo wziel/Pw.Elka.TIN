@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerGroupGetAllCommunicate : ServerCommunicate
+    internal class ServerGroupGetAllCommunicate : ServerCommunicate
     {
         public List<int> GroupIDs { get; set; }
         public List<string> GroupNames { get; set; }
