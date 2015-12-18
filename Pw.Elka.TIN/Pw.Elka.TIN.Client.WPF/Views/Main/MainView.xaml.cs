@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class MainView : UserControl
     {
-        public LoginView()
+        public MainView()
         {
             InitializeComponent();
-        }
-
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            var stkpanel = (StackPanel)Parent;
-            var rootView = (RootContainerView)stkpanel.Parent;
-            rootView.NavigateToMainView();
         }
     }
 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main
 {
     /// <summary>
-    /// Interaction logic for GroupDetails.xaml
+    /// Interaction logic for SendView.xaml
     /// </summary>
-    public partial class GroupDetails : UserControl
+    public partial class SendView : UserControl
     {
-        public GroupDetails()
+        public SendView()
         {
             InitializeComponent();
         }

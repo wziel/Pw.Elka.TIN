@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 {
     /// <summary>
     /// Interaction logic for MessageDetails.xaml

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
 {
     /// <summary>
-    /// Interaction logic for GroupsView.xaml
+    /// Interaction logic for GroupDetails.xaml
     /// </summary>
-    public partial class GroupsView : UserControl
+    public partial class GroupDetails : UserControl
     {
-        public GroupsView()
+        public GroupDetails()
         {
             InitializeComponent();
         }

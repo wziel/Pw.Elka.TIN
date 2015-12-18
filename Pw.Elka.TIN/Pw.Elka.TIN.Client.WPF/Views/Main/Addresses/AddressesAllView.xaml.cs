@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main.Addresses
 {
     /// <summary>
-    /// Interaction logic for GroupEdit.xaml
+    /// Interaction logic for AddressesView.xaml
     /// </summary>
-    public partial class GroupEdit : UserControl
+    public partial class AddressesAllView : UserControl
     {
-        public GroupEdit()
+        public AddressesAllView()
         {
             InitializeComponent();
         }

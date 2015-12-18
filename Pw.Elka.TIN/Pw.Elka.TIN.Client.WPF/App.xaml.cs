@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pw.Elka.TIN.Client.Logic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,7 @@ namespace Pw.Elka.TIN.Client.WPF
     /// </summary>
     public partial class App : Application
     {
+        private Logic.App AppLogic { get; set; }
+        internal AppDAL AppDAL { get; private set; }
     }
 }

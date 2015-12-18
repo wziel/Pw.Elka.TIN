@@ -27,7 +27,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-
+            var stkpanel = (StackPanel)Parent;
+            var rootView = (RootContainerView)stkpanel.Parent;
+            rootView.NavigateToLoginView();
         }
     }
 }

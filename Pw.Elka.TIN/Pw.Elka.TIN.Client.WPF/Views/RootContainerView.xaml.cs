@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pw.Elka.TIN.Client.WPF.Views.Main;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,25 @@ using System.Windows.Shapes;
 namespace Pw.Elka.TIN.Client.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MessageEdit.xaml
+    /// Interaction logic for RootContainerView.xaml
     /// </summary>
-    public partial class MessageEdit : UserControl
+    public partial class RootContainerView : UserControl
     {
-        public MessageEdit()
+        public RootContainerView()
         {
             InitializeComponent();
+        }
+
+        public void NavigateToLoginView()
+        {
+            stkPanel.Children.Clear();
+            stkPanel.Children.Add(new LoginView());
+        }
+
+        public void NavigateToMainView()
+        {
+            stkPanel.Children.Clear();
+            stkPanel.Children.Add(new MainView());
         }
     }
 }

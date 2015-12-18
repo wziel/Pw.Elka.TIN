@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views
+namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 {
     /// <summary>
-    /// Interaction logic for MessagesView.xaml
+    /// Interaction logic for MessageEdit.xaml
     /// </summary>
-    public partial class MessagesView : UserControl
+    public partial class MessageEdit : UserControl
     {
-        public MessagesView()
+        public MessageEdit()
         {
             InitializeComponent();
         }
