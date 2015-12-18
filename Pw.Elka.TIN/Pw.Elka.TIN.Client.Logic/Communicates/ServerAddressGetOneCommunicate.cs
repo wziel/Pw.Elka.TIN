@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class ServerGroupAddressGetOneCommunicate : ServerCommunicate
+    public class ServerAddressGetOneCommunicate : ServerCommunicate
     {
         public int AddressID { get; set; }
 

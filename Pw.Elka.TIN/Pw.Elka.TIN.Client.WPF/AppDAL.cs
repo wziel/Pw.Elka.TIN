@@ -120,7 +120,7 @@ namespace Pw.Elka.TIN.Client.WPF
         {
             var groupModel = GroupModelGetById(groupId);
             var serverCommunicate = _appLogic.GroupAddressAdd(groupId, address);
-            var communicate = serverCommunicate as ServerGroupAddressGetOneCommunicate;
+            var communicate = serverCommunicate as ServerAddressGetOneCommunicate;
             if(communicate == null)
             {
                 throw new NotImplementedException();

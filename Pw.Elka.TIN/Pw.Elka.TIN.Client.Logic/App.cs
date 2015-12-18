@@ -123,7 +123,7 @@ namespace Pw.Elka.TIN.Client.Logic
             _session.SendCommunicate(new ClientGroupAddressAddCommunicate()
             {
                 GroupID = groupid,
-                AddressValue = addressValue
+                AddressID = addressValue
             });
             return _session.ReceiveCommunicate();
         }

@@ -26,6 +26,9 @@ namespace Pw.Elka.TIN.Client.Logic.Parsers
                 { typeof(ClientGroupAddressRemoveCommunicate), 0x0C },
                 { typeof(ClientSendCommunicate), 0x0D },
                 { typeof(ClientPasswordChangeCommunicate), 0x0E },
+                { typeof(ClientAddressAddCommunicate), 0x18 },
+                { typeof(ClientAddressRemoveCommunicate), 0x19 },
+                { typeof(ClientAddressGetAllCommunicate), 0x1A }
         };
 
         private static Dictionary<byte, Type> ServerCommunicateToCode { get; set; }
@@ -44,7 +47,8 @@ namespace Pw.Elka.TIN.Client.Logic.Parsers
                 { 0x14, typeof(ServerErrorBadGroupCommunicate)},
                 { 0x15, typeof(ServerErrorBadMessageCommunicate)},
                 { 0x16, typeof(ServerErrorServerNotAvailableCommunicate)},
-                { 0x17, typeof(ServerGroupAddressGetOneCommunicate) }
+                { 0x17, typeof(ServerAddressGetOneCommunicate) },
+                { 0x1A, typeof(ServerAddressGetAllCommunicate) }
         };
 
         internal static byte[] GetClientCommunicationCodeByType<C>() where C : ClientCommunicate
