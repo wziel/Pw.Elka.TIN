@@ -10,6 +10,7 @@ class IClientManager;
 class IClientSessionManager
 {
 public:
+	virtual ~IClientSessionManager() = 0;
 	virtual bool Initialize(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager) = 0;
 	virtual bool StartAsync() = 0;
 };

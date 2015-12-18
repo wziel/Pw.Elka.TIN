@@ -4,6 +4,7 @@
 class IClientSession
 {
 public:
+	virtual ~IClientSession() = 0;
 	virtual void PassData(char* buffer, int size) = 0;
 };
 

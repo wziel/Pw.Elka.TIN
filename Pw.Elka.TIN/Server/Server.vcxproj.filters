@@ -152,18 +152,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\Shared\AddressModel.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Files\Shared\ClientModel.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Files\Shared\GroupModel.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Files\Shared\MessageModel.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
       <Filter>Source Files\Components\Cipher</Filter>
     </ClCompile>

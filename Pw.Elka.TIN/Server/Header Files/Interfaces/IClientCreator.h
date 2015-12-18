@@ -4,6 +4,7 @@
 class IClientCreator
 {
 public:
+	virtual ~IClientCreator() = 0;
 	virtual void CreateClientAsync(int socketfd) = 0;
 };
 

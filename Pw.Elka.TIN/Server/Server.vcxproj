@@ -154,10 +154,6 @@
     <ClCompile Include="Source Files\Components\SessionListener\SessionListener.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp" />
-    <ClCompile Include="Source Files\Shared\AddressModel.cpp" />
-    <ClCompile Include="Source Files\Shared\ClientModel.cpp" />
-    <ClCompile Include="Source Files\Shared\GroupModel.cpp" />
-    <ClCompile Include="Source Files\Shared\MessageModel.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,6 +12,7 @@ class GroupModel;
 class IClientDAL
 {
 public:
+	virtual ~IClientDAL() = 0;
 	virtual MessageModel GetMessageById(int id, int clientId) = 0;
 	virtual MessageModel CreateMessage (string title, string content, int clientId) = 0;
 	virtual MessageModel ModifyMessage(int id, string title, string content, int clientId) = 0;

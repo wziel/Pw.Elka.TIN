@@ -8,6 +8,7 @@ using namespace std;
 class IDAL
 {
 public:
+	virtual ~IDAL() = 0;
 	virtual bool ChangeHashOfPassword(int clientId, string newHashOfPassword) = 0;
 	virtual bool BlockClient(string login) = 0;
 };
