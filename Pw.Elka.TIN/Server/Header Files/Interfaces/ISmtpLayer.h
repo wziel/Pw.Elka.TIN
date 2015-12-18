@@ -7,7 +7,6 @@ class ISmtpLayer
 {
 public:
 	virtual void StartAsync() = 0;
-	virtual void End() = 0;
 	virtual void Initialize(MessagesQueue &queue) = 0;
 };
 

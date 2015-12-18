@@ -159,7 +159,6 @@
     <ClCompile Include="Source Files\Shared\GroupModel.cpp" />
     <ClCompile Include="Source Files\Shared\MessageModel.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
-    <ClCompile Include="Source Files\Shared\SmtpMessage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

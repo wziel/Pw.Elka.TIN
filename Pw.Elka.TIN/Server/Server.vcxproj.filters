@@ -164,9 +164,6 @@
     <ClCompile Include="Source Files\Shared\MessageModel.cpp">
       <Filter>Source Files\Shared</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Shared\SmtpMessage.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
       <Filter>Source Files\Components\Cipher</Filter>
     </ClCompile>
