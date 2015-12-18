@@ -9,7 +9,7 @@ class IAdminDAL
 {
 public:
 	virtual bool UnblockClient(string login) = 0;
-	virtual bool CreateClient(string login, string password) = 0;
+	virtual bool CreateClient(string login, string hashOfPassword) = 0;
 	virtual bool DeleteClient(string login) = 0;
 	virtual bool ChangeLogin(int clientId, string newLogin) = 0;
 };
