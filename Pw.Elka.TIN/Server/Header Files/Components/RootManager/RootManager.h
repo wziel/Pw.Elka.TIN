@@ -2,6 +2,7 @@
 
 #include "../../Interfaces/IClientCreator.h"
 #include "../../Interfaces/IClientManager.h"
+#include "../../Interfaces/IClientSessionsRegister.h"
 #include "../ClientSession/ClientSession.h"
 #include "../Cipher/Cipher.h"
 #include "../TcpLayer/TcpLayer.h"
@@ -10,30 +11,30 @@
 #include "../DAL/DAL.h"
 #include "../../Shared/MessagesQueue.h"
 #include "../../Shared/SessionState.h"
+#include "Enums.h"
+#include "../AdministratorView/ClientSessionView.h"
 
 #include<Windows.h>
 
 class RootManager :
-	public IClientCreator, public IClientManager
+	public IClientCreator, public IClientManager, public IClientSessionsRegister
 {
 private:
-	enum ClientSessionState
-	{
-		Starting,
-		Working,
-		Ending
-	};
 
 	///class that stores objects per client session
 	class ClientSessionObjects
 	{
 	public:
+		unsigned connectionId;
 		ClientSession* clientSession;
 		Cipher* cipher;
 		TcpLayer* tcpLayer;
 		HANDLE thread;
 		ClientSessionState state;
 	};
+
+	///the biggest number of client id assigned
+	unsigned connectionIdHighWaterMark = 0;
 
 	///mutex for accessing clientsessions - since they are accessed from multiple threads
 	HANDLE clientSessionsMutex;
@@ -86,5 +87,9 @@ public:
 
 	///IClientManager interface
 	void RegisterClientEnded(IClientSessionManager &clientSessionManager) override;
+
+	///IClientSessionsRegister interface
+	virtual std::vector<ClientSessionView> GetAllClientSessionViews() override;
+	virtual void EndClientSession(unsigned clientSessionViewId) override;
 };
 

@@ -63,6 +63,7 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 	sessionObjects.clientSession = new ClientSession();
 	sessionObjects.cipher = new Cipher();
 	sessionObjects.tcpLayer = new TcpLayer();
+	sessionObjects.connectionId = rootManager.connectionIdHighWaterMark++;
 
 	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
 
@@ -115,4 +116,46 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 	ReleaseMutex(rootManager.clientSessionsMutex);
 
 	delete params;
+}
+
+
+std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
+{
+	std::vector<ClientSessionView> views;
+
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	for (int i = 0; i < clientSessions.size(); ++i)
+	{
+		ClientSessionView view;
+		view.clientName = clientSessions[i]->clientSession->GetClientName();
+		view.connectionId = clientSessions[i]->connectionId;
+		view.state = clientSessions[i]->state;
+	}
+	ReleaseMutex(clientSessionsMutex);
+
+	return views;
+}
+
+void RootManager::EndClientSession(unsigned clientSessionViewId)
+{
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	for (int i = 0; i < clientSessions.size(); ++i)
+	{
+		if (clientSessions[i]->connectionId == clientSessionViewId)
+		{
+			if (clientSessions[i]->state == ClientSessionState::Ending)
+			{
+				throw "Not implemented";
+			}
+
+			clientSessions[i]->tcpLayer->End();
+			clientSessions[i]->state = ClientSessionState::Ending;
+			DWORD dwThreadId;
+			WaitForClientThreadToEndParamsPointer threadParams
+				= new WaitForClientThreadToEndParams(clientSessions[i]->thread, *this);
+			CreateThread(NULL, 0, WaitForClientThreadToEnd, threadParams, 0, &dwThreadId);
+			break;
+		}
+	}
+	ReleaseMutex(clientSessionsMutex);
 }

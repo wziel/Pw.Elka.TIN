@@ -118,9 +118,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Header Files\Components\AdministratorView\AdministratorView.h" />
+    <ClInclude Include="Header Files\Components\AdministratorView\ClientSessionView.h" />
     <ClInclude Include="Header Files\Components\Cipher\Cipher.h" />
     <ClInclude Include="Header Files\Components\ClientSession\ClientSession.h" />
     <ClInclude Include="Header Files\Components\DAL\DAL.h" />
+    <ClInclude Include="Header Files\Components\RootManager\Enums.h" />
     <ClInclude Include="Header Files\Components\RootManager\RootManager.h" />
     <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h" />
     <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h" />
@@ -131,6 +134,7 @@
     <ClInclude Include="Header Files\Interfaces\IClientDAL.h" />
     <ClInclude Include="Header Files\Interfaces\IClientManager.h" />
     <ClInclude Include="Header Files\Interfaces\IClientSessionManager.h" />
+    <ClInclude Include="Header Files\Interfaces\IClientSessionsRegister.h" />
     <ClInclude Include="Header Files\Interfaces\IDAL.h" />
     <ClInclude Include="Header Files\Interfaces\ILayer.h" />
     <ClInclude Include="Header Files\Interfaces\ISessionListener.h" />
@@ -146,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source Files\Components\AdministratorView\AdministratorView.cpp" />
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\ClientSession.cpp" />
     <ClCompile Include="Source Files\Components\DAL\DAL.cpp" />

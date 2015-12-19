@@ -70,6 +70,12 @@
     <Filter Include="Header Files\Shared">
       <UniqueIdentifier>{fbf8391b-c557-48fd-aa89-7493dfd10a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\AdministratorView">
+      <UniqueIdentifier>{6fe2fce1-42be-4f7d-bed1-335567beaceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\AdministratorView">
+      <UniqueIdentifier>{3fd835ca-99ac-4f06-983f-a74cc3c3328f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
@@ -147,6 +153,18 @@
     <ClInclude Include="Header Files\Shared\MessagesQueue.h">
       <Filter>Header Files\Shared</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\IClientSessionsRegister.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\AdministratorView\AdministratorView.h">
+      <Filter>Header Files\Components\AdministratorView</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\RootManager\Enums.h">
+      <Filter>Header Files\Components\RootManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Components\AdministratorView\ClientSessionView.h">
+      <Filter>Header Files\Components\AdministratorView</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -175,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp">
       <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\AdministratorView\AdministratorView.cpp">
+      <Filter>Source Files\Components\AdministratorView</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
