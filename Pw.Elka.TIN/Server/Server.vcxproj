@@ -130,7 +130,6 @@
     <ClInclude Include="Header Files\Interfaces\IClientCreator.h" />
     <ClInclude Include="Header Files\Interfaces\IClientDAL.h" />
     <ClInclude Include="Header Files\Interfaces\IClientManager.h" />
-    <ClInclude Include="Header Files\Interfaces\IClientSession.h" />
     <ClInclude Include="Header Files\Interfaces\IClientSessionManager.h" />
     <ClInclude Include="Header Files\Interfaces\IDAL.h" />
     <ClInclude Include="Header Files\Interfaces\ILayer.h" />

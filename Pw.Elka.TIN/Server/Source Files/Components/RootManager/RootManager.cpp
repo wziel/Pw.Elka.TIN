@@ -6,12 +6,17 @@ RootManager::RootManager()
 	messagesQueue = new MessagesQueue();
 	smtpLayer = new SmtpLayer();
 	sessionsListener = new SessionListener();
-	clentSessionsMutex = CreateMutex(NULL, FALSE, NULL);
+	clientSessionsMutex = CreateMutex(NULL, FALSE, NULL);
 }
 
 
 RootManager::~RootManager()
 {
+	delete dataAccessLayer;
+	delete messagesQueue;
+	delete smtpLayer;
+	delete sessionsListener;
+	CloseHandle(clientSessionsMutex);
 }
 
 void RootManager::Start()
@@ -23,50 +28,71 @@ void RootManager::Start()
 
 void RootManager::CreateClientAsync(int socketfd)
 {
-	ClientSessionTrio* sessionTrio = new ClientSessionTrio();
-	sessionTrio->clientSession = new ClientSession();
-	sessionTrio->cipher = new Cipher();
-	sessionTrio->tcpLayer = new TcpLayer();
+	DWORD dwThreadId;
+	ClientSessionObjects* sessionObjects = new ClientSessionObjects();
+	CreateClientParamsPointer params = new CreateClientParams(*sessionObjects, *this, socketfd);
+	sessionObjects->thread = CreateThread(NULL, 0, CreateClient, params, 0, &dwThreadId);
+}
 
-	WaitForSingleObject(clentSessionsMutex, INFINITE);
-	clientSessions.push_back(sessionTrio);
-	ReleaseMutex(clentSessionsMutex);
+DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
+{
+	CreateClientParamsPointer params = (CreateClientParamsPointer)lpParam;
+	ClientSessionObjects& sessionObjects = params->objectsToUpdate;
+	RootManager& rootManager = params->rootManager;
 
-	SessionState initialState = clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
-	sessionTrio->clientSession->Initialize(*sessionTrio->cipher, *messagesQueue, initialState, *dataAccessLayer, *this);
-	sessionTrio->cipher->Initialize(*sessionTrio->tcpLayer);
-	sessionTrio->tcpLayer->Initialize(socketfd);
+	sessionObjects.clientSession = new ClientSession();
+	sessionObjects.cipher = new Cipher();
+	sessionObjects.tcpLayer = new TcpLayer();
 
-	sessionTrio->clientSession->StartAsync();
+	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
+	rootManager.clientSessions.push_back(&sessionObjects);
+	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
+	ReleaseMutex(rootManager.clientSessionsMutex);
+
+	sessionObjects.clientSession->Initialize(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
+	sessionObjects.cipher->Initialize(*sessionObjects.tcpLayer);
+	sessionObjects.tcpLayer->Initialize(params->socketFd);
+
+	sessionObjects.clientSession->StartAsync();
 }
 
 
-void RootManager::RegisterClientEnded(IClientSessionManager &clientSessionManager, unsigned int clientThreadId)
+void RootManager::RegisterClientEnded(IClientSessionManager &clientSessionManager)
 {
-	WaitForSingleObject(clentSessionsMutex, INFINITE);
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
 	for (int i = 0; i < clientSessions.size(); ++i)
 	{
 		if (&clientSessionManager == clientSessions[i]->clientSession)
 		{
 			DWORD dwThreadId;
-			WaitForClientThreadToEndAsnycParamsPointer threadParams 
-				= new WaitForClientThreadToEndAsnycParams(clientSessionManager, *this, clientThreadId);
-			CreateThread(
-				NULL,
-				0,
-				WaitForClientThreadToEndAsnyc,
-				threadParams,
-				0,
-				&dwThreadId);
+			WaitForClientThreadToEndParamsPointer threadParams
+				= new WaitForClientThreadToEndParams(clientSessions[i]->thread, *this);
+			CreateThread(NULL, 0, WaitForClientThreadToEnd, threadParams, 0, &dwThreadId);
 			break;
 		}
 	}
-	ReleaseMutex(clentSessionsMutex);
+	ReleaseMutex(clientSessionsMutex);
 }
 
-DWORD WINAPI RootManager::WaitForClientThreadToEndAsnyc(LPVOID lpParam)
+DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 {
-	WaitForClientThreadToEndAsnycParamsPointer params = (WaitForClientThreadToEndAsnycParamsPointer)lpParam;
-	throw "Not implemnetd";
+	WaitForClientThreadToEndParamsPointer params = (WaitForClientThreadToEndParamsPointer)lpParam;
+	RootManager& rootManager = params->rootManager;
+	HANDLE threadHandle = params->thread;
+	WaitForSingleObject(params->thread, INFINITE);
 
+	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
+	for (int i = 0; i < rootManager.clientSessions.size(); ++i)
+	{
+		if (threadHandle == rootManager.clientSessions[i]->thread)
+		{
+			delete rootManager.clientSessions[i]->cipher;
+			delete rootManager.clientSessions[i]->clientSession;
+			delete rootManager.clientSessions[i]->tcpLayer;
+			rootManager.clientSessions.erase(rootManager.clientSessions.begin() + i);
+		}
+	}
+	ReleaseMutex(rootManager.clientSessionsMutex);
+
+	delete params;
 }

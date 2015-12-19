@@ -7,7 +7,7 @@ class IClientManager
 {
 public:
 	virtual ~IClientManager() = 0;
-	virtual void RegisterClientEnded(IClientSessionManager &clientSessionManager, unsigned int clientThreadId) = 0;
+	virtual void RegisterClientEnded(IClientSessionManager &clientSessionManager) = 0;
 };
 
 #endif

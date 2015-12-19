@@ -17,41 +17,59 @@ class RootManager :
 	public IClientCreator, public IClientManager
 {
 private:
-	class ClientSessionTrio
+	///class that stores objects per client session
+	class ClientSessionObjects
 	{
 	public:
 		ClientSession* clientSession;
 		Cipher* cipher;
 		TcpLayer* tcpLayer;
+		HANDLE thread;
 	};
-	std::vector<ClientSessionTrio*> clientSessions;
-	HANDLE clentSessionsMutex;
 
+	///components of whole system
+	std::vector<ClientSessionObjects*> clientSessions;
 	MessagesQueue* messagesQueue;
 	SessionListener* sessionsListener;
 	SmtpLayer* smtpLayer;
 	DAL* dataAccessLayer;
 
-	typedef struct WaitForClientThreadToEndAsnycParams
+	///mutex for accessing clientsessions - since they are accessed from multiple threads
+	HANDLE clientSessionsMutex;
+
+	///thread function that waits for a specified client session thread to end and then notifies rootManger of that event
+	static DWORD WINAPI WaitForClientThreadToEnd(LPVOID lpParam);
+	///parameters for the above thread
+	typedef struct WaitForClientThreadToEndParams
 	{
-		IClientSessionManager &clientSessionManager;
+		HANDLE thread;
 		RootManager &rootManager;
-		DWORD WINAPI clientThreadId;
-		WaitForClientThreadToEndAsnycParams(IClientSessionManager& clientMng, RootManager& rootMng, DWORD WINAPI threadId)
-			: clientSessionManager(clientMng), rootManager(rootMng)
-		{
-			clientThreadId = threadId;
-		}
-	} *WaitForClientThreadToEndAsnycParamsPointer;
-	static DWORD WINAPI WaitForClientThreadToEndAsnyc(LPVOID lpParam);
+		WaitForClientThreadToEndParams(HANDLE thread, RootManager& rootMng) : thread(thread), rootManager(rootMng) { }
+	} *WaitForClientThreadToEndParamsPointer;
+
+	///thread function that creates client objects
+	static DWORD WINAPI CreateClient(LPVOID lpParam);
+	///parameters for the above thread
+	typedef struct CreateClientParams
+	{
+		ClientSessionObjects& objectsToUpdate;
+		RootManager &rootManager;
+		int socketFd;
+		CreateClientParams(ClientSessionObjects& sessionObjects, RootManager& rootMng, int socketFd) 
+			: objectsToUpdate(sessionObjects), rootManager(rootMng), socketFd(socketFd) { }
+	} *CreateClientParamsPointer;
 
 public:
 	RootManager();
 	~RootManager();
 
+	///function that should be used to start the whole system
 	void Start();
+
+	///IClientCreator interface
 	void CreateClientAsync(int socketfd) override;
-	void RegisterClientEnded(IClientSessionManager &clientSessionManager, unsigned int clientThreadId) override;
-	void DeleteClientObjects(IClientSessionManager& manager);
+
+	///IClientManager interface
+	void RegisterClientEnded(IClientSessionManager &clientSessionManager) override;
 };
 

@@ -1,7 +1,7 @@
 //@todo - klasy wyj¹tków
 #include "../../../Header Files/Components/TcpLayer/TcpLayer.h"
 
-bool TcpLayer :: Initialize(int socketfd, ILayer &upperLayer)
+bool TcpLayer :: Initialize(int socketfd)
 {
 	//Creating notification socket
 	if (initNotificationSocket = socket(AF_INET, SOCK_STREAM, 0) == -1)

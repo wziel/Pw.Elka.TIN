@@ -13,7 +13,7 @@ public:
 	TcpLayer();
 	~TcpLayer();
 //ITcpLayerManager intereface
-	bool Initialize(int socketfd, ILayer &upperLayer);
+	bool Initialize(int socketfd);
 	int End();
 //ILayer interface
 	void Send(char* buffer, int size) = 0;
