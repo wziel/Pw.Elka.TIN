@@ -23,8 +23,23 @@ void RootManager::Start()
 {
 	smtpLayer->Initialize(*messagesQueue);
 	sessionsListener->Initialize(*this);
+
+	DWORD dwThreadId;
+	smtpLayerThreadHandle = CreateThread(NULL, 0, StartSmtpLayer, smtpLayer, 0, &dwThreadId);
+	sessionsListenerThreadHandle = CreateThread(NULL, 0, StartSessionsListener, sessionsListener, 0, &dwThreadId);
 }
 
+DWORD WINAPI RootManager::StartSmtpLayer(LPVOID lpParam)
+{
+	SmtpLayer* smtpLayer = (SmtpLayer*)lpParam;
+	smtpLayer->Start();
+}
+
+DWORD WINAPI RootManager::StartSessionsListener(LPVOID lpParam)
+{
+	SessionListener* sessionsLister = (SessionListener*)lpParam;
+	sessionsLister->Start();
+}
 
 void RootManager::CreateClientAsync(int socketfd)
 {
@@ -32,6 +47,11 @@ void RootManager::CreateClientAsync(int socketfd)
 	ClientSessionObjects* sessionObjects = new ClientSessionObjects();
 	CreateClientParamsPointer params = new CreateClientParams(*sessionObjects, *this, socketfd);
 	sessionObjects->thread = CreateThread(NULL, 0, CreateClient, params, 0, &dwThreadId);
+	sessionObjects->state = ClientSessionState::Starting;
+
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	clientSessions.push_back(sessionObjects);
+	ReleaseMutex(clientSessionsMutex);
 }
 
 DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
@@ -44,16 +64,14 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 	sessionObjects.cipher = new Cipher();
 	sessionObjects.tcpLayer = new TcpLayer();
 
-	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
-	rootManager.clientSessions.push_back(&sessionObjects);
 	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
-	ReleaseMutex(rootManager.clientSessionsMutex);
 
 	sessionObjects.clientSession->Initialize(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
 	sessionObjects.cipher->Initialize(*sessionObjects.tcpLayer);
 	sessionObjects.tcpLayer->Initialize(params->socketFd);
 
-	sessionObjects.clientSession->StartAsync();
+	sessionObjects.clientSession->Start();
+	sessionObjects.state = ClientSessionState::Working;
 }
 
 
@@ -64,6 +82,7 @@ void RootManager::RegisterClientEnded(IClientSessionManager &clientSessionManage
 	{
 		if (&clientSessionManager == clientSessions[i]->clientSession)
 		{
+			clientSessions[i]->state = ClientSessionState::Ending;
 			DWORD dwThreadId;
 			WaitForClientThreadToEndParamsPointer threadParams
 				= new WaitForClientThreadToEndParams(clientSessions[i]->thread, *this);
@@ -89,6 +108,7 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 			delete rootManager.clientSessions[i]->cipher;
 			delete rootManager.clientSessions[i]->clientSession;
 			delete rootManager.clientSessions[i]->tcpLayer;
+			delete rootManager.clientSessions[i];
 			rootManager.clientSessions.erase(rootManager.clientSessions.begin() + i);
 		}
 	}

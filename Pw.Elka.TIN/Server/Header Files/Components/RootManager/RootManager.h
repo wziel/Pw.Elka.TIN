@@ -17,6 +17,13 @@ class RootManager :
 	public IClientCreator, public IClientManager
 {
 private:
+	enum ClientSessionState
+	{
+		Starting,
+		Working,
+		Ending
+	};
+
 	///class that stores objects per client session
 	class ClientSessionObjects
 	{
@@ -25,17 +32,24 @@ private:
 		Cipher* cipher;
 		TcpLayer* tcpLayer;
 		HANDLE thread;
+		ClientSessionState state;
 	};
+
+	///mutex for accessing clientsessions - since they are accessed from multiple threads
+	HANDLE clientSessionsMutex;
 
 	///components of whole system
 	std::vector<ClientSessionObjects*> clientSessions;
 	MessagesQueue* messagesQueue;
+	DAL* dataAccessLayer;
 	SessionListener* sessionsListener;
 	SmtpLayer* smtpLayer;
-	DAL* dataAccessLayer;
+	HANDLE sessionsListenerThreadHandle;
+	HANDLE smtpLayerThreadHandle;
 
-	///mutex for accessing clientsessions - since they are accessed from multiple threads
-	HANDLE clientSessionsMutex;
+	///thread functions to start application-wide components that have own threads.
+	static DWORD WINAPI StartSmtpLayer(LPVOID lpParam);
+	static DWORD WINAPI StartSessionsListener(LPVOID lpParam);
 
 	///thread function that waits for a specified client session thread to end and then notifies rootManger of that event
 	static DWORD WINAPI WaitForClientThreadToEnd(LPVOID lpParam);
@@ -58,6 +72,7 @@ private:
 		CreateClientParams(ClientSessionObjects& sessionObjects, RootManager& rootMng, int socketFd) 
 			: objectsToUpdate(sessionObjects), rootManager(rootMng), socketFd(socketFd) { }
 	} *CreateClientParamsPointer;
+
 
 public:
 	RootManager();
