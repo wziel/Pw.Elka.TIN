@@ -14,7 +14,7 @@ public:
 	~Cipher();
 	void Initialize(ILayer &bottomLayer);
 	void Send(char* buffer, int size);
-	void Receive(char* buffer, int size);
+	void Receive(char* buffer, int &size);
 private:
 	ILayer *bottomLayer;
 	const char keyCode[] = "michal";
