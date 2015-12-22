@@ -30,8 +30,6 @@ private:
 
 	WSAEVENT wsaEvents[2];
 	int eventSignaled;
-
-	bool isEnd;
 };
 
 #endif

@@ -7,7 +7,6 @@ SessionListener::SessionListener()
 	this->portToListen = 7777;
 	wsaEvents[0]= WSACreateEvent();
 	wsaEvents[1] = WSACreateEvent();
-	isEnd = false;
 }
 
 
@@ -41,16 +40,16 @@ void SessionListener::Start()
 		eventSignaled = WSAWaitForMultipleEvents(1, wsaEvents, FALSE, WSA_INFINITE, FALSE);
 		if (eventSignaled == 0)
 		{
-			newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght);
-			if (newClientSocketDescriptor < 0)
+			if((newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght)) < 0)
 				throw "Error while accept()";
 			else
 				clientCreator->CreateClientAsync(newClientSocketDescriptor, newClientAddressStruct, newClientAddressLenght);
+			WSAResetEvent(wsaEvents[0]);
 		}
 		else if (eventSignaled == 1)	// konczymy dzialanie listenera
-		{
 			break;
-		}
+		else
+			throw "Error in WSAWaitForMultipleEvents";
 	}
 	closesocket(socketDescriptor);
 }
