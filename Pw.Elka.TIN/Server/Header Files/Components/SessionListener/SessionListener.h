@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <sys/types.h>
 #include <winsock.h>
+#include <WinSock2.h>
 #include <stdlib.h>
 
 class SessionListener :
@@ -26,6 +27,11 @@ private:
 	int newClientAddressLenght;
 	struct sockaddr_in addressStruct;
 	struct sockaddr_in newClientAddressStruct;
+
+	WSAEVENT wsaEvents[2];
+	int eventSignaled;
+
+	bool isEnd;
 };
 
 #endif

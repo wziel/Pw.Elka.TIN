@@ -4,6 +4,10 @@
 
 SessionListener::SessionListener()
 {
+	this->portToListen = 7777;
+	wsaEvents[0]= WSACreateEvent();
+	wsaEvents[1] = WSACreateEvent();
+	isEnd = false;
 }
 
 
@@ -25,18 +29,33 @@ void SessionListener::Start()
 	addressStruct.sin_addr.s_addr = htonl(INADDR_ANY);
 	addressStruct.sin_port = htons(portToListen);
 
-	if (bind(socketDescriptor, (struct sockaddr*)&addressStruct, sizeof(addressStruct)) != 0)
+	if (bind(socketDescriptor, (struct sockaddr *) &addressStruct, sizeof(addressStruct)) != 0)
 		throw "Error while binding address with socket";
 
 	if (listen(socketDescriptor, 10) != 0)
 		throw "Error while setting socket to listen";
 
-	for (; ;)
+	WSAEventSelect(socketDescriptor, wsaEvents[0], FD_ACCEPT);
+	while (true)
 	{
-		newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght);
-		if (newClientSocketDescriptor < 0)
-			throw "Error while accept()";
-		else
-			clientCreator->CreateClientAsync(newClientSocketDescriptor, newClientAddressStruct, newClientAddressLenght);
+		eventSignaled = WSAWaitForMultipleEvents(1, wsaEvents, FALSE, WSA_INFINITE, FALSE);
+		if (eventSignaled == 0)
+		{
+			newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght);
+			if (newClientSocketDescriptor < 0)
+				throw "Error while accept()";
+			else
+				clientCreator->CreateClientAsync(newClientSocketDescriptor, newClientAddressStruct, newClientAddressLenght);
+		}
+		else if (eventSignaled == 1)	// konczymy dzialanie listenera
+		{
+			break;
+		}
 	}
+	closesocket(socketDescriptor);
+}
+
+void SessionListener::End()
+{
+	WSASetEvent(wsaEvents[1]);
 }
