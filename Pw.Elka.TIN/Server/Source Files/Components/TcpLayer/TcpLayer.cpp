@@ -1,64 +1,45 @@
-//@todo - klasy wyj¹tków
+//@todo - check WSAWaitForMultipleEvents return value -is this correct?
+//@todo - check WSAEnumNetworkEvent
+//@todo - implement reading action (receive)
+//@todo - implement send function
+//@todo - constructors instead of initialization
+//@todo - destructor 
+
 #include "../../../Header Files/Components/TcpLayer/TcpLayer.h"
 
 bool TcpLayer :: Initialize(int socketfd)
 {
-	//Creating notification socket
-	if (initNotificationSocket = socket(AF_INET, SOCK_STREAM, 0) == -1)
-	{
-		throw "Socket() error - notificationSocket";
-	}
+	this->socketFD = socketfd;
+	WSAEventArray[0] = WSACreateEvent();	//event signalling end of client session
+		if (WSAEventArray[0] == WSA_INVALID_EVENT)
+		{
+			throw "WSACreateEvent() error - WSAEventArray[0]";
+		}
 
-	notificationAddress.sin_family = AF_INET;
-	notificationAddress.sin_addr.s_addr = htonl(INADDR_ANY);
-	notificationAddress.sin_port = htons(notificationPort);
-
-	if (bind(initNotificationSocket, (sockaddr*)&notificationAddress, sizeof notificationAddress) == -1)
-	{
-		throw "Bind() error - notificationSocket";
-	}
-
-	//@todo - check backlog number
-	listen(initNotificationSocket, 5);
-
-	if (notificationSocket = accept(initNotificationSocket, (sockaddr*)0, (int*)0) == -1)
-	{
-		throw "Accept() error - notificationSocket";
-	}
-
-	//Creating communication socket
-	if (initCommunicationSocket = socket(AF_INET, SOCK_STREAM, 0) == -1)
-	{
-		throw "Socket() error - communicationSocket"; 
-	}
-
-	communicationAddress.sin_family = AF_INET;
-	communicationAddress.sin_addr.s_addr = htonl(INADDR_ANY);
-	communicationAddress.sin_port = htons(communicationPort);
-
-	if (bind( initCommunicationSocket,(sockaddr*) &communicationAddress, sizeof communicationAddress)  == -1)
-	{
-		throw "Bind() error - communicationSocket";
-	}
-
-	//@todo - check backlog number
-	listen(initCommunicationSocket, 5);
-
-	if(communicationSocket = accept(initCommunicationSocket, (sockaddr*)0, (int*)0) == -1)
-	{
-		throw "Accept() error - communicationSocket";
-	}
-
-
-	//@todo 
+	WSAEventArray[1] = WSACreateEvent();	//network event - read
+		if (WSAEventArray[1] == WSA_INVALID_EVENT)
+		{
+			throw "WSACreateEvent() error - WSAEventArray[1]";
+		}
+	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ);	//associate event with a socket
+		if (iResult != 0)
+		{
+			throw "WSAEventSelect() error";
+		}
 	return true;
 }
 
 int TcpLayer :: End()
 {
-	//@todo
-
-	return 0;
+	if(WSASetEvent(WSAEventArray[1]) == TRUE)
+	{
+		return 0;
+	}
+		
+	else
+	{
+		return -1;
+	}
 }
 
 void TcpLayer :: Send(char* buffer, int size)
@@ -68,6 +49,27 @@ void TcpLayer :: Send(char* buffer, int size)
 
 void TcpLayer :: Receive(char* buffer, int size)
 {
+
+	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);
+	if (signalledEvent == WSA_WAIT_FAILED)
+	{
+		throw "WSAWaitForMultipleEvents() error";
+	}
+
+	if (signalledEvent == 0)
+	{
+		return;
+	}
+	else if (signalledEvent == 1)
+	{
+		//@todo read handling 
+		/*{
+		***
+		***
+		***
+		}*/
+		WSAResetEvent(WSAEventArray[1]);
+	}
 
 }
 
@@ -79,4 +81,6 @@ TcpLayer::TcpLayer()
 
 TcpLayer::~TcpLayer()
 {
+	WSACloseEvent(WSAEventArray[0]);
+	WSACloseEvent(WSAEventArray[1]);
 }
