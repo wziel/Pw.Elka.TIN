@@ -22,7 +22,6 @@ public:
 	void Receive(char* buffer, int size);
 
 private:
-
 //Communication socket descriptor
 	int socketFD;
 //Array of network events
@@ -31,6 +30,10 @@ private:
 	int iResult;
 //Signalled event
 	int signalledEvent; 
+//Buffer for receiving and sending data (including header)
+	char* myBuffer; 
+//Size of buffer for data+header
+	int mySize; 
 
 };
 

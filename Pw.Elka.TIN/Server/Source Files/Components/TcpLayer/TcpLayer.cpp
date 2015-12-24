@@ -1,5 +1,3 @@
-//@todo - check WSAWaitForMultipleEvents return value -is this correct?
-//@todo - check WSAEnumNetworkEvent
 //@todo - implement reading action (receive)
 //@todo - implement send function
 //@todo - constructors instead of initialization
@@ -56,18 +54,33 @@ void TcpLayer :: Receive(char* buffer, int size)
 		throw "WSAWaitForMultipleEvents() error";
 	}
 
-	if (signalledEvent == 0)
+	if ((signalledEvent - WSA_WAIT_EVENT_0 ) == 0)
 	{
 		return;
 	}
-	else if (signalledEvent == 1)
-	{
-		//@todo read handling 
-		/*{
-		***
-		***
-		***
-		}*/
+	
+	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1)
+	{	
+		mySize = size + 2;
+		myBuffer = new char[mySize];
+
+		iResult = recv(socketFD, myBuffer, mySize, NULL );
+		if (iResult == SOCKET_ERROR)
+		{
+			throw "Recv() error";
+		}
+
+		for (int i = 2; i < mySize; ++i)
+		{
+			buffer[i - 2] = myBuffer[i];
+		}
+
+		for (int i = 0; i < mySize; ++i)
+		{
+			delete myBuffer[i];
+		}
+
+		delete myBuffer;
 		WSAResetEvent(WSAEventArray[1]);
 	}
 
