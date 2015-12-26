@@ -13,6 +13,7 @@
 #include "../../Shared/SessionState.h"
 #include "Enums.h"
 #include "../AdministratorView/ClientSessionView.h"
+#include "../AdministratorView/AdministratorView.h"
 
 #include<Windows.h>
 
@@ -45,6 +46,8 @@ private:
 	DAL* dataAccessLayer;
 	SessionListener* sessionsListener;
 	SmtpLayer* smtpLayer;
+	AdministratorView* adminView;
+
 	HANDLE sessionsListenerThreadHandle;
 	HANDLE smtpLayerThreadHandle;
 
@@ -74,6 +77,7 @@ private:
 			: objectsToUpdate(sessionObjects), rootManager(rootMng), socketFd(socketFd) { }
 	} *CreateClientParamsPointer;
 
+	bool isClosingDown = false;
 
 public:
 	RootManager();
@@ -81,15 +85,16 @@ public:
 
 	///function that should be used to start the whole system
 	void Start();
+	void End();
 
 	///IClientCreator interface
-	void CreateClientAsync(int socketfd) override;
+	void CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght) override;
 
 	///IClientManager interface
 	void RegisterClientEnded(IClientSessionManager &clientSessionManager) override;
 
 	///IClientSessionsRegister interface
-	virtual std::vector<ClientSessionView> GetAllClientSessionViews() override;
-	virtual void EndClientSession(unsigned clientSessionViewId) override;
+	std::vector<ClientSessionView> GetAllClientSessionViews() override;
+	void EndClientSession(unsigned clientSessionViewId) override;
 };
 

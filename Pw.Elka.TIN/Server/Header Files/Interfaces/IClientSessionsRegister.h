@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "../Components/AdministratorView/ClientSessionView.h"
 
 class IClientSessionsRegister

@@ -6,6 +6,7 @@ RootManager::RootManager()
 	messagesQueue = new MessagesQueue();
 	smtpLayer = new SmtpLayer();
 	sessionsListener = new SessionListener();
+	adminView = new AdministratorView();
 	clientSessionsMutex = CreateMutex(NULL, FALSE, NULL);
 }
 
@@ -16,6 +17,15 @@ RootManager::~RootManager()
 	delete messagesQueue;
 	delete smtpLayer;
 	delete sessionsListener;
+	while (clientSessions.size() > 0)
+	{
+		ClientSessionObjects* clientSession = clientSessions[clientSessions.size() - 1];
+		delete clientSession->cipher;
+		delete clientSession->clientSession;
+		delete clientSession->tcpLayer;
+		delete clientSession;
+		clientSessions.pop_back();
+	}
 	CloseHandle(clientSessionsMutex);
 }
 
@@ -23,10 +33,36 @@ void RootManager::Start()
 {
 	smtpLayer->Initialize(*messagesQueue);
 	sessionsListener->Initialize(*this);
+	adminView->Initialize(*this, *dataAccessLayer);
 
 	DWORD dwThreadId;
 	smtpLayerThreadHandle = CreateThread(NULL, 0, StartSmtpLayer, smtpLayer, 0, &dwThreadId);
 	sessionsListenerThreadHandle = CreateThread(NULL, 0, StartSessionsListener, sessionsListener, 0, &dwThreadId);
+
+	adminView->Start();
+}
+
+void RootManager::End()
+{
+	isClosingDown = true;
+	sessionsListener->End();
+	messagesQueue->End();
+
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	for (int i = clientSessions.size() - 1; i >= 0; ++i)
+	{
+		clientSessions[i]->tcpLayer->End();
+	}
+	ReleaseMutex(clientSessionsMutex);
+
+	WaitForSingleObject(sessionsListenerThreadHandle, INFINITE);
+	WaitForSingleObject(smtpLayerThreadHandle, INFINITE);
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	for (int i = clientSessions.size() - 1; i >= 0; ++i)
+	{
+		WaitForSingleObject(clientSessions[i]->thread, INFINITE);
+	}
+	ReleaseMutex(clientSessionsMutex);
 }
 
 DWORD WINAPI RootManager::StartSmtpLayer(LPVOID lpParam)
@@ -41,7 +77,7 @@ DWORD WINAPI RootManager::StartSessionsListener(LPVOID lpParam)
 	sessionsLister->Start();
 }
 
-void RootManager::CreateClientAsync(int socketfd)
+void RootManager::CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght)
 {
 	DWORD dwThreadId;
 	ClientSessionObjects* sessionObjects = new ClientSessionObjects();
@@ -50,7 +86,10 @@ void RootManager::CreateClientAsync(int socketfd)
 	sessionObjects->state = ClientSessionState::Starting;
 
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
-	clientSessions.push_back(sessionObjects);
+	if (!isClosingDown)
+	{
+		clientSessions.push_back(sessionObjects);
+	}
 	ReleaseMutex(clientSessionsMutex);
 }
 

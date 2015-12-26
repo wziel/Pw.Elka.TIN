@@ -4,4 +4,5 @@ int main()
 {
 	RootManager* rootManager = new RootManager();
 	rootManager->Start();
+	rootManager->End();
 }
