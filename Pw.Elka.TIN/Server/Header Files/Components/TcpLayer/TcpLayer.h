@@ -19,7 +19,7 @@ public:
 	int End();
 //ILayer interface
 	void Send(char* buffer, int size);
-	void Receive(char* buffer, int size);
+	void Receive(char* buffer, int &size);
 
 private:
 //Communication socket descriptor
@@ -30,10 +30,12 @@ private:
 	int iResult;
 //Signalled event
 	int signalledEvent; 
-//Buffer for receiving and sending data (including header)
+//Buffer for receiving and sending data (excluding header)
 	char* myBuffer; 
-//Size of buffer for data+header
+//Size of buffer for data
 	int mySize; 
+//Size of buffer for data (byte form)
+	char mySizeBuffer[2];
 
 };
 
