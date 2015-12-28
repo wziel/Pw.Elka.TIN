@@ -8,18 +8,40 @@ bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, Sessio
 	this->DAL = &DAL;
 	this->clientManager = &clientManager;
 
-	return true; 
+	return true;
 }
 
 bool ClientSession::Start()
 {
-	throw "Unimplemented";
+	while (true)
+	{
+		switch (sessionState)
+		{
+		case Authorized:
+		{
+			throw "Unimplemented";
+			break;
+		}
+		case Unauthorized:
+		{
+			throw "Unimplemented";
+			break;
+		}
+		case Busy:
+		{
+			throw "Unimplemented";
+			break;
+		}
+
+		}
+
+	}
+	
 }
 string ClientSession::GetClientName()
 {
 	throw "Unimplemented";
 }
-
 
 
 ClientSession::ClientSession()

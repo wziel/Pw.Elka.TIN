@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Interfaces/IClientSessionManager.h"
+#include "../../Shared/SessionState.h"
 
 using namespace std;
 

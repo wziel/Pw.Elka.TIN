@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Components\AdministratorView">
       <UniqueIdentifier>{3fd835ca-99ac-4f06-983f-a74cc3c3328f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\ClientSession\Communicates">
+      <UniqueIdentifier>{2e27d3e0-9f94-4a0b-8a6a-00bf02095ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\ClientSession\Communicates">
+      <UniqueIdentifier>{f8193dc7-9700-4971-81d7-8745b0f6d468}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
@@ -165,6 +171,108 @@
     <ClInclude Include="Header Files\Components\AdministratorView\ClientSessionView.h">
       <Filter>Header Files\Components\AdministratorView</Filter>
     </ClInclude>
+    <ClInclude Include="Communicate.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComAUTH.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComACK.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComMSGGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComMSGGETONE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComGRPGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRUNAUTH.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRSERVUNAV.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRMSG.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRGROUP.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRBADREQ.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRBUSY.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComADDRGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComADDRGETONE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRBADCONTENT.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComSEND.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComADDRADD.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComADDRGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComADDRRMV.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComAUTH.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPADRADD.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPADRRMV.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPCREATE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPDELETE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComGRPGETONE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComMSGCREATE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComMSGDELETE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComMSGGETALL.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComMSGGETONE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComMSGMODIFY.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="CliComPSSWCHG.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComGRPGETONE.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
+    <ClInclude Include="ServComERRLOGIN.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -196,6 +304,108 @@
     </ClCompile>
     <ClCompile Include="Source Files\Components\AdministratorView\AdministratorView.cpp">
       <Filter>Source Files\Components\AdministratorView</Filter>
+    </ClCompile>
+    <ClCompile Include="Communicate.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComAUTH.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComACK.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComMSGGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComMSGGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComADDRGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComADDRGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRBADCONTENT.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRBADREQ.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRBUSY.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRGROUP.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRMSG.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRSERVUNAV.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRUNAUTH.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComGRPGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComSEND.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComADDRGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComADDRRMV.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComAUTH.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPADRADD.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPADRRMV.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPCREATE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPDELETE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComGRPGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComMSGCREATE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComMSGDELETE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComMSGGETALL.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComMSGGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComMSGMODIFY.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComPSSWCHG.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="CliComADDRADD.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComGRPGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="ServComERRLOGIN.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
