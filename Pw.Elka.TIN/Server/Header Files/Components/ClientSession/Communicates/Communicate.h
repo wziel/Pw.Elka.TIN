@@ -14,6 +14,8 @@ public:
 private:
 //Communicate
 	char* communicateBuffer;
+//Communicate size
+	int size;
 
 };
 

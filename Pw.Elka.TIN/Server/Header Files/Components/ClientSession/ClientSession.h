@@ -2,6 +2,12 @@
 #include "../../Interfaces/IClientSessionManager.h"
 #include "../../Shared/SessionState.h"
 
+//communicates
+#include "../../Components/ClientSession/Communicates/CliComADDRADD.h"
+
+
+
+
 using namespace std;
 
 class ClientSession :
@@ -28,5 +34,6 @@ private:
 	IClientDAL* DAL;
 	//Client Manager interface (used to register client ended)
 	IClientManager* clientManager;
-
+	//last communicate code
+	unsigned char communicateCode; 
 };

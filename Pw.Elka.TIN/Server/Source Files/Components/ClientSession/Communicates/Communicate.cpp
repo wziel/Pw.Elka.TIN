@@ -1,6 +1,7 @@
 #include "Communicate.h"
 
 
+
 unsigned char Communicate::getCode()
 {
 	return communicateBuffer[0];

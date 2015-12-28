@@ -1,5 +1,44 @@
 #include "../../../Header Files/Components/ClientSession/ClientSession.h"
 
+
+
+bool ClientSession::Start()
+{
+	//sending an authorization communicate
+	while (true)
+	{
+		switch (sessionState)
+		{
+
+		case Unauthorized:
+		{	
+
+
+			throw "Unimplemented";
+			break;
+		}
+
+		case Authorized:
+		{
+			throw "Unimplemented";
+			break;
+		}
+	
+		case Busy:
+		{
+			throw "Unimplemented";
+			break;
+		}
+		default:
+		{
+			throw "Server state error";
+		}
+
+		}
+	}
+}
+
+
 bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager)
 {
 	this->bottomLayer = &bottomLayer;
@@ -11,33 +50,6 @@ bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, Sessio
 	return true;
 }
 
-bool ClientSession::Start()
-{
-	while (true)
-	{
-		switch (sessionState)
-		{
-		case Authorized:
-		{
-			throw "Unimplemented";
-			break;
-		}
-		case Unauthorized:
-		{
-			throw "Unimplemented";
-			break;
-		}
-		case Busy:
-		{
-			throw "Unimplemented";
-			break;
-		}
-
-		}
-
-	}
-	
-}
 string ClientSession::GetClientName()
 {
 	throw "Unimplemented";
