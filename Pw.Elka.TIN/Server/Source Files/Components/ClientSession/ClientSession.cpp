@@ -5,6 +5,10 @@
 bool ClientSession::Start()
 {
 	//sending an authorization communicate
+	ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
+	salt = authorizationCommunicate->getSalt();
+	bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
+
 	while (true)
 	{
 		switch (sessionState)
@@ -52,7 +56,7 @@ bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, Sessio
 
 string ClientSession::GetClientName()
 {
-	throw "Unimplemented";
+	return clientName;
 }
 
 

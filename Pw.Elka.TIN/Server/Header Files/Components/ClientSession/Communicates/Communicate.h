@@ -10,12 +10,16 @@ public:
 
 	//Returns code of communicate
 	unsigned char getCode();
+	//returns communicate size
+	int getSize();
+	//returns communicate content
+	char* getCommunicate();
 
-private:
+
+protected:
 //Communicate
 	char* communicateBuffer;
 //Communicate size
 	int size;
-
 };
 

@@ -1,4 +1,4 @@
-#include "Communicate.h"
+#include "../../../../Header Files/Components/ClientSession/Communicates/Communicate.h"
 
 
 
@@ -18,4 +18,14 @@ Communicate::Communicate(char* communicateBuffer)
 
 Communicate::~Communicate()
 {
+}
+
+char* Communicate::getCommunicate()
+{
+	return communicateBuffer;
+}
+
+int Communicate::getSize()
+{
+	return size;
 }
