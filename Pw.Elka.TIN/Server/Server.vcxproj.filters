@@ -276,6 +276,9 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComMSGGETONE.h">
       <Filter>Header Files\Components\ClientSession\Communicates</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRADDR.h">
+      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -411,6 +414,9 @@
       <Filter>Source Files\Components\ClientSession\Communicates</Filter>
     </ClCompile>
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComMSGGETONE.cpp">
+      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRADDR.cpp">
       <Filter>Source Files\Components\ClientSession\Communicates</Filter>
     </ClCompile>
   </ItemGroup>

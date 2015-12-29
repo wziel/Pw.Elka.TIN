@@ -1,6 +1,6 @@
 #pragma once
 #include "Communicate.h"
-//Server communicate - acknowledge previous client request
+//Server communicate - acknowledge previous client's request
 class ServComACK :
 	public Communicate
 {

@@ -1,13 +1,15 @@
-#include "ServComERRGROUP.h"
-
+#include "../../../../Header Files/Components/ClientSession/Communicates/ServComERRGROUP.h"
 
 
 ServComERRGROUP::ServComERRGROUP()
 {
-	throw "Class unimplemented";
+	size = 1;
+	communicateBuffer = new char;
+	communicateBuffer[0] = 0x14;
 }
 
 
 ServComERRGROUP::~ServComERRGROUP()
 {
+	delete communicateBuffer;
 }

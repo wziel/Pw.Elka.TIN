@@ -17,7 +17,7 @@ public:
 
 
 protected:
-//Communicate
+//Communicate content
 	char* communicateBuffer;
 //Communicate size
 	int size;

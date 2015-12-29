@@ -145,6 +145,7 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComADDRGETALL.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComADDRGETONE.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComAUTH.h" />
+    <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRADDR.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRBADCONTENT.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRBADREQ.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRBUSY.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComADDRGETALL.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComADDRGETONE.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComAUTH.cpp" />
+    <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRADDR.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRBADCONTENT.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRBADREQ.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRBUSY.cpp" />

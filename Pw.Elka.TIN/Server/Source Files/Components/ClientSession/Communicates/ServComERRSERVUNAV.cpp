@@ -1,13 +1,16 @@
-#include "ServComERRSERVUNAV.h"
+#include "../../../../Header Files/Components/ClientSession/Communicates/ServComERRSERVUNAV.h"
 
 
 
 ServComERRSERVUNAV::ServComERRSERVUNAV()
 {
-	throw "Class unimplemented";
+	size = 1;
+	communicateBuffer = new char;
+	communicateBuffer[0] = 0x16;
 }
 
 
 ServComERRSERVUNAV::~ServComERRSERVUNAV()
 {
+	delete communicateBuffer;
 }

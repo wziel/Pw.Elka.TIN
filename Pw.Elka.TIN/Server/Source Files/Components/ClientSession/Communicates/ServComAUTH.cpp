@@ -9,7 +9,7 @@ ServComAUTH::ServComAUTH()
 	//creating communicate
 	size = 7;	
 	communicateBuffer = new char[7];
-	communicateBuffer[0]=0x01;			//communicate code
+	communicateBuffer[0]=0x00;			//communicate code
 	communicateBuffer[1]=  (4)& 0xFF;	//salt size
 	communicateBuffer[2] = (4 >> 8) & 0xFF;
 	communicateBuffer[3] = ((rand() % 89) + 33);

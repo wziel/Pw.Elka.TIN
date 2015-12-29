@@ -1,13 +1,15 @@
-#include "ServComACK.h"
-
+#include "../../../../Header Files/Components/ClientSession/Communicates/ServComACK.h"
 
 
 ServComACK::ServComACK()
 {
-	throw "Class unimplemented";
+	size = 1;
+	communicateBuffer = new char;
+	communicateBuffer[0] = 0x01;
 }
 
 
 ServComACK::~ServComACK()
 {
+	delete communicateBuffer;
 }
