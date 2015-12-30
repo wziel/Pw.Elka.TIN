@@ -1,11 +1,15 @@
 #ifndef I_CLIENT_SESSION_MANAGER
 #define I_CLIENT_SESSION_MANAGER
 
+#include <string>
+
 class ILayer;
 class MessagesQueue;
 enum SessionState;
 class IClientDAL;
 class IClientManager;
+
+using namespace std;
 
 class IClientSessionManager
 {

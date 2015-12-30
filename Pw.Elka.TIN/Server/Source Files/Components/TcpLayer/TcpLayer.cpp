@@ -1,7 +1,4 @@
-//@todo - implement reading action (receive)
-//@todo - implement send function
 //@todo - constructors instead of initialization
-//@todo - destructor 
 
 #include "../../../Header Files/Components/TcpLayer/TcpLayer.h"
 
@@ -29,68 +26,82 @@ bool TcpLayer :: Initialize(int socketfd)
 
 int TcpLayer :: End()
 {
-	if(WSASetEvent(WSAEventArray[1]) == TRUE)
+	if(WSASetEvent(WSAEventArray[1]) == TRUE)	//successfully signal an ending event
 	{
 		return 0;
 	}
 		
 	else
 	{
+		throw "WSASetEvent() error";
 		return -1;
 	}
 }
 
-void TcpLayer :: Send(char* buffer, int size)
+void TcpLayer :: Send(char* buffer, int size)	//send data to client
 {
+	//Create a buffer to send - header+data
+	mySize = size + 2;
+	myBuffer = new char[mySize];
+	myBuffer[0] = (mySize)& 0xFF;
+	myBuffer[1] = (mySize >> 8) & 0xFF;
 
+	for (int i = 2; i < mySize; ++i)
+	{
+		myBuffer[i] = buffer[i - 2];
+	}
+
+	iResult = send(socketFD, myBuffer, mySize, NULL);	//send message
+	if (iResult == SOCKET_ERROR)
+	{
+		throw "Send() error";
+	}
+
+	delete myBuffer;
 }
 
-void TcpLayer :: Receive(char* buffer, int size)
+void TcpLayer :: Receive(char* buffer, int &size)	//receive data from client
 {
 
-	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);
+	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer
 	if (signalledEvent == WSA_WAIT_FAILED)
 	{
 		throw "WSAWaitForMultipleEvents() error";
 	}
 
-	if ((signalledEvent - WSA_WAIT_EVENT_0 ) == 0)
+	if ((signalledEvent - WSA_WAIT_EVENT_0 ) == 0) // end of TcpLayer
 	{
+		throw "End of TcpLayer";
 		return;
 	}
 	
-	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1)
+	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //receive a message
 	{	
-		mySize = size + 2;
-		myBuffer = new char[mySize];
+		iResult = recv(socketFD, mySizeBuffer, 2, NULL); //reading header (contains data size)
+		if (iResult == SOCKET_ERROR)
+		{
+			throw "Recv() error - header";
+		}
+		
+		mySize = (((mySizeBuffer[1])<<8)|(mySizeBuffer[0]));
+		size = mySize;
 
-		iResult = recv(socketFD, myBuffer, mySize, NULL );
+		buffer = new char[mySize];
+
+		iResult = recv(socketFD, buffer, mySize, NULL );
 		if (iResult == SOCKET_ERROR)
 		{
 			throw "Recv() error";
 		}
 
-		for (int i = 2; i < mySize; ++i)
-		{
-			buffer[i - 2] = myBuffer[i];
-		}
-
-		for (int i = 0; i < mySize; ++i)
-		{
-			delete myBuffer[i];
-		}
-
-		delete myBuffer;
 		WSAResetEvent(WSAEventArray[1]);
 	}
-
 }
 
 
 TcpLayer::TcpLayer()
 {
 }
-
 
 TcpLayer::~TcpLayer()
 {
