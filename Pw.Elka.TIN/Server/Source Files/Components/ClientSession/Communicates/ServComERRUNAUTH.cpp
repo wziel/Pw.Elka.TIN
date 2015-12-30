@@ -4,7 +4,7 @@ ServComERRUNAUTH::ServComERRUNAUTH()
 {
 	size = 1;
 	communicateBuffer = new char;
-	communicateBuffer[0] = 0x0F;
+	communicateBuffer[0] = _SERVCOMERRUNAUTH;
 }
 
 

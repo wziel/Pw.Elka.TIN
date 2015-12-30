@@ -1,6 +1,6 @@
 #include "../../../Header Files/Components/ClientSession/ClientSession.h"
 
-
+int DJBHash(string& str);
 
 bool ClientSession::Start()
 {
@@ -16,8 +16,18 @@ bool ClientSession::Start()
 
 		case Unauthorized:
 		{	
-
-
+			bottomLayer->Receive(cliCom, comSize);
+			if (cliCom[0]!= _CLICOMAUTH)
+			{	//client sent anything else than CliComAuth 
+				ServComERRUNAUTH* servUnauth = new ServComERRUNAUTH();		//tell client he is not authorized
+				bottomLayer->Send(servUnauth->getCommunicate(), servUnauth->getSize());
+				delete servUnauth;
+			}
+			else
+			{
+				CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
+				communicateService(*cliComAuth);
+			}
 			throw "Unimplemented";
 			break;
 		}
@@ -67,4 +77,51 @@ ClientSession::ClientSession()
 
 ClientSession::~ClientSession()
 {
+}
+
+void ClientSession:: communicateService(CliComAUTH clientCommunicate)
+{
+	//password hash stored in DB
+	string passwordDB=DAL->GetHashOfPassword(clientCommunicate.getUsername());
+	
+	if (0) //no such user -don't know what's going to be returned yet
+	{
+		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+		delete errLogin;
+	}
+	else
+	{
+		passwordDB.append(salt);
+		
+		//(password hash + salt) hash, (based on DB values)
+		int passwordhashDB = DJBHash(passwordDB);
+
+		if (passwordhashDB == clientCommunicate.getpasswHashAuth())
+		{
+			clientName = clientCommunicate.getUsername();
+			ServComACK* ack = new ServComACK();
+			bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+			delete ack;
+		}
+		else
+		{
+			ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+			bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+			delete errLogin;
+		}
+	}
+
+}
+
+int DJBHash(string& str)
+{
+	unsigned int hash = 5381;
+
+	for (std::size_t i = 0; i < str.length(); i++)
+	{
+		hash = ((hash << 5) + hash) + str[i];
+	}
+
+	return hash;
 }

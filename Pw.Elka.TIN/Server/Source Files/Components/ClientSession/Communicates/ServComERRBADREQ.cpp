@@ -4,7 +4,7 @@ ServComERRBADREQ::ServComERRBADREQ()
 {
 	size = 1;
 	communicateBuffer = new char;
-	communicateBuffer[0] = 0x12;
+	communicateBuffer[0] = _SERVCOMERRBADREQ;
 }
 
 

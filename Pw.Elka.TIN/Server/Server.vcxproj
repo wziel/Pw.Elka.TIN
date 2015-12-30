@@ -140,7 +140,6 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\CliComPSSWCHG.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\CliComSEND.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\Communicate.h" />
-    <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServClassGRPGETONE.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComACK.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComADDRGETALL.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComADDRGETONE.h" />
@@ -207,7 +206,6 @@
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\CliComPSSWCHG.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\CliComSEND.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\Communicate.cpp" />
-    <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServClassGRPGETONE.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComACK.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComADDRGETALL.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComADDRGETONE.cpp" />

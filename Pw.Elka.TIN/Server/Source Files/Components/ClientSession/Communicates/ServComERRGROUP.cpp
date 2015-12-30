@@ -5,7 +5,7 @@ ServComERRGROUP::ServComERRGROUP()
 {
 	size = 1;
 	communicateBuffer = new char;
-	communicateBuffer[0] = 0x14;
+	communicateBuffer[0] = _SERVCOMERRGROUP;
 }
 
 

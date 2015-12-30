@@ -6,7 +6,7 @@ ServComERRMSG::ServComERRMSG()
 {
 	size = 1;
 	communicateBuffer = new char;
-	communicateBuffer[0] = 0x15;
+	communicateBuffer[0] = _SERVCOMERRMSG;
 }
 
 

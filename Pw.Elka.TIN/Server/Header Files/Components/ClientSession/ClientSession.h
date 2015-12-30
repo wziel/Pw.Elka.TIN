@@ -2,6 +2,7 @@
 #include "../../Interfaces/IClientSessionManager.h"
 #include "../../Shared/SessionState.h"
 #include "../../Interfaces/ILayer.h"
+#include "../../Interfaces/IClientDAL.h"
 
 #include <string>
 
@@ -23,7 +24,6 @@
 #include "../../Components/ClientSession/Communicates/CliComMSGMODIFY.h"
 #include "../../Components/ClientSession/Communicates/CliComPSSWCHG.h"
 #include "../../Components/ClientSession/Communicates/CliComSEND.h"
-#include "../../Components/ClientSession/Communicates/ServClassGRPGETONE.h"
 #include "../../Components/ClientSession/Communicates/ServComACK.h"
 #include "../../Components/ClientSession/Communicates/ServComADDRGETALL.h"
 #include "../../Components/ClientSession/Communicates/ServComADDRGETONE.h"
@@ -40,6 +40,7 @@
 #include "../../Components/ClientSession/Communicates/ServComGRPGETONE.h"
 #include "../../Components/ClientSession/Communicates/ServComMSGGETALL.h"
 #include "../../Components/ClientSession/Communicates/ServComMSGGETONE.h"
+
 
 
 
@@ -75,8 +76,13 @@ private:
 	char* servCom;
 	//last client communicate content
 	char* cliCom;
+	//last communicate size
+	int comSize;
 	//client's username
 	string clientName; 
 	//salt used for hashing user's password
 	string salt;
+
+	//communicates service functions
+	void communicateService(CliComAUTH clientCommunicate);
 };

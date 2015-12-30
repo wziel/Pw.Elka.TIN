@@ -225,9 +225,6 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\Communicate.h">
       <Filter>Header Files\Components\ClientSession\Communicates</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServClassGRPGETONE.h">
-      <Filter>Header Files\Components\ClientSession\Communicates</Filter>
-    </ClInclude>
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComACK.h">
       <Filter>Header Files\Components\ClientSession\Communicates</Filter>
     </ClInclude>
@@ -363,9 +360,6 @@
       <Filter>Source Files\Components\ClientSession\Communicates</Filter>
     </ClCompile>
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\Communicate.cpp">
-      <Filter>Source Files\Components\ClientSession\Communicates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServClassGRPGETONE.cpp">
       <Filter>Source Files\Components\ClientSession\Communicates</Filter>
     </ClCompile>
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComACK.cpp">

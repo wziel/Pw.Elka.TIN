@@ -5,7 +5,7 @@ ServComERRBADCONTENT::ServComERRBADCONTENT()
 {
 	size = 1;
 	communicateBuffer = new char;
-	communicateBuffer[0] = 0x13;
+	communicateBuffer[0] = _SERVCOMERRBADCONTENT;
 }
 
 
