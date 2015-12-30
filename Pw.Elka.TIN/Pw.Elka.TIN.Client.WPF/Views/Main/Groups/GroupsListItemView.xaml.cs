@@ -35,6 +35,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
         public GroupsListItemView(GroupModel model, GroupsListView masterView)
         {
             InitializeComponent();
+
+            var app = (App)Application.Current;
+            _model = app.AppDAL.GroupModelGetById(model.Id);
             lblGroupName.Content = model.Name;
 
             _masterView = masterView;
