@@ -67,8 +67,17 @@
     <Compile Include="Views\Main\GroupsView.xaml.cs">
       <DependentUpon>GroupsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\Groups\GroupAddressListItemView.xaml.cs">
+      <DependentUpon>GroupAddressListItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Groups\GroupDetailsView.xaml.cs">
+      <DependentUpon>GroupDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\Groups\GroupsListItemView.xaml.cs">
       <DependentUpon>GroupsListItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Groups\GroupsListView.xaml.cs">
+      <DependentUpon>GroupsListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -129,7 +138,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Main\Groups\GroupAddressListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Groups\GroupDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\Groups\GroupsListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Groups\GroupsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

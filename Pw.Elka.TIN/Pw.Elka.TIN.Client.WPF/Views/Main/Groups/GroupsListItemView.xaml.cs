@@ -22,7 +22,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
     public partial class GroupsListItemView : UserControl
     {
         private GroupModel _model;
-        private GroupsView _masterView;
+        private GroupsListView _masterView;
 
         public int ModelId
         {
@@ -32,7 +32,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             }
         }
 
-        public GroupsListItemView(GroupModel model, GroupsView masterView)
+        public GroupsListItemView(GroupModel model, GroupsListView masterView)
         {
             InitializeComponent();
             lblGroupName.Content = model.Name;
@@ -47,7 +47,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            _masterView.DisplayDetailsListItem(_model);
+            _masterView.DisplayDetails(_model);
         }
     }
 }
