@@ -8,5 +8,11 @@ class DAL :
 public:
 	DAL();
 	~DAL();
+/*********************/
+/*Ceated for testing!*/
+/*********************/
+//IClientDAL.h 
+	string GetHashOfPassword(string username);
+/*********************/
 };
 
