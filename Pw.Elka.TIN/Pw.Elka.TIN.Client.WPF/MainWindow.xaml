@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
-        <Views:RootContainerView />
+        <Views:RootContainerView x:Name="rootContainer" />
+        <TextBox x:Name="txtError" Height="50px" VerticalAlignment="Bottom" BorderThickness="0" Margin="0,10,0,0"/>
     </StackPanel>
 </Window>

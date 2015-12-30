@@ -55,43 +55,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\Main\AccountView.xaml.cs">
+    <Compile Include="Views\Main\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\AddressesView.xaml.cs">
+    <Compile Include="Views\Main\Addresses\AddressesView.xaml.cs">
       <DependentUpon>AddressesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Addresses\AddressesNew.xaml.cs">
-      <DependentUpon>AddressesNew.xaml</DependentUpon>
+    <Compile Include="Views\Main\Addresses\AddressListItemView.xaml.cs">
+      <DependentUpon>AddressListItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Addresses\AddressesAllView.xaml.cs">
-      <DependentUpon>AddressesAllView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\GroupsView.xaml.cs">
+    <Compile Include="Views\Main\Groups\GroupsView.xaml.cs">
       <DependentUpon>GroupsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Groups\GroupDetails.xaml.cs">
-      <DependentUpon>GroupDetails.xaml</DependentUpon>
+    <Compile Include="Views\Main\Groups\GroupAddressListItemView.xaml.cs">
+      <DependentUpon>GroupAddressListItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Groups\GroupEdit.xaml.cs">
-      <DependentUpon>GroupEdit.xaml</DependentUpon>
+    <Compile Include="Views\Main\Groups\GroupDetailsView.xaml.cs">
+      <DependentUpon>GroupDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Groups\GroupsListItemView.xaml.cs">
+      <DependentUpon>GroupsListItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Groups\GroupsListView.xaml.cs">
+      <DependentUpon>GroupsListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\MessagesView.xaml.cs">
+    <Compile Include="Views\Main\Messages\MessagesView.xaml.cs">
       <DependentUpon>MessagesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Messages\MessageDetails.xaml.cs">
-      <DependentUpon>MessageDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\Messages\MessageEdit.xaml.cs">
-      <DependentUpon>MessageEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\Messages\MessagesAllView.xaml.cs">
-      <DependentUpon>MessagesAllView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\SendView.xaml.cs">
+    <Compile Include="Views\Main\Send\SendView.xaml.cs">
       <DependentUpon>SendView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RootContainerView.xaml.cs">
@@ -100,35 +94,19 @@
     <Compile Include="Views\ServerConnectView.xaml.cs">
       <DependentUpon>ServerConnectView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Main\AccountView.xaml">
+    <Page Include="Views\Main\Account\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\AddressesView.xaml">
+    <Page Include="Views\Main\Addresses\AddressesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\Addresses\AddressesNew.xaml">
+    <Page Include="Views\Main\Addresses\AddressListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\Addresses\AddressesAllView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\GroupsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupsAllView.xaml">
+    <Page Include="Views\Main\Groups\GroupsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,9 +122,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Main\Groups\GroupsAllView.xaml.cs">
-      <DependentUpon>GroupsAllView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -154,27 +129,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Main\Groups\GroupAddressListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Groups\GroupDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Groups\GroupsListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Groups\GroupsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\MessagesView.xaml">
+    <Page Include="Views\Main\Messages\MessagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\Messages\MessageDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Messages\MessageEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Messages\MessagesAllView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\SendView.xaml">
+    <Page Include="Views\Main\Send\SendView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

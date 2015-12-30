@@ -76,6 +76,7 @@
     <Compile Include="Communicates\ServerGroupGetOneCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetAllCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetOneCommunicate.cs" />
+    <Compile Include="Exceptions\NotAuthorizedException.cs" />
     <Compile Include="Hash\Hashing.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\GroupModel.cs" />

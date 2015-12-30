@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pw.Elka.TIN.Client.Logic.Models;
+using Pw.Elka.TIN.Client.WPF.Views.Main.Groups;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +24,24 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
     {
         public GroupsView()
         {
+            var app = (App)Application.Current;
+            var mainWindow = ((MainWindow)app.MainWindow);
             InitializeComponent();
+
+            stkMain.Children.Add(new GroupsListView(this));
+        }
+
+
+        public void DisplayDetailsListItem(GroupModel model)
+        {
+            stkMain.Children.Clear();
+            stkMain.Children.Add(new GroupDetailsView(model, this));
+        }
+
+        public void DisplayListView()
+        {
+            stkMain.Children.Clear();
+            stkMain.Children.Add(new GroupsListView(this));
         }
     }
 }
