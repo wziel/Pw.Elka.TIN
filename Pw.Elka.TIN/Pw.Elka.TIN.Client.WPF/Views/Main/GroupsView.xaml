@@ -6,7 +6,29 @@
              xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF.Views.Main"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <StackPanel Name="stkListView">
+            <Label FontSize="21.333">Dodaj nową grupę</Label>
+            <Label>Nazwa grupy</Label>
+            <TextBox Name="txtNewGroupName"></TextBox>
+            <Button Name="btnSubmitNewGroup" Margin="0,10,0,0" Click="btnSubmitNewGroup_Click">Dodaj</Button>
+            <Label FontSize="21.333">Lista obecnych grup</Label>
+            <StackPanel Name="stkGroups"></StackPanel>
+        </StackPanel>
+        <StackPanel Name="stkDetailsView" Visibility="Hidden">
+            <Button Name="btnDetailsSave" Click="btnDetailsSave_Click" />
+            <Button Name="btnDetailsCollapse" Click="btnDetailsCollapse_Click"></Button>
+            <TextBox Name="txtDetailsGroupName" />
+            <ListBox Name="lbDetailsAddresses">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Label Content="{Binding AdresseeName}" FontSize="21.333"></Label>
+                            <Label Content="{Binding Value}"></Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

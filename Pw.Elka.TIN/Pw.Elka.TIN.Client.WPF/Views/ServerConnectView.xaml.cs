@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,9 +28,21 @@ namespace Pw.Elka.TIN.Client.WPF.Views
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            var stkpanel = (StackPanel)Parent;
-            var rootView = (RootContainerView)stkpanel.Parent;
-            rootView.NavigateToLoginView();
+            var app = (App)Application.Current;
+            var mainWindow = ((MainWindow)app.MainWindow);
+            //mainWindow.ClearError();
+            //try
+            //{
+            //    app.AppLogic = new Logic.App(txtAddress.Text, int.Parse(txtPort.Text));
+            //    app.AppLogic.Connect();
+            //    app.AppDAL = new Logic.AppDAL(app.AppLogic);
+            //}
+            //catch (SocketException)
+            //{
+            //    mainWindow.DisplayError("Nie udało połączyć się z serwerem. Spróbuj jeszcze raz.");
+            //    return;
+            //}
+            mainWindow.rootContainer.NavigateToLoginView();
         }
     }
 }

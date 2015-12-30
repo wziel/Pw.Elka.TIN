@@ -6,7 +6,14 @@
              xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <Label FontSize="21.333" >Zmień hasło</Label>
+        <Label>Obecne hasło</Label>
+        <PasswordBox Name="txtOldPass" />
+        <Label>Nowe hasło</Label>
+        <PasswordBox Name="txtNewPass" />
+        <Label>Potwierdź nowe hasło</Label>
+        <PasswordBox Name="txtNewPassConfirm" />
+        <Button Name="btnSubmit" Click="btnSubmit_Click" Margin="0,10,0,0">Submit</Button>
+    </StackPanel>
 </UserControl>

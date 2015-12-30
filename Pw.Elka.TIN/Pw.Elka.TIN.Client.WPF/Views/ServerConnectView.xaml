@@ -8,11 +8,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
             <StackPanel Margin="100,50,100,0">
-                <Label Content="Server address:" />
-                <TextBox Name="txtAddress" />
-                <Label Content="Server port:" />
-                <TextBox Name="txtPort" />
-                <Button Name="btnConnect" Click="btnConnect_Click" Content="Connect" />
+            <Label Content="Połącz się z serwerem" FontSize="21.333"></Label>
+                <Label Content="Adres serwera" />
+                <TextBox Name="txtAddress" Text="localhost" />
+                <Label Content="Port serwera" />
+                <TextBox Name="txtPort" Text="7777" />
+            <Button Name="btnConnect" Click="btnConnect_Click" Content="Połącz" Margin="0,10,0,0" />
             </StackPanel>
         </StackPanel>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pw.Elka.TIN.Client.Logic.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +28,18 @@ namespace Pw.Elka.TIN.Client.WPF.Views
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            var stkpanel = (StackPanel)Parent;
-            var rootView = (RootContainerView)stkpanel.Parent;
-            rootView.NavigateToMainView();
+            var app = (App)Application.Current;
+            var mainWindow = ((MainWindow)app.MainWindow);
+            //try
+            //{
+            //    app.AppDAL.ClientAuthenticate(txtPassword.Password, txtUsername.Text);
+            //}
+            //catch (NotAuthorizedException)
+            //{
+            //    mainWindow.DisplayError("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
+            //    return;
+            //}
+            mainWindow.rootContainer.NavigateToMainView();
         }
     }
 }

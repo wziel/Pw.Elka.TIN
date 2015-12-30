@@ -6,7 +6,14 @@
              xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF.Views.Main"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <Label FontSize="21.333">Dodaj nowy adres</Label>
+        <Label>Nazwa adresata</Label>
+        <TextBox Name="txtNewName"></TextBox>
+        <Label>Adres</Label>
+        <TextBox Name="txtNewValue"></TextBox>
+        <Button Name="btnSubmit" Click="btnSubmit_Click"  Margin="0,10,0,0">Dodaj</Button>
+        <Label FontSize="21.333" Margin="0,-3,0,0">Lista obecnych adresów</Label>
+        <StackPanel Name="stkAddress"></StackPanel>
+    </StackPanel>
 </UserControl>

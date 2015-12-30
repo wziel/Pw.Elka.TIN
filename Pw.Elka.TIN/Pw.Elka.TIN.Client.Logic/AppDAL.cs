@@ -1,4 +1,5 @@
 ﻿using Pw.Elka.TIN.Client.Logic.Communicates;
+using Pw.Elka.TIN.Client.Logic.Exceptions;
 using Pw.Elka.TIN.Client.Logic.Models;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,17 @@ namespace Pw.Elka.TIN.Client.Logic
 {
     public class AppDAL
     {
-        private static Logic.App _appLogic;
+        private Logic.App _appLogic;
 
-        public static void Initialize(Logic.App application)
+        public AppDAL(Logic.App application)
         {
             _appLogic = application;
         }
 
 
-        private static List<GroupModel> _groupModels;
+        private List<GroupModel> _groupModels;
 
-        public static List<GroupModel> GroupModels
+        public List<GroupModel> GroupModels
         {
             get
             {
@@ -47,9 +48,9 @@ namespace Pw.Elka.TIN.Client.Logic
             }
         }
 
-        private static List<MessageModel> _messagrModels;
+        private List<MessageModel> _messagrModels;
 
-        public static List<MessageModel> MessageModels
+        public List<MessageModel> MessageModels
         {
             get
             {
@@ -76,9 +77,9 @@ namespace Pw.Elka.TIN.Client.Logic
             }
         }
 
-        private static List<AddressModel> _addressModels;
+        private List<AddressModel> _addressModels;
 
-        public static List<AddressModel> AddressModels
+        public List<AddressModel> AddressModels
         {
             get
             {
@@ -106,7 +107,7 @@ namespace Pw.Elka.TIN.Client.Logic
         }
 
 
-        public static GroupModel GroupModelGetById(int id)
+        public GroupModel GroupModelGetById(int id)
         {
             var groupModel = GroupModels.Single(g => g.Id == id);
             if (groupModel.Addresses == null)
@@ -130,7 +131,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return groupModel;
         }
 
-        public static MessageModel MessageModelGetById(int id)
+        public MessageModel MessageModelGetById(int id)
         {
             var messageModel = MessageModels.Single(m => m.Id == id);
             if (messageModel.Content == null)
@@ -146,7 +147,7 @@ namespace Pw.Elka.TIN.Client.Logic
             return messageModel;
         }
 
-        public static void GroupModelAddressAdd(int groupId, int addressId)
+        public void GroupModelAddressAdd(int groupId, int addressId)
         {
             var groupModel = GroupModelGetById(groupId);
             var serverCommunicate = _appLogic.GroupAddressAdd(groupId, addressId);
@@ -159,7 +160,7 @@ namespace Pw.Elka.TIN.Client.Logic
             groupModel.Addresses.Add(address);
         }
 
-        public static void GroupModelAddressRemove(int addressId, int groupId)
+        public void GroupModelAddressRemove(int addressId, int groupId)
         {
             var groupModel = GroupModelGetById(groupId);
             var serverCommunicate = _appLogic.GroupAddressRemove(groupId, addressId);
@@ -171,7 +172,7 @@ namespace Pw.Elka.TIN.Client.Logic
             groupModel.Addresses.RemoveAll(a => a.Id == addressId);
         }
 
-        public static void GroupModelCreate(string name)
+        public GroupModel GroupModelCreate(string name)
         {
             var serverCommunicate = _appLogic.GroupCreate(name);
             var communicate = serverCommunicate as ServerGroupGetOneCommunicate;
@@ -194,9 +195,10 @@ namespace Pw.Elka.TIN.Client.Logic
                 });
             }
             GroupModels.Add(groupModel);
+            return groupModel;
         }
 
-        public static void GroupModelDelete(int id)
+        public void GroupModelDelete(int id)
         {
             var serverCommunicate = _appLogic.GroupDelete(id);
             var communicate = serverCommunicate as ServerAckCommunicate;
@@ -207,7 +209,7 @@ namespace Pw.Elka.TIN.Client.Logic
             GroupModels.RemoveAll(g => g.Id == id);
         }
 
-        public static void MessageModelCreate(string name, string template)
+        public void MessageModelCreate(string name, string template)
         {
             var serverCommunicate = _appLogic.MessageCreate(template, name);
             var communicate = serverCommunicate as ServerMessageGetOneCommunicate;
@@ -223,7 +225,7 @@ namespace Pw.Elka.TIN.Client.Logic
             });
         }
 
-        public static void MessageModelDelete(int id)
+        public void MessageModelDelete(int id)
         {
             var serverCommunicate = _appLogic.MessageDelete(id);
             var communicate = serverCommunicate as ServerAckCommunicate;
@@ -234,7 +236,7 @@ namespace Pw.Elka.TIN.Client.Logic
             MessageModels.RemoveAll(m => m.Id == id);
         }
 
-        public static void MessageModelModify(int id, string name, string template)
+        public void MessageModelModify(int id, string name, string template)
         {
             var serverCommunicate = _appLogic.MessageModyify(template, name, id);
             var communicate = serverCommunicate as ServerAckCommunicate;
@@ -247,17 +249,20 @@ namespace Pw.Elka.TIN.Client.Logic
             messageModel.Content = template;
         }
 
-        public static void ClientAuthenticate(string password, string login)
+        public void ClientAuthenticate(string password, string login)
         {
             var serverCommunicate = _appLogic.Authorize(login, password);
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                throw new NotImplementedException();
+                if(serverCommunicate is ServerErrorNotAuthorizedCommunicate)
+                {
+                    throw new NotAuthorizedException();
+                }
             }
         }
 
-        public static void ClientPasswordChange(string password, string newPassword)
+        public void ClientPasswordChange(string password, string newPassword)
         {
             var serverCommunicate = _appLogic.PasswordChange(password, newPassword);
             var communicate = serverCommunicate as ServerAckCommunicate;
@@ -267,7 +272,7 @@ namespace Pw.Elka.TIN.Client.Logic
             }
         }
 
-        public static void Send(int groupId, int messageId, List<string> templateValues)
+        public void Send(int groupId, int messageId, List<string> templateValues)
         {
             var serverCommunicate = _appLogic.Send(groupId, messageId, templateValues);
             var communicate = serverCommunicate as ServerAckCommunicate;
@@ -277,7 +282,7 @@ namespace Pw.Elka.TIN.Client.Logic
             }
         }
 
-        public static void AddressAdd(string addresValue, string addresseeName)
+        public AddressModel AddressAdd(string addresValue, string addresseeName)
         {
             var serverCommunicate = _appLogic.AddressAdd(addresValue, addresseeName);
             var communicate = serverCommunicate as ServerAddressGetOneCommunicate;
@@ -285,15 +290,17 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 throw new NotImplementedException();
             }
-            AddressModels.Add(new AddressModel()
+            var addrModel = new AddressModel()
             {
                 AdresseeName = addresseeName,
                 Value = addresValue,
                 Id = communicate.AddressID
-            });
+            };
+            AddressModels.Add(addrModel);
+            return addrModel;
         }
 
-        public static void AddressRemove(int addressId)
+        public void AddressRemove(int addressId)
         {
             var serverCommunicate = _appLogic.AddressRemove(addressId);
             var communicate = serverCommunicate as ServerAckCommunicate;

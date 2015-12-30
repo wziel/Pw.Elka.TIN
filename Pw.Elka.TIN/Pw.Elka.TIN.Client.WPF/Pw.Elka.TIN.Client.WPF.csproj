@@ -61,20 +61,14 @@
     <Compile Include="Views\Main\AddressesView.xaml.cs">
       <DependentUpon>AddressesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Addresses\AddressesNew.xaml.cs">
-      <DependentUpon>AddressesNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\Addresses\AddressesAllView.xaml.cs">
-      <DependentUpon>AddressesAllView.xaml</DependentUpon>
+    <Compile Include="Views\Main\Addresses\AddressListItemView.xaml.cs">
+      <DependentUpon>AddressListItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\GroupsView.xaml.cs">
       <DependentUpon>GroupsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Main\Groups\GroupDetails.xaml.cs">
-      <DependentUpon>GroupDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Main\Groups\GroupEdit.xaml.cs">
-      <DependentUpon>GroupEdit.xaml</DependentUpon>
+    <Compile Include="Views\Main\Groups\GroupsListItemView.xaml.cs">
+      <DependentUpon>GroupsListItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -108,27 +102,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Main\Addresses\AddressesNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Addresses\AddressesAllView.xaml">
+    <Page Include="Views\Main\Addresses\AddressListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\GroupsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Main\Groups\GroupsAllView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,9 +122,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Main\Groups\GroupsAllView.xaml.cs">
-      <DependentUpon>GroupsAllView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -154,6 +129,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Main\Groups\GroupsListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

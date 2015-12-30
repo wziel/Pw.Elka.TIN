@@ -24,5 +24,13 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         {
             InitializeComponent();
         }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            var mainWindow = ((MainWindow)app.MainWindow);
+
+            mainWindow.ClearMessage();
+        }
     }
 }

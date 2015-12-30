@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic.Hash
 {
-    internal static class Hashing
+    public static class Hashing
     {
-        internal static int GetDJBHash(string str)
+        public static int GetDJBHash(string str)
         {
             int hash = 5381;
 
@@ -20,7 +20,7 @@ namespace Pw.Elka.TIN.Client.Logic.Hash
             return hash;
         }
 
-        internal static string GetXoredString(string str)
+        public static string GetXoredString(string str)
         {
             byte[] key = { 143, 87, 133, 84, 123, 101, 68 };
             int minimumStringLength = 16;

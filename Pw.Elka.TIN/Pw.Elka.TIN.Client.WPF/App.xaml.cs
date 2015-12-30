@@ -14,7 +14,7 @@ namespace Pw.Elka.TIN.Client.WPF
     /// </summary>
     public partial class App : Application
     {
-        private Logic.App AppLogic { get; set; }
-        internal AppDAL AppDAL { get; private set; }
+        internal Logic.App AppLogic { get; set; }
+        internal AppDAL AppDAL { get; set; }
     }
 }
