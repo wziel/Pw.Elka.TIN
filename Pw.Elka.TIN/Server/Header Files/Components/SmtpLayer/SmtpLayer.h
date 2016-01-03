@@ -6,6 +6,11 @@ class SmtpLayer :
 {
 public:
 	SmtpLayer();
+	SmtpLayer(MessagesQueue &queue);
 	~SmtpLayer();
+
+	//ISmtpLayer
+	void Start();
+
 };
 
