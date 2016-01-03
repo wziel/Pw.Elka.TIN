@@ -13,9 +13,10 @@ class TcpLayer :
 {
 public:
 	TcpLayer(); 
+	TcpLayer(int socketfd);
 	~TcpLayer();
 //ITcpLayerManager intereface
-	bool Initialize(int socketfd);
+	//bool Initialize(int socketfd);
 	int End();
 //ILayer interface
 	void Send(char* buffer, int size);

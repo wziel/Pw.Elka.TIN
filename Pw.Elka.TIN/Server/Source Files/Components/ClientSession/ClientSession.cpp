@@ -52,17 +52,24 @@ bool ClientSession::Start()
 	}
 }
 
-
-bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager)
+ClientSession::ClientSession(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager)
 {
 	this->bottomLayer = &bottomLayer;
 	this->messagesQueue = &queue;
 	this->sessionState = initialState;
 	this->DAL = &DAL;
 	this->clientManager = &clientManager;
-
-	return true;
 }
+//bool ClientSession::Initialize(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager)
+//{
+//	this->bottomLayer = &bottomLayer;
+//	this->messagesQueue = &queue;
+//	this->sessionState = initialState;
+//	this->DAL = &DAL;
+//	this->clientManager = &clientManager;
+//
+//	return true;
+//}
 
 string ClientSession::GetClientName()
 {
