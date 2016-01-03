@@ -11,12 +11,14 @@ class Cipher :
 {
 public:
 	Cipher();
+	Cipher(ILayer &bottomLayer);
 	~Cipher();
-	void Initialize(ILayer &bottomLayer);
+	//ICipherManager
+	//void Initialize(ILayer &bottomLayer);
 	void Send(char* buffer, int size);
 	void Receive(char* buffer, int &size);
 private:
 	ILayer *bottomLayer;
-	const char keyCode[] = "michal";
+	const char keyCode[7] = "michal";
 };
 

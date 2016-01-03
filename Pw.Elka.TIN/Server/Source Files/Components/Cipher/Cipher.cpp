@@ -12,10 +12,16 @@ Cipher::~Cipher()
 {
 }
 
-void Cipher::Initialize(ILayer &bottomLayer)
+Cipher::Cipher(ILayer &bottomLayer)
 {
 	this->bottomLayer = &bottomLayer;
 }
+
+
+//void Cipher::Initialize(ILayer &bottomLayer)
+//{
+//	this->bottomLayer = &bottomLayer;
+//}
 
 void Cipher::Send(char *buffer, int size)
 {
@@ -33,7 +39,7 @@ void Cipher::Send(char *buffer, int size)
 void Cipher::Receive(char *buffer, int &size)	//znamy juz rozmiar?
 {
 	int mySize;
-	char *myBuffer;
+	char *myBuffer=NULL;
 	bottomLayer->Receive(myBuffer, mySize);
 	buffer = new char[mySize - 3];
 	if (myBuffer[0] == 0x00)
