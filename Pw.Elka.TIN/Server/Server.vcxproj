@@ -164,7 +164,6 @@
     <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h" />
     <ClInclude Include="Header Files\Components\TcpLayer\TcpLayer.h" />
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h" />
-    <ClInclude Include="Header Files\Interfaces\ICipherManager.h" />
     <ClInclude Include="Header Files\Interfaces\IClientCreator.h" />
     <ClInclude Include="Header Files\Interfaces\IClientDAL.h" />
     <ClInclude Include="Header Files\Interfaces\IClientManager.h" />

@@ -6,8 +6,7 @@ class ILayer;
 class ITcpLayerManager
 {
 public:
-	virtual ~ITcpLayerManager() = 0;
-	//virtual bool Initialize(int socketfd) = 0;
+	virtual ~ITcpLayerManager();
 	virtual int End() = 0;
 };
 

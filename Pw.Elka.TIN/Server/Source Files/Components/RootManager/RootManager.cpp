@@ -65,12 +65,14 @@ DWORD WINAPI RootManager::StartSmtpLayer(LPVOID lpParam)
 {
 	SmtpLayer* smtpLayer = (SmtpLayer*)lpParam;
 	smtpLayer->Start();
+	return 0;
 }
 
 DWORD WINAPI RootManager::StartSessionsListener(LPVOID lpParam)
 {
 	SessionListener* sessionsLister = (SessionListener*)lpParam;
 	sessionsLister->Start();
+	return 0;
 }
 
 void RootManager::CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght)
@@ -104,6 +106,7 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 
 	sessionObjects.clientSession->Start();
 	sessionObjects.state = ClientSessionState::Working;
+	return 0;
 }
 
 
@@ -147,6 +150,7 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 	ReleaseMutex(rootManager.clientSessionsMutex);
 
 	delete params;
+	return 0;
 }
 
 

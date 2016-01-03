@@ -18,7 +18,6 @@ public:
 	//ISessionListener
 	void Start();
 	void End();
-	//void Initialize(IClientCreator &clientCreator);
 private:
 	IClientCreator *clientCreator;
 

@@ -8,7 +8,6 @@ class ISmtpLayer
 public:
 	virtual ~ISmtpLayer() {};
 	virtual void Start() = 0;
-//	virtual void Initialize(MessagesQueue &queue) = 0;
 };
 
 #endif

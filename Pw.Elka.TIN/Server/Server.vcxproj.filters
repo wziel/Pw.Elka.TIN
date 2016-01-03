@@ -87,9 +87,6 @@
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Interfaces\ICipherManager.h">
-      <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Header Files\Interfaces\IClientCreator.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>

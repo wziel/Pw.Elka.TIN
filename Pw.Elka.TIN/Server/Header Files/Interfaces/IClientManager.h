@@ -6,7 +6,7 @@ class IClientSessionManager;
 class IClientManager
 {
 public:
-	virtual ~IClientManager() = 0;
+	virtual ~IClientManager() { };
 	virtual void RegisterClientEnded(IClientSessionManager &clientSessionManager) = 0;
 };
 

@@ -6,7 +6,7 @@
 class IClientSessionsRegister
 {
 public:
-	virtual ~IClientSessionsRegister() = 0;
+	virtual ~IClientSessionsRegister() { };
 	virtual std::vector<ClientSessionView> GetAllClientSessionViews() = 0;
 	virtual void EndClientSession(unsigned clientSessionViewId) = 0;
 };
