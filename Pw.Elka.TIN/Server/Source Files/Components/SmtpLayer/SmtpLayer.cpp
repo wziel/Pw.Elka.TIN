@@ -3,7 +3,7 @@
 
 SmtpLayer::SmtpLayer(MessagesQueue &queue)
 {
-	throw "Not implemented";
+	//throw "Not implemented";
 }
 
 SmtpLayer::~SmtpLayer()
@@ -12,5 +12,5 @@ SmtpLayer::~SmtpLayer()
 
 void SmtpLayer::Start()
 {
-	throw "Not implemented";
+	//throw "Not implemented";
 }

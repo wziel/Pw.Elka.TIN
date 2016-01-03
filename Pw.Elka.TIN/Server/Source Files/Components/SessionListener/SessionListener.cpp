@@ -1,5 +1,4 @@
 #include "../../../Header Files/Components/SessionListener/SessionListener.h"
-
 SessionListener::SessionListener(IClientCreator &clientCreator)
 {
 
@@ -15,9 +14,20 @@ SessionListener::~SessionListener()
 
 void SessionListener::Start()
 {
+	/*WSAStartup part*/
+	WORD wVersionRequested;
+	WSADATA wsaData;
+	int err;
+
+	wVersionRequested = MAKEWORD(2, 2);
+
+	if(err = WSAStartup(wVersionRequested, &wsaData) != 0)
+		throw "WSAStartup error";
+	/*WSAStartup part - end*/
+
 	if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		throw "Error while creating socket";
-
+	
 	addressStruct.sin_family = AF_INET;
 	addressStruct.sin_addr.s_addr = htonl(INADDR_ANY);
 	addressStruct.sin_port = htons(portToListen);
