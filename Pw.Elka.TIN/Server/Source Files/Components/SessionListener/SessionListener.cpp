@@ -66,8 +66,3 @@ void SessionListener::End()
 {
 	WSASetEvent(wsaEvents[1]);
 }
-
-void SessionListener::CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght)
-{
-	throw "Not implemented";
-}

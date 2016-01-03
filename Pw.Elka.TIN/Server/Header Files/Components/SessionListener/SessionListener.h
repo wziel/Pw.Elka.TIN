@@ -19,8 +19,6 @@ public:
 	//ISessionListener
 	void Start();
 	void End();
-	//IClientCreator
-	void CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght);
 	//void Initialize(IClientCreator &clientCreator);
 private:
 	IClientCreator *clientCreator;
