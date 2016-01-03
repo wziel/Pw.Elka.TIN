@@ -6,7 +6,7 @@ class ILayer;
 class ITcpLayerManager
 {
 public:
-	virtual ~ITcpLayerManager();
+	virtual ~ITcpLayerManager() {};
 	virtual int End() = 0;
 };
 
