@@ -5,7 +5,6 @@ class SmtpLayer :
 	public ISmtpLayer
 {
 public:
-	SmtpLayer();
 	SmtpLayer(MessagesQueue &queue);
 	~SmtpLayer();
 

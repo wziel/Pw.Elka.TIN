@@ -2,19 +2,13 @@
 #include <iostream>
 #include <algorithm>
 
-AdministratorView::AdministratorView()
+AdministratorView::AdministratorView(IClientSessionsRegister& sessionsRegister, IAdminDAL& DALarg) : DAL(DAL), sessionsRegister(sessionsRegister)
 {
 }
 
 
 AdministratorView::~AdministratorView()
 {
-}
-
-void AdministratorView::Initialize(IClientSessionsRegister& sessionsRegister, IAdminDAL& DAL)
-{
-	this->DAL = DAL;
-	this->sessionsRegister = sessionsRegister;
 }
 
 void AdministratorView::Start()
@@ -90,7 +84,8 @@ string AdministratorView::GetHashedString(string str)
 
 	for (int i = 0; i < characterLength; ++i)
 	{
-		characters[i] = (char)(key[i % 7] ^ str[i % str.length]);
+		throw "Assignment exception.";
+		//characters[i] = ((key[i % 7]) + (str[i % str.length]));
 	}
 
 	string returnStr(characters);

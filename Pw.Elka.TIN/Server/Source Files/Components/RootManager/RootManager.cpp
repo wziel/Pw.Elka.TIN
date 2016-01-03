@@ -4,9 +4,9 @@ RootManager::RootManager()
 {
 	dataAccessLayer = new DAL();
 	messagesQueue = new MessagesQueue();
-	smtpLayer = new SmtpLayer();
-	sessionsListener = new SessionListener();
-	adminView = new AdministratorView();
+	smtpLayer = new SmtpLayer(*messagesQueue);
+	sessionsListener = new SessionListener(*this);
+	adminView = new AdministratorView(*this, *dataAccessLayer);
 	clientSessionsMutex = CreateMutex(NULL, FALSE, NULL);
 }
 
@@ -31,10 +31,6 @@ RootManager::~RootManager()
 
 void RootManager::Start()
 {
-	smtpLayer->Initialize(*messagesQueue);
-	sessionsListener->Initialize(*this);
-	adminView->Initialize(*this, *dataAccessLayer);
-
 	DWORD dwThreadId;
 	smtpLayerThreadHandle = CreateThread(NULL, 0, StartSmtpLayer, smtpLayer, 0, &dwThreadId);
 	sessionsListenerThreadHandle = CreateThread(NULL, 0, StartSessionsListener, sessionsListener, 0, &dwThreadId);
@@ -99,16 +95,12 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 	ClientSessionObjects& sessionObjects = params->objectsToUpdate;
 	RootManager& rootManager = params->rootManager;
 
-	sessionObjects.clientSession = new ClientSession();
-	sessionObjects.cipher = new Cipher();
-	sessionObjects.tcpLayer = new TcpLayer();
-	sessionObjects.connectionId = rootManager.connectionIdHighWaterMark++;
-
 	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
 
-	sessionObjects.clientSession->Initialize(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
-	sessionObjects.cipher->Initialize(*sessionObjects.tcpLayer);
-	sessionObjects.tcpLayer->Initialize(params->socketFd);
+	sessionObjects.clientSession = new ClientSession(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
+	sessionObjects.tcpLayer = new TcpLayer(params->socketFd);
+	sessionObjects.cipher = new Cipher(*sessionObjects.tcpLayer);
+	sessionObjects.connectionId = rootManager.connectionIdHighWaterMark++;
 
 	sessionObjects.clientSession->Start();
 	sessionObjects.state = ClientSessionState::Working;

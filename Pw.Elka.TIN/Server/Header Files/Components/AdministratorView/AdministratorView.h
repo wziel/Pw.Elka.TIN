@@ -23,9 +23,8 @@ private:
 	void mainLoop();
 
 public:
-	AdministratorView();
+	AdministratorView(IClientSessionsRegister& sessionsRegister, IAdminDAL& DALarg);
 	~AdministratorView();
 
-	void Initialize(IClientSessionsRegister& sessionsRegister, IAdminDAL& DAL);
 	void Start();
 };

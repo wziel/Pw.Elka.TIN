@@ -22,27 +22,6 @@ TcpLayer::TcpLayer(int socketfd)
 		throw "WSAEventSelect() error";
 	}
 }
-//bool TcpLayer :: Initialize(int socketfd)
-//{
-//	this->socketFD = socketfd;
-//	WSAEventArray[0] = WSACreateEvent();	//event signalling end of client session
-//		if (WSAEventArray[0] == WSA_INVALID_EVENT)
-//		{
-//			throw "WSACreateEvent() error - WSAEventArray[0]";
-//		}
-//
-//	WSAEventArray[1] = WSACreateEvent();	//network event - read
-//		if (WSAEventArray[1] == WSA_INVALID_EVENT)
-//		{
-//			throw "WSACreateEvent() error - WSAEventArray[1]";
-//		}
-//	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ);	//associate event with a socket
-//		if (iResult != 0)
-//		{
-//			throw "WSAEventSelect() error";
-//		}
-//	return true;
-//}
 
 int TcpLayer :: End()
 {
@@ -116,11 +95,6 @@ void TcpLayer :: Receive(char* buffer, int &size)	//receive data from client
 
 		WSAResetEvent(WSAEventArray[1]);
 	}
-}
-
-
-TcpLayer::TcpLayer()
-{
 }
 
 TcpLayer::~TcpLayer()

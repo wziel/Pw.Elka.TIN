@@ -1,13 +1,6 @@
 #include "../../../Header Files/Components/Cipher/Cipher.h"
 #include <iostream>
 
-
-
-Cipher::Cipher()
-{
-}
-
-
 Cipher::~Cipher()
 {
 }
@@ -16,12 +9,6 @@ Cipher::Cipher(ILayer &bottomLayer)
 {
 	this->bottomLayer = &bottomLayer;
 }
-
-
-//void Cipher::Initialize(ILayer &bottomLayer)
-//{
-//	this->bottomLayer = &bottomLayer;
-//}
 
 void Cipher::Send(char *buffer, int size)
 {

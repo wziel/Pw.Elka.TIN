@@ -10,11 +10,9 @@ class Cipher :
 	public ILayer, public ICipherManager
 {
 public:
-	Cipher();
 	Cipher(ILayer &bottomLayer);
 	~Cipher();
 	//ICipherManager
-	//void Initialize(ILayer &bottomLayer);
 	void Send(char* buffer, int size);
 	void Receive(char* buffer, int &size);
 private:

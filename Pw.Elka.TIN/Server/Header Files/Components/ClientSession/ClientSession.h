@@ -52,11 +52,9 @@ class ClientSession :
 public:
 
 	// IClientSessionManager
-//	bool Initialize(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager);
 	bool Start();
 	string GetClientName();
 
-	ClientSession();
 	ClientSession(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager);
 	~ClientSession();
 

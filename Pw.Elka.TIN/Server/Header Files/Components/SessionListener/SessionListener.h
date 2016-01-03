@@ -13,7 +13,6 @@ class SessionListener :
 	public ISessionListener
 {
 public:
-	SessionListener();
 	SessionListener(IClientCreator &clientCreator);
 	~SessionListener();
 	//ISessionListener

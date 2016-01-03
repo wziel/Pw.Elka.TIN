@@ -1,14 +1,5 @@
 #include "../../../Header Files/Components/SessionListener/SessionListener.h"
 
-
-
-SessionListener::SessionListener()
-{
-	this->portToListen = 7777;
-	wsaEvents[0]= WSACreateEvent();
-	wsaEvents[1] = WSACreateEvent();
-}
-
 SessionListener::SessionListener(IClientCreator &clientCreator)
 {
 
@@ -21,11 +12,6 @@ SessionListener::SessionListener(IClientCreator &clientCreator)
 SessionListener::~SessionListener()
 {
 }
-
-//void SessionListener::Initialize(IClientCreator &clientCreator)
-//{
-//	this->clientCreator = &clientCreator;
-//}
 
 void SessionListener::Start()
 {

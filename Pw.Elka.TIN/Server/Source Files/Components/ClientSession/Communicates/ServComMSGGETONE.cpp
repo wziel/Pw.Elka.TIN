@@ -1,5 +1,4 @@
-#include "ServComMSGGETONE.h"
-
+#include "../../../../Header Files/Components/ClientSession/Communicates/ServComMSGGETONE.h"
 
 
 ServComMSGGETONE::ServComMSGGETONE()
