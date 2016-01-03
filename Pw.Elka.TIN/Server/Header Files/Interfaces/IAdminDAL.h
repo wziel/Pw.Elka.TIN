@@ -10,7 +10,7 @@ using namespace std;
 class IAdminDAL
 {
 public:
-	virtual ~IAdminDAL() = 0;
+	virtual ~IAdminDAL() {};
 	virtual bool BlockClient(string login, bool isBlocked) = 0;
 	virtual bool CreateClient(string login, string hashOfPassword) = 0;
 	virtual bool DeleteClient(string login) = 0;
