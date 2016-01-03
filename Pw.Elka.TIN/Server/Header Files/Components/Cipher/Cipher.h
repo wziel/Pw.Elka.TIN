@@ -2,6 +2,7 @@
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/ICipherManager.h"
 #include <string>
+#define _WINSOCKAPI_ 
 #include <windows.h>
 
 using namespace std;

@@ -15,6 +15,7 @@
 #include "../AdministratorView/ClientSessionView.h"
 #include "../AdministratorView/AdministratorView.h"
 
+#define _WINSOCKAPI_ 
 #include<Windows.h>
 
 class RootManager :

@@ -3,8 +3,8 @@
 #include "../../Interfaces/ITcpLayerManager.h"
 
 #include <WinSock2.h>
-#include <windows.h>
-#include <sys/types.h>
+//#include <windows.h>
+//#include <sys/types.h>
 //#include <winsock.h>
 
 

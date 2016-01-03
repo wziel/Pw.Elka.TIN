@@ -4,8 +4,8 @@
 #include "../../Interfaces/ISessionListener.h"
 #include "../../Interfaces/IClientCreator.h"
 #include <WinSock2.h>
-#include <windows.h>
-#include <sys/types.h>
+//#include <windows.h>
+//#include <sys/types.h>
 //#include <winsock.h>
 #include <stdlib.h>
 
