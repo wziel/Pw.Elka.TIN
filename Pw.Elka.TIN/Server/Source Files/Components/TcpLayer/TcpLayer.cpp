@@ -42,8 +42,8 @@ void TcpLayer :: Send(char* buffer, int size)	//send data to client
 	//Create a buffer to send - header+data
 	mySize = size + 2;
 	myBuffer = new char[mySize];
-	myBuffer[0] = (mySize)& 0xFF;
-	myBuffer[1] = (mySize >> 8) & 0xFF;
+	myBuffer[0] = (size)& 0xFF;
+	myBuffer[1] = (size >> 8) & 0xFF;
 
 	for (int i = 2; i < mySize; ++i)
 	{
