@@ -28,7 +28,7 @@ bool ClientSession::Start()
 				CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
 				communicateService(*cliComAuth);
 			}
-			throw "Unimplemented";
+			//throw "Unimplemented";
 			break;
 		}
 
