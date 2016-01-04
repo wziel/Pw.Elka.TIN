@@ -30,18 +30,18 @@ namespace Pw.Elka.TIN.Client.WPF.Views
         {
             var app = (App)Application.Current;
             var mainWindow = ((MainWindow)app.MainWindow);
-            //mainWindow.ClearError();
-            //try
-            //{
-            //    app.AppLogic = new Logic.App(txtAddress.Text, int.Parse(txtPort.Text));
-            //    app.AppLogic.Connect();
-            //    app.AppDAL = new Logic.AppDAL(app.AppLogic);
-            //}
-            //catch (SocketException)
-            //{
-            //    mainWindow.DisplayError("Nie udało połączyć się z serwerem. Spróbuj jeszcze raz.");
-            //    return;
-            //}
+            mainWindow.ClearMessage();
+            try
+            {
+                app.AppLogic = new Logic.App(txtAddress.Text, int.Parse(txtPort.Text));
+                app.AppLogic.Connect();
+                app.AppDAL = new Logic.AppDAL(app.AppLogic);
+            }
+            catch (SocketException)
+            {
+                mainWindow.DisplayMessage("Nie udało połączyć się z serwerem. Spróbuj jeszcze raz.");
+                return;
+            }
             mainWindow.rootContainer.NavigateToLoginView();
         }
     }

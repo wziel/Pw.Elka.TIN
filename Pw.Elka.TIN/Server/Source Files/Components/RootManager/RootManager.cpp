@@ -51,8 +51,8 @@ void RootManager::End()
 	}
 	ReleaseMutex(clientSessionsMutex);
 
-	WaitForSingleObject(sessionsListenerThreadHandle, INFINITE);
 	WaitForSingleObject(smtpLayerThreadHandle, INFINITE);
+	WaitForSingleObject(sessionsListenerThreadHandle, INFINITE);
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
 	for (int i = clientSessions.size() - 1; i >= 0; ++i)
 	{

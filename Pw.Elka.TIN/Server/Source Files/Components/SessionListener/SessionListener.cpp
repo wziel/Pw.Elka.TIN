@@ -44,8 +44,11 @@ void SessionListener::Start()
 		eventSignaled = WSAWaitForMultipleEvents(1, wsaEvents, FALSE, WSA_INFINITE, FALSE);
 		if (eventSignaled == 0)
 		{
-			if((newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght)) < 0)
+			if ((newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght)) < 0)
+			{
+				int error = WSAGetLastError();
 				throw "Error while accept()";
+			}
 			else
 				clientCreator->CreateClientAsync(newClientSocketDescriptor, newClientAddressStruct, newClientAddressLenght);
 			WSAResetEvent(wsaEvents[0]);

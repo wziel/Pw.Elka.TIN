@@ -30,15 +30,15 @@ namespace Pw.Elka.TIN.Client.WPF.Views
         {
             var app = (App)Application.Current;
             var mainWindow = ((MainWindow)app.MainWindow);
-            //try
-            //{
-            //    app.AppDAL.ClientAuthenticate(txtPassword.Password, txtUsername.Text);
-            //}
-            //catch (NotAuthorizedException)
-            //{
-            //    mainWindow.DisplayError("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
-            //    return;
-            //}
+            try
+            {
+                app.AppDAL.ClientAuthenticate(txtPassword.Password, txtUsername.Text);
+            }
+            catch (NotAuthorizedException)
+            {
+                mainWindow.DisplayMessage("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
+                return;
+            }
             mainWindow.rootContainer.NavigateToMainView();
         }
     }
