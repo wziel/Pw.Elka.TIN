@@ -12,18 +12,24 @@ namespace Pw.Elka.TIN.Client.Logic.Parsers
         {
             var lengthBytes = BitConverter.GetBytes((short)str.Length);
             var strBytes = new byte[str.Length];
-            Buffer.BlockCopy(str.ToCharArray(), 0, strBytes, 0, str.Length);
+            for(int i = 0; i < str.Length; ++ i)
+            {
+                strBytes[i] = (byte)str[i];
+            }
             return lengthBytes.Concat(strBytes).ToArray();
         }
 
-        internal static string GetString(byte[] bytes, int fromIndex, out int newFromIndex)
+        internal static string GetString(byte[] bytes, int fromIndex, out int newFromIndex, int? stringKnownLength = null)
         {
-            var length = BitConverter.ToInt16(bytes, fromIndex);
+            var length = stringKnownLength.HasValue ? stringKnownLength.Value : BitConverter.ToInt16(bytes, fromIndex);
             fromIndex += 2;
-            newFromIndex = 0;
+            newFromIndex = fromIndex + length;
 
             var characters = new char[length];
-            Buffer.BlockCopy(bytes, fromIndex, characters, 0, length);
+            for(int i = 0; i < length; ++i)
+            {
+                characters[i] = (char)bytes[i + fromIndex];
+            }
             return new string(characters);
         }
     }

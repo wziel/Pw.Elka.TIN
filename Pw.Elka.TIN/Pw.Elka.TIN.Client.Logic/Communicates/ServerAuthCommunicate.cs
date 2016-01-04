@@ -11,7 +11,7 @@ namespace Pw.Elka.TIN.Client.Logic.Communicates
             int startIndex = 1;
             int newStartIndex = 0;
 
-            Salt = ASIAStringParser.GetString(bytes, startIndex, out newStartIndex);
+            Salt = ASIAStringParser.GetString(bytes, startIndex, out newStartIndex, 4);
             startIndex = newStartIndex;
         }
     }
