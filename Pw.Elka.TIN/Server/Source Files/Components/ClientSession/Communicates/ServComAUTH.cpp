@@ -10,13 +10,14 @@ ServComAUTH::ServComAUTH()
 	communicateBuffer = new char[7];
 	communicateBuffer[0]=_SERVCOMAUTH;			//communicate code
 	communicateBuffer[1]=  0x00;	//salt size
-	communicateBuffer[2] = (4 >> 8) & 0xFF;
+	//communicateBuffer[2] = (4 >> 8) & 0xFF;
+	communicateBuffer[2] = 4;
 	communicateBuffer[3] = ((rand() % 89) + 33);
 	communicateBuffer[4] = ((rand() % 89) + 33);
 	communicateBuffer[5] = ((rand() % 89) + 33);
 	communicateBuffer[6] = ((rand() % 89) + 33);
 
-	salt.assign(communicateBuffer[3], 4);
+	salt.assign(communicateBuffer+3, 4);
 		
 }
 
