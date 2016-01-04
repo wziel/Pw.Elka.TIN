@@ -21,10 +21,10 @@ public:
 private:
 	IClientCreator *clientCreator;
 
-	int portToListen;	// w konstruktorze/inicie?
+	int portToListen;
 	int socketDescriptor;
 	int newClientSocketDescriptor;
-	int newClientAddressLenght;
+	int newClientAddressLenght = sizeof(sockaddr_in);
 	struct sockaddr_in addressStruct;
 	struct sockaddr_in newClientAddressStruct;
 

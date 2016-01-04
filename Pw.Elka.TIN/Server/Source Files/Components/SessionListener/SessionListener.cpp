@@ -1,9 +1,10 @@
 #include "../../../Header Files/Components/SessionListener/SessionListener.h"
+
 SessionListener::SessionListener(IClientCreator &clientCreator)
 {
 
 	this->clientCreator = &clientCreator;
-	this->portToListen = 7777;
+	this->portToListen = 7777;					// powinno byc z pliku konfiguracyjnego
 	wsaEvents[0] = WSACreateEvent();
 	wsaEvents[1] = WSACreateEvent();
 }
@@ -47,7 +48,7 @@ void SessionListener::Start()
 			newClientAddressLenght = sizeof(sockaddr_in);
 			if ((newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght)) < 0)
 			{
-				int error = WSAGetLastError();
+				int error = WSAGetLastError();  // debug
 				throw "Error while accept()";
 			}
 			else
