@@ -23,12 +23,13 @@ void Cipher::Send(char *buffer, int size)
 	delete myBuffer;
 }
 
-void Cipher::Receive(char *buffer, int &size)
+void Cipher::Receive(char* &buffer, int &size)
 {
 	int mySize;
 	char *myBuffer=NULL;
 	bottomLayer->Receive(myBuffer, mySize);
 	buffer = new char[mySize - 3];
+	size = mySize - 3;
 	if (myBuffer[0] == 0x00)
 	{
 		for (int i = 0; i < size; i++)

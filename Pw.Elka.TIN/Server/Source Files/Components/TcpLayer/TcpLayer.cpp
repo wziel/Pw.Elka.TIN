@@ -59,7 +59,7 @@ void TcpLayer :: Send(char* buffer, int size)	//send data to client
 	delete myBuffer;
 }
 
-void TcpLayer :: Receive(char* buffer, int &size)	//receive data from client
+void TcpLayer :: Receive(char* &buffer, int &size)	//receive data from client
 {
 
 	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer

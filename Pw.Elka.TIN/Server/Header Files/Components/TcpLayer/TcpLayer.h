@@ -18,7 +18,7 @@ public:
 	int End();
 //ILayer interface
 	void Send(char* buffer, int size);
-	void Receive(char* buffer, int &size);
+	void Receive(char* &buffer, int &size);
 
 private:
 //Communication socket descriptor
