@@ -44,6 +44,7 @@ void SessionListener::Start()
 		eventSignaled = WSAWaitForMultipleEvents(1, wsaEvents, FALSE, WSA_INFINITE, FALSE);
 		if (eventSignaled == 0)
 		{
+			newClientAddressLenght = sizeof(sockaddr_in);
 			if ((newClientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &newClientAddressStruct, &newClientAddressLenght)) < 0)
 			{
 				int error = WSAGetLastError();

@@ -99,9 +99,9 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 
 	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
 
-	sessionObjects.clientSession = new ClientSession(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
 	sessionObjects.tcpLayer = new TcpLayer(params->socketFd);
 	sessionObjects.cipher = new Cipher(*sessionObjects.tcpLayer);
+	sessionObjects.clientSession = new ClientSession(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
 	sessionObjects.connectionId = rootManager.connectionIdHighWaterMark++;
 
 	sessionObjects.clientSession->Start();
