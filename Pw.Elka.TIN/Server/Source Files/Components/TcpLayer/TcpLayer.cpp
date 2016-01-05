@@ -50,7 +50,7 @@ void TcpLayer :: Send(unsigned char* buffer, int size)	//send data to client
 		myBuffer[i] = buffer[i - 2];
 	}
 
-	iResult = send(socketFD, myBuffer, mySize, NULL);	//send message
+	iResult = send(socketFD, (char*)myBuffer, mySize, NULL);	//send message
 	if (iResult == SOCKET_ERROR)
 	{
 		throw "Send() error";
@@ -76,7 +76,7 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 	
 	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //receive a message
 	{	
-		iResult = recv(socketFD, mySizeBuffer, 2, NULL); //reading header (contains data size)
+		iResult = recv(socketFD, (char*)mySizeBuffer, 2, NULL); //reading header (contains data size)
 		if (iResult == SOCKET_ERROR)
 		{
 			throw "Recv() error - header";
@@ -87,7 +87,7 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 
 		buffer = new unsigned char[mySize];
 
-		iResult = recv(socketFD, buffer, mySize, NULL );
+		iResult = recv(socketFD, (char*)buffer, mySize, NULL );
 		if (iResult == SOCKET_ERROR)
 		{
 			throw "Recv() error";
