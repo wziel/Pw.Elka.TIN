@@ -255,10 +255,11 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorNotAuthorizedCommunicate)
+                if(serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
-                    throw new NotAuthorizedException();
+                    throw new BadLoginException();
                 }
+                throw new NotImplementedException();
             }
         }
 

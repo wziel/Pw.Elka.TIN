@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pw.Elka.TIN.Client.Logic.Exceptions
+namespace Pw.Elka.TIN.Client.Logic.Communicates
 {
-    public class BadLoginException : Exception
+    internal class ServerErrorBadLoginCommunicate : ServerCommunicate
     {
     }
 }

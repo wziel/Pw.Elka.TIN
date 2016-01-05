@@ -66,6 +66,7 @@
     <Compile Include="Communicates\ServerCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadContentCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadGroupCommunicate.cs" />
+    <Compile Include="Communicates\ServerErrorBadLoginCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadMessageCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadRequestCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBusyCommunicate.cs" />

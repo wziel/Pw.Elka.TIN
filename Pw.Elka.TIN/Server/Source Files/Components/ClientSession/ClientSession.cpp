@@ -4,18 +4,18 @@ int DJBHash(string& str);
 
 bool ClientSession::Start()
 {
-	//sending an authorization communicate
-	ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
-	salt = authorizationCommunicate->getSalt();
-	bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
-
 	while (true)
 	{
 		switch (sessionState)
 		{
 
 		case Unauthorized:
-		{	
+		{
+			//sending an authorization communicate
+			ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
+			salt = authorizationCommunicate->getSalt();
+			bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
+
 			bottomLayer->Receive(cliCom, comSize);
 			if (cliCom[0]!= _CLICOMAUTH)
 			{	//client sent anything else than CliComAuth 
