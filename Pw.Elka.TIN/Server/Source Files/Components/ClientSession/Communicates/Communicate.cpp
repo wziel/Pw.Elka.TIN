@@ -11,7 +11,7 @@ Communicate::Communicate()
 {
 }
 
-Communicate::Communicate(char* communicateBuffer)
+Communicate::Communicate(unsigned char* communicateBuffer)
 {
 	this->communicateBuffer = communicateBuffer;
 }
@@ -20,7 +20,7 @@ Communicate::~Communicate()
 {
 }
 
-char* Communicate::getCommunicate()
+unsigned char* Communicate::getCommunicate()
 {
 	return communicateBuffer;
 }

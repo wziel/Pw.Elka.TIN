@@ -13,8 +13,8 @@ public:
 	Cipher(ILayer &bottomLayer);
 	~Cipher();
 	//ILayer
-	void Send(char* buffer, int size);
-	void Receive(char* &buffer, int &size);
+	void Send(unsigned char* buffer, int size);
+	void Receive(unsigned char* &buffer, int &size);
 private:
 	ILayer *bottomLayer;
 	const char keyCode[7] = "michal";

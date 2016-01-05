@@ -72,9 +72,9 @@ private:
 	//last communicate code
 	unsigned char communicateCode; 
 	//last server communicate content
-	char* servCom;
+	unsigned char* servCom;
 	//last client communicate content
-	char* cliCom;
+	unsigned char* cliCom;
 	//last communicate size
 	int comSize;
 	//client's username

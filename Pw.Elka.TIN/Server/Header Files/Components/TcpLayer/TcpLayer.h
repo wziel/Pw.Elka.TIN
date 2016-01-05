@@ -17,8 +17,8 @@ public:
 //ITcpLayerManager intereface
 	int End();
 //ILayer interface
-	void Send(char* buffer, int size);
-	void Receive(char* &buffer, int &size);
+	void Send(unsigned char* buffer, int size);
+	void Receive(unsigned char* &buffer, int &size);
 
 private:
 //Communication socket descriptor
@@ -30,11 +30,11 @@ private:
 //Signalled event
 	int signalledEvent; 
 //Buffer for receiving and sending data (excluding header)
-	char* myBuffer; 
+	unsigned char* myBuffer;
 //Size of buffer for data
 	int mySize; 
 //Size of buffer for data (byte form)
-	char mySizeBuffer[2];
+	unsigned char mySizeBuffer[2];
 
 };
 

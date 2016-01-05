@@ -10,10 +10,10 @@ Cipher::Cipher(ILayer &bottomLayer)
 	this->bottomLayer = &bottomLayer;
 }
 
-void Cipher::Send(char *buffer, int size)
+void Cipher::Send(unsigned char *buffer, int size)
 {
 	int mySize = size + 3;
-	char *myBuffer = new char[mySize];
+	unsigned char *myBuffer = new unsigned char[mySize];
 	myBuffer[0] = BYTE (0x00);
 	myBuffer[1] = (size) & 0xFF;
 	myBuffer[2] = (size >> 8) & 0xFF;
@@ -23,12 +23,12 @@ void Cipher::Send(char *buffer, int size)
 	delete myBuffer;
 }
 
-void Cipher::Receive(char* &buffer, int &size)
+void Cipher::Receive(unsigned char* &buffer, int &size)
 {
 	int mySize;
-	char *myBuffer=NULL;
+	unsigned char *myBuffer=NULL;
 	bottomLayer->Receive(myBuffer, mySize);
-	buffer = new char[mySize - 3];
+	buffer = new unsigned char[mySize - 3];
 	size = mySize - 3;
 	if (myBuffer[0] == 0x00)
 	{

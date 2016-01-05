@@ -41,7 +41,7 @@ class Communicate
 public:
 
 	Communicate();
-	Communicate(char* communicateBuffer);
+	Communicate(unsigned char* communicateBuffer);
 	~Communicate();
 
 	//Returns code of communicate
@@ -49,12 +49,12 @@ public:
 	//returns communicate size
 	int getSize();
 	//returns communicate content
-	char* getCommunicate();
+	unsigned char* getCommunicate();
 
 
 protected:
 //Communicate content
-	char* communicateBuffer;
+	unsigned char* communicateBuffer;
 //Communicate size
 	int size;
 };

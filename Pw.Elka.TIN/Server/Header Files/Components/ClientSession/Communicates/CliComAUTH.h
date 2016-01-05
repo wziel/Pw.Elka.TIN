@@ -8,7 +8,7 @@ class CliComAUTH :
 {
 public:
 	CliComAUTH();
-	CliComAUTH(char* communicateBuffer);
+	CliComAUTH(unsigned char* communicateBuffer);
 	~CliComAUTH();
 	string getUsername();
 	int getpasswHashAuth();

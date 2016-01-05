@@ -4,10 +4,10 @@ CliComAUTH::CliComAUTH()
 {
 	throw "Class unimplemented";
 }
-CliComAUTH::CliComAUTH(char* communicateBuffer) : Communicate(communicateBuffer)
+CliComAUTH::CliComAUTH(unsigned char* communicateBuffer) : Communicate(communicateBuffer)
 {
 	usernameLength = (((communicateBuffer[2]) << 8) | (communicateBuffer[1]));
-	username.assign(communicateBuffer+3, usernameLength);
+	username.assign((char*)communicateBuffer+3, usernameLength);
 	passwHashAuth = (communicateBuffer[3 + usernameLength + 5] << 24 | communicateBuffer[3 + usernameLength + 4] << 16 | communicateBuffer[3 + usernameLength + 3] << 8 | communicateBuffer[3 + usernameLength + 2]);
 }
 

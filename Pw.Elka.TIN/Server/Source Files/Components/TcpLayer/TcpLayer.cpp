@@ -37,11 +37,11 @@ int TcpLayer :: End()
 	}
 }
 
-void TcpLayer :: Send(char* buffer, int size)	//send data to client
+void TcpLayer :: Send(unsigned char* buffer, int size)	//send data to client
 {
 	//Create a buffer to send - header+data
 	mySize = size + 2;
-	myBuffer = new char[mySize];
+	myBuffer = new unsigned char[mySize];
 	myBuffer[0] = (size)& 0xFF;
 	myBuffer[1] = (size >> 8) & 0xFF;
 
@@ -59,7 +59,7 @@ void TcpLayer :: Send(char* buffer, int size)	//send data to client
 	delete myBuffer;
 }
 
-void TcpLayer :: Receive(char* &buffer, int &size)	//receive data from client
+void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from client
 {
 
 	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer
@@ -85,7 +85,7 @@ void TcpLayer :: Receive(char* &buffer, int &size)	//receive data from client
 		mySize = (((mySizeBuffer[1])<<8)|(mySizeBuffer[0]));
 		size = mySize;
 
-		buffer = new char[mySize];
+		buffer = new unsigned char[mySize];
 
 		iResult = recv(socketFD, buffer, mySize, NULL );
 		if (iResult == SOCKET_ERROR)
