@@ -25,10 +25,13 @@ public:
 	virtual GroupModel GetGroupById(int id, int clientId) = 0;
 	virtual bool DeleteGroupById(int id, int clientId) = 0;
 	virtual GroupModel CreateGroup(string name, int clientId) = 0;
-	virtual bool AddAddressToGroup(int groupId, string value, int clientId) = 0;
+	virtual bool AddAddressToGroup(int groupId, int addressId, int clientId) = 0;
 	virtual bool RemoveAddressFromGroup(int groupId, int addressId, int clientId) = 0;
 	virtual string GetHashOfPassword(string username) = 0;
 	virtual bool IsBlocked(int clientId) = 0;
+	virtual AddressModel CreateAddress(string addrName, string addrValue, int clientId) = 0;
+	virtual bool DeleteAddress(int addrId, int clientId) = 0;
+	virtual vector<AddressModel> GetAllAddresses(int clientId) = 0;
 };
 
 #endif

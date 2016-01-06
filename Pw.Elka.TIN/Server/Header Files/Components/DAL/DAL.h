@@ -8,12 +8,6 @@ class DAL :
 public:
 	DAL();
 	~DAL();
-/*********************/
-/*Ceated for testing!*/
-/*********************/
-//IClientDAL.h 
-	string GetHashOfPassword(string username);
-/*********************/
 
 	//IAdminDAL.h
     bool BlockClient(string login, bool isBlocked);
@@ -33,10 +27,13 @@ public:
 	GroupModel GetGroupById(int id, int clientId);
 	bool DeleteGroupById(int id, int clientId);
 	GroupModel CreateGroup(string name, int clientId);
-	bool AddAddressToGroup(int groupId, string value, int clientId);
+	bool AddAddressToGroup(int groupId, int addressId, int clientId);
 	bool RemoveAddressFromGroup(int groupId, int addressId, int clientId);
-	//string GetHashOfPassword(string username);
+	string GetHashOfPassword(string username);
 	bool IsBlocked(int clientId);
+	AddressModel CreateAddress(string addrName, string addrValue, int clientId);
+	bool DeleteAddress(int addrId, int clientId);
+	vector<AddressModel> GetAllAddresses(int clientId);
 
 	//IDAL.h
 	bool ChangeHashOfPassword(int clientId, string newHashOfPassword);

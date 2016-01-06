@@ -1,7 +1,5 @@
 #include "../../../Header Files/Components/DAL/DAL.h"
 
-
-
 DAL::DAL()
 {
 }
@@ -10,16 +8,6 @@ DAL::DAL()
 DAL::~DAL()
 {
 }
-
-/*********************/
-/*Ceated for testing!*/
-/*********************/
-//IClientDAL.h 
-string DAL::GetHashOfPassword(string username)
-{
-	return string("test");
-}
-/*********************/
 
 //IAdminDAL.h
 bool DAL::BlockClient(string login, bool isBlocked)
@@ -84,7 +72,7 @@ GroupModel DAL::CreateGroup(string name, int clientId)
 {
 	throw "Not implemented";
 }
-bool DAL::AddAddressToGroup(int groupId, string value, int clientId)
+bool DAL::AddAddressToGroup(int groupId, int addressId, int clientId)
 {
 	throw "Not implemented";
 }
@@ -92,11 +80,23 @@ bool DAL::RemoveAddressFromGroup(int groupId, int addressId, int clientId)
 {
 	throw "Not implemented";
 }
-//string DAL::GetHashOfPassword(string username)
-//{
-//	throw "Not implemented";
-//}
+string DAL::GetHashOfPassword(string username)
+{
+	return string("test");
+}
 bool DAL::IsBlocked(int clientId)
+{
+	throw "Not implemented";
+}
+AddressModel DAL::CreateAddress(string addrName, string addrValue, int clientId)
+{
+	throw "Not implemented";
+}
+bool DAL::DeleteAddress(int addrId, int clientId)
+{
+	throw "Not implemented";
+}
+vector<AddressModel> DAL::GetAllAddresses(int clientId)
 {
 	throw "Not implemented";
 }
