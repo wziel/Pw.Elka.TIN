@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Interfaces/IClientSessionManager.h"
 #include "../../Shared/SessionState.h"
+#include "../../Shared/ClientModel.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
 
@@ -79,6 +80,8 @@ private:
 	int comSize;
 	//client's username
 	string clientName; 
+	//client's id in database
+	int clientId;
 	//salt used for hashing user's password
 	string salt;
 

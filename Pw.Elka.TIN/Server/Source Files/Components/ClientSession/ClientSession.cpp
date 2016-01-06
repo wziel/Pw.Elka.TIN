@@ -34,6 +34,27 @@ bool ClientSession::Start()
 
 		case Authorized:
 		{
+			bottomLayer->Receive(cliCom, comSize);
+			communicateCode = cliCom[0];
+			switch (communicateCode)
+			{
+			//case _CLICOMADDRADD :
+			//{
+			//	CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
+			////	communicateService(*cliComAddradd);
+			//}
+
+			default:
+			{
+				//No such communicate code
+				ServComERRBADREQ* badReq = new ServComERRBADREQ();	
+				bottomLayer->Send(badReq->getCommunicate(), badReq->getSize());
+				delete badReq;
+			}
+			{
+
+			}
+			}
 			throw "Unimplemented";
 			break;
 		}
@@ -72,17 +93,23 @@ ClientSession::~ClientSession()
 
 void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 {
-	//password hash stored in DB
-	string passwordDB=DAL->GetHashOfPassword(clientCommunicate.getUsername());
-	
+	//client's data stored in db
+	ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
+
 	if (0) //no such user -don't know what's going to be returned yet
 	{
 		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
 		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
 		delete errLogin;
 	}
+	
+
 	else
 	{
+		//password hash stored in DB
+		string passwordDB = clientDB.hashOfPassword;
+		//string passwordDB=DAL->GetHashOfPassword(clientCommunicate.getUsername());
+
 		passwordDB.append(salt);
 		
 		//(password hash + salt) hash, (based on DB values)
@@ -93,6 +120,7 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 			clientName = clientCommunicate.getUsername();
 			ServComACK* ack = new ServComACK();
 			bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+			sessionState = Authorized;
 			delete ack;
 		}
 		else

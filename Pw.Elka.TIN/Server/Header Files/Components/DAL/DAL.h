@@ -34,6 +34,7 @@ public:
 	AddressModel CreateAddress(string addrName, string addrValue, int clientId);
 	bool DeleteAddress(int addrId, int clientId);
 	vector<AddressModel> GetAllAddresses(int clientId);
+	ClientModel getClient(string login);
 
 	//IDAL.h
 	bool ChangeHashOfPassword(int clientId, string newHashOfPassword);

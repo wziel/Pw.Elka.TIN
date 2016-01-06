@@ -110,3 +110,7 @@ bool DAL::BlockClient(string login)
 {
 	throw "Not implemented";
 }
+ClientModel DAL::getClient(string login)
+{
+	return *(new ClientModel(1, login, "test"));
+}
