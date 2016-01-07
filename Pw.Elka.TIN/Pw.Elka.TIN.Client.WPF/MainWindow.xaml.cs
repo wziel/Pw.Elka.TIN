@@ -25,15 +25,5 @@ namespace Pw.Elka.TIN.Client.WPF
         {
             InitializeComponent();
         }
-
-        public void DisplayMessage(string s)
-        {
-            txtError.Text = s;
-        }
-
-        public void ClearMessage()
-        {
-            txtError.Text = "";
-        }
     }
 }

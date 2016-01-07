@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,42 +26,44 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         public AddressesView()
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
             InitializeComponent();
-            //app.AppDAL.AddressModels.ForEach(a => stkAddress.Children.Add(new AddressListItemView(a, this)));
+            app.AppDAL.AddressModels.ForEach(a => stkAddress.Children.Add(new AddressListItemView(a, this)));
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
 
-            mainWindow.ClearMessage();
+            if(txtNewName.Text.Length == 0)
+            {
+                MessageBox.Show("Nazwa adresata nie może być pusta.");
+                return;
+            }
+            if (!Regex.IsMatch(txtNewValue.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            {
+                MessageBox.Show("Adres email nie jest poprawny.");
+                return;
+            }
 
-            //if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
-            //{
-            //    mainWindow.DisplayMessage("Adresat z podaną nazwą już istnieje. Spróbuj jeszcze raz.");
-            //    return;
-            //}
+            if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
+            {
+                MessageBox.Show("Adresat z podaną nazwą już istnieje.");
+                return;
+            }
 
-            //var addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
-            //stkAddress.Children.Add(new AddressListItemView(addrModel, this));
+            var addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
+            stkAddress.Children.Add(new AddressListItemView(addrModel, this));
 
             txtNewName.Text = "";
             txtNewValue.Text = "";
-
-            mainWindow.DisplayMessage("Pomyślnie dodano nowego adresata");
         }
 
         public void RemoveAddressListItem(AddressListItemView addrView)
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
 
-            //app.AppDAL.AddressRemove(addrView.ModelId);
+            app.AppDAL.AddressRemove(addrView.ModelId);
             stkAddress.Children.Remove(addrView);
-
-            mainWindow.DisplayMessage("Pomyślnie usunięto adresata");
         }
     }
 }

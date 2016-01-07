@@ -34,9 +34,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             {
                 app.AppDAL.ClientAuthenticate(txtPassword.Password, txtUsername.Text);
             }
-            catch (BadLoginException)
+            catch (NotAuthorizedException)
             {
-                mainWindow.DisplayMessage("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
+                MessageBox.Show("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
                 return;
             }
             mainWindow.rootContainer.NavigateToMainView();

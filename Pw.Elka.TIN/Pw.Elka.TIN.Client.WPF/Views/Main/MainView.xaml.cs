@@ -28,9 +28,27 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
 
-            mainWindow.ClearMessage();
+            if(tabControl.SelectedItem == tabItemAccount)
+            {
+                tabItemAccount.Content = new AccountView();
+            }
+            else if(tabControl.SelectedItem == tabItemAddresses)
+            {
+                tabItemAddresses.Content = new AddressesView();
+            }
+            else if(tabControl.SelectedItem == tabItemGroups)
+            {
+                tabItemGroups.Content = new GroupsView();
+            }
+            else if(tabControl.SelectedItem == tabItemMessages)
+            {
+                tabItemMessages.Content = new MessagesView();
+            }
+            else if(tabControl.SelectedItem == tabItemSend)
+            {
+                tabItemSend.Content = new SendView();
+            }
         }
     }
 }

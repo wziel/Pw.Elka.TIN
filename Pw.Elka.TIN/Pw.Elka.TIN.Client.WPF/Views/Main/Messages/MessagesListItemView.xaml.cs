@@ -14,37 +14,42 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Pw.Elka.TIN.Client.WPF.Views.Main.Addresses
+namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 {
     /// <summary>
-    /// Interaction logic for AddressListItemView.xaml
+    /// Interaction logic for MessagesListItemView.xaml
     /// </summary>
-    public partial class AddressListItemView : UserControl
+    public partial class MessagesListItemView : UserControl
     {
-        private AddressesView _masterView;
-        private AddressModel _addrModel;
+        private MessageModel _model;
+        private MessagesListView _masterView;
 
         public int ModelId
         {
             get
             {
-                return _addrModel.Id;
+                return _model.Id;
             }
         }
 
-        public AddressListItemView(AddressModel model, AddressesView masterView)
+        public MessagesListItemView(MessageModel model, MessagesListView masterView)
         {
             InitializeComponent();
-            lblAddressName.Content = model.AdresseeName;
-            lblAddressValue.Content = model.Value;
 
-            _addrModel = model;
+            _model = model;
             _masterView = masterView;
+
+            lblMsgName.Content = model.Name;
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            _masterView.RemoveAddressListItem(this);
+            _masterView.RemoveMessageListItem(this);
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            _masterView.DisplayDetails(_model);
         }
     }
 }

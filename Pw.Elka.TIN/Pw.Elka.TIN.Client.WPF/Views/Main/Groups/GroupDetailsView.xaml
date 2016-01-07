@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <StackPanel>
-        <Button Name="btnDetailsCollapse" Click="btnDetailsCollapse_Click">Go back</Button>
-        <Label Name="lblDetailsGroupName" />
+        <Button Name="btnDetailsCollapse" Click="btnDetailsCollapse_Click">Wróć do listy grup</Button>
+        <Label Name="lblDetailsGroupName" FontSize="21.333" />
         <StackPanel Name="stkAddressesList"></StackPanel>
     </StackPanel>
 </UserControl>

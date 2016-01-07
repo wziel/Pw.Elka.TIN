@@ -64,6 +64,7 @@
     <Compile Include="Communicates\ServerAuthCommunicate.cs" />
     <Compile Include="Communicates\ServerAckCommunicate.cs" />
     <Compile Include="Communicates\ServerCommunicate.cs" />
+    <Compile Include="Communicates\ServerErrorBadAddressCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadContentCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadGroupCommunicate.cs" />
     <Compile Include="Communicates\ServerErrorBadLoginCommunicate.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="Communicates\ServerGroupGetOneCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetAllCommunicate.cs" />
     <Compile Include="Communicates\ServerMessageGetOneCommunicate.cs" />
-    <Compile Include="Exceptions\NotAuthorizedException.cs" />
+    <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="Hash\Hashing.cs" />
     <Compile Include="Interfaces\AppDAL.cs" />
     <Compile Include="Models\AddressModel.cs" />

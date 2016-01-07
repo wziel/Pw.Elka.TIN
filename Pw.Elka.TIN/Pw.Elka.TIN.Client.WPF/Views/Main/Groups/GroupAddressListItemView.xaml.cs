@@ -27,6 +27,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
         public GroupAddressListItemView(GroupModel groupModel, AddressModel addressModel)
         {
             InitializeComponent();
+
+            lblAddressName.Content = addressModel.AdresseeName;
+            lblAddressValue.Content = addressModel.Value;
             _groupModel = groupModel;
             _addressModel = addressModel;
         }

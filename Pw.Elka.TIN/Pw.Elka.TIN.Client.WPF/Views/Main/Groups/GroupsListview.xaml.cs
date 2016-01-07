@@ -1,4 +1,5 @@
-﻿using Pw.Elka.TIN.Client.Logic.Models;
+﻿using Pw.Elka.TIN.Client.Logic.Exceptions;
+using Pw.Elka.TIN.Client.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,24 +26,19 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
 
         public GroupsListView(GroupsView masterView)
         {
-            masterView = _masterView;
             InitializeComponent();
 
+            _masterView = masterView;
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
-            //app.AppDAL.GroupModels.ForEach(g => stkGroups.Children.Add(new GroupsListItemView(g, this)));
+            app.AppDAL.GroupModels.ForEach(g => stkGroups.Children.Add(new GroupsListItemView(g, this)));
         }
 
         public void RemoveGroupListItem(GroupsListItemView groupListItem)
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
-            mainWindow.ClearMessage();
 
-            //app.AppDAL.GroupModelDelete(groupListItem.ModelId);
+            app.AppDAL.GroupModelDelete(groupListItem.ModelId);
             stkGroups.Children.Remove(groupListItem);
-
-            mainWindow.DisplayMessage("Pomyślnie usunięto grupę");
         }
 
         public void DisplayDetails(GroupModel model)
@@ -53,21 +49,17 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
         private void btnSubmitNewGroup_Click(object sender, RoutedEventArgs e)
         {
             var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
-            mainWindow.ClearMessage();
 
-            //if(app.AppDAL.GroupModels.SingleOrDefault(g => g.Name == txtNewGroupName.Text) != null)
-            //{
-            //    mainWindow.DisplayMessage("Grupa z podaną nazwą już istnieje. Spróbuj jeszcze raz.");
-            //    return;
-            //}
+            if (app.AppDAL.GroupModels.SingleOrDefault(g => g.Name == txtNewGroupName.Text) != null)
+            {
+                MessageBox.Show("Grupa z podaną nazwą już istnieje.");
+                return;
+            }
 
-            //var groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
-            //stkGroups.Children.Add(new GroupsListItemView(groupModel, this));
+            var groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
 
+            stkGroups.Children.Add(new GroupsListItemView(groupModel, this));
             txtNewGroupName.Text = "";
-
-            mainWindow.DisplayMessage("Pomyślnie dodano nową grupę.");
         }
     }
 }

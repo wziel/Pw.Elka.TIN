@@ -169,14 +169,17 @@ namespace Pw.Elka.TIN.Client.Mocks
             GroupModels.RemoveAll(g => g.Id == id);
         }
 
-        public void MessageModelCreate(string name, string template)
+        public MessageModel MessageModelCreate(string name, string template)
         {
-            MessageModels.Add(new MessageModel()
+            var messageModel = new MessageModel()
             {
                 Id = _messageModelsIdHighWaterMark++,
                 Name = name,
                 Content = template
-            });
+            };
+
+            MessageModels.Add(messageModel);
+            return messageModel;
         }
 
         public void MessageModelDelete(int id)

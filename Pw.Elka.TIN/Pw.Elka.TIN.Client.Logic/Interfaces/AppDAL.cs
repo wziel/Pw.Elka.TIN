@@ -26,7 +26,7 @@ namespace Pw.Elka.TIN.Client.Logic.Interfaces
 
         void GroupModelDelete(int id);
 
-        void MessageModelCreate(string name, string template);
+        MessageModel MessageModelCreate(string name, string template);
 
         void MessageModelDelete(int id);
 

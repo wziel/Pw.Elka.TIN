@@ -82,6 +82,15 @@
     <Compile Include="Views\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\Messages\MessagesDetailsView.xaml.cs">
+      <DependentUpon>MessagesDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Messages\MessagesListItemView.xaml.cs">
+      <DependentUpon>MessagesListItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\Messages\MessagesListView.xaml.cs">
+      <DependentUpon>MessagesListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\Messages\MessagesView.xaml.cs">
       <DependentUpon>MessagesView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +155,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Messages\MessagesDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Messages\MessagesListItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Main\Messages\MessagesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

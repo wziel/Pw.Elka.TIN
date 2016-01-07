@@ -49,7 +49,8 @@ namespace Pw.Elka.TIN.Client.Logic.Parsers
                 { 0x16, typeof(ServerErrorServerNotAvailableCommunicate)},
                 { 0x17, typeof(ServerAddressGetOneCommunicate) },
                 { 0x1A, typeof(ServerAddressGetAllCommunicate) },
-                { 0x11, typeof(ServerErrorBadLoginCommunicate) }
+                { 0x11, typeof(ServerErrorBadLoginCommunicate) },
+                { 0x1B, typeof(ServerErrorBadAddressCommunicate) }
         };
 
         internal static byte[] GetClientCommunicationCodeByType<C>() where C : ClientCommunicate

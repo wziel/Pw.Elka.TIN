@@ -8,19 +8,19 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Name="stkPanel">
         <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
-            <TabItem Header="Wyślij">
+            <TabItem Name="tabItemSend" Header="Wyślij">
                 <local:SendView/>
             </TabItem>
-            <TabItem Header="Grupy">
+            <TabItem Name="tabItemGroups" Header="Grupy">
                 <local:GroupsView />
             </TabItem>
-            <TabItem Header="Wiadomości">
+            <TabItem Name="tabItemMessages" Header="Wiadomości">
                 <local:MessagesView />
             </TabItem>
-            <TabItem Header="Adresy">
+            <TabItem Name="tabItemAddresses" Header="Adresy">
                 <local:AddressesView />
             </TabItem>
-            <TabItem Header="Konto">
+            <TabItem Name="tabItemAccount" Header="Konto">
                 <local:AccountView />
             </TabItem>
         </TabControl>

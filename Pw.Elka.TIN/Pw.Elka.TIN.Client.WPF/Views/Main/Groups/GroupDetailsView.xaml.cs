@@ -32,22 +32,23 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             _masterView = groupsView;
             lblDetailsGroupName.Content = model.Name;
 
-            //var app = (App)Application.Current;
+            var app = (App)Application.Current;
 
-            //foreach(var addressModel in app.AppDAL.AddressModels)
-            //{
-            //    var groupAddrView = new GroupAddressListItemView(_model, addressModel);
-            //    if(_model.Addresses.Contains(addressModel))
-            //    {
-            //        groupAddrView.btnRemove.Visibility = Visibility.Visible;
-            //        groupAddrView.btnAdd.Visibility = Visibility.Hidden;
-            //    }
-            //    else
-            //    {
-            //        groupAddrView.btnRemove.Visibility = Visibility.Hidden;
-            //        groupAddrView.btnAdd.Visibility = Visibility.Visible;
-            //    }
-            //}
+            foreach (var addressModel in app.AppDAL.AddressModels)
+            {
+                var groupAddrView = new GroupAddressListItemView(_model, addressModel);
+                if (_model.Addresses.Contains(addressModel))
+                {
+                    groupAddrView.btnRemove.Visibility = Visibility.Visible;
+                    groupAddrView.btnAdd.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    groupAddrView.btnRemove.Visibility = Visibility.Hidden;
+                    groupAddrView.btnAdd.Visibility = Visibility.Visible;
+                }
+                stkAddressesList.Children.Add(groupAddrView);
+            }
         }
 
         private void btnDetailsCollapse_Click(object sender, RoutedEventArgs e)

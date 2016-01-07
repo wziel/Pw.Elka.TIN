@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF.Views.Main"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Name="stkMain">
+        
+    </StackPanel>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pw.Elka.TIN.Client.Logic.Models;
+using Pw.Elka.TIN.Client.WPF.Views.Main.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,19 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         public MessagesView()
         {
             InitializeComponent();
+            stkMain.Children.Add(new MessagesListView(this));
+        }
+
+        public void DisplayDetailsListItem(MessageModel model)
+        {
+            stkMain.Children.Clear();
+            stkMain.Children.Add(new MessagesDetailsView(model, this));
+        }
+
+        public void DisplayListView()
+        {
+            stkMain.Children.Clear();
+            stkMain.Children.Add(new MessagesListView(this));
         }
     }
 }

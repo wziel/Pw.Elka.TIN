@@ -116,6 +116,10 @@ namespace Pw.Elka.TIN.Client.Logic
                 var communicate = serverCommunicate as ServerGroupGetOneCommunicate;
                 if (communicate == null)
                 {
+                    if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                    {
+                        throw new BadGroup();
+                    }
                     throw new NotImplementedException();
                 }
                 groupModel.Addresses = new List<AddressModel>();
@@ -154,6 +158,14 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                {
+                    throw new BadGroup();
+                }
+                if(serverCommunicate is ServerErrorBadAddressCommunicate)
+                {
+                    throw new BadAddress();
+                }
                 throw new NotImplementedException();
             }
             var address = AddressModels.Single(a => a.Id == addressId);
@@ -167,6 +179,14 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadGroupCommunicate)
+                {
+                    throw new BadGroup();
+                }
+                if (serverCommunicate is ServerErrorBadAddressCommunicate)
+                {
+                    throw new BadAddress();
+                }
                 throw new NotImplementedException();
             }
             groupModel.Addresses.RemoveAll(a => a.Id == addressId);
@@ -178,6 +198,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerGroupGetOneCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadGroupCommunicate)
+                {
+                    throw new BadGroup();
+                }
                 throw new NotImplementedException();
             }
             var groupModel = new GroupModel()
@@ -204,25 +228,37 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadGroupCommunicate)
+                {
+                    throw new BadGroup();
+                }
                 throw new NotImplementedException();
             }
             GroupModels.RemoveAll(g => g.Id == id);
         }
 
-        public void MessageModelCreate(string name, string template)
+        public MessageModel MessageModelCreate(string name, string template)
         {
             var serverCommunicate = _appLogic.MessageCreate(template, name);
             var communicate = serverCommunicate as ServerMessageGetOneCommunicate;
             if (communicate == null)
             {
+                if(serverCommunicate is ServerErrorBadMessageCommunicate)
+                {
+                    throw new BadMessage();
+                }
                 throw new NotImplementedException();
             }
-            MessageModels.Add(new MessageModel()
+
+            var messageModel = new MessageModel()
             {
                 Id = communicate.MessageID,
-                Name = communicate.MessageName,
-                Content = communicate.MessageTemplate
-            });
+                Name = name,
+                Content = template
+            };
+
+            MessageModels.Add(messageModel);
+            return messageModel;
         }
 
         public void MessageModelDelete(int id)
@@ -231,6 +267,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadMessageCommunicate)
+                {
+                    throw new BadMessage();
+                }
                 throw new NotImplementedException();
             }
             MessageModels.RemoveAll(m => m.Id == id);
@@ -242,6 +282,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadMessageCommunicate)
+                {
+                    throw new BadMessage();
+                }
                 throw new NotImplementedException();
             }
             var messageModel = MessageModels.Single(m => m.Id == id);
@@ -257,7 +301,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if(serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
-                    throw new BadLoginException();
+                    throw new NotAuthorizedException();
                 }
                 throw new NotImplementedException();
             }
@@ -269,6 +313,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if(serverCommunicate is ServerErrorNotAuthorizedCommunicate)
+                {
+                    throw new NotAuthorizedException();
+                }
                 throw new NotImplementedException();
             }
         }
@@ -279,6 +327,14 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadMessageCommunicate)
+                {
+                    throw new BadMessage();
+                }
+                if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                {
+                    throw new BadGroup();
+                }
                 throw new NotImplementedException();
             }
         }
@@ -289,6 +345,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAddressGetOneCommunicate;
             if(communicate == null)
             {
+                if(serverCommunicate is ServerErrorBadAddressCommunicate)
+                {
+                    throw new BadAddress();
+                }
                 throw new NotImplementedException();
             }
             var addrModel = new AddressModel()
@@ -307,6 +367,10 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if(communicate == null)
             {
+                if (serverCommunicate is ServerErrorBadAddressCommunicate)
+                {
+                    throw new BadAddress();
+                }
                 throw new NotImplementedException();
             }
             foreach(var group in GroupModels)

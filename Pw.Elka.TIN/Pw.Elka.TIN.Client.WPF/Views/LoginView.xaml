@@ -10,9 +10,9 @@
         <StackPanel Margin="100,50,100,0">
             <Label Content="Zaloguj się" FontSize="21.333"></Label>
             <Label Content="Nazwa użytkownika"/>
-            <TextBox Name="txtUsername" />
+            <TextBox Name="txtUsername" Text="user"/>
             <Label Content="Hasło"/>
-            <PasswordBox Name="txtPassword" />
+            <PasswordBox Name="txtPassword" Password="test" />
             <Button Name="btnSubmit" Click="btnSubmit_Click" Content="Log In" Margin="0,10,0,0"/>
         </StackPanel>
     </StackPanel>

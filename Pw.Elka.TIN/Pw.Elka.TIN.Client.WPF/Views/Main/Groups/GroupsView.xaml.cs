@@ -24,13 +24,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
     {
         public GroupsView()
         {
-            var app = (App)Application.Current;
-            var mainWindow = ((MainWindow)app.MainWindow);
             InitializeComponent();
-
             stkMain.Children.Add(new GroupsListView(this));
         }
-
 
         public void DisplayDetailsListItem(GroupModel model)
         {
