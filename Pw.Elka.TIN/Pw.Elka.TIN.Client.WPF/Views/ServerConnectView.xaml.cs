@@ -35,7 +35,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             {
                 app.AppLogic = new Logic.App(txtAddress.Text, int.Parse(txtPort.Text));
                 app.AppLogic.Connect();
-                app.AppDAL = new Logic.AppDAL(app.AppLogic);
+                //app.AppDAL = new Logic.AppDAL(app.AppLogic);
+                app.AppDAL = new Mocks.MockAppDAL(app.AppLogic);
             }
             catch (SocketException)
             {

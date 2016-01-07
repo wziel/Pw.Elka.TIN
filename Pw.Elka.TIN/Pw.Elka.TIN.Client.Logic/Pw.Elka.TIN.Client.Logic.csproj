@@ -79,6 +79,7 @@
     <Compile Include="Communicates\ServerMessageGetOneCommunicate.cs" />
     <Compile Include="Exceptions\NotAuthorizedException.cs" />
     <Compile Include="Hash\Hashing.cs" />
+    <Compile Include="Interfaces\AppDAL.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\MessageModel.cs" />

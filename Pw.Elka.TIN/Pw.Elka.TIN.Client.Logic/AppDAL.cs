@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pw.Elka.TIN.Client.Logic
 {
-    public class AppDAL
+    public class AppDAL : Interfaces.AppDAL
     {
         private Logic.App _appLogic;
 
@@ -313,6 +313,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 group.Addresses.RemoveAll(a => a.Id == addressId);
             }
+            AddressModels.RemoveAll(a => a.Id == addressId);
         }
     }
 }
