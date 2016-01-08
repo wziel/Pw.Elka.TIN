@@ -7,7 +7,6 @@ class CliComADDRADD :
 	public Communicate
 {
 public:
-	CliComADDRADD();
 	CliComADDRADD(unsigned char* communicateBuffer);
 	~CliComADDRADD();
 	string getAddressValue();

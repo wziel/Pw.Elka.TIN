@@ -2,11 +2,6 @@
 
 
 
-CliComADDRADD::CliComADDRADD()
-{
-	throw "Class unimplemented";
-}
-
 CliComADDRADD::CliComADDRADD(unsigned char* communicateBuffer) : Communicate(communicateBuffer)
 {
 	unsigned char* myBuffer = communicateBuffer + 1;

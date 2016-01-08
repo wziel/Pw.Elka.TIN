@@ -76,7 +76,7 @@ MessageModel DAL::ModifyMessage(int id, string title, string content, int client
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", content);
+	MessageModel wiadomosc1(1, title, content);
 	return wiadomosc1;
 }
 bool DAL::DeleteMessage(int id, int clientId)
