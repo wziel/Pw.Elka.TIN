@@ -28,7 +28,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
         public MessagesDetailsView(MessageModel model, MessagesView masterView)
         {
             InitializeComponent();
-            _model = model;
+            var app = (App)Application.Current;
+
+            _model = app.AppDAL.MessageModelGetById(model.Id);
             _masterView = masterView;
 
             txtMessageContent.Text = model.Content;

@@ -37,7 +37,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             InitializeComponent();
 
             var app = (App)Application.Current;
-            _model = app.AppDAL.GroupModelGetById(model.Id);
+            _model = model;
             lblGroupName.Content = model.Name;
 
             _masterView = masterView;
