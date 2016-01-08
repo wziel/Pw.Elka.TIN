@@ -14,37 +14,47 @@ bool DAL::BlockClient(string login, bool isBlocked)
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	return true;
 }
 bool DAL::CreateClient(string login, string hashOfPassword)
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	return true;
 }
 bool DAL::DeleteClient(string login)
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	return true;
 }
 bool DAL::ChangeLogin(int clientId, string newLogin)
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	return true;
 }
-std::vector<ClientModel> DAL::GetAllClients()
+vector<ClientModel> DAL::GetAllClients()
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	vector<ClientModel> klienci;
+
+	ClientModel klient1(1, "Michal", "hashHasla");
+	ClientModel klient2(2, "Asia", "hashHasla");
+	ClientModel klient3(3, "Wojtek", "hashHasla");
+
+	klienci.push_back(klient1);
+	klienci.push_back(klient2);
+	klienci.push_back(klient3);
+
+	return klienci;
 }
 bool DAL::ModifyClient(string oldLogin, string login, string passwordHash)
 {
 	/* MOCK */
 
-	throw "Not implemented";
+	return true;
 }
 
 //IClientDAL.h
@@ -52,14 +62,14 @@ MessageModel DAL::GetMessageById(int id, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", NULL);
+	MessageModel wiadomosc1(1, "Wiadomosc1", "");
 	return wiadomosc1;
 }
 MessageModel DAL::CreateMessage(string title, string content, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", NULL);
+	MessageModel wiadomosc1(1, "Wiadomosc1", "");
 	return wiadomosc1;
 }
 MessageModel DAL::ModifyMessage(int id, string title, string content, int clientId)
