@@ -165,6 +165,8 @@ std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
 		view.clientName = clientSessions[i]->clientSession->GetClientName();
 		view.connectionId = clientSessions[i]->connectionId;
 		view.state = clientSessions[i]->state;
+
+		views.push_back(view);
 	}
 	ReleaseMutex(clientSessionsMutex);
 

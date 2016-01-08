@@ -1,6 +1,7 @@
 #include "..\..\..\Header Files\Components\AdministratorView\AdministratorView.h"
 #include <iostream>
 #include <algorithm>
+#include<iomanip>
 
 AdministratorView::AdministratorView(IClientSessionsRegister& sessionsRegister, IAdminDAL& DALarg) : DAL(DAL), sessionsRegister(sessionsRegister)
 {
@@ -35,9 +36,16 @@ void AdministratorView::helpDisplay()
 void AdministratorView::sessionsDisplay()
 {
 	std::vector <ClientSessionView> views = sessionsRegister.GetAllClientSessionViews();
+	if (views.size() == 0)
+	{
+		std::cout << "There are currently no sessions\n";
+		return;
+	}
+	std::cout << setw(20) << "Connection ID" << setw(20) << "Connection state" << setw(20) << "Client Name\n";
 	for (unsigned i = 0; i < views.size(); ++i)
 	{
-		std::cout << views[i].connectionId << " " << views[i].state << " " << views[i].clientName << "\n";
+		std::cout << setw(20) << views[i].connectionId << setw(20) << views[i].state << setw(20) << views[i].clientName;
+		std::cout << "\n";
 	}
 }
 
@@ -77,6 +85,8 @@ void AdministratorView::clientModify(string oldLogin, string login, string passw
 
 string AdministratorView::GetHashedString(string str)
 {
+	return str;
+
 	char key [7] = { 143, 87, 133, 84, 123, 101, 68 };
 	std::size_t minimumStringLength = 16;
 	std::size_t characterLength = max(str.length(), minimumStringLength);
@@ -84,8 +94,8 @@ string AdministratorView::GetHashedString(string str)
 
 	for (int i = 0; i < characterLength; ++i)
 	{
-		throw "Assignment exception.";
-		//characters[i] = ((key[i % 7]) + (str[i % str.length]));
+		//TODO fix this
+		//characters[i] = ((key[i % 7]) ^ (str[i % str.length]));
 	}
 
 	string returnStr(characters);
