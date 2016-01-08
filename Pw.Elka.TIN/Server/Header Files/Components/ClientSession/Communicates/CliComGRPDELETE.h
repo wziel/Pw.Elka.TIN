@@ -5,7 +5,10 @@ class CliComGRPDELETE :
 	public Communicate
 {
 public:
-	CliComGRPDELETE();
+	CliComGRPDELETE(unsigned char* communicateBuffer);
 	~CliComGRPDELETE();
+	int getGrpId();
+private:
+	int grpId;
 };
 

@@ -108,6 +108,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMGRPDELETE:
+			{
+				CliComGRPDELETE* cliComGrpdelete = new CliComGRPDELETE(cliCom);
+				communicateService(*cliComGrpdelete);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -362,6 +369,23 @@ void ClientSession::communicateService(CliComMSGDELETE clientCommunicate)
 {
 	//client's data stored in db
 	bool isDeleted = DAL->DeleteMessage(clientCommunicate.getMsgId(), clientId);
+
+	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComGRPDELETE clientCommunicate)
+{
+	//client's data stored in db
+	bool isDeleted = DAL->DeleteGroupById(clientCommunicate.getGrpId(), clientId);
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
