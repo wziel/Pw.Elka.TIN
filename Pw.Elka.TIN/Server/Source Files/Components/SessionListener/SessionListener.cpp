@@ -1,4 +1,5 @@
 #include "../../../Header Files/Components/SessionListener/SessionListener.h"
+#include <iostream>
 
 SessionListener::SessionListener(IClientCreator &clientCreator)
 {
@@ -42,7 +43,7 @@ void SessionListener::Start()
 	WSAEventSelect(socketDescriptor, wsaEvents[0], FD_ACCEPT);
 	while (true)
 	{
-		eventSignaled = WSAWaitForMultipleEvents(1, wsaEvents, FALSE, WSA_INFINITE, FALSE);
+		eventSignaled = WSAWaitForMultipleEvents(2, wsaEvents, FALSE, WSA_INFINITE, FALSE);
 		if (eventSignaled == 0)
 		{
 			newClientAddressLenght = sizeof(sockaddr_in);
@@ -65,5 +66,8 @@ void SessionListener::Start()
 
 void SessionListener::End()
 {
-	WSASetEvent(wsaEvents[1]);
+	bool czySieUdalo;
+	czySieUdalo = WSASetEvent(wsaEvents[1]);
+	if (czySieUdalo == FALSE)
+		throw "Blad przy SetEvent!";
 }
