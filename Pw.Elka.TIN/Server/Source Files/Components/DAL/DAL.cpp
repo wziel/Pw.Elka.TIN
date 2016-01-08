@@ -28,7 +28,7 @@ bool DAL::DeleteClient(string login)
 
 	return true;
 }
-bool DAL::ChangeLogin(int clientId, string newLogin)
+bool DAL::ChangeLogin(string login, string newLogin)
 {
 	/* MOCK */
 
@@ -50,7 +50,8 @@ vector<ClientModel> DAL::GetAllClients()
 
 	return klienci;
 }
-bool DAL::ModifyClient(string oldLogin, string login, string passwordHash)
+
+bool  DAL::UnblockClient(string login)
 {
 	/* MOCK */
 
@@ -204,7 +205,7 @@ vector<AddressModel> DAL::GetAllAddresses(int clientId)
 }
 
 //IDAL.h
-bool DAL::ChangeHashOfPassword(int clientId, string newHashOfPassword)
+bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 {
 	/* MOCK */
 

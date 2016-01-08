@@ -13,9 +13,9 @@ public:
     bool BlockClient(string login, bool isBlocked);
 	bool CreateClient(string login, string hashOfPassword);
 	bool DeleteClient(string login);
-	bool ChangeLogin(int clientId, string newLogin);
+	bool ChangeLogin(string login, string newLogin);
 	std::vector<ClientModel> GetAllClients();
-	bool ModifyClient(string oldLogin, string login, string passwordHash);
+	virtual bool UnblockClient(string login);
 
 	//IClientDAL.h
 	MessageModel GetMessageById(int id, int clientId);
@@ -37,7 +37,7 @@ public:
 	ClientModel getClient(string login);
 
 	//IDAL.h
-	bool ChangeHashOfPassword(int clientId, string newHashOfPassword);
+	bool ChangeHashOfPassword(string login, string newHashOfPassword);
 	bool BlockClient(string login);
 };
 
