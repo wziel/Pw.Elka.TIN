@@ -101,6 +101,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMMSGDELETE:
+			{
+				CliComMSGDELETE* cliComMsgdelete = new CliComMSGDELETE(cliCom);
+				communicateService(*cliComMsgdelete);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -342,6 +349,23 @@ void ClientSession::communicateService(CliComADDRRMV clientCommunicate)
 	{
 	}
 
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComMSGDELETE clientCommunicate)
+{
+	//client's data stored in db
+	bool isDeleted = DAL->DeleteMessage(clientCommunicate.getMsgId(), clientId);
+
+	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
 	else
 	{
 		ServComACK* ack = new ServComACK();

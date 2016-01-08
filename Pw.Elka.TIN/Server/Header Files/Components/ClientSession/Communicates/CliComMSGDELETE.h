@@ -5,7 +5,10 @@ class CliComMSGDELETE :
 	public Communicate
 {
 public:
-	CliComMSGDELETE();
+	CliComMSGDELETE(unsigned char* communicateBuffer);
 	~CliComMSGDELETE();
+	int getMsgId();
+private:
+	int msgId;
 };
 
