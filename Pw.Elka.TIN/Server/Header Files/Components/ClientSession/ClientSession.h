@@ -97,4 +97,5 @@ private:
 	void communicateService(CliComGRPGETONE clientCommunicate);
 	void communicateService(CliComMSGGETONE clientCommunicate);
 	void communicateService(CliComGRPCREATE clientCommunicate);
+	void communicateService(CliComMSGCREATE clientCommunicate);
 };

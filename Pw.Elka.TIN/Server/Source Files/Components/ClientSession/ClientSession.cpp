@@ -87,6 +87,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMMSGCREATE:
+			{
+				CliComMSGCREATE* cliComMsgcreate = new CliComMSGCREATE(cliCom);
+				communicateService(*cliComMsgcreate);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -295,6 +302,24 @@ void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 	else
 	{
 		ServComGRPGETONE* ack = new ServComGRPGETONE(&groupDB);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
+{
+	//client's data stored in db
+	MessageModel messageDB = DAL->CreateMessage(clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
+
+	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComMSGGETONE* ack = new ServComMSGGETONE(&messageDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}

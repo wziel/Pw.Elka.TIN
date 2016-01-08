@@ -5,7 +5,12 @@ class CliComMSGCREATE :
 	public Communicate
 {
 public:
-	CliComMSGCREATE();
+	CliComMSGCREATE(unsigned char* communicateBuffer);
 	~CliComMSGCREATE();
+	string getMsgContent();
+	string getMsgTitle();
+private:
+	string msgContent;
+	string msgTitle;
 };
 
