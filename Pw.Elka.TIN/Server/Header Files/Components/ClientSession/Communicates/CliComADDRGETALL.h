@@ -6,6 +6,7 @@ class CliComADDRGETALL :
 {
 public:
 	CliComADDRGETALL();
+	CliComADDRGETALL(unsigned char* communicateBuffer);
 	~CliComADDRGETALL();
 };
 
