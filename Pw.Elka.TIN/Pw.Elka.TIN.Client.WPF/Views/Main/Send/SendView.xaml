@@ -18,11 +18,11 @@
         <Button Click="Button_Click" Grid.Row="0" Grid.ColumnSpan="2">Send</Button>
         <StackPanel Name="stkGroups" Grid.Column="0" Grid.Row="1">
             <Label Content="Groups"></Label>
-            <ComboBox Name="cbbGroups" DisplayMemberPath="Name" SelectedValuePath="Id"></ComboBox>
+            <ComboBox Name="cbbGroups" DisplayMemberPath="Name"></ComboBox>
         </StackPanel>
         <StackPanel Name="stkMessages" Grid.Column="1" Grid.Row="1">
             <Label Content="Messages"></Label>
-            <ComboBox Name="cbbMessages" DisplayMemberPath="Name" SelectedValuePath="Id"></ComboBox>
+            <ComboBox Name="cbbMessages" DisplayMemberPath="Name"></ComboBox>
         </StackPanel>
     </Grid>
 </UserControl>
