@@ -42,6 +42,7 @@ bool ClientSession::Start()
 			{
 				CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
 				communicateService(*cliComAddradd);
+				break;
 			}
 
 			default:
@@ -50,12 +51,11 @@ bool ClientSession::Start()
 				ServComERRBADREQ* badReq = new ServComERRBADREQ();	
 				bottomLayer->Send(badReq->getCommunicate(), badReq->getSize());
 				delete badReq;
+				break;
 			}
-			{
 
 			}
-			}
-			throw "Unimplemented";
+
 			break;
 		}
 	
@@ -136,7 +136,7 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 {
 	//client's data stored in db
-	AddressModel addresstDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
+	AddressModel addressDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
@@ -144,7 +144,7 @@ void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 
 	else
 	{
-		ServComADDRGETONE* ack = new ServComADDRGETONE(addresstDB.id);
+		ServComADDRGETONE* ack = new ServComADDRGETONE(addressDB.id);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
