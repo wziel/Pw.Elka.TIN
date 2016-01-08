@@ -24,7 +24,32 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
         private GroupModel _groupModel;
         private AddressModel _addressModel;
 
-        public GroupAddressListItemView(GroupModel groupModel, AddressModel addressModel)
+        private bool _isAdded;
+        public bool IsAdded
+        {
+            get
+            {
+                return _isAdded;
+            }
+            set
+            {
+                _isAdded = value;
+                if(value)
+                {
+                    btnAdd.Visibility = Visibility.Hidden;
+                    btnRemove.Visibility = Visibility.Visible;
+                    Background = Brushes.White;
+                }
+                else
+                {
+                    btnAdd.Visibility = Visibility.Visible;
+                    btnRemove.Visibility = Visibility.Hidden;
+                    Background = Brushes.LightGray;
+                }
+            }
+        }
+
+        public GroupAddressListItemView(GroupModel groupModel, AddressModel addressModel, bool isAdded)
         {
             InitializeComponent();
 
@@ -32,16 +57,18 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             lblAddressValue.Content = addressModel.Value;
             _groupModel = groupModel;
             _addressModel = addressModel;
+            IsAdded = isAdded;
+
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             btnAdd.Visibility = Visibility.Hidden;
-            
+
             var app = (App)Application.Current;
             app.AppDAL.GroupModelAddressAdd(_groupModel.Id, _addressModel.Id);
 
-            btnRemove.Visibility = Visibility.Visible;
+            IsAdded = true;
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -51,7 +78,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             var app = (App)Application.Current;
             app.AppDAL.GroupModelAddressRemove(_groupModel.Id, _addressModel.Id);
 
-            btnAdd.Visibility = Visibility.Visible;
+            IsAdded = false;
         }
     }
 }

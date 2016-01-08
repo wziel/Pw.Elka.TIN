@@ -2,12 +2,20 @@
 
 
 
-CliComMSGDELETE::CliComMSGDELETE()
+CliComMSGDELETE::CliComMSGDELETE(unsigned char* communicateBuffer)
 {
-	throw "Class unimplemented";
+	unsigned char* myBuffer = communicateBuffer + 1;
+	unsigned char** localBuffer = &myBuffer;
+	parseShort(localBuffer); //id size, not used (always 4)	
+	msgId = parseInt(localBuffer);
 }
 
 
 CliComMSGDELETE::~CliComMSGDELETE()
 {
+}
+
+int CliComMSGDELETE::getMsgId()
+{
+	return msgId;
 }

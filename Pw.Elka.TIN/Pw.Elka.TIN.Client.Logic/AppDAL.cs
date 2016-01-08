@@ -313,7 +313,7 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorNotAuthorizedCommunicate)
+                if(serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
                     throw new NotAuthorizedException();
                 }
@@ -375,7 +375,10 @@ namespace Pw.Elka.TIN.Client.Logic
             }
             foreach(var group in GroupModels)
             {
-                group.Addresses.RemoveAll(a => a.Id == addressId);
+                if(group.Addresses != null)
+                {
+                    group.Addresses.RemoveAll(a => a.Id == addressId);
+                }
             }
             AddressModels.RemoveAll(a => a.Id == addressId);
         }

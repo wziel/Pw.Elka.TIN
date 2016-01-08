@@ -30,6 +30,8 @@ void AdministratorView::helpDisplay()
 	std::cout << "client-create {login} {password} - creates client with specified login and password\n";
 	std::cout << "client-delete {login} - delets client with specified login\n";
 	std::cout << "client-modify {old login} {login} {password} - modifies client with specified old login, by setting new login and password\n";
+	std::cout << "client-pass {login} {password} - modifies password of client with specified login\n";
+	std::cout << "client-login {old login} {login} - modifies client with specified old login, by setting new login\n";
 	std::cout << "exit - exit the programm\n";
 }
 
@@ -65,7 +67,14 @@ void AdministratorView::clientsDisplay()
 
 void AdministratorView::clientBlock(string login, bool isBlocked)
 {
-	DAL.BlockClient(login, isBlocked);
+	if (isBlocked)
+	{
+		DAL.BlockClient(login);
+	}
+	else
+	{
+		DAL.UnblockClient(login);
+	}
 }
 
 void AdministratorView::clientCreate(string login, string password)
@@ -78,9 +87,14 @@ void AdministratorView::clientDelete(string login)
 	DAL.DeleteClient(login);
 }
 
-void AdministratorView::clientModify(string oldLogin, string login, string password)
+void AdministratorView::clientSetPass(string login, string password)
 {
-	DAL.ModifyClient(oldLogin, login, GetHashedString(password));
+	DAL.ChangeHashOfPassword(login, GetHashedString(password));
+}
+
+void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
+{
+	DAL.ChangeLogin(oldLogin, newLogin);
 }
 
 string AdministratorView::GetHashedString(string str)
@@ -150,10 +164,15 @@ void AdministratorView::mainLoop()
 			std::cin >> oldLogin;
 			clientDelete(oldLogin);
 		}
-		else if (command == "client-modify")
+		else if (command == "client-pass")
 		{
-			std::cin >> oldLogin >> login >> password;
-			clientModify(oldLogin, login, password);
+			std::cin >> login >> password;
+			clientSetPass(login, password);
+		}
+		else if (command == "client-login")
+		{
+			std::cin >> oldLogin >> login;
+			clientSetLogin(oldLogin, login);
 		}
 		else if (command == "exit")
 		{

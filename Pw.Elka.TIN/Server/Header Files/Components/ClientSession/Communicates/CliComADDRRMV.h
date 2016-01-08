@@ -5,7 +5,10 @@ class CliComADDRRMV :
 	public Communicate
 {
 public:
-	CliComADDRRMV();
+	CliComADDRRMV(unsigned char* communicateBuffer);
 	~CliComADDRRMV();
+	int getAddrId();
+private:
+	int addrId;
 };
 

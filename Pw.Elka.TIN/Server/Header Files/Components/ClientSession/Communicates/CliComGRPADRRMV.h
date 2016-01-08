@@ -5,7 +5,13 @@ class CliComGRPADRRMV :
 	public Communicate
 {
 public:
-	CliComGRPADRRMV();
+	CliComGRPADRRMV(unsigned char* communicateBuffer);
 	~CliComGRPADRRMV();
+	int getGrpId();
+	int getAddrId();
+private:
+	int grpId;
+	int addrId;
+
 };
 

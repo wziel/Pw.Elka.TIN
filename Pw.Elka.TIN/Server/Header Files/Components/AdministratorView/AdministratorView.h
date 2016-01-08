@@ -17,7 +17,8 @@ private:
 	void clientBlock(string login, bool isBlocked);
 	void clientCreate(string login, string password);
 	void clientDelete(string login);
-	void clientModify(string oldLogin, string login, string password);
+	void clientSetPass(string login, string password);
+	void clientSetLogin(string oldLogin, string newLogin);
 	static string GetHashedString(string str);
 
 	void mainLoop();

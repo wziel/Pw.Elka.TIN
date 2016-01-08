@@ -28,7 +28,7 @@ bool DAL::DeleteClient(string login)
 
 	return true;
 }
-bool DAL::ChangeLogin(int clientId, string newLogin)
+bool DAL::ChangeLogin(string login, string newLogin)
 {
 	/* MOCK */
 
@@ -50,7 +50,8 @@ vector<ClientModel> DAL::GetAllClients()
 
 	return klienci;
 }
-bool DAL::ModifyClient(string oldLogin, string login, string passwordHash)
+
+bool  DAL::UnblockClient(string login)
 {
 	/* MOCK */
 
@@ -62,21 +63,21 @@ MessageModel DAL::GetMessageById(int id, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", "To jest bardzo superowa wiadomosc, ktora mozna sobie wyslac lub tez nie. Albo lepiej komus a nie sobie");
+	MessageModel wiadomosc1(8, "Wiadomosc1", "To jest bardzo superowa wiadomosc, ktora mozna sobie wyslac lub tez nie. Albo lepiej komus a nie sobie");
 	return wiadomosc1;
 }
 MessageModel DAL::CreateMessage(string title, string content, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", "");
+	MessageModel wiadomosc1(8, "Wiadomosc1", "");
 	return wiadomosc1;
 }
 MessageModel DAL::ModifyMessage(int id, string title, string content, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, title, content);
+	MessageModel wiadomosc1(8, title, content);
 	return wiadomosc1;
 }
 bool DAL::DeleteMessage(int id, int clientId)
@@ -146,7 +147,7 @@ GroupModel DAL::CreateGroup(string name, int clientId)
 	/* MOCK */
 
 	vector<AddressModel> adresy;
-	GroupModel grupa1(1, "Grupa1", adresy);
+	GroupModel grupa1(8, "Grupa1", adresy);
 
 	return grupa1;
 }
@@ -204,7 +205,7 @@ vector<AddressModel> DAL::GetAllAddresses(int clientId)
 }
 
 //IDAL.h
-bool DAL::ChangeHashOfPassword(int clientId, string newHashOfPassword)
+bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 {
 	/* MOCK */
 

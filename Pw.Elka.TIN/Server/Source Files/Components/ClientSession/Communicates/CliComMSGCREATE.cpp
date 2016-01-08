@@ -2,12 +2,24 @@
 
 
 
-CliComMSGCREATE::CliComMSGCREATE()
+CliComMSGCREATE::CliComMSGCREATE(unsigned char* communicateBuffer)
 {
-	throw "Class unimplemented";
+	unsigned char* myBuffer = communicateBuffer + 1;
+	unsigned char** localBuffer = &myBuffer;
+	msgContent = parseString(localBuffer);
+	msgTitle = parseString(localBuffer);
 }
 
 
 CliComMSGCREATE::~CliComMSGCREATE()
 {
+}
+
+string CliComMSGCREATE::getMsgContent()
+{
+	return msgContent;
+}
+string CliComMSGCREATE::getMsgTitle()
+{
+	return msgTitle;
 }
