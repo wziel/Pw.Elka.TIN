@@ -136,7 +136,7 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 {
 	//client's data stored in db
-	AddressModel addresstDB = DAL->CreateAddress(clientCommunicate.getAddressName, clientCommunicate.getAddressValue, clientId);
+	AddressModel addresstDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
