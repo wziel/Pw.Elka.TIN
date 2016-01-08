@@ -31,6 +31,7 @@ namespace Pw.Elka.TIN.Client.Logic.Parsers
                 fromIndex = newFromIndex;
             }
 
+            newFromIndex = fromIndex;
             return list;
         }
     }

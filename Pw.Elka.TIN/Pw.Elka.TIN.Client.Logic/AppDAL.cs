@@ -123,12 +123,12 @@ namespace Pw.Elka.TIN.Client.Logic
                     throw new NotImplementedException();
                 }
                 groupModel.Addresses = new List<AddressModel>();
-                for (int i = 0; i < communicate.AddressID.Count; ++i)
+                for (int i = 0; i < communicate.AddressIDs.Count; ++i)
                 {
                     groupModel.Addresses.Add(new AddressModel()
                     {
-                        Id = communicate.AddressID[i],
-                        Value = communicate.AddressValuse[i]
+                        Id = communicate.AddressIDs[i],
+                        Value = communicate.AddressValues[i]
                     });
                 }
             }
@@ -210,12 +210,12 @@ namespace Pw.Elka.TIN.Client.Logic
                 Name = communicate.GroupName,
                 Addresses = new List<AddressModel>()
             };
-            for (int i = 0; i < communicate.AddressID.Count; ++i)
+            for (int i = 0; i < communicate.AddressIDs.Count; ++i)
             {
                 groupModel.Addresses.Add(new AddressModel()
                 {
-                    Id = communicate.AddressID[i],
-                    Value = communicate.AddressValuse[i]
+                    Id = communicate.AddressIDs[i],
+                    Value = communicate.AddressValues[i]
                 });
             }
             GroupModels.Add(groupModel);
