@@ -94,6 +94,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMADDRRMV:
+			{
+				CliComADDRRMV* cliComAddrrmv = new CliComADDRRMV(cliCom);
+				communicateService(*cliComAddrrmv);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -326,6 +333,23 @@ void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 
 }
 
+void ClientSession::communicateService(CliComADDRRMV clientCommunicate)
+{
+	//client's data stored in db
+	bool isDeleted = DAL->DeleteAddress(clientCommunicate.getAddrId(), clientId);
+
+	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
 int DJBHash(string& str)
 {
 	unsigned int hash = 5381;

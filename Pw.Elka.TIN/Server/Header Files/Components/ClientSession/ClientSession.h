@@ -98,4 +98,5 @@ private:
 	void communicateService(CliComMSGGETONE clientCommunicate);
 	void communicateService(CliComGRPCREATE clientCommunicate);
 	void communicateService(CliComMSGCREATE clientCommunicate);
+	void communicateService(CliComADDRRMV clientCommunicate);
 };
