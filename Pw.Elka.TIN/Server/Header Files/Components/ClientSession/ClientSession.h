@@ -2,6 +2,7 @@
 #include "../../Interfaces/IClientSessionManager.h"
 #include "../../Shared/SessionState.h"
 #include "../../Shared/ClientModel.h"
+#include "../../Shared/AddressModel.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
 
@@ -88,4 +89,5 @@ private:
 	//communicates service functions
 	void communicateService(CliComAUTH clientCommunicate);
 	void communicateService(CliComADDRADD clientCommunicate);
+	void communicateService(CliComADDRGETALL clientCommunicate);
 };
