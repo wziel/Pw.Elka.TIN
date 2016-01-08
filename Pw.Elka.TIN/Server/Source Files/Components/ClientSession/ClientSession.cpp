@@ -136,6 +136,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMPSSWCHG:
+			{
+				CliComPSSWCHG* cliComPsswchg = new CliComPSSWCHG(cliCom);
+				communicateService(*cliComPsswchg);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -465,6 +472,47 @@ void ClientSession::communicateService(CliComGRPADRRMV clientCommunicate)
 		ServComACK* ack = new ServComACK();
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
+{
+	//client's data stored in db
+	ClientModel clientDB = DAL->getClient(clientName);
+
+	if (0) //no such user -don't know what's going to be returned yet
+	{
+		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+		delete errLogin;
+	}
+
+	else
+	{
+		//password hash stored in DB
+		string passwordDB = clientDB.hashOfPassword;
+
+		if (passwordDB == clientCommunicate.getPasswHash())
+		{
+			bool isChanged = DAL->ChangeHashOfPassword(clientId, clientCommunicate.getNewPasswHash());
+
+			if (isChanged == false)//error
+			{
+			}
+			else
+			{
+				ServComACK* ack = new ServComACK();
+				bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+				delete ack;
+			}
+		}
+		else
+		{
+			ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+			bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+			delete errLogin;
+		}
 	}
 
 }

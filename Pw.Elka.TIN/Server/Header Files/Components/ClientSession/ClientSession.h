@@ -104,4 +104,5 @@ private:
 	void communicateService(CliComMSGMODIFY clientCommunicate);
 	void communicateService(CliComGRPADRADD clientCommunicate);
 	void communicateService(CliComGRPADRRMV clientCommunicate);
+	void communicateService(CliComPSSWCHG clientCommunicate);
 };
