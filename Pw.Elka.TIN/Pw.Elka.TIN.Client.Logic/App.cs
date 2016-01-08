@@ -153,8 +153,9 @@ namespace Pw.Elka.TIN.Client.Logic
         {
             _session.SendCommunicate(new ClientPasswordChangeCommunicate()
             {
-                PasswordHash = Hashing.GetDJBHash(oldPassword + _salt),
-                NewPasswordHash = Hashing.GetXoredString(newPassword)
+                PasswordHash = oldPassword,
+                //NewPasswordHash = Hashing.GetXoredString(newPassword)
+                NewPasswordHash = newPassword
             });
             return _session.ReceiveCommunicate();
         }
