@@ -66,7 +66,7 @@ void SessionListener::Start()
 
 void SessionListener::End()
 {
-	bool czySieUdalo;
+	BOOL czySieUdalo;
 	czySieUdalo = WSASetEvent(wsaEvents[1]);
 	if (czySieUdalo == FALSE)
 		throw "Blad przy SetEvent!";
