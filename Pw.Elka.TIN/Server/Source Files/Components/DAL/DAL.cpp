@@ -90,7 +90,7 @@ bool DAL::IsBlocked(int clientId)
 }
 AddressModel DAL::CreateAddress(string addrName, string addrValue, int clientId)
 {
-	throw "Not implemented";
+	return *new AddressModel(8,addrValue, addrName);
 }
 bool DAL::DeleteAddress(int addrId, int clientId)
 {

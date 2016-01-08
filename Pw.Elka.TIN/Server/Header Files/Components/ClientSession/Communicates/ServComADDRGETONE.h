@@ -5,7 +5,7 @@ class ServComADDRGETONE :
 	public Communicate
 {
 public:
-	ServComADDRGETONE();
+	ServComADDRGETONE(int addressId);
 	~ServComADDRGETONE();
 };
 

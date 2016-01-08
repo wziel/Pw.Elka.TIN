@@ -87,4 +87,5 @@ private:
 
 	//communicates service functions
 	void communicateService(CliComAUTH clientCommunicate);
+	void communicateService(CliComADDRADD clientCommunicate);
 };

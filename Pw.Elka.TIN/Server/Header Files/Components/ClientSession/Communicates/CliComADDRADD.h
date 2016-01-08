@@ -11,9 +11,7 @@ public:
 	CliComADDRADD(unsigned char* communicateBuffer);
 	~CliComADDRADD();
 	string getAddressValue();
-	short int getAddressValueSize();
 	string getAddressName();
-	short int getAddressNameSize();
 private:
 	//e-mail address value
 	string addressValue;

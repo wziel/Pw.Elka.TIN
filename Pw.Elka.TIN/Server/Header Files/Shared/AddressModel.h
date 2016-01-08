@@ -9,7 +9,7 @@ class AddressModel
 {
 public:
 	AddressModel() {}
-	AddressModel(int id, string value, string name) : id(id), value(value), name(name) {}
+	AddressModel(int id,  string value, string name ) : id(id), value(value), name(name) {}
 	~AddressModel() {}
 
 	int id;

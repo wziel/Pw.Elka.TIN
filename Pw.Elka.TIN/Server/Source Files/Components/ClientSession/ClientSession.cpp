@@ -38,11 +38,11 @@ bool ClientSession::Start()
 			communicateCode = cliCom[0];
 			switch (communicateCode)
 			{
-			//case _CLICOMADDRADD :
-			//{
-			//	CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
-			////	communicateService(*cliComAddradd);
-			//}
+			case _CLICOMADDRADD :
+			{
+				CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
+				communicateService(*cliComAddradd);
+			}
 
 			default:
 			{
@@ -103,7 +103,6 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 		delete errLogin;
 	}
 	
-
 	else
 	{
 		//password hash stored in DB
@@ -118,6 +117,7 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 		if (passwordhashDB == clientCommunicate.getpasswHashAuth())
 		{
 			clientName = clientCommunicate.getUsername();
+			clientId = clientDB.id;
 			ServComACK* ack = new ServComACK();
 			bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 			sessionState = Authorized;
@@ -133,6 +133,23 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 
 }
 
+void ClientSession::communicateService(CliComADDRADD clientCommunicate)
+{
+	//client's data stored in db
+	AddressModel addresstDB = DAL->CreateAddress(clientCommunicate.getAddressName, clientCommunicate.getAddressValue, clientId);
+
+	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComADDRGETONE* ack = new ServComADDRGETONE(addresstDB.id);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
 int DJBHash(string& str)
 {
 	unsigned int hash = 5381;
