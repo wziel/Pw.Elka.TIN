@@ -45,6 +45,20 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMADDRGETALL:
+			{
+				CliComADDRGETALL* cliComAddrgetall = new CliComADDRGETALL(cliCom);
+				communicateService(*cliComAddrgetall);
+				break;
+			}
+
+			case _CLICOMGRPGETALL:
+			{
+				CliComGRPGETALL* cliComGrprgetall = new CliComGRPGETALL(cliCom);
+				communicateService(*cliComGrprgetall);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -150,6 +164,43 @@ void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 	}
 
 }
+
+void ClientSession::communicateService(CliComADDRGETALL clientCommunicate)
+{
+	//client's data stored in db
+	vector<AddressModel> addressVectorDB = DAL->GetAllAddresses(clientId);
+
+	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComADDRGETALL* ack = new ServComADDRGETALL(&addressVectorDB);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
+{
+	//client's data stored in db
+	vector<GroupModel> groupVectorDB = DAL->GetAllGroupsWithoutAdresses(clientId);
+
+	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComGRPGETALL* ack = new ServComGRPGETALL(&groupVectorDB);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
 int DJBHash(string& str)
 {
 	unsigned int hash = 5381;

@@ -5,7 +5,7 @@ class CliComGRPGETALL :
 	public Communicate
 {
 public:
-	CliComGRPGETALL();
+	CliComGRPGETALL(unsigned char* communicateBuffer);
 	~CliComGRPGETALL();
 };
 

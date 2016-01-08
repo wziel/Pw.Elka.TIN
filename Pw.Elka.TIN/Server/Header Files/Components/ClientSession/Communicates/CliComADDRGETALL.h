@@ -5,7 +5,7 @@ class CliComADDRGETALL :
 	public Communicate
 {
 public:
-	CliComADDRGETALL();
+	CliComADDRGETALL(unsigned char* communicateBuffer);
 	~CliComADDRGETALL();
 };
 

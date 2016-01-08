@@ -2,9 +2,8 @@
 
 
 
-CliComADDRGETALL::CliComADDRGETALL()
+CliComADDRGETALL:: CliComADDRGETALL(unsigned char* communicateBuffer)
 {
-	throw "Class unimplemented";
 }
 
 
