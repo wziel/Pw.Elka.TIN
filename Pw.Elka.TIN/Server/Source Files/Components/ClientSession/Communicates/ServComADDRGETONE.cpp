@@ -4,7 +4,7 @@
 
 ServComADDRGETONE::ServComADDRGETONE(int addressId)
 {
-	throw "Class unimplemented";
+	//throw "Class unimplemented";
 
 	//creating communicate
 	size = 7;
