@@ -37,7 +37,7 @@ public:
 	virtual vector<AddressModel> GetAllAddresses(int clientId) = 0;
 	virtual ClientModel getClient(string login) = 0;
 	//IDAL
-	virtual bool ChangeHashOfPassword(int clientId, string newHashOfPassword)=0;
+	virtual bool ChangeHashOfPassword(string login, string newHashOfPassword)=0;
 };
 
 #endif

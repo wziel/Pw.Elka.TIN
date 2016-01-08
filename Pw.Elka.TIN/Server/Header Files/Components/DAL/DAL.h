@@ -15,7 +15,7 @@ public:
 	bool DeleteClient(string login);
 	bool ChangeLogin(string login, string newLogin);
 	std::vector<ClientModel> GetAllClients();
-	virtual bool UnblockClient(string login);
+	bool UnblockClient(string login);
 
 	//IClientDAL.h
 	MessageModel GetMessageById(int id, int clientId);
