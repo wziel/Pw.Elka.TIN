@@ -26,16 +26,18 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
             InitializeComponent();
 
             var app = (App)Application.Current;
-            //app.AppDAL.GroupModels.ForEach(g => lbGroups.Items.Add(g));
-            //app.AppDAL.MessageModels.ForEach(m => lbMessages.Items.Add(m));
+
+            app.AppDAL.GroupModels.ForEach(g => cbbGroups.Items.Add(g));
+            app.AppDAL.MessageModels.ForEach(m => cbbMessages.Items.Add(m));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var groupId = ((GroupModel)lbGroups.SelectedItem).Id;
-            var msgId = ((MessageModel)lbMessages.SelectedItem).Id;
-
             var app = (App)Application.Current;
+
+            //var groupId = ((GroupModel)cbbGroups.SelectedItem).Id;
+            //var msgId = ((MessageModel)cbbMessages.SelectedItem).Id;
+
             //app.AppDAL.Send(groupId, msgId, new List<string>());
         }
     }

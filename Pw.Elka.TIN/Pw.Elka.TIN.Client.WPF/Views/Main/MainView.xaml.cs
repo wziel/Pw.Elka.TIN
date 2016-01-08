@@ -27,6 +27,11 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if(e.OriginalSource != tabControl)
+            {
+                return;
+            }
+
             var app = (App)Application.Current;
 
             if(tabControl.SelectedItem == tabItemAccount)
