@@ -35,6 +35,7 @@
 #define _SERVCOMERRADDR		  0x1B
 
 #include <string> 
+using namespace std;
 
 class Communicate
 {
@@ -50,6 +51,9 @@ public:
 	int getSize();
 	//returns communicate content
 	unsigned char* getCommunicate();
+	int parseInt(unsigned char** buffer);
+	short int parseShort(unsigned char** buffer);
+	string parseString(unsigned char** buffer);
 
 
 protected:
