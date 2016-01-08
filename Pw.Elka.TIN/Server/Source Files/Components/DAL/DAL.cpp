@@ -79,9 +79,9 @@ vector<MessageModel> DAL::GetAllMessagesWithoutContent(int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", NULL);
-	MessageModel wiadomosc2(2, "Wiadomosc2", NULL);
-	MessageModel wiadomosc3(3, "Wiadomosc3", NULL);
+	MessageModel wiadomosc1(1, "Wiadomosc1", "");
+	MessageModel wiadomosc2(2, "Wiadomosc2", "");
+	MessageModel wiadomosc3(3, "Wiadomosc3", "");
 
 	vector<MessageModel> wiadomosci;
 	wiadomosci.push_back(wiadomosc1);
