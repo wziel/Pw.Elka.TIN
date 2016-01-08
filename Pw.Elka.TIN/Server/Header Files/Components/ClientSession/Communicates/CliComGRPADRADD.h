@@ -5,7 +5,13 @@ class CliComGRPADRADD :
 	public Communicate
 {
 public:
-	CliComGRPADRADD();
+	CliComGRPADRADD(unsigned char* communicateBuffer);
 	~CliComGRPADRADD();
+	int getGrpId();
+	int getAddrId();
+private:
+	int grpId;
+	int addrId;
+	
 };
 

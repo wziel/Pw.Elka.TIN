@@ -122,6 +122,20 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMGRPADRADD:
+			{
+				CliComGRPADRADD* cliComGrpadrad = new CliComGRPADRADD(cliCom);
+				communicateService(*cliComGrpadrad);
+				break;
+			}
+
+			case _CLICOMGRPADRRMV:
+			{
+				CliComGRPADRRMV* cliComGrpadrrm = new CliComGRPADRRMV(cliCom);
+				communicateService(*cliComGrpadrrm);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -412,6 +426,38 @@ void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 	MessageModel messageDB = DAL->ModifyMessage(clientCommunicate.getMsgId(), clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComGRPADRADD clientCommunicate)
+{
+	//client's data stored in db
+	bool isAdded = DAL->AddAddressToGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
+	if (isAdded==false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComGRPADRRMV clientCommunicate)
+{
+	//client's data stored in db
+	bool isDeleted = DAL->RemoveAddressFromGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
+	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 	}
 	else
