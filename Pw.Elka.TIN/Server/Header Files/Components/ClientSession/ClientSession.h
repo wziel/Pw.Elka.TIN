@@ -4,6 +4,7 @@
 #include "../../Shared/ClientModel.h"
 #include "../../Shared/AddressModel.h"
 #include "../../Shared/GroupModel.h"
+#include "../../Shared/MessageModel.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
 
@@ -92,4 +93,5 @@ private:
 	void communicateService(CliComADDRADD clientCommunicate);
 	void communicateService(CliComADDRGETALL clientCommunicate);
 	void communicateService(CliComGRPGETALL clientCommunicate);
+	void ClientSession::communicateService(CliComMSGGETALL clientCommunicate);
 };

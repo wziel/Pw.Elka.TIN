@@ -2,9 +2,8 @@
 
 
 
-CliComMSGGETALL::CliComMSGGETALL()
+CliComMSGGETALL::CliComMSGGETALL(unsigned char* communicateBuffer)
 {
-	throw "Class unimplemented";
 }
 
 

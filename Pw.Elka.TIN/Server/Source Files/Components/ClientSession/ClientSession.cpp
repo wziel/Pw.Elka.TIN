@@ -59,6 +59,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMMSGGETALL:
+			{
+				CliComMSGGETALL* cliComMsggetall = new CliComMSGGETALL(cliCom);
+				communicateService(*cliComMsggetall);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -195,6 +202,24 @@ void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
 	else
 	{
 		ServComGRPGETALL* ack = new ServComGRPGETALL(&groupVectorDB);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
+{
+	//client's data stored in db
+	vector<MessageModel> messageVectorDB = DAL->GetAllMessagesWithoutContent(clientId);
+
+	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComMSGGETALL* ack = new ServComMSGGETALL(&messageVectorDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
