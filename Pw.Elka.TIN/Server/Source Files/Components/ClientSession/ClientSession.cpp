@@ -143,6 +143,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMSEND:
+			{
+				CliComSEND* cliComSend = new CliComSEND(cliCom);
+				communicateService(*cliComSend);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -516,6 +523,41 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 	}
 
 }
+
+void ClientSession::communicateService(CliComSEND clientCommunicate)
+{
+	//client's data stored in db
+	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGrpId(), clientId);
+	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMsgId(), clientId);
+
+	vector<string> readyAddressList;
+	for (unsigned int i = 0; i < groupDB.addresses.size(); ++i)
+	{
+		readyAddressList.push_back(groupDB.addresses[i].value);
+	}
+
+	string readyMessage = messageDB.content;
+/*
+Here should be combining a message template with the fields
+
+*/
+
+	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, readyAddressList);
+	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		messagesQueue->Push(smtpMessage);
+//what if error?
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
 
 int DJBHash(string& str)
 {

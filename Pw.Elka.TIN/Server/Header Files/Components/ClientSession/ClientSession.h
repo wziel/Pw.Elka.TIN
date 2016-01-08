@@ -5,6 +5,8 @@
 #include "../../Shared/AddressModel.h"
 #include "../../Shared/GroupModel.h"
 #include "../../Shared/MessageModel.h"
+#include "../../Shared/SmtpMessage.h"
+#include "../../Shared/MessagesQueue.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
 
@@ -105,4 +107,6 @@ private:
 	void communicateService(CliComGRPADRADD clientCommunicate);
 	void communicateService(CliComGRPADRRMV clientCommunicate);
 	void communicateService(CliComPSSWCHG clientCommunicate);
+	void communicateService(CliComSEND clientCommunicate);
+
 };
