@@ -357,7 +357,7 @@ namespace Pw.Elka.TIN.Client.Logic
                 Value = addresValue,
                 Id = communicate.AddressID
             };
-            //AddressModels.Add(addrModel);
+            AddressModels.Add(addrModel);
             return addrModel;
         }
 

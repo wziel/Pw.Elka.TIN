@@ -35,10 +35,21 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         {
             var app = (App)Application.Current;
 
-            //var groupId = ((GroupModel)cbbGroups.SelectedItem).Id;
-            //var msgId = ((MessageModel)cbbMessages.SelectedItem).Id;
+            if(cbbGroups.SelectedItem == null || cbbMessages.SelectedItem == null)
+            {
+                MessageBox.Show("Nie wybrano grupy lubi wiadomości");
+                return;
+            }
 
-            //app.AppDAL.Send(groupId, msgId, new List<string>());
+            var groupId = ((GroupModel)cbbGroups.SelectedItem).Id;
+            var msgId = ((MessageModel)cbbMessages.SelectedItem).Id;
+
+            app.AppDAL.Send(groupId, msgId, new List<string>());
+
+            MessageBox.Show("Wiadomość została pomyślnie wysłana");
+
+            cbbGroups.SelectedItem = null;
+            cbbMessages.SelectedItem = null;
         }
     }
 }
