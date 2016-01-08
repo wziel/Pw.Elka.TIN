@@ -2,12 +2,25 @@
 
 
 
-CliComPSSWCHG::CliComPSSWCHG()
+CliComPSSWCHG::CliComPSSWCHG(unsigned char* communicateBuffer)
 {
-	throw "Class unimplemented";
-}
+	unsigned char* myBuffer = communicateBuffer + 1;
+	unsigned char** localBuffer = &myBuffer;
+	
+	passwHash = parseString(localBuffer);
+	newPasswHash = parseString(localBuffer);
 
+}
 
 CliComPSSWCHG::~CliComPSSWCHG()
 {
+}
+
+string CliComPSSWCHG::getPasswHash()
+{
+	return passwHash;
+}
+string CliComPSSWCHG::getNewPasswHash()
+{
+	return newPasswHash;
 }

@@ -7,6 +7,7 @@
 #include "../../Header Files/Shared/MessageModel.h"
 #include "../../Header Files/Shared/GroupModel.h"
 #include "../../Header Files/Shared/ClientModel.h"
+#include "../../Header Files/Interfaces/IDAL.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 //class GroupModel;
 
 class IClientDAL
+	:public IDAL
 {
 public:
 	virtual ~IClientDAL() {};
@@ -34,6 +36,8 @@ public:
 	virtual bool DeleteAddress(int addrId, int clientId) = 0;
 	virtual vector<AddressModel> GetAllAddresses(int clientId) = 0;
 	virtual ClientModel getClient(string login) = 0;
+	//IDAL
+	virtual bool ChangeHashOfPassword(int clientId, string newHashOfPassword)=0;
 };
 
 #endif

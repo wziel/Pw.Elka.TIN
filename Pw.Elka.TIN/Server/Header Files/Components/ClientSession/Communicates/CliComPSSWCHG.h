@@ -5,7 +5,12 @@ class CliComPSSWCHG :
 	public Communicate
 {
 public:
-	CliComPSSWCHG();
+	CliComPSSWCHG(unsigned char* communicateBuffer);
 	~CliComPSSWCHG();
+	string getPasswHash();
+	string getNewPasswHash();
+private:
+	string passwHash;
+	string newPasswHash;
 };
 
