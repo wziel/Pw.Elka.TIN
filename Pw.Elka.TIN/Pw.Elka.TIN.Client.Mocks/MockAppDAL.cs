@@ -99,8 +99,8 @@ namespace Pw.Elka.TIN.Client.Mocks
             };
 
             _addressModelsIdHighWaterMark = _addressModels.Count;
-            _groupModelsIdHighWaterMark = GroupModels.Count;
-            _messageModelsIdHighWaterMark = MessageModels.Count;
+            _groupModelsIdHighWaterMark = _groupModels.Count;
+            _messageModelsIdHighWaterMark = _messageModels.Count;
         }
 
 
@@ -109,7 +109,7 @@ namespace Pw.Elka.TIN.Client.Mocks
 
         public List<GroupModel> GroupModels
         {
-            get { return _groupModels; }
+            get { return _realAppDAL.GroupModels; }
         }
 
         private List<MessageModel> _messageModels;
