@@ -1,6 +1,6 @@
 #include "../../../../Header Files/Components/ClientSession/Communicates/ServComMSGGETALL.h"
 
-
+ 
 
 ServComMSGGETALL::ServComMSGGETALL(vector <MessageModel> * vect)
 {
@@ -14,18 +14,18 @@ ServComMSGGETALL::ServComMSGGETALL(vector <MessageModel> * vect)
 	unsigned char* myBuffer = communicateBuffer + 1;
 	communicateBuffer[0] = _SERVCOMMSGGETALL;			//communicate code
 
-	myBuffer = storeShort(myBuffer, vect->size());
+	myBuffer = storeShort(myBuffer, (short)(vect->size()));
 
 	for (unsigned int i = 0; i < vect->size(); ++i)
 	{
 		myBuffer = storeShort(myBuffer, 4);
 		myBuffer = storeInt(myBuffer, (*vect)[i].id);
 	}
-	myBuffer = storeShort(myBuffer, vect->size());
+	myBuffer = storeShort(myBuffer, (short)(vect->size()));
 
 	for (unsigned int i = 0; i < vect->size(); ++i)
 	{
-		myBuffer = storeShort(myBuffer, (*vect)[i].title.length());
+		myBuffer = storeShort(myBuffer, (short)((*vect)[i].title.length()));
 		myBuffer = storeString(myBuffer, (*vect)[i].title);
 	}
 }

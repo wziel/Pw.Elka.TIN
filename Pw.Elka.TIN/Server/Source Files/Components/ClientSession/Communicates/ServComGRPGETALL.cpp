@@ -14,18 +14,18 @@ ServComGRPGETALL::ServComGRPGETALL(vector <GroupModel> * vect)
 	unsigned char* myBuffer = communicateBuffer + 1;
 	communicateBuffer[0] = _SERVCOMGRPGETALL;			//communicate code
 
-	myBuffer = storeShort(myBuffer, vect->size());
+	myBuffer = storeShort(myBuffer, (short)(vect->size()));
 
 	for (unsigned int i = 0; i < vect->size(); ++i)
 	{
 		myBuffer = storeShort(myBuffer, 4);
 		myBuffer = storeInt(myBuffer, (*vect)[i].id);
 	}
-	myBuffer = storeShort(myBuffer, vect->size());
+	myBuffer = storeShort(myBuffer, (short)(vect->size()));
 
 	for (unsigned int i = 0; i < vect->size(); ++i)
 	{
-		myBuffer = storeShort(myBuffer, (*vect)[i].name.length());
+		myBuffer = storeShort(myBuffer, (short)((*vect)[i].name.length()));
 		myBuffer = storeString(myBuffer, (*vect)[i].name);
 	}
 }

@@ -106,7 +106,7 @@ string AdministratorView::GetHashedString(string str)
 	std::size_t characterLength = max(str.length(), minimumStringLength);
 	char* characters = new char[characterLength];
 
-	for (int i = 0; i < characterLength; ++i)
+	for (unsigned int i = 0; i < characterLength; ++i)
 	{
 		//TODO fix this
 		//characters[i] = ((key[i % 7]) ^ (str[i % str.length]));

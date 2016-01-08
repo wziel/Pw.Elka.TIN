@@ -7,7 +7,6 @@ class CliComAUTH :
 	public Communicate
 {
 public:
-	CliComAUTH();
 	CliComAUTH(unsigned char* communicateBuffer);
 	~CliComAUTH();
 	string getUsername();

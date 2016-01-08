@@ -23,7 +23,7 @@ ServComAUTH::ServComAUTH()
 
 ServComAUTH::~ServComAUTH()
 {
-	delete communicateBuffer;
+	delete communicateBuffer; 
 }
 
 string ServComAUTH::getSalt()

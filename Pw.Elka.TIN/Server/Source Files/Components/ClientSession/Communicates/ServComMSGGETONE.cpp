@@ -13,11 +13,11 @@ ServComMSGGETONE::ServComMSGGETONE(MessageModel *messageDB)
 	myBuffer = storeShort(myBuffer, 4);
 	myBuffer = storeInt(myBuffer, messageDB->id);
 
-	myBuffer = storeShort(myBuffer, messageDB->content.length());
+	myBuffer = storeShort(myBuffer, (short)(messageDB->content.length()));
 	myBuffer = storeString(myBuffer, messageDB->content);
 
-	myBuffer = storeShort(myBuffer, messageDB->title.length());
-	myBuffer = storeString(myBuffer, messageDB->title);
+	myBuffer = storeShort(myBuffer, (short)(messageDB->title.length()));
+	myBuffer = storeString(myBuffer, messageDB->title); 
 
 }
 

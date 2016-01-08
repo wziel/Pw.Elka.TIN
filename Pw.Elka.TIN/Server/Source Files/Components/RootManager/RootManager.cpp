@@ -113,7 +113,7 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 void RootManager::RegisterClientEnded(IClientSessionManager &clientSessionManager)
 {
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
-	for (int i = 0; i < clientSessions.size(); ++i)
+	for (unsigned int i = 0; i < clientSessions.size(); ++i)
 	{
 		if (&clientSessionManager == clientSessions[i]->clientSession)
 		{
@@ -136,7 +136,7 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 	WaitForSingleObject(params->thread, INFINITE);
 
 	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
-	for (int i = 0; i < rootManager.clientSessions.size(); ++i)
+	for (unsigned int i = 0; i < rootManager.clientSessions.size(); ++i)
 	{
 		if (threadHandle == rootManager.clientSessions[i]->thread)
 		{
@@ -159,7 +159,7 @@ std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
 	std::vector<ClientSessionView> views;
 
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
-	for (int i = 0; i < clientSessions.size(); ++i)
+	for (unsigned int i = 0; i < clientSessions.size(); ++i)
 	{
 		ClientSessionView view;
 		view.clientName = clientSessions[i]->clientSession->GetClientName();
@@ -176,7 +176,7 @@ std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
 void RootManager::EndClientSession(unsigned clientSessionViewId)
 {
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
-	for (int i = 0; i < clientSessions.size(); ++i)
+	for (unsigned int i = 0; i < clientSessions.size(); ++i)
 	{
 		if (clientSessions[i]->connectionId == clientSessionViewId)
 		{
