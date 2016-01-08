@@ -32,21 +32,10 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             _model = app.AppDAL.GroupModelGetById(model.Id);
             _masterView = groupsView;
             lblDetailsGroupName.Content = model.Name;
-
-
+            
             foreach (var addressModel in app.AppDAL.AddressModels)
             {
-                var groupAddrView = new GroupAddressListItemView(_model, addressModel);
-                if (_model.Addresses.Contains(addressModel))
-                {
-                    groupAddrView.btnRemove.Visibility = Visibility.Visible;
-                    groupAddrView.btnAdd.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    groupAddrView.btnRemove.Visibility = Visibility.Hidden;
-                    groupAddrView.btnAdd.Visibility = Visibility.Visible;
-                }
+                var groupAddrView = new GroupAddressListItemView(_model, addressModel, _model.Addresses.Contains(addressModel));
                 stkAddressesList.Children.Add(groupAddrView);
             }
         }
