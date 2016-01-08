@@ -54,7 +54,9 @@ public:
 	int parseInt(unsigned char** buffer);
 	short int parseShort(unsigned char** buffer);
 	string parseString(unsigned char** buffer);
-
+	unsigned char* storeInt(unsigned char* buffer, int val);
+	unsigned char* storeShort(unsigned char* buffer, short val);
+	unsigned char* storeString(unsigned char* buffer, string val);
 
 protected:
 //Communicate content

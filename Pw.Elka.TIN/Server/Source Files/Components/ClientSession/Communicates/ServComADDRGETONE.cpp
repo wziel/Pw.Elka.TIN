@@ -16,6 +16,15 @@ ServComADDRGETONE::ServComADDRGETONE(int addressId)
 	communicateBuffer[4] = (addressId >> 8) & 0xFF;
 	communicateBuffer[5] = (addressId >> 16) & 0xFF;
 	communicateBuffer[6] = (addressId >> 24) & 0xFF;
+
+	//int size = 1 + 2 + 5 + 2 + 4;
+	//communicateBuffer = new unsigned char[size];
+	//communicateBuffer[0] = 8;
+	//unsigned char* myBuffer = communicateBuffer + 1;
+	//myBuffer = storeShort(myBuffer, usernameSize);
+	//myBuffer = storeString(myBuffer, username);
+	//myBuffer = storeShort(myBuffer, passwordSize);
+	//myBuffer = storeInt(myBuffer, password);
 }
 
 
