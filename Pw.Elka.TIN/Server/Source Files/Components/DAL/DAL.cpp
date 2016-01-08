@@ -54,11 +54,35 @@ bool DAL::DeleteMessage(int id, int clientId)
 }
 vector<MessageModel> DAL::GetAllMessagesWithoutContent(int clientId)
 {
-	throw "Not implemented";
+	/* MOCK */
+
+	MessageModel wiadomosc1(1, "Wiadomosc1", NULL);
+	MessageModel wiadomosc2(2, "Wiadomosc2", NULL);
+	MessageModel wiadomosc3(3, "Wiadomosc3", NULL);
+
+	vector<MessageModel> wiadomosci;
+	wiadomosci.push_back(wiadomosc1);
+	wiadomosci.push_back(wiadomosc2);
+	wiadomosci.push_back(wiadomosc3);
+
+	return wiadomosci;
 }
 vector<GroupModel> DAL::GetAllGroupsWithoutAdresses(int clientId)
 {
-	throw "Not implemented";
+	/* MOCK */
+
+	vector<AddressModel> adresy;
+
+	GroupModel grupa1(1, "Grupa1", adresy);
+	GroupModel grupa2(2, "Grupa2", adresy);
+	GroupModel grupa3(3, "Grupa3", adresy);
+
+	vector<GroupModel> grupy;
+	grupy.push_back(grupa1);
+	grupy.push_back(grupa2);
+	grupy.push_back(grupa3);
+
+	return grupy;
 }
 GroupModel DAL::GetGroupById(int id, int clientId)
 {
@@ -98,7 +122,19 @@ bool DAL::DeleteAddress(int addrId, int clientId)
 }
 vector<AddressModel> DAL::GetAllAddresses(int clientId)
 {
-	throw "Not implemented";
+
+	/* MOCK */
+
+	AddressModel adres1(1, "michal@gmail.com", "Michal");
+	AddressModel adres2(2, "asia@gmail.com", "Asia");
+	AddressModel adres3(3, "wojtek@gmail.com", "Wojtek");
+
+	vector<AddressModel> adresy;
+	adresy.push_back(adres1);
+	adresy.push_back(adres2);
+	adresy.push_back(adres3);
+
+	return adresy;
 }
 
 //IDAL.h
