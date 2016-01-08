@@ -122,6 +122,15 @@ GroupModel DAL::GetGroupById(int id, int clientId)
 	/* MOCK */
 
 	vector<AddressModel> adresy;
+
+	AddressModel adres1(1, "michal@gmail.com", "Michal");
+	AddressModel adres2(2, "asia@gmail.com", "Asia");
+	AddressModel adres3(3, "wojtek@gmail.com", "Wojtek");
+
+	adresy.push_back(adres1);
+	adresy.push_back(adres2);
+	adresy.push_back(adres3);
+
 	GroupModel grupa1(1, "Grupa1", adresy);
 
 	return grupa1;

@@ -5,7 +5,10 @@ class CliComGRPGETONE :
 	public Communicate
 {
 public:
-	CliComGRPGETONE();
+	CliComGRPGETONE(unsigned char* communicateBuffer);
 	~CliComGRPGETONE();
+	int getGroupId();
+private:
+	int groupId;
 };
 

@@ -66,6 +66,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMGRPGETONE:
+			{
+				CliComGRPGETONE* cliComGrpgetone = new CliComGRPGETONE(cliCom);
+				communicateService(*cliComGrpgetone);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -220,6 +227,24 @@ void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
 	else
 	{
 		ServComMSGGETALL* ack = new ServComMSGGETALL(&messageVectorDB);
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
+void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
+{
+	//client's data stored in db
+	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGroupId(),clientId);
+
+	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+
+	else
+	{
+		ServComGRPGETONE* ack = new ServComGRPGETONE(&groupDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}

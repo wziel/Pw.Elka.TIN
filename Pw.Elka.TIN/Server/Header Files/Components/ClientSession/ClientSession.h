@@ -93,5 +93,6 @@ private:
 	void communicateService(CliComADDRADD clientCommunicate);
 	void communicateService(CliComADDRGETALL clientCommunicate);
 	void communicateService(CliComGRPGETALL clientCommunicate);
-	void ClientSession::communicateService(CliComMSGGETALL clientCommunicate);
+	void communicateService(CliComMSGGETALL clientCommunicate);
+	void communicateService(CliComGRPGETONE clientCommunicate);
 };
