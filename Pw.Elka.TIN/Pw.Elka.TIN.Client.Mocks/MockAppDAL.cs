@@ -11,117 +11,24 @@ namespace Pw.Elka.TIN.Client.Mocks
     {
         private Logic.App _appLogic;
         private Logic.AppDAL _realAppDAL;
+        private int _uniqueIdMock;
 
         public MockAppDAL(Logic.App application)
         {
             _appLogic = application;
             _realAppDAL = new Logic.AppDAL(_appLogic);
-
-            _addressModels = new List<AddressModel>()
-            {
-                new AddressModel()
-                {
-                    Id = 0,
-                    AdresseeName = "Pierwszy adresat",
-                    Value = "pierwszy.adresat@asia.pl"
-                },
-                new AddressModel()
-                {
-                    Id = 1,
-                    AdresseeName = "Ciekawy adres",
-                    Value = "ciekawyadres1234@michal.pl"
-                },
-                new AddressModel()
-                {
-                    Id = 2,
-                    AdresseeName = "Lubię placki",
-                    Value = "xxxOOOxxxLubie@kamil.com"
-                },
-                new AddressModel()
-                {
-                    Id = 3,
-                    AdresseeName = "Student nr. 1234",
-                    Value = "bardzopilnystudent@wojtek.org"
-                }
-            };
-
-            _messageModels = new List<MessageModel>()
-            {
-                new MessageModel()
-                {
-                    Id = 0,
-                    Content = "To jest szablon bardzo ciekawej wiadomosc bez zadnych dodatkowych pól",
-                    Name = "Ciekawa wiadomość"
-                },
-                new MessageModel()
-                {
-                    Id = 1,
-                    Content = "Ten szablon zawiera jedno pole o nazwie {pole}",
-                    Name = "Jedno pole"
-                },
-                new MessageModel()
-                {
-                    Id = 2,
-                    Content = "Ta wiadomość w zasadzie nie wiem po co jest, ale niech będzie i niech ma jedno pole dodatkowe",
-                    Name = "Ale po co?"
-                }
-            };
-
-            _groupModels = new List<GroupModel>()
-            {
-                new GroupModel()
-                {
-                    Id = 0,
-                    Name = "Grupa pierwsza",
-                    Addresses = new List<AddressModel>()
-                    {
-                        _addressModels[0],
-                        _addressModels[1],
-                        _addressModels[2]
-                    }
-                },
-                new GroupModel()
-                {
-                    Id = 1,
-                    Name = "Grupa druga",
-                    Addresses = new List<AddressModel>()
-                    {
-                        _addressModels[1],
-                        _addressModels[3]
-                    }
-                },
-                new GroupModel()
-                {
-                    Id = 2,
-                    Name = "Grupa bez adresów",
-                    Addresses = new List<AddressModel>()
-                }
-            };
-
-            _addressModelsIdHighWaterMark = _addressModels.Count;
-            _groupModelsIdHighWaterMark = _groupModels.Count;
-            _messageModelsIdHighWaterMark = _messageModels.Count;
+            _uniqueIdMock = 100;
         }
-
-
-        private List<GroupModel> _groupModels;
-        private int _groupModelsIdHighWaterMark;
 
         public List<GroupModel> GroupModels
         {
             get { return _realAppDAL.GroupModels; }
         }
 
-        private List<MessageModel> _messageModels;
-        private int _messageModelsIdHighWaterMark;
-
         public List<MessageModel> MessageModels
         {
-            get { return _messageModels; }
+            get { return _realAppDAL.MessageModels; }
         }
-
-        private List<AddressModel> _addressModels;
-        private int _addressModelsIdHighWaterMark;
 
         public List<AddressModel> AddressModels
         {
@@ -156,7 +63,7 @@ namespace Pw.Elka.TIN.Client.Mocks
         {
             var groupModel = new GroupModel()
             {
-                Id = _groupModelsIdHighWaterMark++,
+                Id = _uniqueIdMock++,
                 Name = name,
                 Addresses = new List<AddressModel>()
             };
@@ -173,7 +80,7 @@ namespace Pw.Elka.TIN.Client.Mocks
         {
             var messageModel = new MessageModel()
             {
-                Id = _messageModelsIdHighWaterMark++,
+                Id = _uniqueIdMock++,
                 Name = name,
                 Content = template
             };
