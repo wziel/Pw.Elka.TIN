@@ -3,6 +3,7 @@
 #include "../../Shared/SessionState.h"
 #include "../../Shared/ClientModel.h"
 #include "../../Shared/AddressModel.h"
+#include "../../Shared/GroupModel.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
 
@@ -90,4 +91,5 @@ private:
 	void communicateService(CliComAUTH clientCommunicate);
 	void communicateService(CliComADDRADD clientCommunicate);
 	void communicateService(CliComADDRGETALL clientCommunicate);
+	void communicateService(CliComGRPGETALL clientCommunicate);
 };
