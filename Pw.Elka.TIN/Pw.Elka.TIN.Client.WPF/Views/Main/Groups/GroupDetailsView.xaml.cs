@@ -27,12 +27,12 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
         public GroupDetailsView(GroupModel model, GroupsView groupsView)
         {
             InitializeComponent();
+            var app = (App)Application.Current;
 
-            _model = model;
+            _model = app.AppDAL.GroupModelGetById(model.Id);
             _masterView = groupsView;
             lblDetailsGroupName.Content = model.Name;
 
-            var app = (App)Application.Current;
 
             foreach (var addressModel in app.AppDAL.AddressModels)
             {
