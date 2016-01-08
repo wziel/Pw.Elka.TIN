@@ -375,7 +375,10 @@ namespace Pw.Elka.TIN.Client.Logic
             }
             foreach(var group in GroupModels)
             {
-                group.Addresses.RemoveAll(a => a.Id == addressId);
+                if(group.Addresses != null)
+                {
+                    group.Addresses.RemoveAll(a => a.Id == addressId);
+                }
             }
             AddressModels.RemoveAll(a => a.Id == addressId);
         }
