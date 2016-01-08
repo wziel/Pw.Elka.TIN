@@ -495,7 +495,7 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 
 		if (passwordDB == clientCommunicate.getPasswHash())
 		{
-			bool isChanged = DAL->ChangeHashOfPassword(clientId, clientCommunicate.getNewPasswHash());
+			bool isChanged = DAL->ChangeHashOfPassword(clientName, clientCommunicate.getNewPasswHash());
 
 			if (isChanged == false)//error
 			{

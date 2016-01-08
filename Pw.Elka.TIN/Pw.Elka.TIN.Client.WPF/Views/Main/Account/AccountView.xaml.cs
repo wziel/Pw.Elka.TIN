@@ -37,8 +37,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
                 return;
             }
 
-            var oldPass = Hashing.GetXoredString(txtOldPass.Password);
-            var newPass = Hashing.GetXoredString(txtNewPass.Password);
+            var newPass = txtNewPass.Password;
+            var oldPass = txtOldPass.Password;
             
             try
             {
