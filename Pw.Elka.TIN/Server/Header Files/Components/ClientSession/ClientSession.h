@@ -101,4 +101,5 @@ private:
 	void communicateService(CliComADDRRMV clientCommunicate);
 	void communicateService(CliComMSGDELETE clientCommunicate);
 	void communicateService(CliComGRPDELETE clientCommunicate);
+	void communicateService(CliComMSGMODIFY clientCommunicate);
 };

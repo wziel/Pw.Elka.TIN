@@ -115,6 +115,13 @@ bool ClientSession::Start()
 				break;
 			}
 
+			case _CLICOMMSGMODIFY:
+			{
+				CliComMSGMODIFY* cliComMsgmodify = new CliComMSGMODIFY(cliCom);
+				communicateService(*cliComMsgmodify);
+				break;
+			}
+
 			default:
 			{
 				//No such communicate code
@@ -398,6 +405,24 @@ void ClientSession::communicateService(CliComGRPDELETE clientCommunicate)
 	}
 
 }
+
+void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
+{
+	//client's data stored in db
+	MessageModel messageDB = DAL->ModifyMessage(clientCommunicate.getMsgId(), clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
+
+	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	{
+	}
+	else
+	{
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
+	}
+
+}
+
 int DJBHash(string& str)
 {
 	unsigned int hash = 5381;

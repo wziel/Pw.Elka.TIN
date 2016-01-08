@@ -5,7 +5,14 @@ class CliComMSGMODIFY :
 	public Communicate
 {
 public:
-	CliComMSGMODIFY();
+	CliComMSGMODIFY(unsigned char* communicateBuffer);
 	~CliComMSGMODIFY();
+	int getMsgId();
+	string getMsgContent();
+	string getMsgTitle();
+private:
+	int msgId;
+	string msgContent;
+	string msgTitle;
 };
 
