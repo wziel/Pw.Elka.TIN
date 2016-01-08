@@ -95,4 +95,5 @@ private:
 	void communicateService(CliComGRPGETALL clientCommunicate);
 	void communicateService(CliComMSGGETALL clientCommunicate);
 	void communicateService(CliComGRPGETONE clientCommunicate);
+	void communicateService(CliComMSGGETONE clientCommunicate);
 };

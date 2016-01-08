@@ -62,7 +62,7 @@ MessageModel DAL::GetMessageById(int id, int clientId)
 {
 	/* MOCK */
 
-	MessageModel wiadomosc1(1, "Wiadomosc1", "");
+	MessageModel wiadomosc1(1, "Wiadomosc1", "To jest bardzo superowa wiadomosc, ktora mozna sobie wyslac lub tez nie. Albo lepiej komus a nie sobie");
 	return wiadomosc1;
 }
 MessageModel DAL::CreateMessage(string title, string content, int clientId)

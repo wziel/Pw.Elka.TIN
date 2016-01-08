@@ -5,7 +5,10 @@ class CliComMSGGETONE :
 	public Communicate
 {
 public:
-	CliComMSGGETONE();
+	CliComMSGGETONE(unsigned char* communicateBuffer);
 	~CliComMSGGETONE();
+	int getMessageId();
+private:
+	int messageId;
 };
 
