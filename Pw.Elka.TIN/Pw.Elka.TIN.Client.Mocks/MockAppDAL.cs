@@ -209,14 +209,17 @@ namespace Pw.Elka.TIN.Client.Mocks
 
         public AddressModel AddressAdd(string addresValue, string addresseeName)
         {
-            var addrModel = new AddressModel()
-            {
-                AdresseeName = addresseeName,
-                Value = addresValue,
-                Id = _addressModelsIdHighWaterMark
-            };
+            var addrModel = _realAppDAL.AddressAdd(addresValue, addresseeName);
             AddressModels.Add(addrModel);
             return addrModel;
+            //var addrModel = new AddressModel()
+            //{
+            //    AdresseeName = addresseeName,
+            //    Value = addresValue,
+            //    Id = _addressModelsIdHighWaterMark
+            //};
+            //AddressModels.Add(addrModel);
+            //return addrModel;
         }
 
         public void AddressRemove(int addressId)
