@@ -27,6 +27,33 @@ string Communicate::parseString(unsigned char** buffer)
 	return mystring;
 }
 
+unsigned char* Communicate::storeInt(unsigned char* buffer, int val)
+{
+	buffer[0] = (val)& 0xFF;
+	buffer[1] = (val >> 8) & 0xFF;
+	buffer[2] = (val >> 16) & 0xFF;
+	buffer[3] = (val >> 24) & 0xFF;
+	return buffer + 4;
+}
+
+unsigned char* Communicate::storeShort(unsigned char* buffer, short val)
+{
+	buffer[0] = (val)& 0xFF;
+	buffer[1] = (val >> 8) & 0xFF;
+	return buffer + 2;
+}
+
+unsigned char* Communicate::storeString(unsigned char* buffer, string val)
+{
+	const char* valSplit = val.c_str();
+	for (unsigned int i = 0; i < val.length(); ++i)
+	{
+		buffer[i] = valSplit[i];
+	}
+	return buffer + val.length();
+
+}
+
 unsigned char Communicate::getCode()
 {
 	return communicateBuffer[0];
