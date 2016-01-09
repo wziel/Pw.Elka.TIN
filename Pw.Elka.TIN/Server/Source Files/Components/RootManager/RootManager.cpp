@@ -4,7 +4,7 @@ RootManager::RootManager()
 {
 	dataAccessLayer = new DAL();
 	messagesQueue = new MessagesQueue();
-	smtpLayer = new SmtpLayer(*messagesQueue);
+	smtpLayer = new SmtpLayer(messagesQueue);
 	sessionsListener = new SessionListener(*this);
 	adminView = new AdministratorView(*this, *dataAccessLayer);
 	clientSessionsMutex = CreateMutex(NULL, FALSE, NULL);

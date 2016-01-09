@@ -31,6 +31,8 @@ CSmtp::CSmtp()
 	
 	if((SendBuf = new char[BUFFER_SIZE]) == NULL)
 		throw ECSmtp(ECSmtp::LACK_OF_MEMORY);
+
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

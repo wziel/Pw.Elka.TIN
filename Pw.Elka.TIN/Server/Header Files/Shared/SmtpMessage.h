@@ -15,6 +15,7 @@ public:
 	SmtpMessage() {}
 	~SmtpMessage() {}
 	string sender;
+	string title;
 	string message;
 	vector<string> addresses;
 	bool isQuitMessage;
