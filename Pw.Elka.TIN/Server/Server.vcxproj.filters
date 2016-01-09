@@ -273,6 +273,9 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComERRADDR.h">
       <Filter>Header Files\Components\ClientSession\Communicates</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Components\SmtpLayer\CSmtp.h">
+      <Filter>Header Files\Components\SmtpLayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComERRADDR.cpp">
       <Filter>Source Files\Components\ClientSession\Communicates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp">
+      <Filter>Source Files\Components\SmtpLayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

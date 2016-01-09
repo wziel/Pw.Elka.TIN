@@ -162,6 +162,7 @@
     <ClInclude Include="Header Files\Components\RootManager\Enums.h" />
     <ClInclude Include="Header Files\Components\RootManager\RootManager.h" />
     <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h" />
+    <ClInclude Include="Header Files\Components\SmtpLayer\CSmtp.h" />
     <ClInclude Include="Header Files\Components\SmtpLayer\SmtpLayer.h" />
     <ClInclude Include="Header Files\Components\TcpLayer\TcpLayer.h" />
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Source Files\Components\DAL\DAL.cpp" />
     <ClCompile Include="Source Files\Components\RootManager\RootManager.cpp" />
     <ClCompile Include="Source Files\Components\SessionListener\SessionListener.cpp" />
+    <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
