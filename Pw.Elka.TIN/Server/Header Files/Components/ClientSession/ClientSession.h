@@ -47,9 +47,6 @@
 #include "../../Components/ClientSession/Communicates/ServComMSGGETALL.h"
 #include "../../Components/ClientSession/Communicates/ServComMSGGETONE.h"
 
-
-
-
 using namespace std;
 
 class ClientSession :
@@ -57,12 +54,12 @@ class ClientSession :
 {
 public:
 
+	ClientSession(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager);
+	~ClientSession();
+
 	// IClientSessionManager
 	bool Start();
 	string GetClientName();
-
-	ClientSession(ILayer &bottomLayer, MessagesQueue &queue, SessionState initialState, IClientDAL &DAL, IClientManager &clientManager);
-	~ClientSession();
 
 private:
 	// Bottom layer for sending and receiving messages

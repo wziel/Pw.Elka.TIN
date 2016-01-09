@@ -18,7 +18,7 @@ private:
 	short int addressValueSize;
 	//address owner name
 	string addressName;
-	//e-mail address length
+	//address owner name length
 	short int addressNameSize;
 };
 

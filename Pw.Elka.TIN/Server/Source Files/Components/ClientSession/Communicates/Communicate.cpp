@@ -1,4 +1,21 @@
 #include "../../../../Header Files/Components/ClientSession/Communicates/Communicate.h"
+Communicate::Communicate()
+{
+}
+
+Communicate::Communicate(unsigned char* communicateBuffer)
+{
+	this->communicateBuffer = communicateBuffer;
+}
+
+Communicate::~Communicate()
+{
+}
+
+unsigned char* Communicate::getCommunicate()
+{
+	return communicateBuffer;
+}
 
 int Communicate::parseInt(unsigned char** buffer)
 {
@@ -6,7 +23,6 @@ int Communicate::parseInt(unsigned char** buffer)
 	val = ((*buffer)[3] << 24 | (*buffer)[2] << 16 | (*buffer)[1] << 8 | (*buffer)[0]);
 	*buffer = *buffer + 4;
 	return val;
-
 }
 
 short int Communicate::parseShort(unsigned char** buffer)
@@ -51,30 +67,11 @@ unsigned char* Communicate::storeString(unsigned char* buffer, string val)
 		buffer[i] = valSplit[i];
 	}
 	return buffer + val.length();
-
 }
 
 unsigned char Communicate::getCode()
 {
 	return communicateBuffer[0];
-}
-
-Communicate::Communicate()
-{
-}
-
-Communicate::Communicate(unsigned char* communicateBuffer)
-{
-	this->communicateBuffer = communicateBuffer;
-}
-
-Communicate::~Communicate()
-{
-}
-
-unsigned char* Communicate::getCommunicate()
-{
-	return communicateBuffer;
 }
 
 int Communicate::getSize()

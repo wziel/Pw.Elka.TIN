@@ -8,7 +8,6 @@ bool ClientSession::Start()
 	{
 		switch (sessionState)
 		{
-
 		case Unauthorized:
 		{
 			//sending an authorization communicate
@@ -28,13 +27,12 @@ bool ClientSession::Start()
 				CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
 				communicateService(*cliComAuth);
 			}
-			//throw "Unimplemented";
 			break;
 		}
 
 		case Authorized:
 		{
-			bottomLayer->Receive(cliCom, comSize);
+			bottomLayer->Receive(cliCom, comSize); //get communicate from client
 			communicateCode = cliCom[0];
 			switch (communicateCode)
 			{
@@ -44,112 +42,96 @@ bool ClientSession::Start()
 				communicateService(*cliComAddradd);
 				break;
 			}
-
 			case _CLICOMADDRGETALL:
 			{
 				CliComADDRGETALL* cliComAddrgetall = new CliComADDRGETALL(cliCom);
 				communicateService(*cliComAddrgetall);
 				break;
 			}
-
 			case _CLICOMGRPGETALL:
 			{
 				CliComGRPGETALL* cliComGrprgetall = new CliComGRPGETALL(cliCom);
 				communicateService(*cliComGrprgetall);
 				break;
 			}
-
 			case _CLICOMMSGGETALL:
 			{
 				CliComMSGGETALL* cliComMsggetall = new CliComMSGGETALL(cliCom);
 				communicateService(*cliComMsggetall);
 				break;
 			}
-
 			case _CLICOMGRPGETONE:
 			{
 				CliComGRPGETONE* cliComGrpgetone = new CliComGRPGETONE(cliCom);
 				communicateService(*cliComGrpgetone);
 				break;
 			}
-
 			case _CLICOMMSGGETONE:
 			{
 				CliComMSGGETONE* cliComMsggetone = new CliComMSGGETONE(cliCom);
 				communicateService(*cliComMsggetone);
 				break;
 			}
-
 			case _CLICOMGRPCREATE:
 			{
 				CliComGRPCREATE* cliComGrpcreate = new CliComGRPCREATE(cliCom);
 				communicateService(*cliComGrpcreate);
 				break;
 			}
-
 			case _CLICOMMSGCREATE:
 			{
 				CliComMSGCREATE* cliComMsgcreate = new CliComMSGCREATE(cliCom);
 				communicateService(*cliComMsgcreate);
 				break;
 			}
-
 			case _CLICOMADDRRMV:
 			{
 				CliComADDRRMV* cliComAddrrmv = new CliComADDRRMV(cliCom);
 				communicateService(*cliComAddrrmv);
 				break;
 			}
-
 			case _CLICOMMSGDELETE:
 			{
 				CliComMSGDELETE* cliComMsgdelete = new CliComMSGDELETE(cliCom);
 				communicateService(*cliComMsgdelete);
 				break;
 			}
-
 			case _CLICOMGRPDELETE:
 			{
 				CliComGRPDELETE* cliComGrpdelete = new CliComGRPDELETE(cliCom);
 				communicateService(*cliComGrpdelete);
 				break;
 			}
-
 			case _CLICOMMSGMODIFY:
 			{
 				CliComMSGMODIFY* cliComMsgmodify = new CliComMSGMODIFY(cliCom);
 				communicateService(*cliComMsgmodify);
 				break;
 			}
-
 			case _CLICOMGRPADRADD:
 			{
 				CliComGRPADRADD* cliComGrpadrad = new CliComGRPADRADD(cliCom);
 				communicateService(*cliComGrpadrad);
 				break;
 			}
-
 			case _CLICOMGRPADRRMV:
 			{
 				CliComGRPADRRMV* cliComGrpadrrm = new CliComGRPADRRMV(cliCom);
 				communicateService(*cliComGrpadrrm);
 				break;
 			}
-
 			case _CLICOMPSSWCHG:
 			{
 				CliComPSSWCHG* cliComPsswchg = new CliComPSSWCHG(cliCom);
 				communicateService(*cliComPsswchg);
 				break;
 			}
-
 			case _CLICOMSEND:
 			{
 				CliComSEND* cliComSend = new CliComSEND(cliCom);
 				communicateService(*cliComSend);
 				break;
 			}
-
 			default:
 			{
 				//No such communicate code
@@ -158,7 +140,6 @@ bool ClientSession::Start()
 				delete badReq;
 				break;
 			}
-
 			}
 
 			break;
@@ -173,7 +154,6 @@ bool ClientSession::Start()
 		{
 			throw "Server state error";
 		}
-
 		}
 	}
 }
@@ -212,7 +192,6 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 	{
 		//password hash stored in DB
 		string passwordDB = clientDB.hashOfPassword;
-		//string passwordDB=DAL->GetHashOfPassword(clientCommunicate.getUsername());
 
 		passwordDB.append(salt);
 		
@@ -235,12 +214,10 @@ void ClientSession:: communicateService(CliComAUTH clientCommunicate)
 			delete errLogin;
 		}
 	}
-
 }
 
 void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 {
-	//client's data stored in db
 	AddressModel addressDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -253,12 +230,10 @@ void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComADDRGETALL clientCommunicate)
 {
-	//client's data stored in db
 	vector<AddressModel> addressVectorDB = DAL->GetAllAddresses(clientId);
 
 	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -271,12 +246,10 @@ void ClientSession::communicateService(CliComADDRGETALL clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
 {
-	//client's data stored in db
 	vector<GroupModel> groupVectorDB = DAL->GetAllGroupsWithoutAdresses(clientId);
 
 	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -289,25 +262,21 @@ void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
 {
-	//client's data stored in db
 	vector<MessageModel> messageVectorDB = DAL->GetAllMessagesWithoutContent(clientId);
 
 	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 	}
-
 	else
 	{
 		ServComMSGGETALL* ack = new ServComMSGGETALL(&messageVectorDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
@@ -318,19 +287,16 @@ void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 	}
-
 	else
 	{
 		ServComGRPGETONE* ack = new ServComGRPGETONE(&groupDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComMSGGETONE clientCommunicate)
 {
-	//client's data stored in db
 	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMessageId(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -348,7 +314,6 @@ void ClientSession::communicateService(CliComMSGGETONE clientCommunicate)
 
 void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 {
-	//client's data stored in db
 	GroupModel groupDB = DAL->CreateGroup(clientCommunicate.getGroupName(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -366,7 +331,6 @@ void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 
 void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 {
-	//client's data stored in db
 	MessageModel messageDB = DAL->CreateMessage(clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -384,7 +348,6 @@ void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 
 void ClientSession::communicateService(CliComADDRRMV clientCommunicate)
 {
-	//client's data stored in db
 	bool isDeleted = DAL->DeleteAddress(clientCommunicate.getAddrId(), clientId);
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -397,12 +360,10 @@ void ClientSession::communicateService(CliComADDRRMV clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComMSGDELETE clientCommunicate)
 {
-	//client's data stored in db
 	bool isDeleted = DAL->DeleteMessage(clientCommunicate.getMsgId(), clientId);
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -414,12 +375,10 @@ void ClientSession::communicateService(CliComMSGDELETE clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComGRPDELETE clientCommunicate)
 {
-	//client's data stored in db
 	bool isDeleted = DAL->DeleteGroupById(clientCommunicate.getGrpId(), clientId);
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -431,12 +390,10 @@ void ClientSession::communicateService(CliComGRPDELETE clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 {
-	//client's data stored in db
 	MessageModel messageDB = DAL->ModifyMessage(clientCommunicate.getMsgId(), clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
@@ -448,12 +405,10 @@ void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComGRPADRADD clientCommunicate)
 {
-	//client's data stored in db
 	bool isAdded = DAL->AddAddressToGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
 	if (isAdded==false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
@@ -464,12 +419,10 @@ void ClientSession::communicateService(CliComGRPADRADD clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComGRPADRRMV clientCommunicate)
 {
-	//client's data stored in db
 	bool isDeleted = DAL->RemoveAddressFromGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
@@ -480,12 +433,10 @@ void ClientSession::communicateService(CliComGRPADRRMV clientCommunicate)
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 {
-	//client's data stored in db
 	ClientModel clientDB = DAL->getClient(clientName);
 
 	if (0) //no such user -don't know what's going to be returned yet
@@ -494,7 +445,6 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
 		delete errLogin;
 	}
-
 	else
 	{
 		//password hash stored in DB
@@ -521,12 +471,10 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 			delete errLogin;
 		}
 	}
-
 }
 
 void ClientSession::communicateService(CliComSEND clientCommunicate)
 {
-	//client's data stored in db
 	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGrpId(), clientId);
 	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMsgId(), clientId);
 
@@ -546,7 +494,6 @@ Here should be combining a message template with the fields
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 	}
-
 	else
 	{
 		messagesQueue->Push(smtpMessage);
@@ -555,7 +502,6 @@ Here should be combining a message template with the fields
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 

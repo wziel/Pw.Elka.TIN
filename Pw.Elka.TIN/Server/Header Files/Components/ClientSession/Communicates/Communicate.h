@@ -51,11 +51,17 @@ public:
 	int getSize();
 	//returns communicate content
 	unsigned char* getCommunicate();
+	//Converts 4 bytes of a buffer to an integer value (little endian)
 	int parseInt(unsigned char** buffer);
+	//Converts 2 bytes of a buffer to a short integer value (little endian)
 	short int parseShort(unsigned char** buffer);
+	//Converts n+2 bytes of a buffer to a n-byte string (first 2 bytes read as string length)
 	string parseString(unsigned char** buffer);
+	//Converts an integer value to 4 bytes of a buffer  (little endian)
 	unsigned char* storeInt(unsigned char* buffer, int val);
+	//Converts a short integer value to 2 bytes of a buffer  (little endian)
 	unsigned char* storeShort(unsigned char* buffer, short val);
+	//Converts n-byte string to n bytes of a buffer  (length must be stored separately)
 	unsigned char* storeString(unsigned char* buffer, string val);
 
 protected:
