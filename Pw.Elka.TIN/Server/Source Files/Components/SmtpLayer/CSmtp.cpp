@@ -31,8 +31,6 @@ CSmtp::CSmtp()
 	
 	if((SendBuf = new char[BUFFER_SIZE]) == NULL)
 		throw ECSmtp(ECSmtp::LACK_OF_MEMORY);
-
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -246,10 +244,10 @@ void CSmtp::ModMsgLine(unsigned int Line,const char* Text)
 ////////////////////////////////////////////////////////////////////////////////
 void CSmtp::Send()
 {
-	unsigned int i,rcpt_count,res,FileId;
+	unsigned int i, rcpt_count;
 	char *FileBuf = NULL, *FileName = NULL;
 	FILE* hFile = NULL;
-	unsigned long int FileSize,TotalSize,MsgPart;
+//	unsigned long int FileSize,TotalSize,MsgPart;
 	bool bAccepted;
 
 	// ***** CONNECTING TO SMTP SERVER *****

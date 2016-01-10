@@ -1,6 +1,5 @@
 #include "../../../Header Files/Components/SmtpLayer/SmtpLayer.h"
-
-#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 
 class MessagesQueue;
 
@@ -9,7 +8,8 @@ SmtpLayer::SmtpLayer(MessagesQueue* q)
 	this->queue = q;
 	this->mail = new CSmtp();
 	this->mailError = false;
-	this->smtpMessage = new SmtpMessage( false ); // delete  it
+	vector<string> vector1;
+	this->smtpMessage = new SmtpMessage(vector1); // delete  it
 }
 
 SmtpLayer::~SmtpLayer()
@@ -20,6 +20,16 @@ SmtpLayer::~SmtpLayer()
 
 void SmtpLayer::Start()
 {
+	//TESTING !!!
+	/*
+	vector<string> vector;
+	string gmail = string("kakacper1@gmail.com");
+	vector.push_back(gmail);
+	vector.push_back("kamil9422@interia.pl");
+	SmtpMessage forTry = SmtpMessage("tu rozsylacz", "No to sie w koncu doigrales!\n Pozdrawiam Kamil", vector, "gra skonczona");
+	forTry.isQuitMessage = false;
+	queue->Push(forTry);
+		*/
 
 	try
 	{
@@ -35,34 +45,36 @@ void SmtpLayer::Start()
 			*smtpMessage = queue->Pop();
 			if (smtpMessage->isQuitMessage)
 			{
+				
 				return;
 			}
 			else
 			{
 
 				mail->SetSenderName(strcpy((char*)malloc(smtpMessage->sender.length() + 1), smtpMessage->sender.c_str()));
+
 				mail->SetSubject(strcpy((char*)malloc(smtpMessage->title.length() + 1), smtpMessage->title.c_str()));
-				//while
-				//mail->AddRecipient(strcpy((char*)malloc(smtpMessage->sender.length() + 1), smtpMessage->sender.c_str()));
+
+				while (!smtpMessage->addresses.empty())
+				{
+					mail->AddRecipient(strcpy((char*)malloc(smtpMessage->addresses.back().length() + 1), smtpMessage->addresses.back().c_str()));
+					smtpMessage->addresses.pop_back();
+				}
 				mail->SetXPriority(XPRIORITY_NORMAL);
 				mail->SetXMailer("The Bat! (v3.02) Professional");
-				mail->AddMsgLine("Hello,");
-				//mail.Send();
+				mail->AddMsgLine(strcpy((char*)malloc(smtpMessage->message.length() + 1), smtpMessage->message.c_str()));
+				mail->Send();
 			}
 		} while (1);
 
 	}
 	catch (ECSmtp e)
 	{
-		//std::cout << "Error: " << e.GetErrorText().c_str() << ".\n";
-	//	int u;
-		//std::cin >> u;
-		//bError = true;
-	//}
-	//if (!bError)
-	//	std::cout << "Mail was send successfully.\n";
-//	int i;
-//	std::cin >> i;
-//	return 0;
+			cout << "Error: " << e.GetErrorText().c_str() << ".\n";
+			mailError = true;
+		}
+	if (!mailError)
+			cout << "Mail was send successfully.\n";
+			
+		return;
 	}
-}

@@ -3,16 +3,34 @@
 
 #include <string>
 #include <vector>
-
+#include <iostream>
 using namespace std;
 
 class SmtpMessage
 {
 public:
-	SmtpMessage(string sender, string message, vector<string> adresses) :
-		sender(sender), message(message), addresses(addresses) {}
-	SmtpMessage(bool isQuitMessage) : isQuitMessage(isQuitMessage) {}
-	SmtpMessage() {}
+	SmtpMessage(string sender, string message, vector<string>& adr) :
+		sender(sender), message(message), addresses(adr) {
+
+	}
+	SmtpMessage(string sender, string message, vector<string> &adr, string title) :
+		sender(sender), message(message), addresses(adr), title(title) {
+	
+	}
+	SmtpMessage(bool isQuitMessage, vector<string>& add) : isQuitMessage(isQuitMessage), addresses(add) {
+	 
+	
+	}
+	SmtpMessage(vector<string>& add): addresses(add) {}
+	SmtpMessage& operator=( const SmtpMessage& mess) {
+	
+			this->addresses = mess.addresses;
+			this->sender = mess.sender;
+			this->title = mess.title;
+			this->message = mess.message;
+		 
+		 return *this;
+	}
 	~SmtpMessage() {}
 	string sender;
 	string title;
