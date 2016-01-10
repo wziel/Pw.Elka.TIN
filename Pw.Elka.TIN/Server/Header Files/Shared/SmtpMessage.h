@@ -9,18 +9,11 @@ using namespace std;
 class SmtpMessage
 {
 public:
-	SmtpMessage(string sender, string message, vector<string>& adr) :
-		sender(sender), message(message), addresses(adr) {
-
-	}
-	SmtpMessage(string sender, string message, vector<string> &adr, string title) :
-		sender(sender), message(message), addresses(adr), title(title) {
-	
-	}
-	SmtpMessage(bool isQuitMessage, vector<string>& add) : isQuitMessage(isQuitMessage), addresses(add) {
-	 
-	
-	}
+	SmtpMessage(string sen, string mess, vector<string>& adr) :
+		sender(sen), message(mess), addresses(adr) {}
+	SmtpMessage(string sen, string mess, string tit , vector<string> &adr) :
+		sender(sen), message(mess),  title(tit) , addresses(adr) {}
+	SmtpMessage(bool isQuitMessage, vector<string>& add) : isQuitMessage(isQuitMessage), addresses(add) {}
 	SmtpMessage(vector<string>& add): addresses(add) {}
 	SmtpMessage& operator=( const SmtpMessage& mess) {
 	
