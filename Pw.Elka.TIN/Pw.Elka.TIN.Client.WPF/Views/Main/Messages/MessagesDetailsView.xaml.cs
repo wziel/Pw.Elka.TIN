@@ -48,7 +48,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 
             if(txtMessageName.Text.Length == 0)
             {
-                MessageBox.Show("Nazwa szablonu wiadomości nie może być pusta.");
+                Helpers.DisplayError("Nazwa szablonu wiadomości nie może być pusta.");
                 return;
             }
             
@@ -58,10 +58,10 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
             }
             catch(BadMessage)
             {
-                MessageBox.Show("Szablon o podanej nazwie już istnieje");
+                Helpers.DisplayError("Szablon o podanej nazwie już istnieje");
                 return;
             }
-            MessageBox.Show("Pomyślnie zmodyfikowano szablon wiadomości");
+            Helpers.DisplaySuccess("Pomyślnie zmodyfikowano szablon wiadomości");
         }
     }
 }

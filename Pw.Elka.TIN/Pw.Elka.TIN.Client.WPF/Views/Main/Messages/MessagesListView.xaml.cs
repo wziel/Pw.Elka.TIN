@@ -38,7 +38,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 
             if(app.AppDAL.MessageModels.FirstOrDefault(m => m.Name == txtNewMsgName.Text) != null)
             {
-                MessageBox.Show("Szablon wiadomości z podaną nazwą już istnieje.");
+                Helpers.DisplayError("Szablon wiadomości z podaną nazwą już istnieje.");
                 return;
             }
 

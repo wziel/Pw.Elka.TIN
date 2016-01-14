@@ -40,7 +40,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             }
             catch (SocketException)
             {
-                MessageBox.Show("Nie udało połączyć się z serwerem. Spróbuj jeszcze raz.");
+                Helpers.DisplayError("Nie udało połączyć się z serwerem. Spróbuj jeszcze raz.");
                 return;
             }
             mainWindow.rootContainer.NavigateToLoginView();

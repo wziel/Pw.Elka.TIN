@@ -36,18 +36,18 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
 
             if(txtNewName.Text.Length == 0)
             {
-                MessageBox.Show("Nazwa adresata nie może być pusta.");
+                Helpers.DisplayError("Nazwa adresata nie może być pusta.");
                 return;
             }
             if (!Regex.IsMatch(txtNewValue.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
-                MessageBox.Show("Adres email nie jest poprawny.");
+                Helpers.DisplayError("Adres email nie jest poprawny.");
                 return;
             }
 
             if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
             {
-                MessageBox.Show("Adresat z podaną nazwą już istnieje.");
+                Helpers.DisplayError("Adresat z podaną nazwą już istnieje.");
                 return;
             }
 

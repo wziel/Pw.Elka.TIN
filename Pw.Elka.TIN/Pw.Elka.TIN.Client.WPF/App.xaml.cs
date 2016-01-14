@@ -29,8 +29,8 @@ namespace Pw.Elka.TIN.Client.WPF
             var mainWindow = ((MainWindow)MainWindow);
             mainWindow.rootContainer.stkPanel.Children.Clear();
             mainWindow.rootContainer.stkPanel.Children.Add(new ServerConnectView());
-            string errorMessage = $"Wystąpił nieoczekiwany błąd. Spróbuj jeszcze raz połączyć się z serwerem.\nSzczegóły błędu:\n{e.Exception.Message}";
-            MessageBox.Show(errorMessage);
+            string errorMessage = $"Wystąpił nieoczekiwany błąd w aplikacji. Spróbuj jeszcze raz połączyć się z serwerem.\nSzczegóły błędu:\n{e.Exception.Message}";
+            Helpers.DisplayError(errorMessage);
             e.Handled = true;
         }
     }
