@@ -220,6 +220,8 @@ bool DAL::BlockClient(string login)
 ClientModel DAL::getClient(string login)
 {
 	/* MOCK */
+	//hashOfPassword is a hash used in application when inserted password 'test' 
+	//return *(new ClientModel(1, login, "û2ö \u000f\07û#à'\u000f\u0011!ü#"));
 
 	return *(new ClientModel(1, login, "test"));
 }
