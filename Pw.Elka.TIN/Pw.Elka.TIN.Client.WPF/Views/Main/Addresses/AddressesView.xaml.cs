@@ -27,7 +27,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         {
             var app = (App)Application.Current;
             InitializeComponent();
-            app.AppDAL.AddressModels.ForEach(a => stkAddress.Children.Add(new AddressListItemView(a, this)));
+            app.AppDAL.AddressModels.ToList().ForEach(a => stkAddress.Children.Add(new AddressListItemView(a, this)));
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -52,7 +52,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
             }
 
             var addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
-            stkAddress.Children.Add(new AddressListItemView(addrModel, this));
+            stkAddress.Children.Insert(0, new AddressListItemView(addrModel, this));
 
             txtNewName.Text = "";
             txtNewValue.Text = "";

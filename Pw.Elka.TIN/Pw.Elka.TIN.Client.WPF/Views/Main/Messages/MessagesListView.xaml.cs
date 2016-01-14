@@ -43,7 +43,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
             }
 
             var messageModel = app.AppDAL.MessageModelCreate(txtNewMsgName.Text, txtNewMsgContent.Text);
-            stkMsgs.Children.Add(new MessagesListItemView(messageModel, this));
+            stkMsgs.Children.Insert(0, new MessagesListItemView(messageModel, this));
 
             txtNewMsgName.Text = "";
             txtNewMsgContent.Text = "";

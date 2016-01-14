@@ -58,7 +58,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
 
             var groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
 
-            stkGroups.Children.Add(new GroupsListItemView(groupModel, this));
+            stkGroups.Children.Insert(0, new GroupsListItemView(groupModel, this));
             txtNewGroupName.Text = "";
         }
     }

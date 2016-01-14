@@ -43,6 +43,7 @@ namespace Pw.Elka.TIN.Client.Logic
                             Addresses = null
                         });
                     }
+                    _groupModels = _groupModels.OrderBy(g => g.Name).ToList();
                 }
                 return _groupModels;
             }
@@ -72,6 +73,7 @@ namespace Pw.Elka.TIN.Client.Logic
                             Content = null
                         });
                     }
+                    _messagrModels = _messagrModels.OrderBy(m => m.Name).ToList();
                 }
                 return _messagrModels;
             }
@@ -101,6 +103,7 @@ namespace Pw.Elka.TIN.Client.Logic
                             Id = communicate.AddressIds[i]
                         });
                     }
+                    _addressModels = _addressModels.OrderBy(a => a.AdresseeName).ToList();
                 }
                 return _addressModels;
             }
@@ -218,7 +221,8 @@ namespace Pw.Elka.TIN.Client.Logic
                     Value = communicate.AddressValues[i]
                 });
             }
-            GroupModels.Add(groupModel);
+            _groupModels.Add(groupModel);
+            _groupModels = _groupModels.OrderBy(g => g.Name).ToList();
             return groupModel;
         }
 
@@ -257,7 +261,8 @@ namespace Pw.Elka.TIN.Client.Logic
                 Content = template
             };
 
-            MessageModels.Add(messageModel);
+            _messagrModels.Add(messageModel);
+            _messagrModels = _messagrModels.OrderBy(m => m.Name).ToList();
             return messageModel;
         }
 
@@ -291,6 +296,7 @@ namespace Pw.Elka.TIN.Client.Logic
             var messageModel = MessageModels.Single(m => m.Id == id);
             messageModel.Name = name;
             messageModel.Content = template;
+            _messagrModels = _messagrModels.OrderBy(m => m.Name).ToList();
         }
 
         public void ClientAuthenticate(string password, string login)
@@ -357,7 +363,8 @@ namespace Pw.Elka.TIN.Client.Logic
                 Value = addresValue,
                 Id = communicate.AddressID
             };
-            AddressModels.Add(addrModel);
+            _addressModels.Add(addrModel);
+            _addressModels = _addressModels.OrderBy(a => a.AdresseeName).ToList();
             return addrModel;
         }
 
