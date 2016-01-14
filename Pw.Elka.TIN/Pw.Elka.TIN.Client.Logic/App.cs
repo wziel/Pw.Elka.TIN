@@ -32,6 +32,8 @@ namespace Pw.Elka.TIN.Client.Logic
             var auth = (ServerAuthCommunicate)_session.ReceiveCommunicate();
             _salt = auth.Salt;
 
+            password = Hashing.GetXoredString(password);
+
             _session.SendCommunicate(new ClientAuthCommunicate()
             {
                 Login = login,
@@ -151,10 +153,12 @@ namespace Pw.Elka.TIN.Client.Logic
 
         internal ServerCommunicate PasswordChange(string oldPassword, string newPassword)
         {
+            oldPassword = Hashing.GetXoredString(oldPassword);
+            newPassword = Hashing.GetXoredString(newPassword);
+
             _session.SendCommunicate(new ClientPasswordChangeCommunicate()
             {
                 PasswordHash = oldPassword,
-                //NewPasswordHash = Hashing.GetXoredString(newPassword)
                 NewPasswordHash = newPassword
             });
             return _session.ReceiveCommunicate();

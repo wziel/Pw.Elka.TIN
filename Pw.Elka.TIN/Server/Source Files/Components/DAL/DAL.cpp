@@ -221,7 +221,10 @@ ClientModel DAL::getClient(string login)
 {
 	/* MOCK */
 	//hashOfPassword is a hash used in application when inserted password 'test' 
-	//return *(new ClientModel(1, login, "û2ö \u000f\07û#à'\u000f\u0011!ü#"));
 
-	return *(new ClientModel(1, login, "test"));
+	string str("û2ö \xf");
+	str.append(1, '\0');
+	str.append("7û#à'\xf\x11!ü#");
+
+	return *(new ClientModel(1, login, str));
 }
