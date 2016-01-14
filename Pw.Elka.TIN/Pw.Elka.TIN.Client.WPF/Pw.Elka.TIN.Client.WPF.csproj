@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers.cs" />
     <Compile Include="Views\Main\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -218,10 +219,6 @@
     <ProjectReference Include="..\Pw.Elka.TIN.Client.Logic\Pw.Elka.TIN.Client.Logic.csproj">
       <Project>{34503db7-c6ce-44b1-aae1-d9cd5d478710}</Project>
       <Name>Pw.Elka.TIN.Client.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Pw.Elka.TIN.Client.Mocks\Pw.Elka.TIN.Client.Mocks.csproj">
-      <Project>{7de3c089-7db1-40af-b285-c7ba90fcd175}</Project>
-      <Name>Pw.Elka.TIN.Client.Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

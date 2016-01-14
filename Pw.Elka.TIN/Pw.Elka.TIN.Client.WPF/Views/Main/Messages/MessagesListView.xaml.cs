@@ -38,12 +38,12 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 
             if(app.AppDAL.MessageModels.FirstOrDefault(m => m.Name == txtNewMsgName.Text) != null)
             {
-                MessageBox.Show("Szablon wiadomości z podaną nazwą już istnieje.");
+                Helpers.DisplayError("Szablon wiadomości z podaną nazwą już istnieje.");
                 return;
             }
 
             var messageModel = app.AppDAL.MessageModelCreate(txtNewMsgName.Text, txtNewMsgContent.Text);
-            stkMsgs.Children.Add(new MessagesListItemView(messageModel, this));
+            stkMsgs.Children.Insert(0, new MessagesListItemView(messageModel, this));
 
             txtNewMsgName.Text = "";
             txtNewMsgContent.Text = "";

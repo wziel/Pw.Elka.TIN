@@ -52,13 +52,13 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
 
             if (app.AppDAL.GroupModels.SingleOrDefault(g => g.Name == txtNewGroupName.Text) != null)
             {
-                MessageBox.Show("Grupa z podaną nazwą już istnieje.");
+                Helpers.DisplayError("Grupa z podaną nazwą już istnieje.");
                 return;
             }
 
             var groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
 
-            stkGroups.Children.Add(new GroupsListItemView(groupModel, this));
+            stkGroups.Children.Insert(0, new GroupsListItemView(groupModel, this));
             txtNewGroupName.Text = "";
         }
     }

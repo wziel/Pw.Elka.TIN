@@ -37,7 +37,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
 
             if(cbbGroups.SelectedItem == null || cbbMessages.SelectedItem == null)
             {
-                MessageBox.Show("Nie wybrano grupy lubi wiadomości");
+                Helpers.DisplayError("Nie wybrano grupy lub/i wiadomości");
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
 
             app.AppDAL.Send(groupId, msgId, new List<string>());
 
-            MessageBox.Show("Wiadomość została pomyślnie wysłana");
+            Helpers.DisplaySuccess("Wiadomość została pomyślnie wysłana");
 
             cbbGroups.SelectedItem = null;
             cbbMessages.SelectedItem = null;

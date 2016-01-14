@@ -36,7 +36,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             }
             catch (NotAuthorizedException)
             {
-                MessageBox.Show("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
+                Helpers.DisplayError("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
                 return;
             }
             mainWindow.rootContainer.NavigateToMainView();

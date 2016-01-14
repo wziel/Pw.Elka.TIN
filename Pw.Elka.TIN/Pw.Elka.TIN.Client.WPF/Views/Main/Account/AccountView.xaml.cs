@@ -33,7 +33,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
 
             if(txtNewPass.Password != txtNewPassConfirm.Password)
             {
-                MessageBox.Show("Podane nowe hasła nie zgadzają się.");
+                Helpers.DisplayError("Podane nowe hasła nie zgadzają się.");
                 return;
             }
 
@@ -43,11 +43,11 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
             try
             {
                 app.AppDAL.ClientPasswordChange(oldPass, newPass);
-                MessageBox.Show("Pomyślnie zmieniono hasło.");
+                Helpers.DisplaySuccess("Pomyślnie zmieniono hasło.");
             }
             catch(NotAuthorizedException)
             {
-                MessageBox.Show("Podane stare hasło nie jest poprawne.");
+                Helpers.DisplayError("Podane stare hasło nie jest poprawne.");
             }
         }
     }

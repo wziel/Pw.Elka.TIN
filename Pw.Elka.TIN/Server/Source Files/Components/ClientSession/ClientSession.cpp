@@ -507,11 +507,12 @@ Here should be combining a message template with the fields
 
 int DJBHash(string& str)
 {
-	unsigned int hash = 5381;
+	int hash = 5381;
 
 	for (std::size_t i = 0; i < str.length(); i++)
 	{
-		hash = ((hash << 5) + hash) + str[i];
+		unsigned char c = str[i];
+		hash = ((hash << 5) + hash) + c;
 	}
 
 	return hash;
