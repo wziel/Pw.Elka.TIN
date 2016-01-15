@@ -21,15 +21,15 @@ SmtpLayer::~SmtpLayer()
 void SmtpLayer::Start()
 {
 	//TESTING !!!
-	/*
+	
 	vector<string> vector;
 	string gmail = string("kakacper1@gmail.com");
 	vector.push_back(gmail);
 	vector.push_back("kamil9422@interia.pl");
-	SmtpMessage forTry = SmtpMessage("tu rozsylacz", "No to sie w koncu doigrales!\n Pozdrawiam Kamil", vector, "gra skonczona");
+	SmtpMessage forTry = SmtpMessage("tu rozsylacz", "No to sie w koncu doigrales!\n Pozdrawiam Kamil", "gra skonczona" , vector );
 	forTry.isQuitMessage = false;
 	queue->Push(forTry);
-		*/
+		
 
 	try
 	{
@@ -73,8 +73,5 @@ void SmtpLayer::Start()
 			cout << "Error: " << e.GetErrorText().c_str() << ".\n";
 			mailError = true;
 		}
-	if (!mailError)
-			cout << "Mail was send successfully.\n";
-			
 		return;
 	}

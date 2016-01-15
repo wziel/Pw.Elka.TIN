@@ -1,5 +1,7 @@
-
+#define _CRT_SECURE_NO_WARNINGS
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "../../../Header Files/Components/SmtpLayer/SmtpLayer.h"
+#include <Ws2tcpip.h>
 
 
 
@@ -558,16 +560,20 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 		else 
 			nPort = lpServEnt->s_port;
 	}
-			
+	//if ((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
 	sockAddr.sin_family = AF_INET;
 	sockAddr.sin_port = nPort;
-	if((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
+	inet_pton(AF_INET, szServer , &sockAddr.sin_addr.s_addr);
+	if(( sockAddr.sin_addr.s_addr ) == INADDR_NONE)
 	{
 		LPHOSTENT host;
-			
+		//GetAddrInfoW(szServer, nPort_, NULL, &host);
 		host = gethostbyname(szServer);
 		if (host)
-			memcpy(&sockAddr.sin_addr,host->h_addr_list[0],host->h_length);
+		{
+	
+			memcpy(&sockAddr.sin_addr, host->h_addr_list[0], host->h_length);
+		}
 		else
 		{
 
