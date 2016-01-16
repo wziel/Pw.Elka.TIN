@@ -88,6 +88,9 @@
     <Filter Include="Header Files\libodbc++-0.2.5\headers">
       <UniqueIdentifier>{41c5e974-2a9c-407b-a6c2-d1c3be1d6f04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\libodbc++-0.2.5\lib">
+      <UniqueIdentifier>{f6604abf-615d-4f29-b396-a50b3ec9baa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
@@ -544,5 +547,57 @@
     <None Include="Header Files\libodbc++-0.2.5\include\odbc++\config.h.in">
       <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
     </None>
+    <None Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib.pdb">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\callablestatement.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\connection.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\databasemetadata.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datahandler.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datastream.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datetime.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\driverinfo.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\drivermanager.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\errorhandler.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\preparedstatement.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\resultset.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\resultsetmetadata.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\statement.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\threads.obj">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib">
+      <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>
