@@ -17,18 +17,19 @@ Connection DAL::getConnection()
 	return *connection;
 }
 
-//IAdminDAL.h
-bool DAL::BlockClient(string login, bool isBlocked)
+//has prepared statement executed properly.
+//KAMIL - move it as a class method and use it when you can.
+bool ExecutePreparedStatement(PreparedStatement *preparedStatement)
 {
-
-	PreparedStatement *preparedStatement;
-
-	string part1 = "UPDATE LokalnaBazaDanychTIN.dbo.Client SET LokalnaBazaDanychTIN.dbo.Client.blocked = 1 WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
-
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + "'"));
-	preparedStatement->execute();
-	//return 0;
-	return true;
+	try
+	{
+		preparedStatement->execute();
+		return true;
+	}
+	catch(exception e)
+	{
+		return false;
+	}
 }
 bool DAL::CreateClient(string login, string hashOfPassword)
 {
