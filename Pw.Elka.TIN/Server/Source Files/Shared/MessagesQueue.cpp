@@ -35,4 +35,5 @@ void MessagesQueue::End()
 	queue.clear();
 	vector<string> s;
 	queue.push_front(SmtpMessage(true));
+	this->emptyCondition.notify_one();
 }
