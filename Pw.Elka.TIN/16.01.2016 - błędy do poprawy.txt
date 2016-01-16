@@ -16,7 +16,7 @@ OK - Wojtek - Przy wyœwietlaniu klientów w adminie wyœwietlaæ informacje czy s¹ 
 Wojtek - Sprawdziæ hashowanie has³a po stronie admina - narazie wykomentowane
 OK - Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
 Asia - Przy tworzeniu i modyfikowaniu nowych rzeczy sprawdzaæ czy istniej¹ ju¿ inne z takimi samymi nazwami i wtedy b³ad. (tylko jeœli Micha³ nie znajdzie unique cnostraint)
-Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
+OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 Asia - ³apaæ b³edy receive i send
 Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatemend->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
 OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
