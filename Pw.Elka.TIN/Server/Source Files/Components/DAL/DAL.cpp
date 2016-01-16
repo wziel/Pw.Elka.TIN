@@ -305,7 +305,7 @@ bool DAL::DeleteMessage(int messageId, int clientId)
 	//cout << "temat:  " << title << endl;
 	//cout << "zawartosc: " << content << endl; 
 
-	return 0;
+	return true;
 
 	/* MOCK 
 
