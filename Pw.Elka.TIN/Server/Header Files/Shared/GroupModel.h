@@ -12,6 +12,7 @@ class GroupModel
 public:
 	GroupModel() {}
 	GroupModel(int id, string name, vector<AddressModel> addresses) : id(id), name(name), addresses(addresses) {}
+	GroupModel(int id, string name) : id(id), name(name) {}
 	~GroupModel() {}
 
 	int id;

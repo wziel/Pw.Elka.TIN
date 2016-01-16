@@ -10,6 +10,7 @@ class MessageModel
 public:
 	MessageModel() {}
 	MessageModel(int id, string title, string content) : id(id), title(title), content(content) {}
+	MessageModel(int id, string title) : id(id), title(title) {}
 	~MessageModel() {}
 
 	int id;

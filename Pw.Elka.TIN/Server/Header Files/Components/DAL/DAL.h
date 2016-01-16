@@ -10,12 +10,20 @@
 #include "../../Interfaces/IDAL.h"
 #include "../../Interfaces/IAdminDAL.h"
 #include "../../Interfaces/IClientDAL.h"
+
+using namespace odbc;
+
 class DAL :
 	public IClientDAL, public IAdminDAL
 {
+
+private:
+	Connection* connection;
+	DriverManager*	driverManager;
 public:
 	DAL();
 	~DAL();
+	Connection getConnection();
 
 	//IAdminDAL.h
     bool BlockClient(string login, bool isBlocked);
@@ -47,5 +55,8 @@ public:
 	//IDAL.h
 	bool ChangeHashOfPassword(string login, string newHashOfPassword);
 	bool BlockClient(string login);
+	
+
+
 };
 
