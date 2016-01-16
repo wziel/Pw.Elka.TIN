@@ -54,11 +54,16 @@ void AdministratorView::sessionsDisplay()
 void AdministratorView::sessionEnd(unsigned id)
 {
 	sessionsRegister.EndClientSession(id);
+	std::cout << "Successfully ended client session.\n";
 }
 
 void AdministratorView::clientsDisplay()
 {
 	std::vector<ClientModel> clients = DAL.GetAllClients();
+	if (clients.size())
+	{
+		std::cout << "There are no clients in database.\n";
+	}
 	for (unsigned i = 0; i < clients.size(); ++i)
 	{
 		std::cout << clients[i].id << " " << clients[i].login << "\n";
@@ -70,31 +75,37 @@ void AdministratorView::clientBlock(string login, bool isBlocked)
 	if (isBlocked)
 	{
 		DAL.BlockClient(login);
+		std::cout << "Successfully blocked client.\n";
 	}
 	else
 	{
 		DAL.UnblockClient(login);
+		std::cout << "Successfully unblocked client.\n";
 	}
 }
 
 void AdministratorView::clientCreate(string login, string password)
 {
 	DAL.CreateClient(login, GetHashedString(password));
+	std::cout << "Successfully created client.\n";
 }
 
 void AdministratorView::clientDelete(string login)
 {
 	DAL.DeleteClient(login);
+	std::cout << "Successfully deleted client.\n";
 }
 
 void AdministratorView::clientSetPass(string login, string password)
 {
 	DAL.ChangeHashOfPassword(login, GetHashedString(password));
+	std::cout << "Successfully changed client password.\n";
 }
 
 void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
 {
 	DAL.ChangeLogin(oldLogin, newLogin);
+	std::cout << "Successfully changed client login.\n";
 }
 
 string AdministratorView::GetHashedString(string str)
