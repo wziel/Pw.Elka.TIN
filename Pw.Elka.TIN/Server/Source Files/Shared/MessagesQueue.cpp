@@ -34,5 +34,5 @@ void MessagesQueue::End()
 	unique_lock<mutex> lock(this->queueMutex);
 	queue.clear();
 	vector<string> s;
-	queue.push_front(SmtpMessage(true, s));
+	queue.push_front(SmtpMessage(true));
 }
