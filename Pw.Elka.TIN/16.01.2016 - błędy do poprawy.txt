@@ -2,7 +2,7 @@ OK - Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
 Kamil - ma zrobiæ delete na smtpmessage po pobraniu z kolejki i zakonczeniu obslugi
 OK - Kamil - usuwanie wiadomoœci nie dzia³a
 Kamil - usuwanie grup z przypisanymi adresami nie dzia³a (bez przypisanych adresow jest OK)
-OK - Kamil - usuwanie adresów nie dzia³a
+Kamil - usuwanie adresów przypisanych do grup nie dzia³a (jesli nie sa przypisane do grup to jest OK)
 Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
 OK - Wojtek - w c# przy zaznaczeniu kontrolki zaznaczyæ wszystkie literki
 Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
