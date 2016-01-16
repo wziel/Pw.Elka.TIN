@@ -6,7 +6,7 @@ Kamil - usuwanie adresów nie dzia³a
 Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
 Wojtek - w c# przy zaznaczeniu kontrolki zaznaczyæ wszystkie literki
 Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
-Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
+Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy // OK
 Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
 Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
 Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
@@ -22,3 +22,4 @@ Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatemend->exec
 Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
 WSZYSCY - Pokomentowaæ swoje metody w .h implementacji klasy (nie w interfejsach)
 WSZYSCY - Sprawdziæ czy usuwacie dynamicznie alokowane obiekty (wszystkie nad którymi macie w³adzê)
+Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h)
