@@ -9,7 +9,6 @@ SmtpLayer::SmtpLayer(MessagesQueue* q)
 
 	this->mailError = false;
 	vector<string> vector1;
-	this->smtpMessage = new SmtpMessage(vector1); // delete  it
 }
 
 SmtpLayer::~SmtpLayer()
