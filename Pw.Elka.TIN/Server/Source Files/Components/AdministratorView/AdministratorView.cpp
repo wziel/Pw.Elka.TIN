@@ -29,7 +29,6 @@ void AdministratorView::helpDisplay()
 	std::cout << "client-unblock {login} - unblocks clients with specified login\n";
 	std::cout << "client-create {login} {password} - creates client with specified login and password\n";
 	std::cout << "client-delete {login} - delets client with specified login\n";
-	std::cout << "client-modify {old login} {login} {password} - modifies client with specified old login, by setting new login and password\n";
 	std::cout << "client-pass {login} {password} - modifies password of client with specified login\n";
 	std::cout << "client-login {old login} {login} - modifies client with specified old login, by setting new login\n";
 	std::cout << "exit - exit the programm\n";
@@ -187,6 +186,10 @@ void AdministratorView::mainLoop()
 		else if (command == "exit")
 		{
 			return;
+		}
+		else
+		{
+			std::cout << "Command unknown.\n";
 		}
 	}
 }
