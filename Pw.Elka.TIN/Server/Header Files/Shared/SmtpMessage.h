@@ -11,6 +11,7 @@ class SmtpMessage
 public:
 	SmtpMessage(string sen, string mess, string tit, vector<string> &adr, bool isQuitMessage=false) :
 		sender(sen), message(mess),  title(tit), addresses(adr), isQuitMessage(isQuitMessage) {}
+	SmtpMessage(vector<string>& add) : addresses(add) {}
 	SmtpMessage(bool isQuitMessage) :
 		isQuitMessage(isQuitMessage) {}
 	~SmtpMessage() {}
