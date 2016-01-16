@@ -186,6 +186,19 @@
     <ClInclude Include="Header Files\Interfaces\ISessionListener.h" />
     <ClInclude Include="Header Files\Interfaces\ISmtpLayer.h" />
     <ClInclude Include="Header Files\Interfaces\ITcpLayerManager.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\callablestatement.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\config-win32.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\connection.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\databasemetadata.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\drivermanager.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\errorhandler.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\preparedstatement.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\resultset.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\resultsetmetadata.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\setup.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\statement.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\threads.h" />
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\types.h" />
     <ClInclude Include="Header Files\Shared\AddressModel.h" />
     <ClInclude Include="Header Files\Shared\ClientModel.h" />
     <ClInclude Include="Header Files\Shared\GroupModel.h" />
@@ -255,6 +268,7 @@
     <None Include="Header Files\libodbc++-0.2.5\configure.ac" />
     <None Include="Header Files\libodbc++-0.2.5\COPYING" />
     <None Include="Header Files\libodbc++-0.2.5\depcomp" />
+    <None Include="Header Files\libodbc++-0.2.5\include\odbc++\config.h.in" />
     <None Include="Header Files\libodbc++-0.2.5\INSTALL" />
     <None Include="Header Files\libodbc++-0.2.5\install-sh" />
     <None Include="Header Files\libodbc++-0.2.5\libodbc++.pc.in" />

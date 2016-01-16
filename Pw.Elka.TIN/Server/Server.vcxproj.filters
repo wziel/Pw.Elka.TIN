@@ -85,6 +85,9 @@
     <Filter Include="Header Files\libodbc++-0.2.5">
       <UniqueIdentifier>{b050ec3c-b685-4603-b5fa-b4d6cc8b46f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\libodbc++-0.2.5\headers">
+      <UniqueIdentifier>{41c5e974-2a9c-407b-a6c2-d1c3be1d6f04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
@@ -278,6 +281,45 @@
     </ClInclude>
     <ClInclude Include="Header Files\Components\SmtpLayer\CSmtp.h">
       <Filter>Header Files\Components\SmtpLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\callablestatement.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\config-win32.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\connection.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\databasemetadata.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\drivermanager.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\errorhandler.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\preparedstatement.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\resultset.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\resultsetmetadata.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\setup.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\statement.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\threads.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\types.h">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -498,6 +540,9 @@
     </None>
     <None Include="Header Files\libodbc++-0.2.5\TODO">
       <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\include\odbc++\config.h.in">
+      <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
     </None>
   </ItemGroup>
 </Project>
