@@ -378,7 +378,7 @@ vector<GroupModel> DAL::GetAllGroupsWithoutAdresses(int clientId)
 	konwersja.clear();
 
 	// SELECT * FROM LokalnaBazaDanychTIN.dbo.Group WHERE LokalnaBazaDanychTIN.dbo.Group.id_client = 
-	string part1 = " SELECT * FROM LokalnaBazaDanychTIN.dbo.Group WHERE LokalnaBazaDanychTIN.dbo.Group.id_client = ";
+	string part1 = " SELECT * FROM LokalnaBazaDanychTIN.dbo.[Group] WHERE LokalnaBazaDanychTIN.dbo.[Group].id_client = ";
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sClientId));
 	preparedStatement->execute();
 	resultSet = preparedStatement->getResultSet();
