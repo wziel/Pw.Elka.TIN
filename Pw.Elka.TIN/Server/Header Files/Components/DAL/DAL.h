@@ -1,10 +1,11 @@
 #pragma once
-//#include <odbc++\drivermanager.h>
-//#include <odbc++\connection.h>
-//#include <odbc++\resultset.h>
-//#include <odbc++\resultsetmetadata.h>
-//#include <odbc++\callablestatement.h>
-//#include <odbc++\databasemetadata.h>
+
+#include <odbc++\drivermanager.h>
+#include <odbc++\connection.h>
+#include <odbc++\resultset.h>
+#include <odbc++\resultsetmetadata.h>
+#include <odbc++\callablestatement.h>
+#include <odbc++\databasemetadata.h>
 
 #include "../../Interfaces/IDAL.h"
 #include "../../Interfaces/IAdminDAL.h"

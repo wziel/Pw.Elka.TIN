@@ -68,7 +68,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)Header Files\libodbc++-0.2.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Header Files\libodbc++-0.2.5\win32\debug-dll;$(LibraryPath)</LibraryPath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -98,12 +102,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(ProjectDir)Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -233,6 +241,34 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Header Files\libodbc++-0.2.5\acinclude.m4" />
+    <None Include="Header Files\libodbc++-0.2.5\aclocal.m4" />
+    <None Include="Header Files\libodbc++-0.2.5\AUTHORS" />
+    <None Include="Header Files\libodbc++-0.2.5\BUGS" />
+    <None Include="Header Files\libodbc++-0.2.5\ChangeLog" />
+    <None Include="Header Files\libodbc++-0.2.5\config.guess" />
+    <None Include="Header Files\libodbc++-0.2.5\config.h.in" />
+    <None Include="Header Files\libodbc++-0.2.5\config.sub" />
+    <None Include="Header Files\libodbc++-0.2.5\configure" />
+    <None Include="Header Files\libodbc++-0.2.5\configure.ac" />
+    <None Include="Header Files\libodbc++-0.2.5\COPYING" />
+    <None Include="Header Files\libodbc++-0.2.5\depcomp" />
+    <None Include="Header Files\libodbc++-0.2.5\INSTALL" />
+    <None Include="Header Files\libodbc++-0.2.5\install-sh" />
+    <None Include="Header Files\libodbc++-0.2.5\libodbc++.pc.in" />
+    <None Include="Header Files\libodbc++-0.2.5\libodbc++.spec.in" />
+    <None Include="Header Files\libodbc++-0.2.5\ltmain.sh" />
+    <None Include="Header Files\libodbc++-0.2.5\Makefile.am" />
+    <None Include="Header Files\libodbc++-0.2.5\Makefile.in" />
+    <None Include="Header Files\libodbc++-0.2.5\missing" />
+    <None Include="Header Files\libodbc++-0.2.5\NEWS" />
+    <None Include="Header Files\libodbc++-0.2.5\README" />
+    <None Include="Header Files\libodbc++-0.2.5\README.jdbc" />
+    <None Include="Header Files\libodbc++-0.2.5\README.threads" />
+    <None Include="Header Files\libodbc++-0.2.5\THANKS" />
+    <None Include="Header Files\libodbc++-0.2.5\TODO" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

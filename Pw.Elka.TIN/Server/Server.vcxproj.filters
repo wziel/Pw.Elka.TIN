@@ -82,6 +82,9 @@
     <Filter Include="Header Files\Components\ClientSession\Communicates">
       <UniqueIdentifier>{f8193dc7-9700-4971-81d7-8745b0f6d468}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\libodbc++-0.2.5">
+      <UniqueIdentifier>{b050ec3c-b685-4603-b5fa-b4d6cc8b46f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Interfaces\IAdminDAL.h">
@@ -416,5 +419,85 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp">
       <Filter>Source Files\Components\SmtpLayer</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Header Files\libodbc++-0.2.5\acinclude.m4">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\aclocal.m4">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\AUTHORS">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\BUGS">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\ChangeLog">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\config.guess">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\config.h.in">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\config.sub">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\configure">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\configure.ac">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\COPYING">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\depcomp">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\INSTALL">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\install-sh">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\libodbc++.pc.in">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\libodbc++.spec.in">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\ltmain.sh">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\Makefile.am">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\Makefile.in">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\missing">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\NEWS">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\README">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\README.jdbc">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\README.threads">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\THANKS">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
+    <None Include="Header Files\libodbc++-0.2.5\TODO">
+      <Filter>Header Files\libodbc++-0.2.5</Filter>
+    </None>
   </ItemGroup>
 </Project>

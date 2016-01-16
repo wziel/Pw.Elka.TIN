@@ -563,8 +563,9 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 	//if ((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
 	sockAddr.sin_family = AF_INET;
 	sockAddr.sin_port = nPort;
-	inet_pton(AF_INET, szServer , &sockAddr.sin_addr.s_addr);
-	if(( sockAddr.sin_addr.s_addr ) == INADDR_NONE)
+	//inet_pton(AF_INET, szServer , &sockAddr.sin_addr.s_addr);
+	//if(( sockAddr.sin_addr.s_addr ) == INADDR_NONE)
+		if ((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
 	{
 		LPHOSTENT host;
 		//GetAddrInfoW(szServer, nPort_, NULL, &host);
