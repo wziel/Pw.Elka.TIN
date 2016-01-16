@@ -39,11 +39,11 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
                 Helpers.DisplayError("Nazwa adresata nie może być pusta.");
                 return;
             }
-            if (!Regex.IsMatch(txtNewValue.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
-            {
-                Helpers.DisplayError("Adres email nie jest poprawny.");
-                return;
-            }
+            //if (!Regex.IsMatch(txtNewValue.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+            //{
+            //    Helpers.DisplayError("Adres email nie jest poprawny.");
+            //    return;
+            //}
 
             if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
             {

@@ -490,7 +490,7 @@ Here should be combining a message template with the fields
 
 */
 
-	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, readyAddressList);
+	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, messageDB.title ,readyAddressList);
 	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 	}

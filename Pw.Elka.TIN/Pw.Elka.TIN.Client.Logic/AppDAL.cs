@@ -119,7 +119,7 @@ namespace Pw.Elka.TIN.Client.Logic
                 var communicate = serverCommunicate as ServerGroupGetOneCommunicate;
                 if (communicate == null)
                 {
-                    if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                    if (serverCommunicate is ServerErrorBadGroupCommunicate)
                     {
                         throw new BadGroup();
                     }
@@ -128,11 +128,13 @@ namespace Pw.Elka.TIN.Client.Logic
                 groupModel.Addresses = new List<AddressModel>();
                 for (int i = 0; i < communicate.AddressIDs.Count; ++i)
                 {
-                    groupModel.Addresses.Add(new AddressModel()
-                    {
-                        Id = communicate.AddressIDs[i],
-                        Value = communicate.AddressValues[i]
-                    });
+                    var addrModel = AddressModels.FirstOrDefault(a => a.Id == communicate.AddressIDs[i]) ??
+                        new AddressModel()
+                        {
+                            Id = communicate.AddressIDs[i],
+                            Value = communicate.AddressValues[i]
+                        };
+                    groupModel.Addresses.Add(addrModel);
                 }
             }
             return groupModel;
@@ -161,11 +163,11 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
                     throw new BadGroup();
                 }
-                if(serverCommunicate is ServerErrorBadAddressCommunicate)
+                if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
                     throw new BadAddress();
                 }
@@ -247,7 +249,7 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerMessageGetOneCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorBadMessageCommunicate)
+                if (serverCommunicate is ServerErrorBadMessageCommunicate)
                 {
                     throw new BadMessage();
                 }
@@ -305,7 +307,7 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorBadLoginCommunicate)
+                if (serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
                     throw new NotAuthorizedException();
                 }
@@ -319,7 +321,7 @@ namespace Pw.Elka.TIN.Client.Logic
             var communicate = serverCommunicate as ServerAckCommunicate;
             if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorBadLoginCommunicate)
+                if (serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
                     throw new NotAuthorizedException();
                 }
@@ -337,7 +339,7 @@ namespace Pw.Elka.TIN.Client.Logic
                 {
                     throw new BadMessage();
                 }
-                if(serverCommunicate is ServerErrorBadGroupCommunicate)
+                if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
                     throw new BadGroup();
                 }
@@ -349,9 +351,9 @@ namespace Pw.Elka.TIN.Client.Logic
         {
             var serverCommunicate = _appLogic.AddressAdd(addresValue, addresseeName);
             var communicate = serverCommunicate as ServerAddressGetOneCommunicate;
-            if(communicate == null)
+            if (communicate == null)
             {
-                if(serverCommunicate is ServerErrorBadAddressCommunicate)
+                if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
                     throw new BadAddress();
                 }
@@ -372,7 +374,7 @@ namespace Pw.Elka.TIN.Client.Logic
         {
             var serverCommunicate = _appLogic.AddressRemove(addressId);
             var communicate = serverCommunicate as ServerAckCommunicate;
-            if(communicate == null)
+            if (communicate == null)
             {
                 if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
@@ -380,9 +382,9 @@ namespace Pw.Elka.TIN.Client.Logic
                 }
                 throw new NotImplementedException();
             }
-            foreach(var group in GroupModels)
+            foreach (var group in GroupModels)
             {
-                if(group.Addresses != null)
+                if (group.Addresses != null)
                 {
                     group.Addresses.RemoveAll(a => a.Id == addressId);
                 }

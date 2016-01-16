@@ -176,7 +176,7 @@ MessageModel DAL::GetMessageById(int mssageId, int clientId)
 	//cout << "Column (_message): " << r->getString("title") << endl;
 	//cout << "Column (_message): " << r->getString("content") << endl;
 	title = resultSet->getString("title");
-	content = resultSet->getString("costent");
+	content = resultSet->getString("content");
 
 	//cout << "message id;  " << mssageId << endl;
 	//cout << "temat:  " << title << endl;
@@ -377,7 +377,7 @@ vector<GroupModel> DAL::GetAllGroupsWithoutAdresses(int clientId)
 	konwersja.str("");
 	konwersja.clear();
 
-	// SELECT * FROM LokalnaBazaDanychTIN.dbo.Group WHERE LokalnaBazaDanychTIN.dbo.Group.id_client = 
+	// SELECT * FROM LokalnaBazaDanychTIN.dbo.[Group] WHERE LokalnaBazaDanychTIN.dbo.[Group].id_client = 
 	string part1 = " SELECT * FROM LokalnaBazaDanychTIN.dbo.[Group] WHERE LokalnaBazaDanychTIN.dbo.[Group].id_client = ";
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sClientId));
 	preparedStatement->execute();
@@ -446,13 +446,12 @@ GroupModel DAL::GetGroupById(int groupId, int clientId)
 		addresses.push_back(AddressModel(addressId, value, addresseeName));
 	}
 	//--------------NIEPRZETESTOWANE-------------------------------------------
-	string part2 = " SELECT LokalnaBazaDanychTIN.dbo.Group.name FROM LokalnaBazaDanychTIN.dbo.Group WHERE LokalnaBazaDanychTIN.dbo.Group.id_group = ";
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sGroupId));
+	string part2 = " SELECT LokalnaBazaDanychTIN.dbo.[Group].name FROM LokalnaBazaDanychTIN.dbo.[Group] WHERE LokalnaBazaDanychTIN.dbo.[Group].id_group = ";
+	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part2 + sGroupId));
 	preparedStatement->execute();
 	resultSet = preparedStatement->getResultSet();
 	resultSet->next();
 	nameOfGroup = resultSet->getString("name");
-	nameOfGroup = "test";
 
 	return  GroupModel(groupId, nameOfGroup, addresses);
 
@@ -485,10 +484,10 @@ bool DAL::DeleteGroupById(int groupId, int clientId)
 	konwersja.clear();
 
 
-	//DELETE FROM LokalnaBazaDanychTIN.dbo.Group
-	//WHERE LokalnaBazaDanychTIN.dbo.Group.id_group = 12
+	//DELETE FROM LokalnaBazaDanychTIN.dbo.[Group]
+	//WHERE LokalnaBazaDanychTIN.dbo.[Group].id_group = 12
 
-	string part1 = "DELETE FROM LokalnaBazaDanychTIN.dbo.Group WHERE LokalnaBazaDanychTIN.dbo.Group.id_group = ";
+	string part1 = "DELETE FROM LokalnaBazaDanychTIN.dbo.[Group] WHERE LokalnaBazaDanychTIN.dbo.[Group].id_group = ";
 
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sGroupId));
 	preparedStatement->execute();
@@ -510,13 +509,13 @@ GroupModel DAL::CreateGroup(string name, int clientId)
 	konwersja.clear();
 
 
-	//	INSERT INTO LokalnaBazaDanychTIN.dbo.Group( id_client , name ) VALUES('6', 'Grupa dbra')
+	//	INSERT INTO LokalnaBazaDanychTIN.dbo.[Group]( id_client , name ) VALUES('6', 'Grupa dbra')
 
-	//	Select IDENT_CURRENT('LokalnaBazaDanychTIN.dbo.Group') AS last_inserted_row
+	//	Select IDENT_CURRENT('LokalnaBazaDanychTIN.dbo.[Group]') AS last_inserted_row
 
 
-	string part1 = " INSERT INTO LokalnaBazaDanychTIN.dbo.Group( id_client , name ) VALUES( ";
-	string part2 = "Select IDENT_CURRENT('LokalnaBazaDanychTIN.dbo.Group') AS last_inserted_row";
+	string part1 = " INSERT INTO LokalnaBazaDanychTIN.dbo.[Group]( id_client , name ) VALUES( ";
+	string part2 = "Select IDENT_CURRENT('LokalnaBazaDanychTIN.dbo.[Group]') AS last_inserted_row";
 
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sClientId + " , '" + name + "' )"));
 	preparedStatement->execute();
