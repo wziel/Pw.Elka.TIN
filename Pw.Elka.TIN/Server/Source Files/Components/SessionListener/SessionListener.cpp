@@ -64,7 +64,7 @@ void SessionListener::Start()
 		if (closesocket(socketDescriptor) != 0)
 		{
 			int error = WSAGetLastError();
-			throw "Error while closesocket()"
+			throw "Error while closesocket()";
 		}
 	}
 	catch (char const* tekst)
