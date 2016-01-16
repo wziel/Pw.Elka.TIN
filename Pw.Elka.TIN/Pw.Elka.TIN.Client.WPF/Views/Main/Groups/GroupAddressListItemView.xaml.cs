@@ -76,7 +76,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             btnRemove.Visibility = Visibility.Hidden;
 
             var app = (App)Application.Current;
-            app.AppDAL.GroupModelAddressRemove(_groupModel.Id, _addressModel.Id);
+            app.AppDAL.GroupModelAddressRemove(_addressModel.Id, _groupModel.Id);
 
             IsAdded = false;
         }
