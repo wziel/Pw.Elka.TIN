@@ -15,7 +15,7 @@ public:
 	/// id - id klienta
 	/// login - login klienta
 	/// hashOfPassword - hash has³a klienta
-	ClientModel(int id, string login, string hashOfPassword) : id(id), login(login), hashOfPassword(hashOfPassword) {}
+	ClientModel(int id, string login, string hashOfPassword, bool blocked) : id(id), login(login), hashOfPassword(hashOfPassword), blocked(blocked) {}
 	/// Destruktor
 	~ClientModel() {}
 
