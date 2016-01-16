@@ -25,6 +25,10 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         public AccountView()
         {
             InitializeComponent();
+
+            txtNewPass.PrepareApplicationControl();
+            txtNewPassConfirm.PrepareApplicationControl();
+            txtOldPass.PrepareApplicationControl();
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)

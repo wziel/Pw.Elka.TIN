@@ -9,12 +9,13 @@ class ClientModel
 {
 public:
 	ClientModel() {}
-	ClientModel(int id, string login, string hashOfPassword) : id(id), login(login), hashOfPassword(hashOfPassword) {}
+	ClientModel(int id, string login, string hashOfPassword, bool blocked) : id(id), login(login), hashOfPassword(hashOfPassword), blocked(blocked) {}
 	~ClientModel() {}
 
 	int id;
 	string login;
 	string hashOfPassword;
+	bool blocked;
 };
 
 #endif

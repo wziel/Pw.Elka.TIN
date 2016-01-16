@@ -24,6 +24,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views
         public LoginView()
         {
             InitializeComponent();
+            txtPassword.PrepareApplicationControl();
+            txtUsername.PrepareApplicationControl();
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)

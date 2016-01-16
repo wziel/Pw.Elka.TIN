@@ -59,13 +59,16 @@ void AdministratorView::sessionEnd(unsigned id)
 void AdministratorView::clientsDisplay()
 {
 	std::vector<ClientModel> clients = DAL.GetAllClients();
-	if (clients.size())
+	if (clients.size() == 0)
 	{
 		std::cout << "There are no clients in database.\n";
+		return;
 	}
+	std::cout << setw(20) << "Client ID" << setw(20) << "Client login" << setw(20) << "Is client blocked\n";
 	for (unsigned i = 0; i < clients.size(); ++i)
 	{
-		std::cout << clients[i].id << " " << clients[i].login << "\n";
+		std::cout << setw(20) << clients[i].id << setw(20) << clients[i].login << setw(20) << (clients[i].blocked ? "Blocked" : "Not blocked");
+		std::cout << "\n";
 	}
 }
 

@@ -38,6 +38,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
                 var groupAddrView = new GroupAddressListItemView(_model, addressModel, _model.Addresses.Contains(addressModel));
                 stkAddressesList.Children.Add(groupAddrView);
             }
+            
         }
 
         private void btnDetailsCollapse_Click(object sender, RoutedEventArgs e)

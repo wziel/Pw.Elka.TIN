@@ -10,7 +10,7 @@
         <StackPanel Margin="100,50,100,0">
             <Label Content="Połącz się z serwerem" FontSize="21.333"></Label>
             <Label Content="Adres serwera" />
-            <TextBox Name="txtAddress" Text="localhost" />
+            <TextBox Name="txtAddress" Text="localhost"/>
             <Label Content="Port serwera" />
             <TextBox Name="txtPort" Text="7777" />
             <Button Name="btnConnect" Click="btnConnect_Click" Content="Połącz" Margin="0,10,0,0" />

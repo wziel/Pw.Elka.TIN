@@ -35,6 +35,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 
             txtMessageContent.Text = model.Content;
             txtMessageName.Text = model.Name;
+
+            txtMessageContent.PrepareApplicationControl();
+            txtMessageName.PrepareApplicationControl();
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)

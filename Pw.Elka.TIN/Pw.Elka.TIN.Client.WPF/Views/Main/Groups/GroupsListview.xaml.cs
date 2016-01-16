@@ -31,6 +31,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             _masterView = masterView;
             var app = (App)Application.Current;
             app.AppDAL.GroupModels.ForEach(g => stkGroups.Children.Add(new GroupsListItemView(g, this)));
+
+            txtNewGroupName.PrepareApplicationControl();
         }
 
         public void RemoveGroupListItem(GroupsListItemView groupListItem)

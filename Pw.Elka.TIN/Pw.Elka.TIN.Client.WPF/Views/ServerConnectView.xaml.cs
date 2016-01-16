@@ -24,6 +24,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views
         public ServerConnectView()
         {
             InitializeComponent();
+            txtAddress.PrepareApplicationControl();
+            txtPort.PrepareApplicationControl();
         }
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)

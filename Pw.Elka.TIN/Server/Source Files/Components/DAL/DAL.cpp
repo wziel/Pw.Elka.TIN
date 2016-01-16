@@ -91,6 +91,7 @@ vector<ClientModel> DAL::GetAllClients()
 {
 	int clientId;
 	string login, hash;
+	bool blocked;
 	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	vector<ClientModel>  vector;
@@ -109,7 +110,8 @@ vector<ClientModel> DAL::GetAllClients()
 		clientId = resultSet->getInt("id_client");
 		login = resultSet->getString("login");
 		hash = resultSet->getString("password_hash");
-		vector.push_back(ClientModel(clientId, login, hash));
+		blocked = resultSet->getBoolean("blocked");
+		vector.push_back(ClientModel(clientId, login, hash, blocked));
 
 	}
 
@@ -789,6 +791,7 @@ ClientModel DAL::getClient(string login)
 	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string hash;
+	bool blocked;
 
 	string part1 = "SELECT *  FROM  LokalnaBazaDanychTIN.dbo.Client WHERE login = '";
 	string part2 = "' ";
@@ -799,8 +802,9 @@ ClientModel DAL::getClient(string login)
 	resultSet->next();
 	clientId = resultSet->getInt("id_client");
 	hash = resultSet->getString("password_hash");
+	blocked = resultSet->getBoolean("blocked");
 
-	return  ClientModel(clientId, login, hash);
+	return  ClientModel(clientId, login, hash, blocked);
 	/* MOCK 
 	//hashOfPassword is a hash used in application when inserted password 'test' 
 

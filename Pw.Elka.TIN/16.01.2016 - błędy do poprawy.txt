@@ -4,7 +4,7 @@ Kamil - usuwanie wiadomoœci nie dzia³a
 Kamil - usuwanie grup nie dzia³a
 Kamil - usuwanie adresów nie dzia³a
 Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
-Wojtek - w c# przy zaznaczeniu kontrolki zaznaczyæ wszystkie literki
+OK - Wojtek - w c# przy zaznaczeniu kontrolki zaznaczyæ wszystkie literki
 Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
 Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
 Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
@@ -12,9 +12,9 @@ Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
 Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
 Asia - jak przy tworzeniu sesji jest utworzona w stanie Busy to powinno byæ wys³anie klientowi wiadomoœci i roz³¹czenie z klientem
 Kamil - W smtp sprawdzaæ czy uda³o siê wys³aæ, a jesli nie to wyœwietliæ error na konsoli (ale nie ma du¿ej presji na to)
-Wojtek - Przy wyœwietlaniu klientów w adminie wyœwietlaæ informacje czy s¹ zablokowani
+OK - Wojtek - Przy wyœwietlaniu klientów w adminie wyœwietlaæ informacje czy s¹ zablokowani
 Wojtek - Sprawdziæ hashowanie has³a po stronie admina - narazie wykomentowane
-Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
+OK - Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
 Asia - Przy tworzeniu i modyfikowaniu nowych rzeczy sprawdzaæ czy istniej¹ ju¿ inne z takimi samymi nazwami i wtedy b³ad. (tylko jeœli Micha³ nie znajdzie unique cnostraint)
 Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 Asia - ³apaæ b³edy receive i send

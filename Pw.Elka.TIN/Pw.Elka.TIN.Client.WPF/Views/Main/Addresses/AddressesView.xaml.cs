@@ -28,6 +28,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
             var app = (App)Application.Current;
             InitializeComponent();
             app.AppDAL.AddressModels.ToList().ForEach(a => stkAddress.Children.Add(new AddressListItemView(a, this)));
+
+            txtNewName.PrepareApplicationControl();
+            txtNewValue.PrepareApplicationControl();
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)

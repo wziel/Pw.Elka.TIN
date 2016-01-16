@@ -30,6 +30,9 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
 
             var app = (App)Application.Current;
             app.AppDAL.MessageModels.ForEach(m => stkMsgs.Children.Add(new MessagesListItemView(m, this)));
+
+            txtNewMsgContent.PrepareApplicationControl();
+            txtNewMsgName.PrepareApplicationControl();
         }
 
         private void btnSubmitNewMsg_Click(object sender, RoutedEventArgs e)
