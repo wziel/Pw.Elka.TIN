@@ -37,5 +37,5 @@ void Cipher::Receive(unsigned char* &buffer, int &size)
 		delete myBuffer;
 	}
 	else
-		throw "Not implemented";
+		throw "Selected encryption method is not supported";
 }

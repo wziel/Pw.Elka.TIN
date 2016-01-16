@@ -16,7 +16,6 @@ SessionListener::~SessionListener()
 
 void SessionListener::Start()
 {
-	/*WSAStartup part*/
 	WORD wVersionRequested;
 	WSADATA wsaData;
 	int err;
@@ -25,7 +24,6 @@ void SessionListener::Start()
 
 	if(err = WSAStartup(wVersionRequested, &wsaData) != 0)
 		throw "WSAStartup error";
-	/*WSAStartup part - end*/
 
 	if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		throw "Error while creating socket";
