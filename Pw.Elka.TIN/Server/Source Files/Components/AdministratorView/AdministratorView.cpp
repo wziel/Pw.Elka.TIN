@@ -3,7 +3,7 @@
 #include <algorithm>
 #include<iomanip>
 
-AdministratorView::AdministratorView(IClientSessionsRegister& sessionsRegister, IAdminDAL& DALarg) : DAL(DAL), sessionsRegister(sessionsRegister)
+AdministratorView::AdministratorView(IClientSessionsRegister& sessionsRegister, IAdminDAL& DALarg) : DAL(DALarg), sessionsRegister(sessionsRegister)
 {
 }
 
@@ -98,23 +98,22 @@ void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
 }
 
 string AdministratorView::GetHashedString(string str)
-{
-	return str;
-
-	char key [7] = { 143, 87, 133, 84, 123, 101, 68 };
+{/*
+	unsigned char key[7] = { 143, 87, 133, 84, 123, 101, 68 };
 	std::size_t minimumStringLength = 16;
 	std::size_t characterLength = max(str.length(), minimumStringLength);
-	char* characters = new char[characterLength];
+	unsigned char* characters = new unsigned char[characterLength];
 
 	for (unsigned int i = 0; i < characterLength; ++i)
 	{
-		//TODO fix this
-		//characters[i] = ((key[i % 7]) ^ (str[i % str.length]));
+		characters[i] = ((key[i % 7]) ^ (str[i % str.length()]));
 	}
 
-	string returnStr(characters);
+	string returnStr;
+	returnStr.assign((char*)characters, characterLength);
 	delete characters;
-	return returnStr;
+	return returnStr;*/
+	return str;
 }
 
 void AdministratorView::mainLoop()

@@ -810,7 +810,7 @@ ClientModel DAL::getClient(string login)
 
 	return *(new ClientModel(1, login, str));*/
 }
-
+//
 //
 //DAL::DAL()
 //{

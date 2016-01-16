@@ -286,22 +286,6 @@
     <None Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\callablestatement.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\connection.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\databasemetadata.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datahandler.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datastream.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\datetime.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\driverinfo.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\drivermanager.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\errorhandler.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\preparedstatement.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\resultset.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\resultsetmetadata.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\statement.obj" />
-    <Object Include="Header Files\libodbc++-0.2.5\win32\debug-lib\threads.obj" />
-  </ItemGroup>
-  <ItemGroup>
     <Library Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
