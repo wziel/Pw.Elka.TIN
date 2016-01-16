@@ -1,4 +1,4 @@
-Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
+OK - Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
 Kamil - ma zrobiæ delete na smtpmessage po pobraniu z kolejki i zakonczeniu obslugi
 Kamil - usuwanie wiadomoœci nie dzia³a
 Kamil - usuwanie grup nie dzia³a
