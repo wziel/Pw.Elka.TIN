@@ -188,5 +188,9 @@ void AdministratorView::mainLoop()
 		{
 			return;
 		}
+		else
+		{
+			std::cout << "Command unknown.\n";
+		}
 	}
 }
