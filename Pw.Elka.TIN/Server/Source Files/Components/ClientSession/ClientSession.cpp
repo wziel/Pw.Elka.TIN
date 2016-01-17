@@ -188,6 +188,10 @@ bool ClientSession::Start()
 			if (e == "Server busy")
 			{
 				cerr << e ;
+				ServComERRBUSY* busy = new ServComERRBUSY();
+				bottomLayer->Send(busy->getCommunicate(), busy->getSize());
+				delete busy;
+				
 				clientManager->RegisterClientEnded(*this);
 				return false;
 			}
