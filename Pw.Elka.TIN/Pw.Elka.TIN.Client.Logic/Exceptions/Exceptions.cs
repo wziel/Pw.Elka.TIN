@@ -18,6 +18,9 @@ namespace Pw.Elka.TIN.Client.Logic.Exceptions
     public class BadAddressException : Exception
     { }
 
+    public class ServerBusyException : Exception
+    { }
+
     public class TimeoutException : Exception
     { }
 }
