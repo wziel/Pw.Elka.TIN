@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500">
+        Title="Rozgłaszacz Pocztowy" Height="600" Width="500">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Views:RootContainerView x:Name="rootContainer" />
     </ScrollViewer>

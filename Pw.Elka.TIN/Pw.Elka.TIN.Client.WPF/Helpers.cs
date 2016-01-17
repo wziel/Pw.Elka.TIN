@@ -14,7 +14,7 @@ namespace Pw.Elka.TIN.Client.WPF
     {
         public static void DisplayError(string errorMessage)
         {
-            MessageBox.Show(errorMessage, "Błąd w aplikacji", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(errorMessage, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         public static void DisplaySuccess(string successMessage)
