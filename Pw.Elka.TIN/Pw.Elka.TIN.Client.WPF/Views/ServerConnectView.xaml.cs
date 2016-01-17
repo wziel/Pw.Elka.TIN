@@ -55,6 +55,12 @@ namespace Pw.Elka.TIN.Client.WPF.Views
                 Helpers.DisplayError("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
                 return;
             }
+            catch(ServerBusyException)
+            {
+                app.AppLogic.Disconnect();
+                Helpers.DisplayError("Serwer aplikacji jest przeciążony. Spróbuj jeszcze raz później.");
+                return;
+            }
 
             mainWindow.rootContainer.NavigateToMainView();
         }

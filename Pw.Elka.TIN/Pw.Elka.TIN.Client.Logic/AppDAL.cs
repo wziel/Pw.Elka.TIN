@@ -311,6 +311,10 @@ namespace Pw.Elka.TIN.Client.Logic
                 {
                     throw new NotAuthorizedException();
                 }
+                if(serverCommunicate is ServerErrorBusyCommunicate)
+                {
+                    throw new ServerBusyException();
+                }
                 throw new NotImplementedException();
             }
         }
