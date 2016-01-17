@@ -21,28 +21,23 @@ TcpLayer::TcpLayer(int socketfd)
 	{
 		throw "WSA error";
 	}
-
-
 }
 
 int TcpLayer::End()
 {
 	if (WSASetEvent(WSAEventArray[0]) == TRUE)	//successfully signal an ending event
-	{
 		return 0;
-	}
-
+	
 	else
-	{
 		throw "WSA error";
-		return -1;
-	}
 }
 
 int TcpLayer::CloseSocket()
 {
-	closesocket(socketFD);
-	return 0;
+	if (closesocket(socketFD) == 0)
+		return 0;
+	else
+		throw "WSA error";
 }
 
 void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
@@ -104,9 +99,8 @@ void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from cl
 			}
 		}
 		else if (NetworkEvents.lNetworkEvents & FD_CLOSE)
-		{
 			throw "Client ended externally";
-		}
+		
 
 		WSAResetEvent(WSAEventArray[1]);
 	}

@@ -253,7 +253,6 @@ void ClientSession::communicateService(CliComAUTH clientCommunicate)
 		ServComACK* ack = new ServComACK();
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		sessionState = Authorized;
-		//sessionState = Busy;
 		delete ack;
 	}
 	else
