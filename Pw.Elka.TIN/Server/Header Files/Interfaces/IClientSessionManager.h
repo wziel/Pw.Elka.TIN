@@ -3,11 +3,11 @@
 
 #include <string>
 
-class ILayer;
-class MessagesQueue;
-enum SessionState;
-class IClientDAL;
-class IClientManager;
+//class ILayer;
+//class MessagesQueue;
+//enum SessionState;
+//class IClientDAL;
+//class IClientManager;
 
 using namespace std;
 

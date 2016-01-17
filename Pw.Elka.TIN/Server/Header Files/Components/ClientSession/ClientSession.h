@@ -9,6 +9,7 @@
 #include "../../Shared/MessagesQueue.h"
 #include "../../Interfaces/ILayer.h"
 #include "../../Interfaces/IClientDAL.h"
+#include "../../Interfaces/IClientManager.h"
 
 #include <string>
 

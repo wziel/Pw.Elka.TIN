@@ -25,7 +25,7 @@ TcpLayer::TcpLayer(int socketfd)
 
 int TcpLayer :: End()
 {
-	if(WSASetEvent(WSAEventArray[1]) == TRUE)	//successfully signal an ending event
+	if(WSASetEvent(WSAEventArray[0]) == TRUE)	//successfully signal an ending event
 	{
 		return 0;
 	}
@@ -68,13 +68,14 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 		throw "WSAWaitForMultipleEvents() error";
 	}
 
-	if ((signalledEvent - WSA_WAIT_EVENT_0 ) == 0) // end of TcpLayer
+	if ((signalledEvent - WSA_WAIT_EVENT_0) == 0) // end of TcpLayer
 	{
-		throw "End of TcpLayer";
+		closesocket(socketFD);
+		throw "Client ended";
 		return;
 	}
 	
-	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //receive a message
+	else if ((signalledEvent- WSA_WAIT_EVENT_0) == 1) //receive a message
 	{	
 		iResult = recv(socketFD, (char*)mySizeBuffer, 2, NULL); //reading header (contains data size)
 		if (iResult == SOCKET_ERROR)

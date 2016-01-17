@@ -6,155 +6,166 @@ bool ClientSession::Start()
 {
 	while (true)
 	{
-		switch (sessionState)
-		{
-		case Unauthorized:
-		{
-			//sending an authorization communicate
-			ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
-			salt = authorizationCommunicate->getSalt();
-			bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
+		try{
+			switch (sessionState)
+			{
+			case Unauthorized:
+			{
+				//sending an authorization communicate
+				ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
+				salt = authorizationCommunicate->getSalt();
+				bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
 
-			bottomLayer->Receive(cliCom, comSize);
-			if (cliCom[0]!= _CLICOMAUTH)
-			{	//client sent anything else than CliComAuth 
-				ServComERRUNAUTH* servUnauth = new ServComERRUNAUTH();		//tell client he is not authorized
-				bottomLayer->Send(servUnauth->getCommunicate(), servUnauth->getSize());
-				delete servUnauth;
+				bottomLayer->Receive(cliCom, comSize);
+				if (cliCom[0] != _CLICOMAUTH)
+				{	//client sent anything else than CliComAuth 
+					ServComERRUNAUTH* servUnauth = new ServComERRUNAUTH();		//tell client he is not authorized
+					bottomLayer->Send(servUnauth->getCommunicate(), servUnauth->getSize());
+					delete servUnauth;
+				}
+				else
+				{
+					CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
+					communicateService(*cliComAuth);
+				}
+				break;
 			}
-			else
-			{
-				CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
-				communicateService(*cliComAuth);
-			}
-			break;
-		}
 
-		case Authorized:
-		{
-			bottomLayer->Receive(cliCom, comSize); //get communicate from client
-			communicateCode = cliCom[0];
-			switch (communicateCode)
+			case Authorized:
 			{
-			case _CLICOMADDRADD :
-			{
-				CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
-				communicateService(*cliComAddradd);
+				bottomLayer->Receive(cliCom, comSize); //get communicate from client
+				communicateCode = cliCom[0];
+				switch (communicateCode)
+				{
+				case _CLICOMADDRADD:
+				{
+					CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
+					communicateService(*cliComAddradd);
+					break;
+				}
+				case _CLICOMADDRGETALL:
+				{
+					CliComADDRGETALL* cliComAddrgetall = new CliComADDRGETALL(cliCom);
+					communicateService(*cliComAddrgetall);
+					break;
+				}
+				case _CLICOMGRPGETALL:
+				{
+					CliComGRPGETALL* cliComGrprgetall = new CliComGRPGETALL(cliCom);
+					communicateService(*cliComGrprgetall);
+					break;
+				}
+				case _CLICOMMSGGETALL:
+				{
+					CliComMSGGETALL* cliComMsggetall = new CliComMSGGETALL(cliCom);
+					communicateService(*cliComMsggetall);
+					break;
+				}
+				case _CLICOMGRPGETONE:
+				{
+					CliComGRPGETONE* cliComGrpgetone = new CliComGRPGETONE(cliCom);
+					communicateService(*cliComGrpgetone);
+					break;
+				}
+				case _CLICOMMSGGETONE:
+				{
+					CliComMSGGETONE* cliComMsggetone = new CliComMSGGETONE(cliCom);
+					communicateService(*cliComMsggetone);
+					break;
+				}
+				case _CLICOMGRPCREATE:
+				{
+					CliComGRPCREATE* cliComGrpcreate = new CliComGRPCREATE(cliCom);
+					communicateService(*cliComGrpcreate);
+					break;
+				}
+				case _CLICOMMSGCREATE:
+				{
+					CliComMSGCREATE* cliComMsgcreate = new CliComMSGCREATE(cliCom);
+					communicateService(*cliComMsgcreate);
+					break;
+				}
+				case _CLICOMADDRRMV:
+				{
+					CliComADDRRMV* cliComAddrrmv = new CliComADDRRMV(cliCom);
+					communicateService(*cliComAddrrmv);
+					break;
+				}
+				case _CLICOMMSGDELETE:
+				{
+					CliComMSGDELETE* cliComMsgdelete = new CliComMSGDELETE(cliCom);
+					communicateService(*cliComMsgdelete);
+					break;
+				}
+				case _CLICOMGRPDELETE:
+				{
+					CliComGRPDELETE* cliComGrpdelete = new CliComGRPDELETE(cliCom);
+					communicateService(*cliComGrpdelete);
+					break;
+				}
+				case _CLICOMMSGMODIFY:
+				{
+					CliComMSGMODIFY* cliComMsgmodify = new CliComMSGMODIFY(cliCom);
+					communicateService(*cliComMsgmodify);
+					break;
+				}
+				case _CLICOMGRPADRADD:
+				{
+					CliComGRPADRADD* cliComGrpadrad = new CliComGRPADRADD(cliCom);
+					communicateService(*cliComGrpadrad);
+					break;
+				}
+				case _CLICOMGRPADRRMV:
+				{
+					CliComGRPADRRMV* cliComGrpadrrm = new CliComGRPADRRMV(cliCom);
+					communicateService(*cliComGrpadrrm);
+					break;
+				}
+				case _CLICOMPSSWCHG:
+				{
+					CliComPSSWCHG* cliComPsswchg = new CliComPSSWCHG(cliCom);
+					communicateService(*cliComPsswchg);
+					break;
+				}
+				case _CLICOMSEND:
+				{
+					CliComSEND* cliComSend = new CliComSEND(cliCom);
+					communicateService(*cliComSend);
+					break;
+				}
+				default:
+				{
+					//No such communicate code
+					ServComERRBADREQ* badReq = new ServComERRBADREQ();
+					bottomLayer->Send(badReq->getCommunicate(), badReq->getSize());
+					delete badReq;
+					break;
+				}
+				}
+
 				break;
 			}
-			case _CLICOMADDRGETALL:
+
+			case Busy:
 			{
-				CliComADDRGETALL* cliComAddrgetall = new CliComADDRGETALL(cliCom);
-				communicateService(*cliComAddrgetall);
-				break;
-			}
-			case _CLICOMGRPGETALL:
-			{
-				CliComGRPGETALL* cliComGrprgetall = new CliComGRPGETALL(cliCom);
-				communicateService(*cliComGrprgetall);
-				break;
-			}
-			case _CLICOMMSGGETALL:
-			{
-				CliComMSGGETALL* cliComMsggetall = new CliComMSGGETALL(cliCom);
-				communicateService(*cliComMsggetall);
-				break;
-			}
-			case _CLICOMGRPGETONE:
-			{
-				CliComGRPGETONE* cliComGrpgetone = new CliComGRPGETONE(cliCom);
-				communicateService(*cliComGrpgetone);
-				break;
-			}
-			case _CLICOMMSGGETONE:
-			{
-				CliComMSGGETONE* cliComMsggetone = new CliComMSGGETONE(cliCom);
-				communicateService(*cliComMsggetone);
-				break;
-			}
-			case _CLICOMGRPCREATE:
-			{
-				CliComGRPCREATE* cliComGrpcreate = new CliComGRPCREATE(cliCom);
-				communicateService(*cliComGrpcreate);
-				break;
-			}
-			case _CLICOMMSGCREATE:
-			{
-				CliComMSGCREATE* cliComMsgcreate = new CliComMSGCREATE(cliCom);
-				communicateService(*cliComMsgcreate);
-				break;
-			}
-			case _CLICOMADDRRMV:
-			{
-				CliComADDRRMV* cliComAddrrmv = new CliComADDRRMV(cliCom);
-				communicateService(*cliComAddrrmv);
-				break;
-			}
-			case _CLICOMMSGDELETE:
-			{
-				CliComMSGDELETE* cliComMsgdelete = new CliComMSGDELETE(cliCom);
-				communicateService(*cliComMsgdelete);
-				break;
-			}
-			case _CLICOMGRPDELETE:
-			{
-				CliComGRPDELETE* cliComGrpdelete = new CliComGRPDELETE(cliCom);
-				communicateService(*cliComGrpdelete);
-				break;
-			}
-			case _CLICOMMSGMODIFY:
-			{
-				CliComMSGMODIFY* cliComMsgmodify = new CliComMSGMODIFY(cliCom);
-				communicateService(*cliComMsgmodify);
-				break;
-			}
-			case _CLICOMGRPADRADD:
-			{
-				CliComGRPADRADD* cliComGrpadrad = new CliComGRPADRADD(cliCom);
-				communicateService(*cliComGrpadrad);
-				break;
-			}
-			case _CLICOMGRPADRRMV:
-			{
-				CliComGRPADRRMV* cliComGrpadrrm = new CliComGRPADRRMV(cliCom);
-				communicateService(*cliComGrpadrrm);
-				break;
-			}
-			case _CLICOMPSSWCHG:
-			{
-				CliComPSSWCHG* cliComPsswchg = new CliComPSSWCHG(cliCom);
-				communicateService(*cliComPsswchg);
-				break;
-			}
-			case _CLICOMSEND:
-			{
-				CliComSEND* cliComSend = new CliComSEND(cliCom);
-				communicateService(*cliComSend);
+				throw "Unimplemented";
 				break;
 			}
 			default:
 			{
-				//No such communicate code
-				ServComERRBADREQ* badReq = new ServComERRBADREQ();	
-				bottomLayer->Send(badReq->getCommunicate(), badReq->getSize());
-				delete badReq;
-				break;
+				throw "Server state error";
 			}
 			}
-
+	}
+	catch (const char* e)
+	{
+		if (e == "Client ended")
+		{
+			//register client ended? 
+			clientManager->RegisterClientEnded(*this);
 			break;
 		}
-	
-		case Busy:
-		{
-			throw "Unimplemented";
-			break;
-		}
-		default:
-		{
-			throw "Server state error";
-		}
-		}
+	}
 	}
 }
 
