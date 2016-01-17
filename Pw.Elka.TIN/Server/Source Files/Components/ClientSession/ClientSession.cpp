@@ -163,6 +163,13 @@ bool ClientSession::Start()
 			{
 				//register client ended? 
 				cout << e << ": " << clientName << endl;
+				//clientManager->RegisterClientEnded(*this);
+				break;
+			}
+			if (e == "Client ended externally")
+			{
+				//register client ended? 
+				cout << e << ": " << clientName << endl;
 				clientManager->RegisterClientEnded(*this);
 				break;
 			}
