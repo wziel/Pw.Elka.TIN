@@ -11,9 +11,9 @@ OK - Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatement-
 Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h)
 
 
-Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
-Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
-Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
+OK - Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
+OK - Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
+OK - Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
 Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
 Asia - jak przy tworzeniu sesji jest utworzona w stanie Busy to powinno byæ wys³anie klientowi wiadomoœci i roz³¹czenie z klientem
 OK - Asia - Przy tworzeniu i modyfikowaniu nowych rzeczy sprawdzaæ czy istniej¹ ju¿ inne z takimi samymi nazwami i wtedy b³ad. (tylko jeœli Micha³ nie znajdzie unique cnostraint)

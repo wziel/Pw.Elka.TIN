@@ -180,6 +180,12 @@ bool ClientSession::Start()
 				cerr << e;
 				return false;
 			}
+			if (e == "Client blocked" )
+			{
+				cerr << e<< ": " << clientName << endl;
+				clientManager->RegisterClientEnded(*this);
+				return false;
+			}
 		}
 	}
 }
@@ -209,9 +215,11 @@ void ClientSession::communicateService(CliComAUTH clientCommunicate)
 
 	if (clientDB.blocked || clientDB.id < 0)
 	{
+		clientName = clientCommunicate.getUsername();
 		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
 		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
 		delete errLogin;
+		throw "Client blocked";
 		return;
 	}
 	//password hash stored in DB
