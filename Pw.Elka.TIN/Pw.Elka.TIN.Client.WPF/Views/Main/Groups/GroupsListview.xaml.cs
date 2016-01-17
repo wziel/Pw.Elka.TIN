@@ -58,10 +58,22 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
                 return;
             }
 
-            var groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
+            GroupModel groupModel;
+            try
+            {
+                groupModel = app.AppDAL.GroupModelCreate(txtNewGroupName.Text);
+            }
+            catch(BadGroupException)
+            {
+                Helpers.DisplayError("Nie udało się dodać grupy. Prawdopodobnie grupa o podanej nazwie już istnieje.");
+                return;
+            }
+            finally
+            {
+                txtNewGroupName.Text = "";
+            }
 
             stkGroups.Children.Insert(0, new GroupsListItemView(groupModel, this));
-            txtNewGroupName.Text = "";
         }
     }
 }

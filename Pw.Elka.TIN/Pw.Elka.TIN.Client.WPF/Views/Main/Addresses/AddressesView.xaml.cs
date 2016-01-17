@@ -1,4 +1,5 @@
-﻿using Pw.Elka.TIN.Client.Logic.Models;
+﻿using Pw.Elka.TIN.Client.Logic.Exceptions;
+using Pw.Elka.TIN.Client.Logic.Models;
 using Pw.Elka.TIN.Client.WPF.Views.Main.Addresses;
 using System;
 using System.Collections.Generic;
@@ -42,11 +43,6 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
                 Helpers.DisplayError("Nazwa adresata nie może być pusta.");
                 return;
             }
-            //if (!Regex.IsMatch(txtNewValue.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
-            //{
-            //    Helpers.DisplayError("Adres email nie jest poprawny.");
-            //    return;
-            //}
 
             if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
             {
@@ -54,11 +50,23 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
                 return;
             }
 
-            var addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
-            stkAddress.Children.Insert(0, new AddressListItemView(addrModel, this));
+            AddressModel addrModel;
+            try
+            {
+                addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
+            }
+            catch(BadAddressException)
+            {
+                Helpers.DisplayError("Nie udało się dodać adresu. Prawdopodobnie adres o takiej nazwie lub zawartości już istnieje.");
+                return;
+            }
+            finally
+            {
+                txtNewName.Text = "";
+                txtNewValue.Text = "";
+            }
 
-            txtNewName.Text = "";
-            txtNewValue.Text = "";
+            stkAddress.Children.Insert(0, new AddressListItemView(addrModel, this));
         }
 
         public void RemoveAddressListItem(AddressListItemView addrView)
