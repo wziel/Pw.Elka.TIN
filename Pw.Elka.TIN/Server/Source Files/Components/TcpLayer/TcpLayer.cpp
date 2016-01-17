@@ -59,7 +59,7 @@ void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 		throw "Network error";
 	}
 
-	delete myBuffer;
+	delete[] myBuffer;
 }
 
 void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from client
