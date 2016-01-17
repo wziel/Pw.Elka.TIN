@@ -4,9 +4,14 @@
     [address_name]   VARCHAR (50) NOT NULL,
     [id_client]      INT          NOT NULL,
     CONSTRAINT [PK_Address_1] PRIMARY KEY CLUSTERED ([id_address] ASC),
+    CONSTRAINT [FK_Address_Client] FOREIGN KEY ([id_client]) REFERENCES [dbo].[Client] ([id_client]),
     CONSTRAINT [adresNazwa_klient] UNIQUE NONCLUSTERED ([address_name] ASC, [id_client] ASC),
     CONSTRAINT [adresWartosc_klient] UNIQUE NONCLUSTERED ([addressee_name] ASC, [id_client] ASC)
 );
+
+
+
+
 
 
 

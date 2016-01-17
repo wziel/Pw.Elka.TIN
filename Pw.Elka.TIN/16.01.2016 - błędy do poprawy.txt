@@ -7,7 +7,7 @@ OK - Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
 OK - Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatement->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
 Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
 Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h) (ale jeœli teraz dzia³a to nie ma presji na zmiany, ¿eby coœ siê nie zjeba³o)
-
+Kamil - przy usuwaniu klienta najpierw usunac recznie wszystkie jego adresy, a potem dopiero usunac klienta.
 
 OK - Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
 OK - Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
@@ -27,7 +27,7 @@ Wojtek - w AdminView sprawdzaæ czy np klient ktorego id zostalo podane istnieje 
 OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
 OK - Micha³ - W DAL pododawaæ sprawdzanie tak jak w getClient(username) - ifSucceeded, a jeœli nie to zwracaæ b³¹d zdefiniowany zgodnie z komentarzami w DAL.h.
-Micha³ - chyba trzeba dorobiæ kaskadowe usuwanie klienta te¿ z bazy
+OK(tylko adresy trzeba recznie) - Micha³ - chyba trzeba dorobiæ kaskadowe usuwanie klienta te¿ z bazy
 
 WSZYSCY - Pokomentowaæ swoje metody w .h implementacji klasy (nie w interfejsach)
 WSZYSCY - Sprawdziæ czy usuwacie dynamicznie alokowane obiekty (wszystkie nad którymi macie w³adzê)
