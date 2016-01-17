@@ -1,4 +1,5 @@
-﻿using Pw.Elka.TIN.Client.Logic.Models;
+﻿using Pw.Elka.TIN.Client.Logic.Exceptions;
+using Pw.Elka.TIN.Client.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,15 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Groups
             btnAdd.Visibility = Visibility.Hidden;
 
             var app = (App)Application.Current;
-            app.AppDAL.GroupModelAddressAdd(_groupModel.Id, _addressModel.Id);
+            try
+            {
+                app.AppDAL.GroupModelAddressAdd(_groupModel.Id, _addressModel.Id);
+            }
+            catch(Exception ex) when (ex is BadAddressException || ex is BadGroupException)
+            {
+                Helpers.DisplayError("Nie udało się dodać adresu do grupy. Prawdopodobnie jedno z nich zostało usunięte. Zrestartuj aplikację.");
+                return;
+            }
 
             IsAdded = true;
         }

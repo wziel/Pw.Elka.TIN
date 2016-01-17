@@ -179,6 +179,24 @@ std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
 	return views;
 }
 
+bool RootManager::DoesSessionExistForClient(string loginname)
+{
+	bool toReturn = false;
+
+	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	for (unsigned int i = 0; i < clientSessions.size(); ++i)
+	{
+		if (clientSessions[i]->clientSession->GetClientName() == loginname)
+		{
+			toReturn = true;
+			break;
+		}
+	}
+	ReleaseMutex(clientSessionsMutex);
+
+	return toReturn;
+}
+
 bool RootManager::EndClientSession(unsigned clientSessionViewId)
 {
 	bool clientFound = false;

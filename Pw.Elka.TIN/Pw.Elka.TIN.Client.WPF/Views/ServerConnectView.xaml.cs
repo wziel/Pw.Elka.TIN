@@ -52,7 +52,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             catch (NotAuthorizedException)
             {
                 app.AppLogic.Disconnect();
-                Helpers.DisplayError("Logowanie nie powiodło się. Spróbuj jeszcze raz.");
+                Helpers.DisplayError("Logowanie nie powiodło się. Podałeś złą nazwę, hasło, albo jesteś już zalogowany z innego urządzenia.");
                 return;
             }
             catch(ServerBusyException)

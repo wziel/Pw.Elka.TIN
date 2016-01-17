@@ -1,4 +1,5 @@
-﻿using Pw.Elka.TIN.Client.Logic.Models;
+﻿using Pw.Elka.TIN.Client.Logic.Exceptions;
+using Pw.Elka.TIN.Client.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,17 +40,29 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
         {
             var app = (App)Application.Current;
 
-            if(app.AppDAL.MessageModels.FirstOrDefault(m => m.Name == txtNewMsgName.Text) != null)
+            if (app.AppDAL.MessageModels.FirstOrDefault(m => m.Name == txtNewMsgName.Text) != null)
             {
                 Helpers.DisplayError("Szablon wiadomości z podaną nazwą już istnieje.");
                 return;
             }
 
-            var messageModel = app.AppDAL.MessageModelCreate(txtNewMsgName.Text, txtNewMsgContent.Text);
-            stkMsgs.Children.Insert(0, new MessagesListItemView(messageModel, this));
+            MessageModel messageModel;
+            try
+            {
+                messageModel = app.AppDAL.MessageModelCreate(txtNewMsgName.Text, txtNewMsgContent.Text);
+            }
+            catch(BadMessageException)
+            {
+                Helpers.DisplayError("Nie udało się dodać wiadomości. Prawdopodobnie wiadomość o takiej nazwie już istnieje.");
+                return;
+            }
+            finally
+            {
+                txtNewMsgName.Text = "";
+                txtNewMsgContent.Text = "";
+            }
 
-            txtNewMsgName.Text = "";
-            txtNewMsgContent.Text = "";
+            stkMsgs.Children.Insert(0, new MessagesListItemView(messageModel, this));
         }
 
         public void DisplayListView()

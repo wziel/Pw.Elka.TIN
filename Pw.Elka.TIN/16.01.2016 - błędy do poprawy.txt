@@ -24,7 +24,7 @@ OK - Wojtek - Sprawdziæ hashowanie has³a po stronie admina - narazie wykomentowa
 OK - Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
 OK - Wojtek - przerobiæ AdminView tak ¿eby patrzy³ czy jakaœ operacja na DAL siê nie uda³a wykonaæ
 Wojtek - w AdminView sprawdzaæ czy np klient ktorego id zostalo podane istnieje przed wykonaniem operacji.
-Wojtek - zmodyfikowaæ treœæ komunikatów wyœwietlanych w kliencie
+OK - Wojtek - zmodyfikowaæ treœæ komunikatów wyœwietlanych w kliencie
 
 OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)

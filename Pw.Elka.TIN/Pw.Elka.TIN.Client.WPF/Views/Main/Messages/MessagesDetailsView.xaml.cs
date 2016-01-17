@@ -61,7 +61,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
             }
             catch(BadMessageException)
             {
-                Helpers.DisplayError("Szablon o podanej nazwie już istnieje");
+                Helpers.DisplayError("Nie udało się dodać szablonu. Prawdopodobnie szablon o podanej nazwie już istnieje");
                 return;
             }
             Helpers.DisplaySuccess("Pomyślnie zmodyfikowano szablon wiadomości");
