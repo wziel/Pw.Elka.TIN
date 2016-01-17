@@ -96,6 +96,6 @@ public:
 
 	///IClientSessionsRegister interface
 	std::vector<ClientSessionView> GetAllClientSessionViews() override;
-	void EndClientSession(unsigned clientSessionViewId) override;
+	bool EndClientSession(unsigned clientSessionViewId) override;
 };
 

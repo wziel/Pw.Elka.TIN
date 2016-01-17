@@ -177,8 +177,10 @@ std::vector<ClientSessionView> RootManager::GetAllClientSessionViews()
 	return views;
 }
 
-void RootManager::EndClientSession(unsigned clientSessionViewId)
+bool RootManager::EndClientSession(unsigned clientSessionViewId)
 {
+	bool clientFound = false;
+
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
 	for (unsigned int i = 0; i < clientSessions.size(); ++i)
 	{
@@ -195,8 +197,12 @@ void RootManager::EndClientSession(unsigned clientSessionViewId)
 			WaitForClientThreadToEndParamsPointer threadParams
 				= new WaitForClientThreadToEndParams(clientSessions[i]->thread, *this);
 			CreateThread(NULL, 0, WaitForClientThreadToEnd, threadParams, 0, &dwThreadId);
+
+			clientFound = true;
 			break;
 		}
 	}
 	ReleaseMutex(clientSessionsMutex);
+
+	return clientFound;
 }

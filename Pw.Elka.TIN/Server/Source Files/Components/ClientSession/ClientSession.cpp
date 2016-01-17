@@ -161,17 +161,17 @@ bool ClientSession::Start()
 		{
 			if (e == "Client ended")
 			{
-				return 0;
+				return true;
 			}
 			if (e == "Network error")
 			{
 				cerr << e;
-				return 1;
+				return false;
 			}
 			if (e == "WSA error")
 			{
 				cerr << e;
-				return 2;
+				return false;
 			}
 		}
 	}

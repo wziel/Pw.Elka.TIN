@@ -52,8 +52,14 @@ void AdministratorView::sessionsDisplay()
 
 void AdministratorView::sessionEnd(unsigned id)
 {
-	sessionsRegister.EndClientSession(id);
-	std::cout << "Successfully ended client session.\n";
+	if (sessionsRegister.EndClientSession(id))
+	{
+		std::cout << "Successfully ended client session.\n";
+	}
+	else
+	{
+		std::cout << "Specified session wasn't found.\n";
+	}
 }
 
 void AdministratorView::clientsDisplay()
@@ -76,38 +82,74 @@ void AdministratorView::clientBlock(string login, bool isBlocked)
 {
 	if (isBlocked)
 	{
-		DAL.BlockClient(login);
-		std::cout << "Successfully blocked client.\n";
+		if (DAL.BlockClient(login))
+		{
+			std::cout << "Successfully blocked client.\n";
+		}
+		else
+		{
+			std::cout << "Failed to block client.\n";
+		}
 	}
 	else
 	{
-		DAL.UnblockClient(login);
-		std::cout << "Successfully unblocked client.\n";
+		if (DAL.UnblockClient(login))
+		{
+			std::cout << "Successfully unblocked client.\n";
+		}
+		else
+		{
+			std::cout << "Failed to unblock client.\n";
+		}
 	}
 }
 
 void AdministratorView::clientCreate(string login, string password)
 {
-	DAL.CreateClient(login, GetHashedString(password));
-	std::cout << "Successfully created client.\n";
+	if (DAL.CreateClient(login, GetHashedString(password)))
+	{
+		std::cout << "Successfully created client.\n";
+	}
+	else
+	{
+		std::cout << "Failed to create client.\n";
+	}
 }
 
 void AdministratorView::clientDelete(string login)
 {
-	DAL.DeleteClient(login);
-	std::cout << "Successfully deleted client.\n";
+	if (DAL.DeleteClient(login))
+	{
+		std::cout << "Successfully deleted client.\n";
+	}
+	else
+	{
+		std::cout << "Failed to delete client.\n";
+	}
 }
 
 void AdministratorView::clientSetPass(string login, string password)
 {
-	DAL.ChangeHashOfPassword(login, GetHashedString(password));
-	std::cout << "Successfully changed client password.\n";
+	if (DAL.ChangeHashOfPassword(login, GetHashedString(password)))
+	{
+		std::cout << "Successfully changed client password.\n";
+	}
+	else
+	{
+		std::cout << "Failed to change client password.\n";
+	}
 }
 
 void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
 {
-	DAL.ChangeLogin(oldLogin, newLogin);
-	std::cout << "Successfully changed client login.\n";
+	if (DAL.ChangeLogin(oldLogin, newLogin))
+	{
+		std::cout << "Successfully changed client login.\n";
+	}
+	else
+	{
+		std::cout << "Failed to change client login.\n";
+	}
 }
 
 string AdministratorView::GetHashedString(string str)

@@ -20,6 +20,10 @@ class DAL :
 private:
 	Connection* connection;
 	DriverManager*	driverManager;
+
+	///returns true if execution succeeeded
+	bool ExecutePreparedStatement(PreparedStatement *preparedStatement);
+
 public:
 	DAL();
 	~DAL();
@@ -62,8 +66,6 @@ public:
 	bool RemoveAddressFromGroup(int groupId, int addressId, int clientId);
 	///returns empty string when failed
 	string GetHashOfPassword(string username);
-	///returns true if succeeded 
-	bool IsBlocked(int clientId);
 	///if returned object's id is less than 0 then operation didn't success
 	AddressModel CreateAddress(string addrName, string addrValue, int clientId);
 	///returns true if succeeded 
@@ -78,8 +80,5 @@ public:
 	bool ChangeHashOfPassword(string login, string newHashOfPassword);
 	///returns true if succeeded 
 	bool BlockClient(string login);
-	
-
-
 };
 
