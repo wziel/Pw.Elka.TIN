@@ -40,11 +40,11 @@ void RootManager::Start()
 
 void RootManager::End()
 {
-	isClosingDown = true;
 	sessionsListener->End();
 	messagesQueue->End();
 
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
+	isClosingDown = true;
 	for (int i = clientSessions.size() - 1; i >= 0; --i)
 	{
 		clientSessions[i]->tcpLayer->End();
@@ -79,14 +79,21 @@ DWORD WINAPI RootManager::StartSessionsListener(LPVOID lpParam)
 void RootManager::CreateClientAsync(int socketfd, struct sockaddr_in newClientAddressStruct, int newClientAddressLenght)
 {
 	DWORD dwThreadId;
-	ClientSessionObjects* sessionObjects = new ClientSessionObjects();
-	CreateClientParamsPointer params = new CreateClientParams(*sessionObjects, *this, socketfd);
-	sessionObjects->thread = CreateThread(NULL, 0, CreateClient, params, 0, &dwThreadId);
-	sessionObjects->state = ClientSessionState::Starting;
 
 	WaitForSingleObject(clientSessionsMutex, INFINITE);
 	if (!isClosingDown)
 	{
+		ClientSessionObjects* sessionObjects = new ClientSessionObjects();
+
+		SessionState initialState = clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
+		sessionObjects->tcpLayer = new TcpLayer(socketfd);
+		sessionObjects->cipher = new Cipher(*sessionObjects->tcpLayer);
+		sessionObjects->clientSession = new ClientSession(*sessionObjects->cipher, *messagesQueue, initialState, *dataAccessLayer, *this);
+		sessionObjects->connectionId = connectionIdHighWaterMark++;
+
+		CreateClientParamsPointer params = new CreateClientParams(*sessionObjects);
+		sessionObjects->thread = CreateThread(NULL, 0, CreateClient, params, 0, &dwThreadId);
+		sessionObjects->state = ClientSessionState::Starting;
 		clientSessions.push_back(sessionObjects);
 	}
 	ReleaseMutex(clientSessionsMutex);
@@ -96,17 +103,8 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 {
 	CreateClientParamsPointer params = (CreateClientParamsPointer)lpParam;
 	ClientSessionObjects& sessionObjects = params->objectsToUpdate;
-	RootManager& rootManager = params->rootManager;
-
-	SessionState initialState = rootManager.clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
-
-	sessionObjects.tcpLayer = new TcpLayer(params->socketFd);
-	sessionObjects.cipher = new Cipher(*sessionObjects.tcpLayer);
-	sessionObjects.clientSession = new ClientSession(*sessionObjects.cipher, *rootManager.messagesQueue, initialState, *rootManager.dataAccessLayer, rootManager);
-	sessionObjects.connectionId = rootManager.connectionIdHighWaterMark++;
 
 	sessionObjects.clientSession->Start();
-	sessionObjects.state = ClientSessionState::Working;
 	return 0;
 }
 
@@ -154,7 +152,6 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 		}
 	}
 	ReleaseMutex(rootManager.clientSessionsMutex);
-	std::cout << "Session " << id << " ended successfully\n";
 	delete params;
 	return 0;
 }

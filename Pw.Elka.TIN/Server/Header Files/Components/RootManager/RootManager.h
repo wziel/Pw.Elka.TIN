@@ -72,10 +72,7 @@ private:
 	typedef struct CreateClientParams
 	{
 		ClientSessionObjects& objectsToUpdate;
-		RootManager &rootManager;
-		int socketFd;
-		CreateClientParams(ClientSessionObjects& sessionObjects, RootManager& rootMng, int socketFd) 
-			: objectsToUpdate(sessionObjects), rootManager(rootMng), socketFd(socketFd) { }
+		CreateClientParams(ClientSessionObjects& sessionObjects) : objectsToUpdate(sessionObjects) { }
 	} *CreateClientParamsPointer;
 
 	bool isClosingDown = false;
