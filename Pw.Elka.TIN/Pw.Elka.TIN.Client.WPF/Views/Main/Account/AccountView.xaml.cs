@@ -54,5 +54,12 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
                 Helpers.DisplayError("Podane stare hasło nie jest poprawne.");
             }
         }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            app.LogOut();
+            Helpers.DisplaySuccess("Wylogowanie powiodło się.");
+        }
     }
 }

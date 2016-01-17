@@ -24,17 +24,21 @@ namespace Pw.Elka.TIN.Client.WPF
             Dispatcher.UnhandledException += UnhandledExceptionHandler;
         }
 
-        private void UnhandledExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
+        public void LogOut()
         {
             var mainWindow = ((MainWindow)MainWindow);
             mainWindow.rootContainer.stkPanel.Children.Clear();
             mainWindow.rootContainer.stkPanel.Children.Add(new ServerConnectView());
-            string errorMessage = $"Wystąpił nieoczekiwany błąd w aplikacji. Spróbuj jeszcze raz połączyć się z serwerem.\nSzczegóły błędu:\n{e.Exception.Message}";
-            if(AppLogic != null)
+            if (AppLogic != null)
             {
                 AppLogic.Disconnect();
             }
-            Helpers.DisplayError(errorMessage);
+        }
+
+        private void UnhandledExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            LogOut();
+            Helpers.DisplayError("Wystąpił nieoczekiwany błąd w aplikacji.");
             e.Handled = true;
         }
 
