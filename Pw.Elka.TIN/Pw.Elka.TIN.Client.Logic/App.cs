@@ -27,6 +27,11 @@ namespace Pw.Elka.TIN.Client.Logic
             _tcp.Connect();
         }
 
+        public void Disconnect()
+        {
+            _tcp.Disconnect();
+        }
+
         internal ServerCommunicate Authorize(string login, string password)
         {
             var auth = (ServerAuthCommunicate)_session.ReceiveCommunicate();

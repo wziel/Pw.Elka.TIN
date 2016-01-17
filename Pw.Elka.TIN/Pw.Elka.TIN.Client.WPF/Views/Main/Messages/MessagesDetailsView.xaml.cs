@@ -59,7 +59,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main.Messages
             {
                 app.AppDAL.MessageModelModify(_model.Id, txtMessageName.Text, txtMessageContent.Text);
             }
-            catch(BadMessage)
+            catch(BadMessageException)
             {
                 Helpers.DisplayError("Szablon o podanej nazwie już istnieje");
                 return;

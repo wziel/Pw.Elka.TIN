@@ -121,7 +121,7 @@ namespace Pw.Elka.TIN.Client.Logic
                 {
                     if (serverCommunicate is ServerErrorBadGroupCommunicate)
                     {
-                        throw new BadGroup();
+                        throw new BadGroupException();
                     }
                     throw new NotImplementedException();
                 }
@@ -165,11 +165,11 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
-                    throw new BadGroup();
+                    throw new BadGroupException();
                 }
                 if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
-                    throw new BadAddress();
+                    throw new BadAddressException();
                 }
                 throw new NotImplementedException();
             }
@@ -186,11 +186,11 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
-                    throw new BadGroup();
+                    throw new BadGroupException();
                 }
                 if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
-                    throw new BadAddress();
+                    throw new BadAddressException();
                 }
                 throw new NotImplementedException();
             }
@@ -205,7 +205,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
-                    throw new BadGroup();
+                    throw new BadGroupException();
                 }
                 throw new NotImplementedException();
             }
@@ -236,7 +236,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
-                    throw new BadGroup();
+                    throw new BadGroupException();
                 }
                 throw new NotImplementedException();
             }
@@ -251,7 +251,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadMessageCommunicate)
                 {
-                    throw new BadMessage();
+                    throw new BadMessageException();
                 }
                 throw new NotImplementedException();
             }
@@ -276,7 +276,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadMessageCommunicate)
                 {
-                    throw new BadMessage();
+                    throw new BadMessageException();
                 }
                 throw new NotImplementedException();
             }
@@ -291,7 +291,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadMessageCommunicate)
                 {
-                    throw new BadMessage();
+                    throw new BadMessageException();
                 }
                 throw new NotImplementedException();
             }
@@ -337,11 +337,11 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadMessageCommunicate)
                 {
-                    throw new BadMessage();
+                    throw new BadMessageException();
                 }
                 if (serverCommunicate is ServerErrorBadGroupCommunicate)
                 {
-                    throw new BadGroup();
+                    throw new BadGroupException();
                 }
                 throw new NotImplementedException();
             }
@@ -355,7 +355,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
-                    throw new BadAddress();
+                    throw new BadAddressException();
                 }
                 throw new NotImplementedException();
             }
@@ -378,7 +378,7 @@ namespace Pw.Elka.TIN.Client.Logic
             {
                 if (serverCommunicate is ServerErrorBadAddressCommunicate)
                 {
-                    throw new BadAddress();
+                    throw new BadAddressException();
                 }
                 throw new NotImplementedException();
             }

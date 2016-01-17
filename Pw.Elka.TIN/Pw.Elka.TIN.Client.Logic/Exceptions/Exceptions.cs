@@ -9,12 +9,15 @@ namespace Pw.Elka.TIN.Client.Logic.Exceptions
     public class NotAuthorizedException : Exception
     { }
 
-    public class BadGroup : Exception
+    public class BadGroupException : Exception
     { }
 
-    public class BadMessage : Exception
+    public class BadMessageException : Exception
     { }
 
-    public class BadAddress : Exception
+    public class BadAddressException : Exception
+    { }
+
+    public class TimeoutException : Exception
     { }
 }
