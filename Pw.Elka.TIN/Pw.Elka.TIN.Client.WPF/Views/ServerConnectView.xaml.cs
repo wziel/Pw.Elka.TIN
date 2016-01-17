@@ -62,6 +62,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views
                 return;
             }
 
+            app.UserName = txtUsername.Text;
             mainWindow.rootContainer.NavigateToMainView();
         }
     }

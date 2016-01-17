@@ -23,6 +23,8 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         public MainView()
         {
             InitializeComponent();
+            var app = (App)Application.Current;
+            lblUserWelcome.Content = $"Witaj, {app.UserName}";
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

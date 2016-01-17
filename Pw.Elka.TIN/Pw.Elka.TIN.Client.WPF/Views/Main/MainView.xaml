@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Pw.Elka.TIN.Client.WPF.Views.Main"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Name="stkPanel">
+    <StackPanel Name="stkPanel">
+        <Label Name="lblUserWelcome" HorizontalAlignment="Right"></Label>
         <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
             <TabItem Name="tabItemSend" Header="Wyślij" IsSelected="True">
             </TabItem>
@@ -19,5 +20,5 @@
             <TabItem Name="tabItemAccount" Header="Konto">
             </TabItem>
         </TabControl>
-    </Grid>
+    </StackPanel>
 </UserControl>

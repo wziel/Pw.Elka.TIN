@@ -18,6 +18,7 @@ namespace Pw.Elka.TIN.Client.WPF
     {
         internal Logic.App AppLogic { get; set; }
         internal Logic.Interfaces.AppDAL AppDAL { get; set; }
+        internal string UserName { get; set; }
 
         public App() : base()
         {
