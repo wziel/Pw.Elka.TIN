@@ -161,18 +161,17 @@ bool ClientSession::Start()
 		{
 			if (e == "Client ended")
 			{
-				//register client ended? 
-				cout << e << ": " << clientName << endl;
-				clientManager->RegisterClientEnded(*this);
-				break;
+				return 0;
 			}
 			if (e == "Network error")
 			{
 				cerr << e;
+				return 1;
 			}
 			if (e == "WSA error")
 			{
 				cerr << e;
+				return 2;
 			}
 		}
 	}
