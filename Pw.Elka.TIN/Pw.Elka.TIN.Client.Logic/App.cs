@@ -13,7 +13,6 @@ namespace Pw.Elka.TIN.Client.Logic
         private SessionLayer _session;
         private XorCipher _cipher;
         private TCPLayer _tcp;
-        private string _salt;
 
         public App(string serverAddress, int serverPort)
         {
@@ -32,17 +31,19 @@ namespace Pw.Elka.TIN.Client.Logic
             _tcp.Disconnect();
         }
 
-        internal ServerCommunicate Authorize(string login, string password)
+        internal ServerCommunicate ReceiveNextCommunicate()
         {
-            var auth = (ServerAuthCommunicate)_session.ReceiveCommunicate();
-            _salt = auth.Salt;
+            return _session.ReceiveCommunicate();
+        }
 
+        internal ServerCommunicate Authorize(string login, string password, string salt)
+        {
             password = Hashing.GetObfuscatedString(password);
 
             _session.SendCommunicate(new ClientAuthCommunicate()
             {
                 Login = login,
-                Passwhash = Hashing.GetDJBHash(password + _salt)
+                Passwhash = Hashing.GetDJBHash(password + salt)
             });
             return _session.ReceiveCommunicate();
         }

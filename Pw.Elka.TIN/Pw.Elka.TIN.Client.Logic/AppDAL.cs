@@ -303,17 +303,25 @@ namespace Pw.Elka.TIN.Client.Logic
 
         public void ClientAuthenticate(string password, string login)
         {
-            var serverCommunicate = _appLogic.Authorize(login, password);
-            var communicate = serverCommunicate as ServerAckCommunicate;
-            if (communicate == null)
+            var serverCommunicate = _appLogic.ReceiveNextCommunicate();
+            var authCommunicate = serverCommunicate as ServerAuthCommunicate;
+            if (authCommunicate == null)
+            {
+                if(serverCommunicate is ServerErrorBusyCommunicate)
+                {
+                    throw new ServerBusyException();
+                }
+                throw new NotImplementedException();
+            }
+            var salt = authCommunicate.Salt;
+
+            serverCommunicate = _appLogic.Authorize(login, password, salt);
+            var ackCommunicate = serverCommunicate as ServerAckCommunicate;
+            if (ackCommunicate == null)
             {
                 if (serverCommunicate is ServerErrorBadLoginCommunicate)
                 {
                     throw new NotAuthorizedException();
-                }
-                if(serverCommunicate is ServerErrorBusyCommunicate)
-                {
-                    throw new ServerBusyException();
                 }
                 throw new NotImplementedException();
             }
