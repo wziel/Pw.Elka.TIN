@@ -118,6 +118,14 @@ void AdministratorView::clientCreate(string login, string password)
 
 void AdministratorView::clientDelete(string login)
 {
+	std::vector <ClientSessionView> views = sessionsRegister.GetAllClientSessionViews();
+	for (unsigned int i = 0; i < views.size(); ++i)
+	{
+		if (views[i].clientName == login)
+		{
+			sessionsRegister.EndClientSession(views[i].connectionId);
+		}
+	}
 	if (DAL.DeleteClient(login))
 	{
 		std::cout << "Successfully deleted client.\n";

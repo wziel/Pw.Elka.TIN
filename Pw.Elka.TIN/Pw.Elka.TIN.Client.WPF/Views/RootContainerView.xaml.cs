@@ -26,12 +26,6 @@ namespace Pw.Elka.TIN.Client.WPF.Views
             InitializeComponent();
         }
 
-        public void NavigateToLoginView()
-        {
-            stkPanel.Children.Clear();
-            stkPanel.Children.Add(new LoginView());
-        }
-
         public void NavigateToMainView()
         {
             stkPanel.Children.Clear();
