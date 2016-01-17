@@ -38,12 +38,16 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
         {
             var app = (App)Application.Current;
 
-            if(txtNewName.Text.Length == 0)
+            if (txtNewName.Text.Length == 0)
             {
                 Helpers.DisplayError("Nazwa adresata nie może być pusta.");
                 return;
             }
-
+            if (!Regex.IsMatch(txtNewValue.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase))
+            {
+                Helpers.DisplayError("Podany adres email nie jest poprawny.");
+                return;
+            }
             if (app.AppDAL.AddressModels.SingleOrDefault(a => a.AdresseeName == txtNewName.Text) != null)
             {
                 Helpers.DisplayError("Adresat z podaną nazwą już istnieje.");
@@ -55,7 +59,7 @@ namespace Pw.Elka.TIN.Client.WPF.Views.Main
             {
                 addrModel = app.AppDAL.AddressAdd(txtNewValue.Text, txtNewName.Text);
             }
-            catch(BadAddressException)
+            catch (BadAddressException)
             {
                 Helpers.DisplayError("Nie udało się dodać adresu. Prawdopodobnie adres o takiej nazwie lub zawartości już istnieje.");
                 return;
