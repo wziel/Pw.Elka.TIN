@@ -15,6 +15,7 @@ bool ClientSession::Start()
 				ServComAUTH* authorizationCommunicate = new ServComAUTH();	//creating communicate
 				salt = authorizationCommunicate->getSalt();
 				bottomLayer->Send(authorizationCommunicate->getCommunicate(), authorizationCommunicate->getSize());	//sending communicate
+				delete authorizationCommunicate;
 
 				bottomLayer->Receive(cliCom, comSize);
 				if (cliCom[0] != _CLICOMAUTH)
@@ -27,6 +28,7 @@ bool ClientSession::Start()
 				{
 					CliComAUTH* cliComAuth = new CliComAUTH(cliCom);
 					communicateService(*cliComAuth);
+					delete cliComAuth;
 				}
 				break;
 			}
@@ -41,6 +43,7 @@ bool ClientSession::Start()
 				{
 					CliComADDRADD* cliComAddradd = new CliComADDRADD(cliCom);
 					communicateService(*cliComAddradd);
+					delete(cliComAddradd);
 					break;
 				}
 				case _CLICOMADDRGETALL:
@@ -53,84 +56,98 @@ bool ClientSession::Start()
 				{
 					CliComGRPGETALL* cliComGrprgetall = new CliComGRPGETALL(cliCom);
 					communicateService(*cliComGrprgetall);
+					delete(cliComGrprgetall);
 					break;
 				}
 				case _CLICOMMSGGETALL:
 				{
 					CliComMSGGETALL* cliComMsggetall = new CliComMSGGETALL(cliCom);
 					communicateService(*cliComMsggetall);
+					delete(cliComMsggetall);
 					break;
 				}
 				case _CLICOMGRPGETONE:
 				{
 					CliComGRPGETONE* cliComGrpgetone = new CliComGRPGETONE(cliCom);
 					communicateService(*cliComGrpgetone);
+					delete(cliComGrpgetone);
 					break;
 				}
 				case _CLICOMMSGGETONE:
 				{
 					CliComMSGGETONE* cliComMsggetone = new CliComMSGGETONE(cliCom);
 					communicateService(*cliComMsggetone);
+					delete(cliComMsggetone);
 					break;
 				}
 				case _CLICOMGRPCREATE:
 				{
 					CliComGRPCREATE* cliComGrpcreate = new CliComGRPCREATE(cliCom);
 					communicateService(*cliComGrpcreate);
+					delete(cliComGrpcreate);
 					break;
 				}
 				case _CLICOMMSGCREATE:
 				{
 					CliComMSGCREATE* cliComMsgcreate = new CliComMSGCREATE(cliCom);
 					communicateService(*cliComMsgcreate);
+					delete(cliComMsgcreate);
 					break;
 				}
 				case _CLICOMADDRRMV:
 				{
 					CliComADDRRMV* cliComAddrrmv = new CliComADDRRMV(cliCom);
 					communicateService(*cliComAddrrmv);
+					delete(cliComAddrrmv);
 					break;
 				}
 				case _CLICOMMSGDELETE:
 				{
 					CliComMSGDELETE* cliComMsgdelete = new CliComMSGDELETE(cliCom);
 					communicateService(*cliComMsgdelete);
+					delete(cliComMsgdelete);
 					break;
 				}
 				case _CLICOMGRPDELETE:
 				{
 					CliComGRPDELETE* cliComGrpdelete = new CliComGRPDELETE(cliCom);
 					communicateService(*cliComGrpdelete);
+					delete(cliComGrpdelete);
 					break;
 				}
 				case _CLICOMMSGMODIFY:
 				{
 					CliComMSGMODIFY* cliComMsgmodify = new CliComMSGMODIFY(cliCom);
 					communicateService(*cliComMsgmodify);
+					delete(cliComMsgmodify);
 					break;
 				}
 				case _CLICOMGRPADRADD:
 				{
 					CliComGRPADRADD* cliComGrpadrad = new CliComGRPADRADD(cliCom);
 					communicateService(*cliComGrpadrad);
+					delete(cliComGrpadrad);
 					break;
 				}
 				case _CLICOMGRPADRRMV:
 				{
 					CliComGRPADRRMV* cliComGrpadrrm = new CliComGRPADRRMV(cliCom);
 					communicateService(*cliComGrpadrrm);
+					delete(cliComGrpadrrm);
 					break;
 				}
 				case _CLICOMPSSWCHG:
 				{
 					CliComPSSWCHG* cliComPsswchg = new CliComPSSWCHG(cliCom);
 					communicateService(*cliComPsswchg);
+					delete(cliComPsswchg);
 					break;
 				}
 				case _CLICOMSEND:
 				{
 					CliComSEND* cliComSend = new CliComSEND(cliCom);
 					communicateService(*cliComSend);
+					delete(cliComSend);
 					break;
 				}
 				default:
@@ -359,14 +376,12 @@ void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
 		delete errGroup;
 	}
-
 	else
 	{
 		ServComGRPGETONE* ack = new ServComGRPGETONE(&groupDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
@@ -379,14 +394,12 @@ void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
 		delete errMsg;
 	}
-
 	else
 	{
 		ServComMSGGETONE* ack = new ServComMSGGETONE(&messageDB);
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		delete ack;
 	}
-
 }
 
 void ClientSession::communicateService(CliComADDRRMV clientCommunicate)

@@ -60,36 +60,40 @@ public:
 	~ClientSession();
 
 	// IClientSessionManager
+	///Main loop of ClientSession
+	///Returns true if ended with no error
 	bool Start();
+	///Returns client's name
 	string GetClientName();
 
 private:
-	// Bottom layer for sending and receiving messages
+	/// Bottom layer for sending and receiving messages
 	ILayer* bottomLayer;
-	// Message queue for sending client's messages
+	/// Message queue for sending client's messages
 	MessagesQueue* messagesQueue;
-	//Current state of client session
+	///Current state of client session
 	SessionState sessionState;
-	// Data Access Layer
+	/// Data Access Layer
 	IClientDAL* DAL;
-	//Client Manager interface (used to register client ended)
+	///Client Manager interface (used to register client ended)
 	IClientManager* clientManager;
-	//last communicate code
+	///last communicate code
 	unsigned char communicateCode; 
-	//last server communicate content
+	///last server communicate content
 	unsigned char* servCom;
-	//last client communicate content
+	///last client communicate content
 	unsigned char* cliCom;
-	//last communicate size
+	///last communicate size
 	int comSize;
-	//client's username
+	///client's username
 	string clientName; 
-	//client's id in database
+	///client's id in database
 	int clientId;
-	//salt used for hashing user's password
+	///salt used for hashing user's password
 	string salt;
 
-	//communicates service functions
+	///communicates service functions
+	///Params: clientCommunicate - communicate received from a client
 	void communicateService(CliComAUTH clientCommunicate);
 	void communicateService(CliComADDRADD clientCommunicate);
 	void communicateService(CliComADDRGETALL clientCommunicate);

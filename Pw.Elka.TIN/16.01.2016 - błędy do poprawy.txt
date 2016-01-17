@@ -12,8 +12,8 @@ Kamil - przy usuwaniu klienta najpierw usunac recznie wszystkie jego adresy, a p
 OK - Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
 OK - Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
 OK - Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
-Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
-Asia - jak przy tworzeniu sesji jest utworzona w stanie Busy to powinno byæ wys³anie klientowi wiadomoœci i roz³¹czenie z klientem
+OK - Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
+OK -Asia - jak przy tworzeniu sesji jest utworzona w stanie Busy to powinno byæ wys³anie klientowi wiadomoœci i roz³¹czenie z klientem
 OK - Asia - Przy tworzeniu i modyfikowaniu nowych rzeczy sprawdzaæ czy istniej¹ ju¿ inne z takimi samymi nazwami i wtedy b³ad. (tylko jeœli Micha³ nie znajdzie unique cnostraint)
 OK - Asia - ³apaæ b³edy receive i send
 
@@ -23,6 +23,7 @@ OK - Wojtek - Sprawdziæ hashowanie has³a po stronie admina - narazie wykomentowa
 OK - Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
 OK - Wojtek - przerobiæ AdminView tak ¿eby patrzy³ czy jakaœ operacja na DAL siê nie uda³a wykonaæ
 Wojtek - w AdminView sprawdzaæ czy np klient ktorego id zostalo podane istnieje przed wykonaniem operacji.
+Wojtek - zmodyfikowaæ treœæ komunikatów wyœwietlanych w kliencie
 
 OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
