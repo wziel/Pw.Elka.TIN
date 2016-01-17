@@ -20,15 +20,19 @@ namespace Pw.Elka.TIN.Client.Logic.Hash
             return hash;
         }
 
-        public static string GetXoredString(string str)
+        public static string GetObfuscatedString(string str)
         {
             byte[] key = { 143, 87, 133, 84, 123, 101, 68 };
-            int minimumStringLength = 16;
+            int minimumStringLength = 32;
             var characters = new char[Math.Max(str.Length, minimumStringLength)];
+            var summedChars = 5381;
 
             for (int i = 0; i < characters.Length; ++i)
             {
-                characters[i] = (char)(key[i % key.Length] ^ str[i % str.Length]);
+                char c = (char)(key[i % key.Length] ^ str[i % str.Length]);
+                summedChars += (int)c;
+
+                characters[i] = (char)('0' + (summedChars % 10));
             }
 
             return new string(characters);

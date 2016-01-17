@@ -1,14 +1,12 @@
 OK - Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
-Kamil - ma zrobiæ delete na smtpmessage po pobraniu z kolejki i zakonczeniu obslugi
+OK - Kamil - ma zrobiæ delete na smtpmessage po pobraniu z kolejki i zakonczeniu obslugi
 OK - Kamil - usuwanie wiadomoœci nie dzia³a
 OK - Kamil - usuwanie grup z przypisanymi adresami nie dzia³a (bez przypisanych adresow jest OK)
 OK - Kamil - usuwanie adresów przypisanych do grup nie dzia³a (jesli nie sa przypisane do grup to jest OK)
-Kamil - usuwanie klienta nie dzia³a czasami
-Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
 OK - Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
-Kamil - W smtp sprawdzaæ czy uda³o siê wys³aæ, a jesli nie to wyœwietliæ error na konsoli (ale nie ma du¿ej presji na to)
 OK - Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatement->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
-Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h)
+Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
+Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h) (ale jeœli teraz dzia³a to nie ma presji na zmiany, ¿eby coœ siê nie zjeba³o)
 
 
 OK - Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
@@ -28,7 +26,8 @@ Wojtek - w AdminView sprawdzaæ czy np klient ktorego id zostalo podane istnieje 
 
 OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
-Micha³ - W DAL pododawaæ sprawdzanie tak jak w getClient(username) - ifSucceeded, a jeœli nie to zwracaæ b³¹d zdefiniowany zgodnie z komentarzami w DAL.h.
+OK - Micha³ - W DAL pododawaæ sprawdzanie tak jak w getClient(username) - ifSucceeded, a jeœli nie to zwracaæ b³¹d zdefiniowany zgodnie z komentarzami w DAL.h.
+Micha³ - chyba trzeba dorobiæ kaskadowe usuwanie klienta te¿ z bazy
 
 WSZYSCY - Pokomentowaæ swoje metody w .h implementacji klasy (nie w interfejsach)
 WSZYSCY - Sprawdziæ czy usuwacie dynamicznie alokowane obiekty (wszystkie nad którymi macie w³adzê)

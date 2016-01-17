@@ -48,6 +48,8 @@ void SmtpLayer::Start()
 			mail->SetReplyTo(LOGIN);
 			if (smtpMessage->isQuitMessage)
 			{
+				delete this->mail;
+				delete smtpMessage;
 				return;
 			}
 			else
@@ -73,6 +75,7 @@ void SmtpLayer::Start()
 			mailError = true;
 		}
 		delete this->mail;
+		delete smtpMessage;
 
 	} while (1);
 }
