@@ -176,10 +176,12 @@ bool ClientSession::Start()
 			if (e == "Network error")
 			{
 				cerr << e;
+				return 1;
 			}
 			if (e == "WSA error")
 			{
 				cerr << e;
+				return 2;
 			}
 		}
 	}

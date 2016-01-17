@@ -79,12 +79,12 @@ void SessionListener::End()
 	try
 	{
 		BOOL ifSucceed;
-		if (ifSucceed = WSASetEvent(wsaEvents[1]) == FALSE);
+		if (ifSucceed = WSASetEvent(wsaEvents[1]) == FALSE)
 		throw "Blad przy SetEvent!";
 	}
 	catch (char const* tekst)
 	{
 		std::cout << tekst << std::endl;
-		exit(1);
+		return;
 	}
 }
