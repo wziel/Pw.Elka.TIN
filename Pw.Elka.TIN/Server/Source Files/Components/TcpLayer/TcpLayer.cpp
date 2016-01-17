@@ -39,6 +39,12 @@ int TcpLayer::End()
 	}
 }
 
+int TcpLayer::CloseSocket()
+{
+	closesocket(socketFD);
+	return 0;
+}
+
 void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 {
 	//Create a buffer to send - header+data
@@ -72,9 +78,7 @@ void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from cl
 
 	if ((signalledEvent - WSA_WAIT_EVENT_0) == 0) // end of TcpLayer
 	{
-		closesocket(socketFD);
 		throw "Client ended";
-		return;
 	}
 
 	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //receive a message or client distonnected
