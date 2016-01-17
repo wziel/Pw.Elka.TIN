@@ -583,12 +583,11 @@ void ClientSession::communicateService(CliComSEND clientCommunicate)
 
 	*/
 
-	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, messageDB.title, readyAddressList);
+	SmtpMessage smtpMessage = SmtpMessage(clientName, readyMessage, messageDB.title, readyAddressList);
 
 	messagesQueue->Push(smtpMessage);
-	ServComACK* ack = new ServComACK();
-	bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-	delete ack;
+	ServComACK ack = ServComACK();
+	bottomLayer->Send(ack.getCommunicate(), ack.getSize());
 }
 
 

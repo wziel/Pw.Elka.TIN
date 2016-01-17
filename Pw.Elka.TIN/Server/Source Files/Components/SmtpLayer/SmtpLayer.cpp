@@ -6,7 +6,6 @@ class MessagesQueue;
 SmtpLayer::SmtpLayer(MessagesQueue* q)
 {
 	this->queue = q;
-
 	this->mailError = false;
 	vector<string> vector1;
 	this->smtpMessage = new SmtpMessage(vector1); // delete  it
@@ -29,9 +28,6 @@ void SmtpLayer::Start()
 	//SmtpMessage forTry = SmtpMessage("tu rozsylacz", "No to sie w koncu doigrales!\n Pozdrawiam Kamil", "gra skonczona" , vector );
 	//forTry.isQuitMessage = false;
 	//queue->Push(forTry);
-
-
-
 
 	do
 	{
@@ -73,7 +69,6 @@ void SmtpLayer::Start()
 			mailError = true;
 		}
 		delete this->mail;
-		delete smtpMessage;
 
 	} while (1);
 }
