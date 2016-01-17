@@ -47,6 +47,7 @@
 #include "../../Components/ClientSession/Communicates/ServComGRPGETONE.h"
 #include "../../Components/ClientSession/Communicates/ServComMSGGETALL.h"
 #include "../../Components/ClientSession/Communicates/ServComMSGGETONE.h"
+#include "../../Components/ClientSession/Communicates/ServComERRADDR.h"
 
 using namespace std;
 

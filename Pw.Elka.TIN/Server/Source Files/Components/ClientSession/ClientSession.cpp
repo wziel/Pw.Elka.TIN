@@ -6,7 +6,7 @@ bool ClientSession::Start()
 {
 	while (true)
 	{
-		try{
+		try {
 			switch (sessionState)
 			{
 			case Unauthorized:
@@ -156,16 +156,25 @@ bool ClientSession::Start()
 				throw "Server state error";
 			}
 			}
-	}
-	catch (const char* e)
-	{
-		if (e == "Client ended")
-		{
-			//register client ended? 
-			clientManager->RegisterClientEnded(*this);
-			break;
 		}
-	}
+		catch (const char* e)
+		{
+			if (e == "Client ended")
+			{
+				//register client ended? 
+				cout << e << ": " << clientName << endl;
+				clientManager->RegisterClientEnded(*this);
+				break;
+			}
+			if (e == "Network error")
+			{
+				cerr << e;
+			}
+			if (e == "WSA error")
+			{
+				cerr << e;
+			}
+		}
 	}
 }
 
@@ -187,52 +196,65 @@ ClientSession::~ClientSession()
 {
 }
 
-void ClientSession:: communicateService(CliComAUTH clientCommunicate)
+void ClientSession::communicateService(CliComAUTH clientCommunicate)
 {
-	//client's data stored in db
-	ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
 
-	if (0) //no such user -don't know what's going to be returned yet
+	if (DAL->IsBlocked(clientId))
 	{
-		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
-		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
-		delete errLogin;
+		//koñczenie sesji
+		return;
 	}
-	
 	else
 	{
-		//password hash stored in DB
-		string passwordDB = clientDB.hashOfPassword;
+		//client's data stored in db
+		ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
 
-		passwordDB.append(salt);
-		
-		//(password hash + salt) hash, (based on DB values)
-		int passwordhashDB = DJBHash(passwordDB);
-
-		if (passwordhashDB == clientCommunicate.getpasswHashAuth())
-		{
-			clientName = clientCommunicate.getUsername();
-			clientId = clientDB.id;
-			ServComACK* ack = new ServComACK();
-			bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-			sessionState = Authorized;
-			delete ack;
-		}
-		else
+		if (clientDB.id < 0) //no such user -don't know what's going to be returned yet
 		{
 			ServComERRLOGIN* errLogin = new ServComERRLOGIN();
 			bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
 			delete errLogin;
 		}
+
+		else
+		{
+			//password hash stored in DB
+			string passwordDB = clientDB.hashOfPassword;
+
+			passwordDB.append(salt);
+
+			//(password hash + salt) hash, (based on DB values)
+			int passwordhashDB = DJBHash(passwordDB);
+
+			if (passwordhashDB == clientCommunicate.getpasswHashAuth())
+			{
+				clientName = clientCommunicate.getUsername();
+				clientId = clientDB.id;
+				ServComACK* ack = new ServComACK();
+				bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+				sessionState = Authorized;
+				delete ack;
+			}
+			else
+			{
+				ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+				bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+				delete errLogin;
+			}
+		}
 	}
 }
+
 
 void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 {
 	AddressModel addressDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (addressDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
+		ServComERRADDR* ack = new ServComERRADDR();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
 	}
 
 	else
@@ -247,8 +269,11 @@ void ClientSession::communicateService(CliComADDRGETALL clientCommunicate)
 {
 	vector<AddressModel> addressVectorDB = DAL->GetAllAddresses(clientId);
 
-	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (addressVectorDB.empty()) //error  
 	{
+		ServComERRADDR* ack = new ServComERRADDR();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
 	}
 
 	else
@@ -263,8 +288,11 @@ void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
 {
 	vector<GroupModel> groupVectorDB = DAL->GetAllGroupsWithoutAdresses(clientId);
 
-	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (groupVectorDB.empty()) 
 	{
+		ServComERRGROUP* errGroup = new ServComERRGROUP();
+		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
+		delete errGroup;
 	}
 
 	else
@@ -279,8 +307,11 @@ void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
 {
 	vector<MessageModel> messageVectorDB = DAL->GetAllMessagesWithoutContent(clientId);
 
-	if (0) //error  -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (messageVectorDB.empty()) //error )
 	{
+			ServComERRMSG* errMsg = new ServComERRMSG();
+			bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+			delete errMsg;
 	}
 	else
 	{
@@ -293,10 +324,13 @@ void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
 void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
 {
 	//client's data stored in db
-	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGroupId(),clientId);
+	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGroupId(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (groupDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
+		ServComERRGROUP* errGroup = new ServComERRGROUP();
+		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
+		delete errGroup;
 	}
 	else
 	{
@@ -310,8 +344,11 @@ void ClientSession::communicateService(CliComMSGGETONE clientCommunicate)
 {
 	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMessageId(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (messageDB.id<0) //error fetching a message
 	{
+		ServComERRMSG* errMsg = new ServComERRMSG();
+		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+		delete errMsg;
 	}
 
 	else
@@ -327,8 +364,11 @@ void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 {
 	GroupModel groupDB = DAL->CreateGroup(clientCommunicate.getGroupName(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (groupDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
+		ServComERRGROUP* errGroup = new ServComERRGROUP();
+		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
+		delete errGroup;
 	}
 
 	else
@@ -344,8 +384,11 @@ void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 {
 	MessageModel messageDB = DAL->CreateMessage(clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (messageDB.id<0) //error creating message
 	{
+		ServComERRMSG* errMsg = new ServComERRMSG();
+		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+		delete errMsg;
 	}
 
 	else
@@ -363,6 +406,9 @@ void ClientSession::communicateService(CliComADDRRMV clientCommunicate)
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
+		ServComERRADDR* ack = new ServComERRADDR();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
 	}
 
 	else
@@ -379,6 +425,9 @@ void ClientSession::communicateService(CliComMSGDELETE clientCommunicate)
 
 	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
+		ServComERRMSG* errMsg = new ServComERRMSG();
+		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+		delete errMsg;
 	}
 	else
 	{
@@ -392,8 +441,11 @@ void ClientSession::communicateService(CliComGRPDELETE clientCommunicate)
 {
 	bool isDeleted = DAL->DeleteGroupById(clientCommunicate.getGrpId(), clientId);
 
-	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (isDeleted == false) //error deleting a group
 	{
+		ServComERRGROUP* errGroup = new ServComERRGROUP();
+		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
+		delete errGroup;
 	}
 	else
 	{
@@ -407,8 +459,11 @@ void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 {
 	MessageModel messageDB = DAL->ModifyMessage(clientCommunicate.getMsgId(), clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (messageDB.id<0) //error modifying a message
 	{
+		ServComERRMSG* errMsg = new ServComERRMSG();
+		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+		delete errMsg;
 	}
 	else
 	{
@@ -421,8 +476,11 @@ void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 void ClientSession::communicateService(CliComGRPADRADD clientCommunicate)
 {
 	bool isAdded = DAL->AddAddressToGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
-	if (isAdded==false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (isAdded == false) //error adding address 
 	{
+		ServComERRADDR* ack = new ServComERRADDR();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
 	}
 	else
 	{
@@ -435,8 +493,11 @@ void ClientSession::communicateService(CliComGRPADRADD clientCommunicate)
 void ClientSession::communicateService(CliComGRPADRRMV clientCommunicate)
 {
 	bool isDeleted = DAL->RemoveAddressFromGroup(clientCommunicate.getGrpId(), clientCommunicate.getAddrId(), clientId);
-	if (isDeleted == false) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (isDeleted == false) //error removing address 
 	{
+		ServComERRADDR* ack = new ServComERRADDR();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		delete ack;
 	}
 	else
 	{
@@ -450,11 +511,11 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 {
 	ClientModel clientDB = DAL->getClient(clientName);
 
-	if (0) //no such user -don't know what's going to be returned yet
+	if (clientDB.id<0) //no such user -don't know what's going to be returned yet
 	{
-		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
-		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
-		delete errLogin;
+		ServComERRSERVUNAV* errUnav = new ServComERRSERVUNAV();
+		bottomLayer->Send(errUnav->getCommunicate(), errUnav->getSize());
+		delete errUnav;
 	}
 	else
 	{
@@ -465,8 +526,11 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 		{
 			bool isChanged = DAL->ChangeHashOfPassword(clientName, clientCommunicate.getNewPasswHash());
 
-			if (isChanged == false)//error
+			if (isChanged == false)
 			{
+				ServComERRSERVUNAV* errUnav = new ServComERRSERVUNAV();
+				bottomLayer->Send(errUnav->getCommunicate(), errUnav->getSize());
+				delete errUnav;
 			}
 			else
 			{
@@ -487,7 +551,23 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 void ClientSession::communicateService(CliComSEND clientCommunicate)
 {
 	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGrpId(), clientId);
+	if (groupDB.id < 0) //no such group
+	{
+		ServComERRGROUP* errGroup = new ServComERRGROUP();
+		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
+		delete errGroup;
+		return;
+	}
+
 	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMsgId(), clientId);
+
+	if (messageDB.id < 0) //no such message
+	{
+		ServComERRMSG* errMsg = new ServComERRMSG();
+		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
+		delete errMsg;
+		return;
+	}
 
 	vector<string> readyAddressList;
 	for (unsigned int i = 0; i < groupDB.addresses.size(); ++i)
@@ -496,23 +576,17 @@ void ClientSession::communicateService(CliComSEND clientCommunicate)
 	}
 
 	string readyMessage = messageDB.content;
-/*
-Here should be combining a message template with the fields
+	/*
+	Here should be combining a message template with the fields
 
-*/
+	*/
 
-	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, messageDB.title ,readyAddressList);
-	if (0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
-	{
-	}
-	else
-	{
-		messagesQueue->Push(smtpMessage);
-//what if error?
-		ServComACK* ack = new ServComACK();
-		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-		delete ack;
-	}
+	SmtpMessage smtpMessage = *new SmtpMessage(clientName, readyMessage, messageDB.title, readyAddressList);
+
+	messagesQueue->Push(smtpMessage);
+	ServComACK* ack = new ServComACK();
+	bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+	delete ack;
 }
 
 

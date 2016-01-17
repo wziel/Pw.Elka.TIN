@@ -8,18 +8,18 @@ TcpLayer::TcpLayer(int socketfd)
 	WSAEventArray[0] = WSACreateEvent();	//event signalling end of client session
 	if (WSAEventArray[0] == WSA_INVALID_EVENT)
 	{
-		throw "WSACreateEvent() error - WSAEventArray[0]";
+		throw "WSA error";
 	}
 
 	WSAEventArray[1] = WSACreateEvent();	//network event - read
 	if (WSAEventArray[1] == WSA_INVALID_EVENT)
 	{
-		throw "WSACreateEvent() error - WSAEventArray[1]";
+		throw "WSA error";
 	}
 	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ);	//associate event with a socket
 	if (iResult != 0)
 	{
-		throw "WSAEventSelect() error";
+		throw "WSA error";
 	}
 }
 
@@ -32,7 +32,7 @@ int TcpLayer :: End()
 		
 	else
 	{
-		throw "WSASetEvent() error";
+		throw "WSA error";
 		return -1;
 	}
 }
@@ -53,7 +53,7 @@ void TcpLayer :: Send(unsigned char* buffer, int size)	//send data to client
 	iResult = send(socketFD, (char*)myBuffer, mySize, NULL);	//send message
 	if (iResult == SOCKET_ERROR)
 	{
-		throw "Send() error";
+		throw "Network error";
 	}
 
 	delete myBuffer;
@@ -65,7 +65,7 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer
 	if (signalledEvent == WSA_WAIT_FAILED)
 	{
-		throw "WSAWaitForMultipleEvents() error";
+		throw "WSA error";
 	}
 
 	if ((signalledEvent - WSA_WAIT_EVENT_0) == 0) // end of TcpLayer
@@ -80,7 +80,7 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 		iResult = recv(socketFD, (char*)mySizeBuffer, 2, NULL); //reading header (contains data size)
 		if (iResult == SOCKET_ERROR)
 		{
-			throw "Recv() error - header";
+			throw "Network error";
 		}
 		
 		mySize = (((mySizeBuffer[1])<<8)|(mySizeBuffer[0]));
@@ -91,7 +91,7 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 		iResult = recv(socketFD, (char*)buffer, mySize, NULL );
 		if (iResult == SOCKET_ERROR)
 		{
-			throw "Recv() error";
+			throw "Network error";
 		}
 
 		WSAResetEvent(WSAEventArray[1]);
