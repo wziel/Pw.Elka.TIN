@@ -199,49 +199,37 @@ ClientSession::~ClientSession()
 void ClientSession::communicateService(CliComAUTH clientCommunicate)
 {
 
-	if (DAL->IsBlocked(clientId))
+	ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
+
+	if (clientDB.blocked || clientDB.id < 0)
 	{
-		//koñczenie sesji
+		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+		delete errLogin;
 		return;
+	}
+	//password hash stored in DB
+	string passwordDB = clientDB.hashOfPassword;
+
+	passwordDB.append(salt);
+
+	//(password hash + salt) hash, (based on DB values)
+	int passwordhashDB = DJBHash(passwordDB);
+
+	if (passwordhashDB == clientCommunicate.getpasswHashAuth())
+	{
+		clientName = clientCommunicate.getUsername();
+		clientId = clientDB.id;
+		ServComACK* ack = new ServComACK();
+		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+		sessionState = Authorized;
+		delete ack;
 	}
 	else
 	{
-		//client's data stored in db
-		ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
-
-		if (clientDB.id < 0) //no such user -don't know what's going to be returned yet
-		{
-			ServComERRLOGIN* errLogin = new ServComERRLOGIN();
-			bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
-			delete errLogin;
-		}
-
-		else
-		{
-			//password hash stored in DB
-			string passwordDB = clientDB.hashOfPassword;
-
-			passwordDB.append(salt);
-
-			//(password hash + salt) hash, (based on DB values)
-			int passwordhashDB = DJBHash(passwordDB);
-
-			if (passwordhashDB == clientCommunicate.getpasswHashAuth())
-			{
-				clientName = clientCommunicate.getUsername();
-				clientId = clientDB.id;
-				ServComACK* ack = new ServComACK();
-				bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-				sessionState = Authorized;
-				delete ack;
-			}
-			else
-			{
-				ServComERRLOGIN* errLogin = new ServComERRLOGIN();
-				bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
-				delete errLogin;
-			}
-		}
+		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
+		bottomLayer->Send(errLogin->getCommunicate(), errLogin->getSize());
+		delete errLogin;
 	}
 }
 
@@ -250,7 +238,7 @@ void ClientSession::communicateService(CliComADDRADD clientCommunicate)
 {
 	AddressModel addressDB = DAL->CreateAddress(clientCommunicate.getAddressName(), clientCommunicate.getAddressValue(), clientId);
 
-	if (addressDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (addressDB.id < 0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 		ServComERRADDR* ack = new ServComERRADDR();
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
@@ -269,56 +257,27 @@ void ClientSession::communicateService(CliComADDRGETALL clientCommunicate)
 {
 	vector<AddressModel> addressVectorDB = DAL->GetAllAddresses(clientId);
 
-	if (addressVectorDB.empty()) //error  
-	{
-		ServComERRADDR* ack = new ServComERRADDR();
-		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-		delete ack;
-	}
-
-	else
-	{
-		ServComADDRGETALL* ack = new ServComADDRGETALL(&addressVectorDB);
-		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-		delete ack;
-	}
+	ServComADDRGETALL* ack = new ServComADDRGETALL(&addressVectorDB);
+	bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+	delete ack;
 }
 
 void ClientSession::communicateService(CliComGRPGETALL clientCommunicate)
 {
 	vector<GroupModel> groupVectorDB = DAL->GetAllGroupsWithoutAdresses(clientId);
 
-	if (groupVectorDB.empty()) 
-	{
-		ServComERRGROUP* errGroup = new ServComERRGROUP();
-		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
-		delete errGroup;
-	}
-
-	else
-	{
-		ServComGRPGETALL* ack = new ServComGRPGETALL(&groupVectorDB);
-		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-		delete ack;
-	}
+	ServComGRPGETALL* ack = new ServComGRPGETALL(&groupVectorDB);
+	bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+	delete ack;
 }
 
 void ClientSession::communicateService(CliComMSGGETALL clientCommunicate)
 {
 	vector<MessageModel> messageVectorDB = DAL->GetAllMessagesWithoutContent(clientId);
 
-	if (messageVectorDB.empty()) //error )
-	{
-			ServComERRMSG* errMsg = new ServComERRMSG();
-			bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
-			delete errMsg;
-	}
-	else
-	{
-		ServComMSGGETALL* ack = new ServComMSGGETALL(&messageVectorDB);
-		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
-		delete ack;
-	}
+	ServComMSGGETALL* ack = new ServComMSGGETALL(&messageVectorDB);
+	bottomLayer->Send(ack->getCommunicate(), ack->getSize());
+	delete ack;
 }
 
 void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
@@ -326,7 +285,7 @@ void ClientSession::communicateService(CliComGRPGETONE clientCommunicate)
 	//client's data stored in db
 	GroupModel groupDB = DAL->GetGroupById(clientCommunicate.getGroupId(), clientId);
 
-	if (groupDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (groupDB.id < 0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 		ServComERRGROUP* errGroup = new ServComERRGROUP();
 		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
@@ -344,7 +303,7 @@ void ClientSession::communicateService(CliComMSGGETONE clientCommunicate)
 {
 	MessageModel messageDB = DAL->GetMessageById(clientCommunicate.getMessageId(), clientId);
 
-	if (messageDB.id<0) //error fetching a message
+	if (messageDB.id < 0) //error fetching a message
 	{
 		ServComERRMSG* errMsg = new ServComERRMSG();
 		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
@@ -364,7 +323,7 @@ void ClientSession::communicateService(CliComGRPCREATE clientCommunicate)
 {
 	GroupModel groupDB = DAL->CreateGroup(clientCommunicate.getGroupName(), clientId);
 
-	if (groupDB.id<0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
+	if (groupDB.id < 0) //error adding address -don't know what's going to be returned yet (np. adres ju¿ istnieje)
 	{
 		ServComERRGROUP* errGroup = new ServComERRGROUP();
 		bottomLayer->Send(errGroup->getCommunicate(), errGroup->getSize());
@@ -384,7 +343,7 @@ void ClientSession::communicateService(CliComMSGCREATE clientCommunicate)
 {
 	MessageModel messageDB = DAL->CreateMessage(clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
-	if (messageDB.id<0) //error creating message
+	if (messageDB.id < 0) //error creating message
 	{
 		ServComERRMSG* errMsg = new ServComERRMSG();
 		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
@@ -459,7 +418,7 @@ void ClientSession::communicateService(CliComMSGMODIFY clientCommunicate)
 {
 	MessageModel messageDB = DAL->ModifyMessage(clientCommunicate.getMsgId(), clientCommunicate.getMsgTitle(), clientCommunicate.getMsgContent(), clientId);
 
-	if (messageDB.id<0) //error modifying a message
+	if (messageDB.id < 0) //error modifying a message
 	{
 		ServComERRMSG* errMsg = new ServComERRMSG();
 		bottomLayer->Send(errMsg->getCommunicate(), errMsg->getSize());
@@ -511,7 +470,7 @@ void ClientSession::communicateService(CliComPSSWCHG clientCommunicate)
 {
 	ClientModel clientDB = DAL->getClient(clientName);
 
-	if (clientDB.id<0) //no such user -don't know what's going to be returned yet
+	if (clientDB.id < 0) //no such user -don't know what's going to be returned yet
 	{
 		ServComERRSERVUNAV* errUnav = new ServComERRSERVUNAV();
 		bottomLayer->Send(errUnav->getCommunicate(), errUnav->getSize());
