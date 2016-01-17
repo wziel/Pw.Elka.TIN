@@ -25,6 +25,8 @@ private:
 	int socketFD;
 //Array of network events
 	WSAEVENT WSAEventArray[2];
+//Network events associated with WSAEventArray[0]
+	WSANETWORKEVENTS NetworkEvents;
 //Helper variable - result of function call
 	int iResult;
 //Signalled event
@@ -35,6 +37,8 @@ private:
 	int mySize; 
 //Size of buffer for data (byte form)
 	unsigned char mySizeBuffer[2];
+
+
 
 };
 

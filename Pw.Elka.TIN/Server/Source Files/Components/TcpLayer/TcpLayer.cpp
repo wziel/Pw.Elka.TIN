@@ -16,20 +16,22 @@ TcpLayer::TcpLayer(int socketfd)
 	{
 		throw "WSA error";
 	}
-	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ);	//associate event with a socket
+	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ | FD_CLOSE);	//associate event with a socket
 	if (iResult != 0)
 	{
 		throw "WSA error";
 	}
+
+
 }
 
-int TcpLayer :: End()
+int TcpLayer::End()
 {
-	if(WSASetEvent(WSAEventArray[0]) == TRUE)	//successfully signal an ending event
+	if (WSASetEvent(WSAEventArray[0]) == TRUE)	//successfully signal an ending event
 	{
 		return 0;
 	}
-		
+
 	else
 	{
 		throw "WSA error";
@@ -37,7 +39,7 @@ int TcpLayer :: End()
 	}
 }
 
-void TcpLayer :: Send(unsigned char* buffer, int size)	//send data to client
+void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 {
 	//Create a buffer to send - header+data
 	mySize = size + 2;
@@ -59,7 +61,7 @@ void TcpLayer :: Send(unsigned char* buffer, int size)	//send data to client
 	delete myBuffer;
 }
 
-void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from client
+void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from client
 {
 
 	signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer
@@ -74,24 +76,32 @@ void TcpLayer :: Receive(unsigned char* &buffer, int &size)	//receive data from 
 		throw "Client ended";
 		return;
 	}
-	
-	else if ((signalledEvent- WSA_WAIT_EVENT_0) == 1) //receive a message
-	{	
-		iResult = recv(socketFD, (char*)mySizeBuffer, 2, NULL); //reading header (contains data size)
-		if (iResult == SOCKET_ERROR)
+
+	else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //receive a message or client distonnected
+	{
+		WSAEnumNetworkEvents(socketFD, WSAEventArray[1], &NetworkEvents);
+		if (NetworkEvents.lNetworkEvents & FD_READ)
 		{
-			throw "Network error";
+			iResult = recv(socketFD, (char*)mySizeBuffer, 2, NULL); //reading header (contains data size)
+			if (iResult == SOCKET_ERROR)
+			{
+				throw "Network error";
+			}
+
+			mySize = (((mySizeBuffer[1]) << 8) | (mySizeBuffer[0]));
+			size = mySize;
+
+			buffer = new unsigned char[mySize];
+
+			iResult = recv(socketFD, (char*)buffer, mySize, NULL);
+			if (iResult == SOCKET_ERROR)
+			{
+				throw "Network error";
+			}
 		}
-		
-		mySize = (((mySizeBuffer[1])<<8)|(mySizeBuffer[0]));
-		size = mySize;
-
-		buffer = new unsigned char[mySize];
-
-		iResult = recv(socketFD, (char*)buffer, mySize, NULL );
-		if (iResult == SOCKET_ERROR)
+		else if (NetworkEvents.lNetworkEvents & FD_CLOSE)
 		{
-			throw "Network error";
+			throw "Client ended externally";
 		}
 
 		WSAResetEvent(WSAEventArray[1]);
