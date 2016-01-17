@@ -111,22 +111,19 @@ void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
 }
 
 string AdministratorView::GetHashedString(string str)
-{/*
+{
 	unsigned char key[7] = { 143, 87, 133, 84, 123, 101, 68 };
 	std::size_t minimumStringLength = 16;
 	std::size_t characterLength = max(str.length(), minimumStringLength);
-	unsigned char* characters = new unsigned char[characterLength];
+	string returnStr = "";
 
 	for (unsigned int i = 0; i < characterLength; ++i)
 	{
-		characters[i] = ((key[i % 7]) ^ (str[i % str.length()]));
+		char c = ((key[i % 7]) ^ (str[i % str.length()]));
+		returnStr.append(1, c);
 	}
 
-	string returnStr;
-	returnStr.assign((char*)characters, characterLength);
-	delete characters;
-	return returnStr;*/
-	return str;
+	return returnStr;
 }
 
 void AdministratorView::mainLoop()

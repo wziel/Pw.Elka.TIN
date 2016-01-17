@@ -135,11 +135,15 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 	HANDLE threadHandle = params->thread;
 	WaitForSingleObject(params->thread, INFINITE);
 
+	int id;
+
 	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
 	for (unsigned int i = 0; i < rootManager.clientSessions.size(); ++i)
 	{
 		if (threadHandle == rootManager.clientSessions[i]->thread)
 		{
+			id = rootManager.clientSessions[i]->connectionId;
+
 			delete rootManager.clientSessions[i]->cipher;
 			delete rootManager.clientSessions[i]->clientSession;
 			delete rootManager.clientSessions[i]->tcpLayer;
@@ -148,7 +152,7 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 		}
 	}
 	ReleaseMutex(rootManager.clientSessionsMutex);
-
+	std::cout << "Session " << id << " ended successfully\n";
 	delete params;
 	return 0;
 }
