@@ -22,17 +22,16 @@ namespace Pw.Elka.TIN.Client.Logic.Hash
 
         public static string GetXoredString(string str)
         {
-            return str;
-            //byte[] key = { 143, 87, 133, 84, 123, 101, 68 };
-            //int minimumStringLength = 16;
-            //var characters = new char[Math.Max(str.Length, minimumStringLength)];
+            byte[] key = { 143, 87, 133, 84, 123, 101, 68 };
+            int minimumStringLength = 16;
+            var characters = new char[Math.Max(str.Length, minimumStringLength)];
 
-            //for (int i = 0; i < characters.Length; ++i)
-            //{
-            //    characters[i] = (char)(key[i % key.Length] ^ str[i % str.Length]);
-            //}
-            
-            //return new string(characters);
+            for (int i = 0; i < characters.Length; ++i)
+            {
+                characters[i] = (char)(key[i % key.Length] ^ str[i % str.Length]);
+            }
+
+            return new string(characters);
         }
     }
 }
