@@ -20,7 +20,7 @@ void Cipher::Send(unsigned char *buffer, int size)
 	for (int i = 0; i < size; i++)
 		myBuffer[i + 3] = buffer[i] ^ keyCode[i % 6];
 	bottomLayer->Send(myBuffer, mySize);
-	delete myBuffer;
+	delete[] myBuffer;
 }
 
 void Cipher::Receive(unsigned char* &buffer, int &size)
@@ -34,7 +34,7 @@ void Cipher::Receive(unsigned char* &buffer, int &size)
 	{
 		for (int i = 0; i < size; i++)
 			buffer[i] = myBuffer[i + 3] ^ keyCode[i % 6];
-		delete myBuffer;
+		delete[] myBuffer;
 	}
 	else
 		throw "Selected encryption method is not supported";
