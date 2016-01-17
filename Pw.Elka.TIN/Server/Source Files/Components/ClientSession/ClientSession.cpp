@@ -177,34 +177,34 @@ bool ClientSession::Start()
 		{
 			if (e == "Client ended")
 			{
-				cout << e << ": " << clientName << endl;
+				//cout << e << ": " << clientName << endl;
 				return true;
 			}
 			if (e == "Client ended externally")
 			{
-				cout << e << ": " << clientName << endl;
+				//cout << e << ": " << clientName << endl;
 				clientManager->RegisterClientEnded(*this);
 				return false;
 			}
 			if (e == "Network error")
 			{
-				cerr << e;
+				//cerr << e;
 				return false;
 			}
 			if (e == "WSA error")
 			{
-				cerr << e;
+				//cerr << e;
 				return false;
 			}
 			if (e == "Client blocked" )
 			{
-				cerr << e<< ": " << clientName << endl;
+				//cerr << e<< ": " << clientName << endl;
 				clientManager->RegisterClientEnded(*this);
 				return false;
 			}
 			if (e == "Server busy")
 			{
-				cerr << e ;
+				//cerr << e ;
 				ServComERRBUSY* busy = new ServComERRBUSY();
 				bottomLayer->Send(busy->getCommunicate(), busy->getSize());
 				delete busy;
@@ -214,7 +214,7 @@ bool ClientSession::Start()
 			}
 			if (e == "Server state error")
 			{
-				cerr << e;
+				//cerr << e;
 				clientManager->RegisterClientEnded(*this);
 				return false;
 			}
@@ -246,7 +246,7 @@ void ClientSession::communicateService(CliComAUTH clientCommunicate)
 
 	ClientModel clientDB = DAL->getClient(clientCommunicate.getUsername());
 
-	if (clientDB.blocked || clientDB.id < 0)
+	if (clientDB.blocked || clientDB.id < 0 || clientManager->DoesSessionExistForClient(clientCommunicate.getUsername()))
 	{
 		clientName = clientCommunicate.getUsername();
 		ServComERRLOGIN* errLogin = new ServComERRLOGIN();
