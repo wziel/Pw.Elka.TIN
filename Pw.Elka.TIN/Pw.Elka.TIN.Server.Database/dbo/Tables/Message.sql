@@ -4,9 +4,11 @@
     [title]      VARCHAR (50)  NOT NULL,
     [content]    VARCHAR (500) NOT NULL,
     CONSTRAINT [PK_Message] PRIMARY KEY CLUSTERED ([id_message] ASC),
-    CONSTRAINT [FK_Message_Client] FOREIGN KEY ([id_client]) REFERENCES [dbo].[Client] ([id_client]),
+    CONSTRAINT [FK_Message_Client] FOREIGN KEY ([id_client]) REFERENCES [dbo].[Client] ([id_client]) ON DELETE CASCADE,
     CONSTRAINT [wiadomosc_klient] UNIQUE NONCLUSTERED ([id_client] ASC, [title] ASC)
 );
+
+
 
 
 

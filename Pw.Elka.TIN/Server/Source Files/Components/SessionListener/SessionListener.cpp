@@ -80,7 +80,7 @@ void SessionListener::End()
 	{
 		BOOL ifSucceed;
 		if (ifSucceed = WSASetEvent(wsaEvents[1]) == FALSE)
-		throw "Blad przy SetEvent!";
+			throw "Blad przy SetEvent!";
 	}
 	catch (char const* tekst)
 	{
