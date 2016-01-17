@@ -93,6 +93,7 @@ public:
 
 	///IClientManager interface
 	void RegisterClientEnded(IClientSessionManager &clientSessionManager) override;
+	bool DoesSessionExistForClient(string loginname) override;
 
 	///IClientSessionsRegister interface
 	std::vector<ClientSessionView> GetAllClientSessionViews() override;
