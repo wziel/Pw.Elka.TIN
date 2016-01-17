@@ -16,6 +16,7 @@ public:
 	~TcpLayer();
 //ITcpLayerManager intereface
 	int End();
+	int CloseSocket();
 //ILayer interface
 	void Send(unsigned char* buffer, int size);
 	void Receive(unsigned char* &buffer, int &size);

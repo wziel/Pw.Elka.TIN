@@ -8,6 +8,7 @@ class ITcpLayerManager
 public:
 	virtual ~ITcpLayerManager() {};
 	virtual int End() = 0;
+	virtual int CloseSocket() = 0;
 };
 
 #endif

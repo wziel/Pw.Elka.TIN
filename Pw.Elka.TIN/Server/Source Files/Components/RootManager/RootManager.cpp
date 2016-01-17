@@ -57,6 +57,7 @@ void RootManager::End()
 	for (int i = clientSessions.size() - 1; i >= 0; --i)
 	{
 		WaitForSingleObject(clientSessions[i]->thread, INFINITE);
+		clientSessions[i]->tcpLayer->CloseSocket();
 	}
 	ReleaseMutex(clientSessionsMutex);
 }
@@ -144,6 +145,7 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 		{
 			id = rootManager.clientSessions[i]->connectionId;
 
+			rootManager.clientSessions[i]->tcpLayer->CloseSocket();
 			delete rootManager.clientSessions[i]->cipher;
 			delete rootManager.clientSessions[i]->clientSession;
 			delete rootManager.clientSessions[i]->tcpLayer;
