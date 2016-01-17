@@ -3,6 +3,9 @@
     [login]         VARCHAR (50) NOT NULL,
     [password_hash] VARCHAR (50) NOT NULL,
     [blocked]       BIT          NOT NULL,
-    CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED ([id_client] ASC)
+    CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED ([id_client] ASC),
+    CONSTRAINT [UK_login] UNIQUE NONCLUSTERED ([login] ASC)
 );
+
+
 

@@ -29,44 +29,58 @@ bool DAL::ExecutePreparedStatement(PreparedStatement *preparedStatement)
 		return false;
 	}
 }
-
+// sprawdz to bo nie wierze ze to dziala
 bool DAL::CreateClient(string login, string hashOfPassword)
 {
-	int clientId;
-	ResultSet *resultSet;
+	//int clientId;
+	//ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 
+	//if (getClient(login).id < 0) return false;
+
 	string part1 = "INSERT INTO LokalnaBazaDanychTIN.dbo.Client ( login, password_hash , blocked ) VALUES( '";
-	string part2 = " Select IDENT_CURRENT( 'LokalnaBazaDanychTIN.dbo.Client' ) AS last_inserted_row ";
+	//string part2 = " Select IDENT_CURRENT( 'LokalnaBazaDanychTIN.dbo.Client' ) AS last_inserted_row ";
 
 
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + "' , '" + hashOfPassword + "' ,  0  )"));
 	if (ExecutePreparedStatement(preparedStatement) == false) return false;
 
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part2));
-	if (ExecutePreparedStatement(preparedStatement) == false) return false;
+	//preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part2));
+	//if (ExecutePreparedStatement(preparedStatement) == false) return false;
 
-	resultSet = preparedStatement->getResultSet();
-	if (resultSet->next() == false) return false;
+	//resultSet = preparedStatement->getResultSet();
+	//if (resultSet->next() == false) return false;
 
-	clientId = resultSet->getInt("last_inserted_row");
+	//clientId = resultSet->getInt("last_inserted_row");
 	return true;
 }
+//// Przetestuj
 bool DAL::DeleteClient(string login)
-{
+{	
+	if (getClient(login).id < 0) return false;
+
+	ClientModel client = this->getClient(login);
 	PreparedStatement *preparedStatement;
-	string  sClientId, sMessageId;
+	string  sClientId ;
+	ostringstream konwersja;
+	konwersja << client.id;
+	sClientId = konwersja.str();
+	konwersja.str("");
+	konwersja.clear();
 
-	string part1 = "DELETE FROM LokalnaBazaDanychTIN.dbo.Client WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
+	string part1 = "DELETE FROM LokalnaBazaDanychTIN.dbo.Address Where LokalnaBazaDanychTIN.dbo.Address.id_client = ";
+	string part2 = "DELETE FROM LokalnaBazaDanychTIN.dbo.Client WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
 
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + "'"));
+	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sClientId  ));
+	if (ExecutePreparedStatement(preparedStatement) == false) return false;
+	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part2 + login + "'"));
 	if (ExecutePreparedStatement(preparedStatement) == false) return false;
 
 	return true;
 }
 bool DAL::ChangeLogin(string login, string newLogin)
 {
-
+	if (getClient(login).id < 0) return false;
 	PreparedStatement *preparedStatement;
 
 	string part1 = "UPDATE LokalnaBazaDanychTIN.dbo.Client SET LokalnaBazaDanychTIN.dbo.Client.login = '";
@@ -107,6 +121,8 @@ vector<ClientModel> DAL::GetAllClients()
 bool  DAL::UnblockClient(string login)
 {
 	PreparedStatement *preparedStatement;
+
+	if (getClient(login).id < 0) return false;
 
 	string part1 = "UPDATE LokalnaBazaDanychTIN.dbo.Client SET LokalnaBazaDanychTIN.dbo.Client.blocked = 0 WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
 
@@ -274,6 +290,7 @@ vector<GroupModel> DAL::GetAllGroupsWithoutAdresses(int clientId)
 	}
 	return  groups;
 }
+// nie u¿ywam clientId
 GroupModel DAL::GetGroupById(int groupId, int clientId)
 {
 	int addressId;
@@ -319,7 +336,7 @@ GroupModel DAL::GetGroupById(int groupId, int clientId)
 
 bool DAL::DeleteGroupById(int groupId, int clientId)
 {
-	ResultSet *resultSet;
+//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId;
 	ostringstream konwersja;
@@ -367,7 +384,7 @@ GroupModel DAL::CreateGroup(string name, int clientId)
 }
 bool DAL::AddAddressToGroup(int groupId, int addressId, int clientId)
 {
-	ResultSet *resultSet;
+//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId, sAddressId;
 	ostringstream konwersja;
@@ -387,7 +404,7 @@ bool DAL::AddAddressToGroup(int groupId, int addressId, int clientId)
 }
 bool DAL::RemoveAddressFromGroup(int groupId, int addressId, int clientId)
 {
-	ResultSet *resultSet;
+//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId, sAddressId;
 	ostringstream konwersja;
@@ -406,16 +423,18 @@ bool DAL::RemoveAddressFromGroup(int groupId, int addressId, int clientId)
 
 	return true;
 }
-string DAL::GetHashOfPassword(string username)
+string DAL::GetHashOfPassword(string login)
 {
 
 	string hash;
 	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 
+	if (getClient(login).id < 0) return false;
+
 	string part1 = "SELECT LokalnaBazaDanychTIN.dbo.Client.password_hash  FROM  LokalnaBazaDanychTIN.dbo.Client WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
 
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + username + " ' "));
+	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + " ' "));
 	if (ExecutePreparedStatement(preparedStatement) == false) return "";
 
 	resultSet = preparedStatement->getResultSet();
@@ -455,7 +474,7 @@ AddressModel DAL::CreateAddress(string addrName, string addrValue, int clientId)
 }
 bool DAL::DeleteAddress(int addrId, int clientId)
 {
-	ResultSet *resultSet;
+//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sAddrId, sClientId;
 	ostringstream konwersja;
@@ -485,7 +504,6 @@ vector<AddressModel> DAL::GetAllAddresses(int clientId)
 	sClientId = konwersja.str();
 	konwersja.str("");
 	konwersja.clear();
-
 	string part1 = "SELECT * FROM LokalnaBazaDanychTIN.dbo.Address WHERE LokalnaBazaDanychTIN.dbo.Address.id_client = ";
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + sClientId));
 	if (ExecutePreparedStatement(preparedStatement) == false) return vector;
@@ -506,8 +524,10 @@ vector<AddressModel> DAL::GetAllAddresses(int clientId)
 //IDAL.h
 bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 {
-	ResultSet *resultSet;
+//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
+
+	if (getClient(login).id < 0) return false;
 
 	string part1 = "UPDATE LokalnaBazaDanychTIN.dbo.Client SET LokalnaBazaDanychTIN.dbo.Client.password_hash = '";
 	string part2 = "' WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
@@ -519,8 +539,11 @@ bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 }
 bool DAL::BlockClient(string login)
 {
-	ResultSet *resultSet;
+////	ResultSet *resultSet;
+	
 	PreparedStatement *preparedStatement;
+
+	if (getClient(login).id < 0) return false;
 
 	string part1 = "UPDATE LokalnaBazaDanychTIN.dbo.Client SET LokalnaBazaDanychTIN.dbo.Client.blocked = 1 WHERE LokalnaBazaDanychTIN.dbo.Client.login = '";
 
@@ -538,9 +561,8 @@ ClientModel DAL::getClient(string login)
 	bool blocked;
 
 	string part1 = "SELECT *  FROM  LokalnaBazaDanychTIN.dbo.Client WHERE login = '";
-	string part2 = "' ";
 
-	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + part2));
+	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login  + "' "));
 	if (ExecutePreparedStatement(preparedStatement) == false) return ClientModel(-1, "", "", false);
 	resultSet = preparedStatement->getResultSet();
 
