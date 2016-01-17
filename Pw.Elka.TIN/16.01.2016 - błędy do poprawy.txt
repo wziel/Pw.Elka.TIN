@@ -1,12 +1,12 @@
-Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
+OK - Kamil - gdy nie ma u¿ytkownika i sie logujemy to sie wysypuje
 Kamil - ma zrobiæ delete na smtpmessage po pobraniu z kolejki i zakonczeniu obslugi
-Kamil - usuwanie wiadomoœci nie dzia³a
-Kamil - usuwanie grup nie dzia³a
-Kamil - usuwanie adresów nie dzia³a
+OK - Kamil - usuwanie wiadomoœci nie dzia³a
+OK - Kamil - usuwanie grup z przypisanymi adresami nie dzia³a (bez przypisanych adresow jest OK)
+OK - Kamil - usuwanie adresów przypisanych do grup nie dzia³a (jesli nie sa przypisane do grup to jest OK)
 Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
 OK - Wojtek - w c# przy zaznaczeniu kontrolki zaznaczyæ wszystkie literki
 Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
-Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy // OK
+OK - Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
 Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)
 Asia - jak klient koñczy zdalnie sesje to sesja sie nie koñczy
 Asia - jak user jest zablokowany to nie powinnien móc nawi¹zaæ sesji
@@ -16,10 +16,10 @@ OK - Wojtek - Przy wyœwietlaniu klientów w adminie wyœwietlaæ informacje czy s¹ 
 Wojtek - Sprawdziæ hashowanie has³a po stronie admina - narazie wykomentowane
 OK - Wojtek - W aplikacji klienckiej mo¿na tworzyæ obiekty tylko z polskimi znakami.
 Asia - Przy tworzeniu i modyfikowaniu nowych rzeczy sprawdzaæ czy istniej¹ ju¿ inne z takimi samymi nazwami i wtedy b³ad. (tylko jeœli Micha³ nie znajdzie unique cnostraint)
-Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
+OK - Micha³ - jak session listener siê wysypie to wypisaæ coœ na konsole albo co.. ³apaæ wyj¹tek w ka¿dym razie
 Asia - ³apaæ b³edy receive i send
-Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatemend->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
-Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
+Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatement->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
+OK - Micha³ - Sprawdziæ czy da sie unique constraint na pary danych i daæ tam gdzie trzeba np (grupa - groupname, clientid)
 WSZYSCY - Pokomentowaæ swoje metody w .h implementacji klasy (nie w interfejsach)
 WSZYSCY - Sprawdziæ czy usuwacie dynamicznie alokowane obiekty (wszystkie nad którymi macie w³adzê)
 Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h)

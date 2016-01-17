@@ -305,7 +305,7 @@ bool DAL::DeleteMessage(int messageId, int clientId)
 	//cout << "temat:  " << title << endl;
 	//cout << "zawartosc: " << content << endl; 
 
-	return 0;
+	return true;
 
 	/* MOCK 
 
@@ -799,7 +799,9 @@ ClientModel DAL::getClient(string login)
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + part2));
 	preparedStatement->execute();
 	resultSet = preparedStatement->getResultSet();
-	resultSet->next();
+	bool ifSucceed = resultSet->next();
+	if (!ifSucceed)
+		return ClientModel(-1, "", "", false);
 	clientId = resultSet->getInt("id_client");
 	hash = resultSet->getString("password_hash");
 	blocked = resultSet->getBoolean("blocked");
