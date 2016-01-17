@@ -148,8 +148,7 @@ bool ClientSession::Start()
 
 			case Busy:
 			{
-				throw "Unimplemented";
-				break;
+				throw "Server busy";
 			}
 			default:
 			{
@@ -186,6 +185,19 @@ bool ClientSession::Start()
 				clientManager->RegisterClientEnded(*this);
 				return false;
 			}
+			if (e == "Server busy")
+			{
+				cerr << e ;
+				clientManager->RegisterClientEnded(*this);
+				return false;
+			}
+			if (e == "Server state error")
+			{
+				cerr << e;
+				clientManager->RegisterClientEnded(*this);
+				return false;
+			}
+
 		}
 	}
 }
@@ -237,6 +249,7 @@ void ClientSession::communicateService(CliComAUTH clientCommunicate)
 		ServComACK* ack = new ServComACK();
 		bottomLayer->Send(ack->getCommunicate(), ack->getSize());
 		sessionState = Authorized;
+		//sessionState = Busy;
 		delete ack;
 	}
 	else
