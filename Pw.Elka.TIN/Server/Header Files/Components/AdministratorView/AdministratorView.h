@@ -19,7 +19,7 @@ private:
 	void clientDelete(string login);
 	void clientSetPass(string login, string password);
 	void clientSetLogin(string oldLogin, string newLogin);
-	static string GetHashedString(string str);
+	static string GetObfuscatedString(string str);
 
 	void mainLoop();
 

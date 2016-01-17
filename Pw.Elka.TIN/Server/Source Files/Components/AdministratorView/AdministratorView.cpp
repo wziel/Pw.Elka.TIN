@@ -106,7 +106,7 @@ void AdministratorView::clientBlock(string login, bool isBlocked)
 
 void AdministratorView::clientCreate(string login, string password)
 {
-	if (DAL.CreateClient(login, GetHashedString(password)))
+	if (DAL.CreateClient(login, GetObfuscatedString(password)))
 	{
 		std::cout << "Successfully created client.\n";
 	}
@@ -130,7 +130,7 @@ void AdministratorView::clientDelete(string login)
 
 void AdministratorView::clientSetPass(string login, string password)
 {
-	if (DAL.ChangeHashOfPassword(login, GetHashedString(password)))
+	if (DAL.ChangeHashOfPassword(login, GetObfuscatedString(password)))
 	{
 		std::cout << "Successfully changed client password.\n";
 	}
@@ -152,17 +152,21 @@ void AdministratorView::clientSetLogin(string oldLogin, string newLogin)
 	}
 }
 
-string AdministratorView::GetHashedString(string str)
+string AdministratorView::GetObfuscatedString(string str)
 {
 	unsigned char key[7] = { 143, 87, 133, 84, 123, 101, 68 };
-	std::size_t minimumStringLength = 16;
+	std::size_t minimumStringLength = 32;
 	std::size_t characterLength = max(str.length(), minimumStringLength);
 	string returnStr = "";
+	int summedChars = 5381;
 
 	for (unsigned int i = 0; i < characterLength; ++i)
 	{
-		char c = ((key[i % 7]) ^ (str[i % str.length()]));
-		returnStr.append(1, c);
+		unsigned char c = ((key[i % 7]) ^ (str[i % str.length()]));
+		summedChars += (int)c;
+		char toAppend = (char)('0' + (summedChars % 10));
+
+		returnStr.append(1, toAppend);
 	}
 
 	return returnStr;
