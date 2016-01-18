@@ -4,14 +4,8 @@
 #include <Ws2tcpip.h>
 
 
-
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Constructor of CSmtp class.
-//   ARGUMENTS: none
-// USES GLOBAL: none
-// MODIFIES GL: m_iXPriority, m_iSMTPSrvPort, RecvBuf, SendBuf
-//     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
+///     RETURNS: none
 CSmtp::CSmtp()
 {
 	m_iXPriority = XPRIORITY_NORMAL;
@@ -35,13 +29,9 @@ CSmtp::CSmtp()
 		throw ECSmtp(ECSmtp::LACK_OF_MEMORY);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Destructor of CSmtp class.
-//   ARGUMENTS: none
-// USES GLOBAL: RecvBuf, SendBuf
-// MODIFIES GL: RecvBuf, SendBuf
-//     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
+//   RETURNS: none
 CSmtp::~CSmtp()
 {
 	if(SendBuf)
@@ -59,27 +49,11 @@ CSmtp::~CSmtp()
 	WSACleanup();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: New attachment is added.
-//   ARGUMENTS: const char *Path - name of attachment added
-// USES GLOBAL: Attachments
-// MODIFIES GL: Attachments
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::AddAttachment(const char *Path)
-{
-	assert(Path);
-	Attachments.insert(Attachments.end(),Path);
-}
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: New recipient data is added i.e.: email and name. .
 //   ARGUMENTS: const char *email - mail of the recipient
 //              const char *name - name of the recipient
-// USES GLOBAL: Recipients
-// MODIFIES GL: Recipients
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::AddRecipient(const char *email, const char *name)
 {	
 	if(!email)
@@ -92,65 +66,19 @@ void CSmtp::AddRecipient(const char *email, const char *name)
 	Recipients.insert(Recipients.end(), recipient);   
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: New cc-recipient data is added i.e.: email and name. .
-//   ARGUMENTS: const char *email - mail of the cc-recipient
-//              const char *name - name of the ccc-recipient
-// USES GLOBAL: CCRecipients
-// MODIFIES GL: CCRecipients
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::AddCCRecipient(const char *email, const char *name)
-{	
-	if(!email)
-		throw ECSmtp(ECSmtp::UNDEF_RECIPIENT_MAIL);
 
-	Recipient recipient;
-	recipient.Mail.insert(0,email);
-	name!=NULL ? recipient.Name.insert(0,name) : recipient.Name.insert(0,"");
 
-	CCRecipients.insert(CCRecipients.end(), recipient);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: New bcc-recipient data is added i.e.: email and name. .
-//   ARGUMENTS: const char *email - mail of the bcc-recipient
-//              const char *name - name of the bccc-recipient
-// USES GLOBAL: BCCRecipients
-// MODIFIES GL: BCCRecipients
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::AddBCCRecipient(const char *email, const char *name)
-{	
-	if(!email)
-		throw ECSmtp(ECSmtp::UNDEF_RECIPIENT_MAIL);
-
-	Recipient recipient;
-	recipient.Mail.insert(0,email);
-	name!=NULL ? recipient.Name.insert(0,name) : recipient.Name.insert(0,"");
-
-	BCCRecipients.insert(BCCRecipients.end(), recipient);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Adds new line in a message.
 //   ARGUMENTS: const char *Text - text of the new line
-// USES GLOBAL: MsgBody
-// MODIFIES GL: MsgBody
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::AddMsgLine(const char* Text)
 {
 	MsgBody.insert(MsgBody.end(),Text);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Deletes specified line in text message.. .
 //   ARGUMENTS: unsigned int Line - line to be delete
-// USES GLOBAL: MsgBody
-// MODIFIES GL: MsgBody
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::DelMsgLine(unsigned int Line)
 {
 	if(Line > MsgBody.size())
@@ -158,73 +86,27 @@ void CSmtp::DelMsgLine(unsigned int Line)
 	MsgBody.erase(MsgBody.begin()+Line);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Deletes all recipients. .
-//   ARGUMENTS: void
-// USES GLOBAL: Recipients
-// MODIFIES GL: Recipients
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::DelRecipients()
 {
 	Recipients.clear();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Deletes all BCC recipients. .
-//   ARGUMENTS: void
-// USES GLOBAL: BCCRecipients
-// MODIFIES GL: BCCRecipients
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::DelBCCRecipients()
-{
-	BCCRecipients.clear();
-}
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Deletes all CC recipients. .
-//   ARGUMENTS: void
-// USES GLOBAL: CCRecipients
-// MODIFIES GL: CCRecipients
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::DelCCRecipients()
-{
-	CCRecipients.clear();
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Deletes message text.
 //   ARGUMENTS: void
-// USES GLOBAL: MsgBody
-// MODIFIES GL: MsgBody
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::DelMsgLines()
 {
 	MsgBody.clear();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Deletes all recipients. .
-//   ARGUMENTS: void
-// USES GLOBAL: Attchments
-// MODIFIES GL: Attachments
-//     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
-void CSmtp::DelAttachments()
-{
-	Attachments.clear();
-}
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: New bcc-recipient data is added i.e.: email and name. .
+// DESCRIPTION: New recipient data is added i.e.: email and name. .
 //   ARGUMENTS: const char *email - mail of the bcc-recipient
 //              const char *name - name of the bccc-recipient
-// USES GLOBAL: BCCRecipients
-// MODIFIES GL: BCCRecipients, m_oError
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
+
 void CSmtp::ModMsgLine(unsigned int Line,const char* Text)
 {
 	if(Text)
@@ -235,15 +117,9 @@ void CSmtp::ModMsgLine(unsigned int Line,const char* Text)
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Sending the mail. .
+// DESCRIPTION: Sending the mail.
 //   ARGUMENTS: none
-// USES GLOBAL: m_sSMTPSrvName, m_iSMTPSrvPort, SendBuf, RecvBuf, m_sLogin,
-//              m_sPassword, m_sMailFrom, Recipients, CCRecipients,
-//              BCCRecipients, m_sMsgBody, Attachments, 
-// MODIFIES GL: SendBuf 
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::Send()
 {
 	unsigned int i, rcpt_count;
@@ -351,7 +227,7 @@ void CSmtp::Send()
 		}
 	}while(!bAccepted);
 
-	// ***** SENDING E-MAIL *****
+	//  SENDING E-MAIL 
 	
 	// MAIL <SP> FROM:<reverse-path> <CRLF>
 	if(!m_sMailFrom.size())
@@ -396,43 +272,7 @@ void CSmtp::Send()
 	if(rcpt_count <= 0)
 		throw ECSmtp(ECSmtp::COMMAND_RCPT_TO);
 
-	for(i=0;i<CCRecipients.size();i++)
-	{
-		sprintf(SendBuf,"RCPT TO:<%s>\r\n",(CCRecipients.at(i).Mail).c_str());
-		SendData();
-		bAccepted = false;
-		do
-		{
-			ReceiveData();
-			switch(SmtpXYZdigits())
-			{
-				case 250:
-					bAccepted = true;
-					break;
-				default:
-					; // not necessary to throw
-			}
-		}while(!bAccepted);
-	}
 
-	for(i=0;i<BCCRecipients.size();i++)
-	{
-		sprintf(SendBuf,"RCPT TO:<%s>\r\n",(BCCRecipients.at(i).Mail).c_str());
-		SendData();
-		bAccepted = false;
-		do
-		{
-			ReceiveData();
-			switch(SmtpXYZdigits())
-			{
-				case 250:
-					bAccepted = true;
-					break;
-				default:
-					; // not necessary to throw
-			}
-		}while(!bAccepted);
-	}
 	
 	// DATA <CRLF>
 	strcpy(SendBuf,"DATA\r\n");
@@ -472,13 +312,6 @@ void CSmtp::Send()
 		SendData();
 	}
 
-	
-	// sending last message block (if there is one or more attachments)
-	if(Attachments.size())
-	{
-		sprintf(SendBuf,"\r\n--%s--\r\n",BOUNDARY_TEXT);
-		SendData();
-	}
 	
 	// <CRLF> . <CRLF>
 	strcpy(SendBuf,"\r\n.\r\n");
@@ -522,16 +355,11 @@ void CSmtp::Send()
 	hSocket = NULL;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Connecting to the service running on the remote server. 
 //   ARGUMENTS: const char *server - service name
 //              const unsigned short port - service port
-// USES GLOBAL: m_pcSMTPSrvName, m_iSMTPSrvPort, SendBuf, RecvBuf, m_pcLogin,
-//              m_pcPassword, m_pcMailFrom, Recipients, CCRecipients,
-//              BCCRecipients, m_pcMsgBody, Attachments, 
-// MODIFIES GL: m_oError 
 //     RETURNS: socket of the remote service
-////////////////////////////////////////////////////////////////////////////////
 SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPort_)
 {
 	unsigned short nPort = 0;
@@ -560,15 +388,14 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 		else 
 			nPort = lpServEnt->s_port;
 	}
-	//if ((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
 	sockAddr.sin_family = AF_INET;
 	sockAddr.sin_port = nPort;
-	//inet_pton(AF_INET, szServer , &sockAddr.sin_addr.s_addr);
+	//inet_pton(AF_INET, szServer , &sockAddr.sin_addr.s_addr); alternatywnie
 	//if(( sockAddr.sin_addr.s_addr ) == INADDR_NONE)
 		if ((sockAddr.sin_addr.s_addr = inet_addr(szServer)) == INADDR_NONE)
 	{
 		LPHOSTENT host;
-		//GetAddrInfoW(szServer, nPort_, NULL, &host);
+		
 		host = gethostbyname(szServer);
 		if (host)
 		{
@@ -596,15 +423,9 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 
 	if(connect(hSocket,(LPSOCKADDR)&sockAddr,sizeof(sockAddr)) == SOCKET_ERROR)
 	{
-
-
-
 		if(WSAGetLastError() != WSAEWOULDBLOCK)
 
 		{
-
-	
-
 			closesocket(hSocket);
 
 			throw ECSmtp(ECSmtp::WSA_CONNECT);
@@ -653,13 +474,9 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 	return hSocket;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Converts three letters from RecvBuf to the number.
 //   ARGUMENTS: none
-// USES GLOBAL: RecvBuf
-// MODIFIES GL: none
 //     RETURNS: integer number
-////////////////////////////////////////////////////////////////////////////////
 int CSmtp::SmtpXYZdigits()
 {
 	assert(RecvBuf);
@@ -668,20 +485,17 @@ int CSmtp::SmtpXYZdigits()
 	return (RecvBuf[0]-'0')*100 + (RecvBuf[1]-'0')*10 + RecvBuf[2]-'0';
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Prepares a header of the message.
 //   ARGUMENTS: char* header - formated header string
-// USES GLOBAL: Recipients, CCRecipients, BCCRecipients
-// MODIFIES GL: none
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::FormatHeader(char* header)
 {
 	char month[][4] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 	size_t i;
 	std::string to;
 	std::string cc;
-	std::string bcc;
+	
 	time_t rawtime;
 	struct tm* timeinfo;
 
@@ -707,31 +521,7 @@ void CSmtp::FormatHeader(char* header)
 	else
 		throw ECSmtp(ECSmtp::UNDEF_RECIPIENTS);
 
-	if(CCRecipients.size())
-	{
-		for (i=0;i<CCRecipients.size();i++)
-		{
-			if(i > 0)
-				cc. append(",");
-			cc += CCRecipients[i].Name;
-			cc.append("<");
-			cc += CCRecipients[i].Mail;
-			cc.append(">");
-		}
-	}
 
-	if(BCCRecipients.size())
-	{
-		for (i=0;i<BCCRecipients.size();i++)
-		{
-			if(i > 0)
-				bcc.append(",");
-			bcc += BCCRecipients[i].Name;
-			bcc.append("<");
-			bcc += BCCRecipients[i].Mail;
-			bcc.append(">");
-		}
-	}
 	
 	// Date: <SP> <dd> <SP> <mon> <SP> <yy> <SP> <hh> ":" <mm> ":" <ss> <SP> <zone> <CRLF>
 	sprintf(header,"Date: %d %s %d %d:%d:%d\r\n",	timeinfo->tm_mday,
@@ -791,20 +581,6 @@ void CSmtp::FormatHeader(char* header)
 	strcat(header, to.c_str());
 	strcat(header, "\r\n");
 
-	// Cc: <SP> <remote-user-mail> <CRLF>
-	if(CCRecipients.size())
-	{
-		strcat(header,"Cc: ");
-		strcat(header, cc.c_str());
-		strcat(header, "\r\n");
-	}
-
-	if(BCCRecipients.size())
-	{
-		strcat(header,"Bcc: ");
-		strcat(header, bcc.c_str());
-		strcat(header, "\r\n");
-	}
 
 	// Subject: <SP> <subject-text> <CRLF>
 	if(!m_sSubject.size()) 
@@ -816,39 +592,13 @@ void CSmtp::FormatHeader(char* header)
 	}
 	strcat(header, "\r\n");
 	
-	// MIME-Version: <SP> 1.0 <CRLF>
-	strcat(header,"MIME-Version: 1.0\r\n");
-	if(!Attachments.size())
-	{ // no attachments
-		strcat(header,"Content-type: text/plain; charset=US-ASCII\r\n");
-		strcat(header,"Content-Transfer-Encoding: 7bit\r\n");
-		strcat(SendBuf,"\r\n");
-	}
-	else
-	{ // there is one or more attachments
-		strcat(header,"Content-Type: multipart/mixed; boundary=\"");
-		strcat(header,BOUNDARY_TEXT);
-		strcat(header,"\"\r\n");
-		strcat(header,"\r\n");
-		// first goes text message
-		strcat(SendBuf,"--");
-		strcat(SendBuf,BOUNDARY_TEXT);
-		strcat(SendBuf,"\r\n");
-		strcat(SendBuf,"Content-type: text/plain; charset=US-ASCII\r\n");
-		strcat(SendBuf,"Content-Transfer-Encoding: 7bit\r\n");
-		strcat(SendBuf,"\r\n");
-	}
 
-	// done
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Receives a row terminated '\n'.
 //   ARGUMENTS: none
-// USES GLOBAL: RecvBuf
-// MODIFIES GL: RecvBuf
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::ReceiveData()
 {
 	int res,i = 0;
@@ -905,13 +655,9 @@ void CSmtp::ReceiveData()
 	FD_CLR(hSocket,&fdread);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Sends data from SendBuf buffer.
 //   ARGUMENTS: none
-// USES GLOBAL: SendBuf
-// MODIFIES GL: none
 //     RETURNS: void
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SendData()
 {
 	int idx = 0,res,nLeft = strlen(SendBuf);
@@ -967,13 +713,9 @@ void CSmtp::SendData()
 	FD_CLR(hSocket,&fdwrite);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Returns local host name. 
 //   ARGUMENTS: none
-// USES GLOBAL: m_pcLocalHostName
-// MODIFIES GL: m_oError, m_pcLocalHostName 
 //     RETURNS: socket of the remote service
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetLocalHostName() const
 {
 	char* str = NULL;
@@ -989,109 +731,64 @@ const char* CSmtp::GetLocalHostName() const
 	return m_sLocalHostName.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns the number of recipents.
 //   ARGUMENTS: none
-// USES GLOBAL: Recipients
-// MODIFIES GL: none 
 //     RETURNS: number of recipents
-////////////////////////////////////////////////////////////////////////////////
 unsigned int CSmtp::GetRecipientCount() const
 {
 	return Recipients.size();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Returns the number of bcc-recipents. 
-//   ARGUMENTS: none
-// USES GLOBAL: BCCRecipients
-// MODIFIES GL: none 
-//     RETURNS: number of bcc-recipents
-////////////////////////////////////////////////////////////////////////////////
-unsigned int CSmtp::GetBCCRecipientCount() const
-{
-	return BCCRecipients.size();
-}
 
-////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Returns the number of cc-recipents.
-//   ARGUMENTS: none
-// USES GLOBAL: CCRecipients
-// MODIFIES GL: none 
-//     RETURNS: number of cc-recipents
-////////////////////////////////////////////////////////////////////////////////
-unsigned int CSmtp::GetCCRecipientCount() const
-{
-	return CCRecipients.size();
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Returns m_pcReplyTo string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_sReplyTo
-// MODIFIES GL: none 
 //     RETURNS: m_sReplyTo string
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetReplyTo() const
 {
 	return m_sReplyTo.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns m_pcMailFrom string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_sMailFrom
-// MODIFIES GL: none 
 //     RETURNS: m_sMailFrom string
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetMailFrom() const
 {
 	return m_sMailFrom.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns m_pcNameFrom string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_sNameFrom
-// MODIFIES GL: none 
 //     RETURNS: m_sNameFrom string
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetSenderName() const
 {
 	return m_sNameFrom.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns m_pcSubject string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_sSubject
-// MODIFIES GL: none 
 //     RETURNS: m_sSubject string
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetSubject() const
 {
 	return m_sSubject.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns m_pcXMailer string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_pcXMailer
-// MODIFIES GL: none 
 //     RETURNS: m_pcXMailer string
-////////////////////////////////////////////////////////////////////////////////
 const char* CSmtp::GetXMailer() const
 {
 	return m_sXMailer.c_str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Returns m_iXPriority string.
 //   ARGUMENTS: none
-// USES GLOBAL: m_iXPriority
-// MODIFIES GL: none 
 //     RETURNS: CSmptXPriority m_pcXMailer
-////////////////////////////////////////////////////////////////////////////////
 CSmptXPriority CSmtp::GetXPriority() const
 {
 	return m_iXPriority;
@@ -1109,118 +806,91 @@ unsigned int CSmtp::GetMsgLines() const
 	return MsgBody.size();
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting priority of the message.
 //   ARGUMENTS: CSmptXPriority priority - priority of the message (	XPRIORITY_HIGH,
 //              XPRIORITY_NORMAL, XPRIORITY_LOW)
-// USES GLOBAL: none
-// MODIFIES GL: m_iXPriority 
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetXPriority(CSmptXPriority priority)
 {
 	m_iXPriority = priority;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting the return address.
 //   ARGUMENTS: const char *ReplyTo - return address
-// USES GLOBAL: m_sReplyTo
-// MODIFIES GL: m_sReplyTo
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetReplyTo(const char *ReplyTo)
 {
 	m_sReplyTo.erase();
 	m_sReplyTo.insert(0,ReplyTo);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting sender's mail.
 //   ARGUMENTS: const char *EMail - sender's e-mail
-// USES GLOBAL: m_sMailFrom
-// MODIFIES GL: m_sMailFrom
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetSenderMail(const char *EMail)
 {
 	m_sMailFrom.erase();
 	m_sMailFrom.insert(0,EMail);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting sender's name.
 //   ARGUMENTS: const char *Name - sender's name
-// USES GLOBAL: m_sNameFrom
-// MODIFIES GL: m_sNameFrom
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetSenderName(const char *Name)
 {
 	m_sNameFrom.erase();
 	m_sNameFrom.insert(0,Name);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting subject of the message.
 //   ARGUMENTS: const char *Subject - subject of the message
-// USES GLOBAL: m_sSubject
-// MODIFIES GL: m_sSubject
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetSubject(const char *Subject)
 {
 	m_sSubject.erase();
 	m_sSubject.insert(0,Subject);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting the name of program which is sending the mail.
 //   ARGUMENTS: const char *XMailer - programe name
-// USES GLOBAL: m_sXMailer
-// MODIFIES GL: m_sXMailer
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetXMailer(const char *XMailer)
 {
 	m_sXMailer.erase();
 	m_sXMailer.insert(0,XMailer);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting the login of SMTP account's owner.
 //   ARGUMENTS: const char *Login - login of SMTP account's owner
-// USES GLOBAL: m_sLogin
-// MODIFIES GL: m_sLogin
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetLogin(const char *Login)
 {
 	m_sLogin.erase();
 	m_sLogin.insert(0,Login);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting the password of SMTP account's owner.
 //   ARGUMENTS: const char *Password - password of SMTP account's owner
-// USES GLOBAL: m_sPassword
-// MODIFIES GL: m_sPassword
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetPassword(const char *Password)
 {
 	m_sPassword.erase();
 	m_sPassword.insert(0,Password);
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 // DESCRIPTION: Setting the SMTP service name and port.
 //   ARGUMENTS: const char* SrvName - SMTP service name
 //              const unsigned short SrvPort - SMTO service port
-// USES GLOBAL: m_sSMTPSrvName
-// MODIFIES GL: m_sSMTPSrvName 
 //     RETURNS: none
-////////////////////////////////////////////////////////////////////////////////
 void CSmtp::SetSMTPServer(const char* SrvName,const unsigned short SrvPort)
 {
 	m_iSMTPSrvPort = SrvPort;
@@ -1228,13 +898,9 @@ void CSmtp::SetSMTPServer(const char* SrvName,const unsigned short SrvPort)
 	m_sSMTPSrvName.insert(0,SrvName);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Returns the string for specified error code.
 //   ARGUMENTS: CSmtpError ErrorId - error code
-// USES GLOBAL: none
-// MODIFIES GL: none 
 //     RETURNS: error string
-////////////////////////////////////////////////////////////////////////////////
 std::string ECSmtp::GetErrorText() const
 {
 	switch(ErrorCode)

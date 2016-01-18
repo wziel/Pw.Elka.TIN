@@ -5,10 +5,10 @@ OK - Kamil - usuwanie grup z przypisanymi adresami nie dzia³a (bez przypisanych 
 OK - Kamil - usuwanie adresów przypisanych do grup nie dzia³a (jesli nie sa przypisane do grup to jest OK)
 OK - Kamil - sprawdziæ czy przy exit na serwerze w¹tek smtp siê koñczy
 OK - Kamil - sprawdziæ czy jak zapytanie sie nie powiedzie to preparedStatement->execute() rzuci jakimœ wyj¹tkiem albo zwróci coœ dziwnego - ¿eby rozpoznaæ kiedy nie zadzoaia³o.
-Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
-Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h) (ale jeœli teraz dzia³a to nie ma presji na zmiany, ¿eby coœ siê nie zjeba³o)
-Kamil - przy usuwaniu klienta najpierw usunac recznie wszystkie jego adresy, a potem dopiero usunac klienta.
-Kamil - dokumentacja -> biblioteki 
+OK - Kamil - sprawdziæ czy wszêdzie gdzie trzeba jest porównywanie z clientId - ¿eby nie wysy³aæ rzeczy od innego klienta
+NO - Kamil - ogarn¹æ konstruktory w SmtpMessage ( + komentarz SmtpMessage.h) (ale jeœli teraz dzia³a to nie ma presji na zmiany, ¿eby coœ siê nie zjeba³o)
+OK - Kamil - przy usuwaniu klienta najpierw usunac recznie wszystkie jego adresy, a potem dopiero usunac klienta.
+OK - Kamil - dokumentacja -> biblioteki 
 
 OK - Asia - sprawdziæ czy przy exit na serwerze sesje klienckie sie koñcz¹
 OK - Asia - jak administrator robi client-end to sie wysypuje TCPLayer (TCPEnd)

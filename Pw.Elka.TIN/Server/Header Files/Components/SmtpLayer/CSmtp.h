@@ -14,7 +14,7 @@
 
 #define TIME_IN_SEC		10		// how long client will wait for server response in non-blocking mode
 #define BUFFER_SIZE 10240	  // SendData and RecvData buffers sizes
-#define MSG_SIZE_IN_MB 5		// the maximum size of the message with all attachments
+#define MSG_SIZE_IN_MB 5		// the maximum size of the message 
 #define COUNTER_VALUE	100		// how many times program will try to receive data
 
 
@@ -95,21 +95,12 @@ public:
 	CSmtp();
 	virtual ~CSmtp();
 	void AddRecipient(const char *email, const char *name=NULL);
-	void AddBCCRecipient(const char *email, const char *name=NULL);
-	void AddCCRecipient(const char *email, const char *name=NULL);    
-	void AddAttachment(const char *path);   
 	void AddMsgLine(const char* text);
 	void DelRecipients(void);
-	void DelBCCRecipients(void);
-	void DelCCRecipients(void);
-	void DelAttachments(void);
 	void DelMsgLines(void);
 	void DelMsgLine(unsigned int line);
 	void ModMsgLine(unsigned int line,const char* text);
-	unsigned int GetBCCRecipientCount() const;    
-	unsigned int GetCCRecipientCount() const;
 	unsigned int GetRecipientCount() const;    
-	const char* GetLocalHostIP() const;
 	const char* GetLocalHostName() const;
 	const char* GetMsgLineText(unsigned int line) const;
 	unsigned int GetMsgLines(void) const;
@@ -155,9 +146,6 @@ private:
 	};
 
 	std::vector<Recipient> Recipients;
-	std::vector<Recipient> CCRecipients;
-	std::vector<Recipient> BCCRecipients;
-	std::vector<std::string> Attachments;
 	std::vector<std::string> MsgBody;
  
 	void ReceiveData();

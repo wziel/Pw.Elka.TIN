@@ -21,7 +21,9 @@ private:
 	Connection* connection;
 	DriverManager*	driverManager;
 
-	///returns true if execution succeeeded
+
+	// DESCRIPTION: use in every SQL query to handle SQLexceptions
+	///    RETURNS: returns true if execution succeeeded
 	bool ExecutePreparedStatement(PreparedStatement *preparedStatement);
 
 public:
@@ -30,55 +32,98 @@ public:
 	Connection getConnection();
 
 	//IAdminDAL.h
-	///returns true if succeeded
+	// DESCRIPTION: use to create new user
+	///     RETURNS:  true if succeeded
 	bool CreateClient(string login, string hashOfPassword);
-	///returns true if succeeded
+
+	// DESCRIPTION: use to delete user who exist in DB
+	///     RETURNS:  true if succeeded
 	bool DeleteClient(string login);
-	///returns true if succeeded
+
+	// DESCRIPTION: use to change user's login if it exist
+	///     RETURNS:  true if succeeded
 	bool ChangeLogin(string login, string newLogin);
-	///returns vector of all objects
+
+	// DESCRIPTION: use id we want to get all clients
+	///     RETURNS:  vector of all objects
 	std::vector<ClientModel> GetAllClients();
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to unblock user
+	///     RETURNS:  true if succeeded
 	bool UnblockClient(string login);
 
 	//IClientDAL.h
-	///if returned object's id is less than 0 then operation didn't success
+	// DESCRIPTION: use to get message by ID
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	MessageModel GetMessageById(int id, int clientId);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use create new message
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	MessageModel CreateMessage(string title, string content, int clientId);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use to modyfy existing message
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	MessageModel ModifyMessage(int id, string title, string content, int clientId);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to delete existing message
+	///     RETURNS:  true if succeeded
 	bool DeleteMessage(int id, int clientId);
-	///returns vector of all objects
+
+	// DESCRIPTION: use to list all message from one clinet
+	///     RETURNS:  vector of all objects
 	vector<MessageModel> GetAllMessagesWithoutContent(int clientId);
-	///returns vector of all objects
+
+	// DESCRIPTION: use to list all groups
+	///     RETURNS:  returns vector of all objects
 	vector<GroupModel> GetAllGroupsWithoutAdresses(int clientId);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use to get group by ID
+	///     RETURNS: if returned object's id is less than 0 then operation didn't success
 	GroupModel GetGroupById(int id, int clientId);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to delete group by ID
+	///     RETURNS:  returns true if succeeded 
 	bool DeleteGroupById(int id, int clientId);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use to create new group
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	GroupModel CreateGroup(string name, int clientId);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to attach address to group
+	///     RETURNS:  true if succeeded
 	bool AddAddressToGroup(int groupId, int addressId, int clientId);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use detach address from group
+	///     RETURNS:  true if succeeded
 	bool RemoveAddressFromGroup(int groupId, int addressId, int clientId);
-	///returns empty string when failed
+
+	// DESCRIPTION: use to get hash of password from DB
+	///     RETURNS:  empty string when failed
 	string GetHashOfPassword(string username);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use to create new address
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	AddressModel CreateAddress(string addrName, string addrValue, int clientId);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to delete address
+	///     RETURNS:  true if succeeded
 	bool DeleteAddress(int addrId, int clientId);
-	///returns vector of all objects
+
+	// DESCRIPTION: use to list all addresses
+	///     RETURNS:  returns vector of all objects
 	vector<AddressModel> GetAllAddresses(int clientId);
-	///if returned object's id is less than 0 then operation didn't success
+
+	// DESCRIPTION: use to get client by login if exist
+	///     RETURNS:  if returned object's id is less than 0 then operation didn't success
 	ClientModel getClient(string login);
 
 	//IDAL.h
-	///returns true if succeeded 
+	// DESCRIPTION: use to change password stored in DB
+	///     RETURNS:  true if succeeded
 	bool ChangeHashOfPassword(string login, string newHashOfPassword);
-	///returns true if succeeded 
+
+	// DESCRIPTION: use to block user
+	///     RETURNS:  true if succeeded
 	bool BlockClient(string login);
 };
 

@@ -2,9 +2,7 @@
 
 DAL::DAL()
 {
-
 	connection = driverManager->getConnection("DSN=LokalnaBazaDanychTIN");
-
 }
 
 
@@ -16,7 +14,6 @@ Connection DAL::getConnection()
 {
 	return *connection;
 }
-
 bool DAL::ExecutePreparedStatement(PreparedStatement *preparedStatement)
 {
 	try
@@ -29,32 +26,18 @@ bool DAL::ExecutePreparedStatement(PreparedStatement *preparedStatement)
 		return false;
 	}
 }
-// sprawdz to bo nie wierze ze to dziala
 bool DAL::CreateClient(string login, string hashOfPassword)
 {
-	//int clientId;
-	//ResultSet *resultSet;
+
 	PreparedStatement *preparedStatement;
 
-	//if (getClient(login).id < 0) return false;
-
 	string part1 = "INSERT INTO LokalnaBazaDanychTIN.dbo.Client ( login, password_hash , blocked ) VALUES( '";
-	//string part2 = " Select IDENT_CURRENT( 'LokalnaBazaDanychTIN.dbo.Client' ) AS last_inserted_row ";
-
 
 	preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part1 + login + "' , '" + hashOfPassword + "' ,  0  )"));
 	if (ExecutePreparedStatement(preparedStatement) == false) return false;
 
-	//preparedStatement = connection->prepareStatement(ODBCXX_STRING_CONST(part2));
-	//if (ExecutePreparedStatement(preparedStatement) == false) return false;
-
-	//resultSet = preparedStatement->getResultSet();
-	//if (resultSet->next() == false) return false;
-
-	//clientId = resultSet->getInt("last_inserted_row");
 	return true;
 }
-//// Przetestuj
 bool DAL::DeleteClient(string login)
 {	
 	if (getClient(login).id < 0) return false;
@@ -131,7 +114,6 @@ bool  DAL::UnblockClient(string login)
 
 	return true;
 }
-
 //IClientDAL.h
 MessageModel DAL::GetMessageById(int mssageId, int clientId)
 {
@@ -336,7 +318,6 @@ GroupModel DAL::GetGroupById(int groupId, int clientId)
 
 bool DAL::DeleteGroupById(int groupId, int clientId)
 {
-//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId;
 	ostringstream konwersja;
@@ -384,7 +365,6 @@ GroupModel DAL::CreateGroup(string name, int clientId)
 }
 bool DAL::AddAddressToGroup(int groupId, int addressId, int clientId)
 {
-//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId, sAddressId;
 	ostringstream konwersja;
@@ -404,7 +384,6 @@ bool DAL::AddAddressToGroup(int groupId, int addressId, int clientId)
 }
 bool DAL::RemoveAddressFromGroup(int groupId, int addressId, int clientId)
 {
-//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sGroupId, sAddressId;
 	ostringstream konwersja;
@@ -474,7 +453,6 @@ AddressModel DAL::CreateAddress(string addrName, string addrValue, int clientId)
 }
 bool DAL::DeleteAddress(int addrId, int clientId)
 {
-//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 	string  sAddrId, sClientId;
 	ostringstream konwersja;
@@ -524,7 +502,6 @@ vector<AddressModel> DAL::GetAllAddresses(int clientId)
 //IDAL.h
 bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 {
-//	ResultSet *resultSet;
 	PreparedStatement *preparedStatement;
 
 	if (getClient(login).id < 0) return false;
@@ -539,8 +516,6 @@ bool DAL::ChangeHashOfPassword(string login, string newHashOfPassword)
 }
 bool DAL::BlockClient(string login)
 {
-////	ResultSet *resultSet;
-	
 	PreparedStatement *preparedStatement;
 
 	if (getClient(login).id < 0) return false;

@@ -8,7 +8,7 @@ SmtpLayer::SmtpLayer(MessagesQueue* q)
 	this->queue = q;
 	this->mailError = false;
 	vector<string> vector1;
-	this->smtpMessage = new SmtpMessage(vector1); // delete  it
+	this->smtpMessage = new SmtpMessage(vector1);
 }
 
 SmtpLayer::~SmtpLayer()
@@ -19,15 +19,6 @@ SmtpLayer::~SmtpLayer()
 
 void SmtpLayer::Start()
 {
-	//TESTING !!!
-
-	//vector<string> vector;
-	//string gmail = string("kakacper1@gmail.com");
-	//vector.push_back(gmail);
-	//vector.push_back("kamil9422@interia.pl");
-	//SmtpMessage forTry = SmtpMessage("tu rozsylacz", "No to sie w koncu doigrales!\n Pozdrawiam Kamil", "gra skonczona" , vector );
-	//forTry.isQuitMessage = false;
-	//queue->Push(forTry);
 
 	do
 	{
