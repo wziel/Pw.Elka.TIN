@@ -4,14 +4,14 @@
 #include <Ws2tcpip.h>
 
 
-// DESCRIPTION: Constructor of CSmtp class.
+/// DESCRIPTION: Constructor of CSmtp class.
 ///     RETURNS: none
 CSmtp::CSmtp()
 {
 	m_iXPriority = XPRIORITY_NORMAL;
 	m_iSMTPSrvPort = 0;
 
-	// Initialize WinSock
+	/// Initialize WinSock
 	WSADATA wsaData;
 	WORD wVer = MAKEWORD(2,2);    
 	if (WSAStartup(wVer,&wsaData) != NO_ERROR)
@@ -30,8 +30,8 @@ CSmtp::CSmtp()
 }
 
 
-// DESCRIPTION: Destructor of CSmtp class.
-//   RETURNS: none
+/// DESCRIPTION: Destructor of CSmtp class.
+///  RETURNS: none
 CSmtp::~CSmtp()
 {
 	if(SendBuf)
@@ -50,10 +50,10 @@ CSmtp::~CSmtp()
 }
 
 
-// DESCRIPTION: New recipient data is added i.e.: email and name. .
-//   ARGUMENTS: const char *email - mail of the recipient
-//              const char *name - name of the recipient
-//     RETURNS: void
+/// DESCRIPTION: New recipient data is added i.e.: email and name. .
+///   ARGUMENTS: const char *email - mail of the recipient
+///              const char *name - name of the recipient
+///     RETURNS: void
 void CSmtp::AddRecipient(const char *email, const char *name)
 {	
 	if(!email)
@@ -68,17 +68,17 @@ void CSmtp::AddRecipient(const char *email, const char *name)
 
 
 
-// DESCRIPTION: Adds new line in a message.
-//   ARGUMENTS: const char *Text - text of the new line
-//     RETURNS: void
+/// DESCRIPTION: Adds new line in a message.
+///   ARGUMENTS: const char *Text - text of the new line
+///     RETURNS: void
 void CSmtp::AddMsgLine(const char* Text)
 {
 	MsgBody.insert(MsgBody.end(),Text);
 }
 
-// DESCRIPTION: Deletes specified line in text message.. .
-//   ARGUMENTS: unsigned int Line - line to be delete
-//     RETURNS: void
+/// DESCRIPTION: Deletes specified line in text message.. .
+///   ARGUMENTS: unsigned int Line - line to be delete
+///     RETURNS: void
 void CSmtp::DelMsgLine(unsigned int Line)
 {
 	if(Line > MsgBody.size())
@@ -86,26 +86,26 @@ void CSmtp::DelMsgLine(unsigned int Line)
 	MsgBody.erase(MsgBody.begin()+Line);
 }
 
-// DESCRIPTION: Deletes all recipients. .
-//     RETURNS: void
+/// DESCRIPTION: Deletes all recipients. .
+///     RETURNS: void
 void CSmtp::DelRecipients()
 {
 	Recipients.clear();
 }
 
 
-// DESCRIPTION: Deletes message text.
-//   ARGUMENTS: void
+/// DESCRIPTION: Deletes message text.
+///   ARGUMENTS: void
 void CSmtp::DelMsgLines()
 {
 	MsgBody.clear();
 }
 
 
-// DESCRIPTION: New recipient data is added i.e.: email and name. .
-//   ARGUMENTS: const char *email - mail of the bcc-recipient
-//              const char *name - name of the bccc-recipient
-//     RETURNS: void
+/// DESCRIPTION: New recipient data is added i.e.: email and name. .
+///  ARGUMENTS: const char *email - mail of the bcc-recipient
+///              const char *name - name of the bccc-recipient
+///    RETURNS: void
 
 void CSmtp::ModMsgLine(unsigned int Line,const char* Text)
 {
@@ -117,9 +117,9 @@ void CSmtp::ModMsgLine(unsigned int Line,const char* Text)
 	}
 }
 
-// DESCRIPTION: Sending the mail.
-//   ARGUMENTS: none
-//     RETURNS: void
+/// DESCRIPTION: Sending the mail.
+///   ARGUMENTS: none
+///     RETURNS: void
 void CSmtp::Send()
 {
 	unsigned int i, rcpt_count;
@@ -353,13 +353,14 @@ void CSmtp::Send()
 	closesocket(hSocket);
 
 	hSocket = NULL;
+	std::cout << "Message succesfully sent. \n";
 }
 
 
-// DESCRIPTION: Connecting to the service running on the remote server. 
-//   ARGUMENTS: const char *server - service name
-//              const unsigned short port - service port
-//     RETURNS: socket of the remote service
+/// DESCRIPTION: Connecting to the service running on the remote server. 
+///   ARGUMENTS: const char *server - service name
+///              const unsigned short port - service port
+///     RETURNS: socket of the remote service
 SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPort_)
 {
 	unsigned short nPort = 0;
@@ -474,9 +475,9 @@ SOCKET CSmtp::ConnectRemoteServer(const char *szServer,const unsigned short nPor
 	return hSocket;
 }
 
-// DESCRIPTION: Converts three letters from RecvBuf to the number.
-//   ARGUMENTS: none
-//     RETURNS: integer number
+/// DESCRIPTION: Converts three letters from RecvBuf to the number.
+///   ARGUMENTS: none
+///     RETURNS: integer number
 int CSmtp::SmtpXYZdigits()
 {
 	assert(RecvBuf);
@@ -486,9 +487,9 @@ int CSmtp::SmtpXYZdigits()
 }
 
 
-// DESCRIPTION: Prepares a header of the message.
-//   ARGUMENTS: char* header - formated header string
-//     RETURNS: void
+/// DESCRIPTION: Prepares a header of the message.
+///   ARGUMENTS: char* header - formated header string
+///     RETURNS: void
 void CSmtp::FormatHeader(char* header)
 {
 	char month[][4] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
@@ -596,9 +597,9 @@ void CSmtp::FormatHeader(char* header)
 }
 
 
-// DESCRIPTION: Receives a row terminated '\n'.
-//   ARGUMENTS: none
-//     RETURNS: void
+/// DESCRIPTION: Receives a row terminated '\n'.
+///   ARGUMENTS: none
+///     RETURNS: void
 void CSmtp::ReceiveData()
 {
 	int res,i = 0;
@@ -655,9 +656,9 @@ void CSmtp::ReceiveData()
 	FD_CLR(hSocket,&fdread);
 }
 
-// DESCRIPTION: Sends data from SendBuf buffer.
-//   ARGUMENTS: none
-//     RETURNS: void
+/// DESCRIPTION: Sends data from SendBuf buffer.
+///   ARGUMENTS: none
+///     RETURNS: void
 void CSmtp::SendData()
 {
 	int idx = 0,res,nLeft = strlen(SendBuf);
@@ -713,9 +714,9 @@ void CSmtp::SendData()
 	FD_CLR(hSocket,&fdwrite);
 }
 
-// DESCRIPTION: Returns local host name. 
-//   ARGUMENTS: none
-//     RETURNS: socket of the remote service
+/// DESCRIPTION: Returns local host name. 
+///   ARGUMENTS: none
+///     RETURNS: socket of the remote service
 const char* CSmtp::GetLocalHostName() const
 {
 	char* str = NULL;
@@ -732,63 +733,63 @@ const char* CSmtp::GetLocalHostName() const
 }
 
 
-// DESCRIPTION: Returns the number of recipents.
-//   ARGUMENTS: none
-//     RETURNS: number of recipents
+/// DESCRIPTION: Returns the number of recipents.
+///   ARGUMENTS: none
+///     RETURNS: number of recipents
 unsigned int CSmtp::GetRecipientCount() const
 {
 	return Recipients.size();
 }
 
 
-// DESCRIPTION: Returns m_pcReplyTo string.
-//   ARGUMENTS: none
-//     RETURNS: m_sReplyTo string
+/// DESCRIPTION: Returns m_pcReplyTo string.
+///   ARGUMENTS: none
+///     RETURNS: m_sReplyTo string
 const char* CSmtp::GetReplyTo() const
 {
 	return m_sReplyTo.c_str();
 }
 
 
-// DESCRIPTION: Returns m_pcMailFrom string.
-//   ARGUMENTS: none
-//     RETURNS: m_sMailFrom string
+/// DESCRIPTION: Returns m_pcMailFrom string.
+///   ARGUMENTS: none
+///     RETURNS: m_sMailFrom string
 const char* CSmtp::GetMailFrom() const
 {
 	return m_sMailFrom.c_str();
 }
 
 
-// DESCRIPTION: Returns m_pcNameFrom string.
-//   ARGUMENTS: none
-//     RETURNS: m_sNameFrom string
+/// DESCRIPTION: Returns m_pcNameFrom string.
+///   ARGUMENTS: none
+///     RETURNS: m_sNameFrom string
 const char* CSmtp::GetSenderName() const
 {
 	return m_sNameFrom.c_str();
 }
 
 
-// DESCRIPTION: Returns m_pcSubject string.
-//   ARGUMENTS: none
-//     RETURNS: m_sSubject string
+/// DESCRIPTION: Returns m_pcSubject string.
+///   ARGUMENTS: none
+///     RETURNS: m_sSubject string
 const char* CSmtp::GetSubject() const
 {
 	return m_sSubject.c_str();
 }
 
 
-// DESCRIPTION: Returns m_pcXMailer string.
-//   ARGUMENTS: none
-//     RETURNS: m_pcXMailer string
+/// DESCRIPTION: Returns m_pcXMailer string.
+///   ARGUMENTS: none
+///     RETURNS: m_pcXMailer string
 const char* CSmtp::GetXMailer() const
 {
 	return m_sXMailer.c_str();
 }
 
 
-// DESCRIPTION: Returns m_iXPriority string.
-//   ARGUMENTS: none
-//     RETURNS: CSmptXPriority m_pcXMailer
+/// DESCRIPTION: Returns m_iXPriority string.
+///   ARGUMENTS: none
+///     RETURNS: CSmptXPriority m_pcXMailer
 CSmptXPriority CSmtp::GetXPriority() const
 {
 	return m_iXPriority;
@@ -807,19 +808,19 @@ unsigned int CSmtp::GetMsgLines() const
 }
 
 
-// DESCRIPTION: Setting priority of the message.
-//   ARGUMENTS: CSmptXPriority priority - priority of the message (	XPRIORITY_HIGH,
-//              XPRIORITY_NORMAL, XPRIORITY_LOW)
-//     RETURNS: none
+/// DESCRIPTION: Setting priority of the message.
+///   ARGUMENTS: CSmptXPriority priority - priority of the message (	XPRIORITY_HIGH,
+///              XPRIORITY_NORMAL, XPRIORITY_LOW)
+///     RETURNS: none
 void CSmtp::SetXPriority(CSmptXPriority priority)
 {
 	m_iXPriority = priority;
 }
 
 
-// DESCRIPTION: Setting the return address.
-//   ARGUMENTS: const char *ReplyTo - return address
-//     RETURNS: none
+/// DESCRIPTION: Setting the return address.
+///   ARGUMENTS: const char *ReplyTo - return address
+///     RETURNS: none
 void CSmtp::SetReplyTo(const char *ReplyTo)
 {
 	m_sReplyTo.erase();
@@ -827,9 +828,9 @@ void CSmtp::SetReplyTo(const char *ReplyTo)
 }
 
 
-// DESCRIPTION: Setting sender's mail.
-//   ARGUMENTS: const char *EMail - sender's e-mail
-//     RETURNS: none
+/// DESCRIPTION: Setting sender's mail.
+///   ARGUMENTS: const char *EMail - sender's e-mail
+///     RETURNS: none
 void CSmtp::SetSenderMail(const char *EMail)
 {
 	m_sMailFrom.erase();
@@ -837,9 +838,9 @@ void CSmtp::SetSenderMail(const char *EMail)
 }
 
 
-// DESCRIPTION: Setting sender's name.
-//   ARGUMENTS: const char *Name - sender's name
-//     RETURNS: none
+/// DESCRIPTION: Setting sender's name.
+///   ARGUMENTS: const char *Name - sender's name
+///     RETURNS: none
 void CSmtp::SetSenderName(const char *Name)
 {
 	m_sNameFrom.erase();
@@ -847,9 +848,9 @@ void CSmtp::SetSenderName(const char *Name)
 }
 
 
-// DESCRIPTION: Setting subject of the message.
-//   ARGUMENTS: const char *Subject - subject of the message
-//     RETURNS: none
+/// DESCRIPTION: Setting subject of the message.
+///   ARGUMENTS: const char *Subject - subject of the message
+///     RETURNS: none
 void CSmtp::SetSubject(const char *Subject)
 {
 	m_sSubject.erase();
@@ -857,9 +858,9 @@ void CSmtp::SetSubject(const char *Subject)
 }
 
 
-// DESCRIPTION: Setting the name of program which is sending the mail.
-//   ARGUMENTS: const char *XMailer - programe name
-//     RETURNS: none
+/// DESCRIPTION: Setting the name of program which is sending the mail.
+///   ARGUMENTS: const char *XMailer - programe name
+///     RETURNS: none
 void CSmtp::SetXMailer(const char *XMailer)
 {
 	m_sXMailer.erase();
@@ -867,9 +868,9 @@ void CSmtp::SetXMailer(const char *XMailer)
 }
 
 
-// DESCRIPTION: Setting the login of SMTP account's owner.
-//   ARGUMENTS: const char *Login - login of SMTP account's owner
-//     RETURNS: none
+/// DESCRIPTION: Setting the login of SMTP account's owner.
+///   ARGUMENTS: const char *Login - login of SMTP account's owner
+///     RETURNS: none
 void CSmtp::SetLogin(const char *Login)
 {
 	m_sLogin.erase();
@@ -877,9 +878,9 @@ void CSmtp::SetLogin(const char *Login)
 }
 
 
-// DESCRIPTION: Setting the password of SMTP account's owner.
-//   ARGUMENTS: const char *Password - password of SMTP account's owner
-//     RETURNS: none
+/// DESCRIPTION: Setting the password of SMTP account's owner.
+///   ARGUMENTS: const char *Password - password of SMTP account's owner
+///     RETURNS: none
 void CSmtp::SetPassword(const char *Password)
 {
 	m_sPassword.erase();
@@ -887,10 +888,10 @@ void CSmtp::SetPassword(const char *Password)
 }
 
 
-// DESCRIPTION: Setting the SMTP service name and port.
-//   ARGUMENTS: const char* SrvName - SMTP service name
-//              const unsigned short SrvPort - SMTO service port
-//     RETURNS: none
+/// DESCRIPTION: Setting the SMTP service name and port.
+///   ARGUMENTS: const char* SrvName - SMTP service name
+///              const unsigned short SrvPort - SMTO service port
+///     RETURNS: none
 void CSmtp::SetSMTPServer(const char* SrvName,const unsigned short SrvPort)
 {
 	m_iSMTPSrvPort = SrvPort;
@@ -898,9 +899,9 @@ void CSmtp::SetSMTPServer(const char* SrvName,const unsigned short SrvPort)
 	m_sSMTPSrvName.insert(0,SrvName);
 }
 
-// DESCRIPTION: Returns the string for specified error code.
-//   ARGUMENTS: CSmtpError ErrorId - error code
-//     RETURNS: error string
+/// DESCRIPTION: Returns the string for specified error code.
+///   ARGUMENTS: CSmtpError ErrorId - error code
+///     RETURNS: error string
 std::string ECSmtp::GetErrorText() const
 {
 	switch(ErrorCode)

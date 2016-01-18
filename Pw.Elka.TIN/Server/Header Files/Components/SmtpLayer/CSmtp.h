@@ -88,7 +88,7 @@ public:
 private:
 	CSmtpError ErrorCode;
 };
-
+/// Klasa reprezentujaca klienta SMTP
 class CSmtp  
 {
 public:
