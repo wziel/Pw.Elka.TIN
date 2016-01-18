@@ -12,6 +12,8 @@ SessionListener::SessionListener(IClientCreator &clientCreator)
 
 SessionListener::~SessionListener()
 {
+	WSACloseEvent(wsaEvents[0]);
+	WSACloseEvent(wsaEvents[1]);
 }
 
 void SessionListener::Start()
