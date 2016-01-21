@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\Interfaces">
       <UniqueIdentifier>{b5bfed00-7f03-411d-b036-0531b3e68e0c}</UniqueIdentifier>
     </Filter>
@@ -90,6 +86,16 @@
     </Filter>
     <Filter Include="Header Files\libodbc++-0.2.5\lib">
       <UniqueIdentifier>{f6604abf-615d-4f29-b396-a50b3ec9baa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libodbc++-0.2.5\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Components\RawTcpLayer">
+      <UniqueIdentifier>{6b3e5048-9716-4bd0-a33f-5e63afe9b647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\RawTcpLayer">
+      <UniqueIdentifier>{850279f5-fdd5-4bca-85b1-c3ffdc037012}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +333,9 @@
     <ClInclude Include="Header Files\Shared\Configuration.h">
       <Filter>Header Files\Shared</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Components\RawTcpLayer\RawTcpLayer.h">
+      <Filter>Header Files\Components\RawTcpLayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -469,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="Source Files\Shared\Configuration.cpp">
       <Filter>Source Files\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\Components\RawTcpLayer\RawTcpLayer.cpp">
+      <Filter>Source Files\Components\RawTcpLayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

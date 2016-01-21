@@ -170,6 +170,7 @@
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComMSGGETALL.h" />
     <ClInclude Include="Header Files\Components\ClientSession\Communicates\ServComMSGGETONE.h" />
     <ClInclude Include="Header Files\Components\DAL\DAL.h" />
+    <ClInclude Include="Header Files\Components\RawTcpLayer\RawTcpLayer.h" />
     <ClInclude Include="Header Files\Components\RootManager\Enums.h" />
     <ClInclude Include="Header Files\Components\RootManager\RootManager.h" />
     <ClInclude Include="Header Files\Components\SessionListener\SessionListener.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComMSGGETALL.cpp" />
     <ClCompile Include="Source Files\Components\ClientSession\Communicates\ServComMSGGETONE.cpp" />
     <ClCompile Include="Source Files\Components\DAL\DAL.cpp" />
+    <ClCompile Include="Source Files\Components\RawTcpLayer\RawTcpLayer.cpp" />
     <ClCompile Include="Source Files\Components\RootManager\RootManager.cpp" />
     <ClCompile Include="Source Files\Components\SessionListener\SessionListener.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp" />
