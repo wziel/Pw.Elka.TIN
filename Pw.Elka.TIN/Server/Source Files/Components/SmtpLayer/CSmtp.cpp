@@ -188,7 +188,7 @@ void CSmtp::Send()
 	// send login:
 	if(!m_sLogin.size())
 		throw ECSmtp(ECSmtp::UNDEF_LOGIN);
-	sprintf(SendBuf,"%s\r\n", this->m_sLogin);
+	sprintf(SendBuf,"%s\r\n", this->m_sLogin.c_str());
 	SendData();
 	bAccepted = false;
 	do
@@ -207,7 +207,7 @@ void CSmtp::Send()
 	// send password:
 	if(!m_sPassword.size())
 		throw ECSmtp(ECSmtp::UNDEF_PASSWORD);
-	sprintf(SendBuf,"%s\r\n", this->m_sPassword );
+	sprintf(SendBuf,"%s\r\n", this->m_sPassword.c_str() );
 	SendData();
 	bAccepted = false;
 	do

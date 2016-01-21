@@ -15,6 +15,24 @@ SmtpLayer::~SmtpLayer()
 
 void SmtpLayer::Start()
 {
+	string serverName = Configuration::getConfiguration().getServerSmtpName();
+	char *cServerName = new char[serverName.length() + 1];
+	strcpy(cServerName , serverName.c_str());
+
+	string encryptetSmtpLogin = Configuration::getConfiguration().getEncryptedSmtpLogin();
+	char *cEncryptetSmtpLogin = new char[encryptetSmtpLogin.length() + 1];
+	strcpy(cEncryptetSmtpLogin, encryptetSmtpLogin.c_str());
+	
+	string encryptetSmtpPassword = Configuration::getConfiguration().getEncryptedSmtpPassword();
+	char *cEncryptetSmtpPassword = new char[encryptetSmtpPassword.length() + 1];
+	strcpy(cEncryptetSmtpPassword, encryptetSmtpPassword.c_str());
+
+	string smtpLogin = Configuration::getConfiguration().getSmtpLogin();
+	char *cSmtpLogin = new char[smtpLogin.length() + 1];
+	strcpy(cSmtpLogin, smtpLogin.c_str());
+
+	unsigned short portSmtp = Configuration::getConfiguration().getPortSmtp();
+
 	SmtpMessage smtpMessage ;
 	do
 	{
@@ -24,13 +42,17 @@ void SmtpLayer::Start()
 
 			this->mail = new CSmtp();
 			// setting unchangeable serwer details
-			mail->SetSMTPServer(Configuration::getConfiguration().getServerSmtpName().c_str() , Configuration::getConfiguration().getPortSmtp());
-			mail->SetLogin(Configuration::getConfiguration().getEncryptedSmtpLogin().c_str());
-			mail->SetPassword(Configuration::getConfiguration().getEncryptedSmtpPassword().c_str());
-			mail->SetSenderMail(Configuration::getConfiguration().getSmtpLogin().c_str());
-			mail->SetReplyTo(Configuration::getConfiguration().getSmtpLogin().c_str());
+			mail->SetSMTPServer( cServerName , portSmtp);
+			mail->SetLogin(cEncryptetSmtpLogin);
+			mail->SetPassword(cEncryptetSmtpPassword);
+			mail->SetSenderMail(cSmtpLogin);
+			mail->SetReplyTo(cSmtpLogin);
 			if (smtpMessage.isQuitMessage)
 			{
+				delete[] cServerName;
+				delete[] cEncryptetSmtpLogin;
+				delete[] cEncryptetSmtpPassword;
+				delete[] cSmtpLogin;
 				return;
 			}
 			else
