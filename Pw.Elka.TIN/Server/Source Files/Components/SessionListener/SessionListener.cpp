@@ -5,7 +5,6 @@ SessionListener::SessionListener(IClientCreator &clientCreator)
 {
 	this->clientCreator = &clientCreator;
 	this->portToListen = Configuration::getConfiguration().getPortToListen();
-	std::cout << portToListen;
 	wsaEvents[0] = WSACreateEvent();
 	wsaEvents[1] = WSACreateEvent();
 }

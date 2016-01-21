@@ -12,8 +12,16 @@ class Configuration
 public:
 	static Configuration& getConfiguration()
 	{
-		static Configuration configuration;
-		return configuration;
+		try 
+		{
+			static Configuration configuration;
+			return configuration;
+		}
+		catch (char const* tekst)
+		{
+			std::cout << tekst << std::endl;
+			exit(1);
+		}
 	}
 	int getMaxSession()
 	{
