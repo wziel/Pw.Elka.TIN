@@ -33,7 +33,7 @@ void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from cl
 	int headerSize = 2;
 	bottomLayer->Receive(mySizeBuffer, headerSize);
 	//mySize=(int)ntohs(*(short*)mySizeBuffer);
-	//mySize = (((mySizeBuffer[1]) << 8) | (mySizeBuffer[0]));
+	mySize = (((mySizeBuffer[1]) << 8) | (mySizeBuffer[0]));
 
 	buffer = new unsigned char[mySize];
 

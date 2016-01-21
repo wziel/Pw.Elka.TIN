@@ -1,6 +1,8 @@
 //@todo - constructors instead of initialization
 
 #include "../../../Header Files/Components/RawTcpLayer/RawTcpLayer.h"
+#include <iostream>
+using namespace std;
 
 RawTcpLayer::RawTcpLayer(int socketfd)
 	: socketFD(socketfd)
@@ -13,7 +15,8 @@ RawTcpLayer::RawTcpLayer(int socketfd)
 	if (WSAEventArray[1] == WSA_INVALID_EVENT)
 		throw "WSA error";
 	
-	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_WRITE | FD_READ | FD_CLOSE);	//associate event with a socket
+	//iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_WRITE | FD_READ | FD_CLOSE);	//associate event with a socket
+	iResult = WSAEventSelect(socketFD, WSAEventArray[1],  FD_READ | FD_CLOSE);	//associate event with a socket
 	if (iResult != 0)
 		throw "WSA error";
 
@@ -37,12 +40,12 @@ void RawTcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 {
 	//Create a buffer to send 
 	mySize = size;
-	//myBuffer = new unsigned char[mySize];
+	myBuffer = new unsigned char[mySize];
 
-	//for (int i = 0; i < mySize; ++i)
-	//	myBuffer[i] = buffer[i];
+	for (int i = 0; i < mySize; ++i)
+		myBuffer[i] = buffer[i];
 
-	iResult = send(socketFD, (char*)buffer, mySize, NULL);	//send message
+	iResult = send(socketFD, (char*)myBuffer, mySize, NULL);	//send message
 	if (iResult == SOCKET_ERROR)
 		throw "Network error";
 	
@@ -81,13 +84,18 @@ void RawTcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from
 	mySize = size;
 	buffer = new unsigned char[mySize];
 	
-	while (receivedBytes != size)
+	do
 	{
 
 	iResult = recv(socketFD, (char*)(buffer + receivedBytes), mySize - receivedBytes, NULL);
-	receivedBytes += iResult;
+	cout << WSAGetLastError();
+	if (iResult != SOCKET_ERROR)
+	{
+		receivedBytes += iResult;
+	}
 	if (iResult == SOCKET_ERROR&& WSAGetLastError() == WSAEWOULDBLOCK)
 	{
+		WSAResetEvent(WSAEventArray[1]);
 		signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - receive a message or end TcpLayer
 		if (signalledEvent == WSA_WAIT_FAILED)
 			throw "WSA error";
@@ -110,7 +118,7 @@ void RawTcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from
 	}
 	else if (iResult == SOCKET_ERROR)
 		throw "Network error";
-	}
+	} while (receivedBytes < size);
 }
 
 RawTcpLayer::~RawTcpLayer()
