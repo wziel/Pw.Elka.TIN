@@ -98,6 +98,7 @@ private:
 		confFile.close();
 	}
 	Configuration(const Configuration &) {}
+	~Configuration(){}
 
 	/* Data for RootManager */
 	int maxSession;
