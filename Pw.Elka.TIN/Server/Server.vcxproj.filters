@@ -467,9 +467,6 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp">
       <Filter>Source Files\Components\SmtpLayer</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Shared\Configuration.cpp">
-      <Filter>Source Files\Shared</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Header Files\libodbc++-0.2.5\acinclude.m4">
