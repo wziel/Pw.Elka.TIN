@@ -257,7 +257,6 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp" />
-    <ClCompile Include="Source Files\Shared\Configuration.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #include "../../../Header Files/Components/Cipher/Cipher.h"
 #include <iostream>
+#include <WinSock2.h>
 
 Cipher::~Cipher()
 {
@@ -15,10 +16,11 @@ void Cipher::Send(unsigned char *buffer, int size)
 	int mySize = size + 3;
 	unsigned char *myBuffer = new unsigned char[mySize];
 	myBuffer[0] = BYTE (0x00);
-	myBuffer[1] = (size) & 0xFF;
-	myBuffer[2] = (size >> 8) & 0xFF;
 	for (int i = 0; i < size; i++)
 		myBuffer[i + 3] = buffer[i] ^ keyCode[i % 6];
+	size = htons(size);
+	myBuffer[1] = (size)& 0xFF;
+	myBuffer[2] = (size >> 8) & 0xFF;
 	bottomLayer->Send(myBuffer, mySize);
 	delete[] myBuffer;
 }

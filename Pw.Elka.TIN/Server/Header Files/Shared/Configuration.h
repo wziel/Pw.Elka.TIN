@@ -10,9 +10,48 @@ using namespace std;
 class Configuration
 {
 public:
-	static void initialize()
+	static Configuration& getConfiguration()
 	{
-		ifstream confFile(filename);
+		try 
+		{
+			static Configuration configuration;
+			return configuration;
+		}
+		catch (char const* tekst)
+		{
+			std::cout << tekst << std::endl;
+			exit(1);
+		}
+	}
+	int getMaxSession()
+	{
+		return maxSession;
+	}
+	string getServerSmtpName()
+	{
+		return serverSmtpName;
+	}
+	short getPortSmtp()
+	{
+		return portSmtp;
+	}
+	string getEncryptedSmtpLogin()
+	{
+		return encryptedSmtpLogin;
+	}
+	string getEncryptedSmtpPassword()
+	{
+		return encryptedSmtpPassword;
+	}
+	short getPortToListen()
+	{
+		return portToListen;
+	}
+
+private:
+	Configuration()
+	{
+		ifstream confFile("server.conf");
 		if (!confFile.is_open())
 		{
 			throw "Cannot open configuration file!";
@@ -58,45 +97,20 @@ public:
 		}
 		confFile.close();
 	}
-	static int getMaxSession()
-	{
-		return maxSession;
-	}
-	static string getServerSmtpName()
-	{
-		return serverSmtpName;
-	}
-	static short getPortSmtp()
-	{
-		return portSmtp;
-	}
-	static string getEncryptedSmtpLogin()
-	{
-		return encryptedSmtpLogin;
-	}
-	static string getEncryptedSmtpPassword()
-	{
-		return encryptedSmtpPassword;
-	}
-	static short getPortToListen()
-	{
-		return portToListen;
-	}
-
-	static string filename;
-private:
+	Configuration(const Configuration &) {}
+	~Configuration(){}
 
 	/* Data for RootManager */
-	static int maxSession;
+	int maxSession;
 
 	/* Data for SmtpLayer */
-	static string serverSmtpName;
-	static short portSmtp;
-	static string encryptedSmtpLogin;
-	static string encryptedSmtpPassword;
+	string serverSmtpName;
+	short portSmtp;
+	string encryptedSmtpLogin;
+	string encryptedSmtpPassword;
 
 	/* Data for SessionListener */
-	static short portToListen;
+	short portToListen;
 };
 
 
