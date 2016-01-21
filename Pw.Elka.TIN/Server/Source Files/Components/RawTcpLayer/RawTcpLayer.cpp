@@ -1,5 +1,3 @@
-//@todo - constructors instead of initialization
-
 #include "../../../Header Files/Components/RawTcpLayer/RawTcpLayer.h"
 #include <iostream>
 using namespace std;
@@ -15,7 +13,6 @@ RawTcpLayer::RawTcpLayer(int socketfd)
 	if (WSAEventArray[1] == WSA_INVALID_EVENT)
 		throw "WSA error";
 	
-	//iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_WRITE | FD_READ | FD_CLOSE);	//associate event with a socket
 	iResult = WSAEventSelect(socketFD, WSAEventArray[1],  FD_READ | FD_CLOSE);	//associate event with a socket
 	if (iResult != 0)
 		throw "WSA error";
@@ -47,35 +44,7 @@ void RawTcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 
 	iResult = send(socketFD, (char*)myBuffer, mySize, NULL);	//send message
 	if (iResult == SOCKET_ERROR)
-		throw "Network error";
-	
-	//signalledEvent = WSAWaitForMultipleEvents(2, WSAEventArray, FALSE, WSA_INFINITE, FALSE);	//wait for events - send a message or end TcpLayer
-	//if (signalledEvent == WSA_WAIT_FAILED)
-	//	throw "WSA error";
-	//
-	//if ((signalledEvent - WSA_WAIT_EVENT_0) == 0) // end of TcpLayer
-	//	throw "Client ended";
-	//
-	//else if ((signalledEvent - WSA_WAIT_EVENT_0) == 1) //send a message or client distonnected
-	//{
-	//	WSAEnumNetworkEvents(socketFD, WSAEventArray[1], &NetworkEvents);
-	//	if (NetworkEvents.lNetworkEvents & FD_WRITE)
-	//	{
-	//		//iResult = send(socketFD, (char*)myBuffer, mySize, NULL);	//send message
-	//		iResult = send(socketFD, (char*)buffer, mySize, NULL);	//send message
-	//		if (iResult == SOCKET_ERROR)
-	//			throw "Network error";
-	//		
-	//		//delete[] myBuffer;
-	//	}
-	//	else if (NetworkEvents.lNetworkEvents & FD_CLOSE)
-	//		throw "Client ended externally";
-	//	else throw "Network error";
-
-	//	WSAResetEvent(WSAEventArray[1]);
-
-	//
-	//}																				
+		throw "Network error";																			
 }
 
 void RawTcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from client
@@ -88,7 +57,6 @@ void RawTcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from
 	{
 
 	iResult = recv(socketFD, (char*)(buffer + receivedBytes), mySize - receivedBytes, NULL);
-	cout << WSAGetLastError();
 	if (iResult != SOCKET_ERROR)
 	{
 		receivedBytes += iResult;
