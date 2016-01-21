@@ -24,11 +24,11 @@ void SmtpLayer::Start()
 
 			this->mail = new CSmtp();
 			// setting unchangeable serwer details
-			mail->SetSMTPServer( Configuration::getConfiguration().getServerSmtpName.c_str() , Configuration::getConfiguration().getPortSmtp);
-			mail->SetLogin(Configuration::getConfiguration().getEncryptedSmtpLogin.c_str());
-			mail->SetPassword(Configuration::getConfiguration().getEncryptedSmtpPassword.c_str());
-			mail->SetSenderMail(Configuration::getConfiguration().getSmtpLogin.c_str());
-			mail->SetReplyTo(Configuration::getConfiguration().getSmtpLogin.c_str());
+			mail->SetSMTPServer(SERVER, 587);
+			mail->SetLogin(LOGIN);
+			mail->SetPassword(PWD);
+			mail->SetSenderMail(LOGIN);
+			mail->SetReplyTo(LOGIN);
 			if (smtpMessage.isQuitMessage)
 			{
 				return;
