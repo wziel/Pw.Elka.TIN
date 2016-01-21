@@ -1,13 +1,9 @@
-//@todo - constructors instead of initialization
-
 #include "../../../Header Files/Components/TcpLayer/TcpLayer.h"
 
 TcpLayer::TcpLayer(ILayer &bottomLayer)
 {
 	this->bottomLayer = &bottomLayer;
 }
-
-
 
 void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 {
