@@ -14,6 +14,7 @@
 #include "Enums.h"
 #include "../AdministratorView/ClientSessionView.h"
 #include "../AdministratorView/AdministratorView.h"
+#include "../../Shared/Configuration.h"
 
 #define _WINSOCKAPI_ 
 #include<Windows.h>

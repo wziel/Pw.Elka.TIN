@@ -324,6 +324,9 @@
     <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\types.h">
       <Filter>Header Files\libodbc++-0.2.5\headers</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Shared\Configuration.h">
+      <Filter>Header Files\Shared</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -464,6 +467,9 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp">
       <Filter>Source Files\Components\SmtpLayer</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\Shared\Configuration.cpp">
+      <Filter>Source Files\Shared</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Header Files\libodbc++-0.2.5\acinclude.m4">
@@ -550,6 +556,7 @@
     <None Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib.pdb">
       <Filter>Header Files\libodbc++-0.2.5\lib</Filter>
     </None>
+    <None Include="server.conf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib">

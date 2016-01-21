@@ -202,6 +202,7 @@
     <ClInclude Include="Header Files\libodbc++-0.2.5\include\odbc++\types.h" />
     <ClInclude Include="Header Files\Shared\AddressModel.h" />
     <ClInclude Include="Header Files\Shared\ClientModel.h" />
+    <ClInclude Include="Header Files\Shared\Configuration.h" />
     <ClInclude Include="Header Files\Shared\GroupModel.h" />
     <ClInclude Include="Header Files\Shared\MessageModel.h" />
     <ClInclude Include="Header Files\Shared\MessagesQueue.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp" />
     <ClCompile Include="Source Files\Components\SmtpLayer\SmtpLayer.cpp" />
     <ClCompile Include="Source Files\Components\TcpLayer\TcpLayer.cpp" />
+    <ClCompile Include="Source Files\Shared\Configuration.cpp" />
     <ClCompile Include="Source Files\Shared\MessagesQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +287,7 @@
     <None Include="Header Files\libodbc++-0.2.5\THANKS" />
     <None Include="Header Files\libodbc++-0.2.5\TODO" />
     <None Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib.pdb" />
+    <None Include="server.conf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Header Files\libodbc++-0.2.5\win32\debug-lib\odbc++sd.lib" />

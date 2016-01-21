@@ -2,6 +2,7 @@
 
 RootManager::RootManager()
 {
+	Configuration::initialize();
 	dataAccessLayer = new DAL();
 	messagesQueue = new MessagesQueue();
 	smtpLayer = new SmtpLayer(messagesQueue);

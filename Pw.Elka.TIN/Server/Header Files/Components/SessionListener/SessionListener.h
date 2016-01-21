@@ -3,6 +3,7 @@
 
 #include "../../Interfaces/ISessionListener.h"
 #include "../../Interfaces/IClientCreator.h"
+#include "../../Shared/Configuration.h"
 #include <WinSock2.h>
 #include <stdlib.h>
 
@@ -26,7 +27,7 @@ private:
 	/// Wskazanie na obiekt klasy zajmuj¹cy siê obs³ug¹ pod³¹czaj¹cych siê klientów
 	IClientCreator *clientCreator;
 	/// Port do nas³uchiwania
-	int portToListen;
+	short portToListen;
 	/// Deskryptor gniazda przyjmuj¹cego po³¹czenia
 	int socketDescriptor;
 	/// Deskryptor gniazda do którego pod³¹czony bêdzie nowy klient
