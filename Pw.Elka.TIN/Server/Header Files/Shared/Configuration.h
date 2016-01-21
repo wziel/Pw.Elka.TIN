@@ -39,11 +39,15 @@ public:
 	{
 		return encryptedSmtpLogin;
 	}
+	string getSmtpLogin()
+	{
+		return smtpLogin;
+	}
 	string getEncryptedSmtpPassword()
 	{
 		return encryptedSmtpPassword;
 	}
-	short getPortToListen()
+	unsigned short getPortToListen()
 	{
 		return portToListen;
 	}
@@ -84,6 +88,11 @@ private:
 				getline(confFile, data);
 				encryptedSmtpPassword = data;
 			}
+			else if (data == "smtpLogin")
+			{
+				getline(confFile, data);
+				smtpLogin = data;
+			}
 			else if (data == "portToListen")
 			{
 				getline(confFile, data);
@@ -105,9 +114,10 @@ private:
 
 	/* Data for SmtpLayer */
 	string serverSmtpName;
-	short portSmtp;
+	unsigned short portSmtp;
 	string encryptedSmtpLogin;
 	string encryptedSmtpPassword;
+	string smtpLogin;
 
 	/* Data for SessionListener */
 	short portToListen;

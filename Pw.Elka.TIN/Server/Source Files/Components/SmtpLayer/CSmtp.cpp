@@ -188,7 +188,7 @@ void CSmtp::Send()
 	// send login:
 	if(!m_sLogin.size())
 		throw ECSmtp(ECSmtp::UNDEF_LOGIN);
-	sprintf(SendBuf,"%s\r\n", WP_ENCODED_LOGIN);
+	sprintf(SendBuf,"%s\r\n", this->m_sLogin);
 	SendData();
 	bAccepted = false;
 	do
@@ -207,7 +207,7 @@ void CSmtp::Send()
 	// send password:
 	if(!m_sPassword.size())
 		throw ECSmtp(ECSmtp::UNDEF_PASSWORD);
-	sprintf(SendBuf,"%s\r\n", ENCODED_PWD);
+	sprintf(SendBuf,"%s\r\n", this->m_sPassword );
 	SendData();
 	bAccepted = false;
 	do
