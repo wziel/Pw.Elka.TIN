@@ -5,6 +5,7 @@
 #include "../../Components/SmtpLayer/CSmtp.h"
 #include "../../Shared/SmtpMessage.h"
 #include "../../Shared/MessagesQueue.h"
+#include "../../Shared/Configuration.h"
 /// Klasa reprezentujaca warstwê logikê ³acznosæi klienta smtp z serwerem smtp
 class SmtpLayer :
 	public ISmtpLayer
