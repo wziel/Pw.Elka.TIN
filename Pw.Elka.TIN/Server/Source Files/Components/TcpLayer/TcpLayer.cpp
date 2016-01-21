@@ -2,42 +2,9 @@
 
 #include "../../../Header Files/Components/TcpLayer/TcpLayer.h"
 
-TcpLayer::TcpLayer(int socketfd)
-	: socketFD(socketfd)
+TcpLayer::TcpLayer(ILayer& bottomLayer)
 {
-	WSAEventArray[0] = WSACreateEvent();	//event signalling end of client session
-	if (WSAEventArray[0] == WSA_INVALID_EVENT)
-	{
-		throw "WSA error";
-	}
-
-	WSAEventArray[1] = WSACreateEvent();	//network event - read
-	if (WSAEventArray[1] == WSA_INVALID_EVENT)
-	{
-		throw "WSA error";
-	}
-	iResult = WSAEventSelect(socketFD, WSAEventArray[1], FD_READ | FD_CLOSE);	//associate event with a socket
-	if (iResult != 0)
-	{
-		throw "WSA error";
-	}
-}
-
-int TcpLayer::End()
-{
-	if (WSASetEvent(WSAEventArray[0]) == TRUE)	//successfully signal an ending event
-		return 0;
-	
-	else
-		throw "WSA error";
-}
-
-int TcpLayer::CloseSocket()
-{
-	if (closesocket(socketFD) == 0)
-		return 0;
-	else
-		throw "WSA error";
+	throw "not implemented tcp layer constructor";
 }
 
 void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client

@@ -7,6 +7,7 @@
 #include "../Cipher/Cipher.h"
 #include "../TcpLayer/TcpLayer.h"
 #include "../SessionListener/SessionListener.h"
+#include "../RawTcpLayer/RawTcpLayer.h"
 #include "../DAL/DAL.h"
 #include "../../Shared/MessagesQueue.h"
 #include "../SmtpLayer/SmtpLayer.h"
@@ -32,8 +33,10 @@ private:
 		ClientSession* clientSession;
 		Cipher* cipher;
 		TcpLayer* tcpLayer;
+		RawTcpLayer* rawTcpLayer;
 		HANDLE thread;
 		ClientSessionState state;
+		~ClientSessionObjects();
 	};
 
 	///the biggest number of client id assigned
