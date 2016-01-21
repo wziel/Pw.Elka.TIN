@@ -29,12 +29,16 @@ void TcpLayer::Send(unsigned char* buffer, int size)	//send data to client
 
 void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from client
 {
-			mySize = (((mySizeBuffer[1]) << 8) | (mySizeBuffer[0]));
-			size = mySize;
 
-			buffer = new unsigned char[mySize];
+	int headerSize = 2;
+	bottomLayer->Receive(mySizeBuffer, headerSize);
+	mySize = (((mySizeBuffer[1]) << 8) | (mySizeBuffer[0]));
 
-			iResult = recv(socketFD, (char*)buffer, mySize, NULL);
+	buffer = new unsigned char[mySize];
+
+	bottomLayer->Receive(buffer, mySize);
+	
+	size = mySize;
 
 }
 

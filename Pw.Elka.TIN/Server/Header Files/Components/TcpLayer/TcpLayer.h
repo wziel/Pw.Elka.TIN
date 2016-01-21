@@ -22,6 +22,9 @@ private:
 ///Bottom layer
 	ILayer *bottomLayer;
 
+///Size of buffer for data (byte form)
+unsigned char* mySizeBuffer;
+
 
 };
 
