@@ -7,7 +7,6 @@ class TcpLayer :
 public:
 	TcpLayer(ILayer &bottomLayer);
 	~TcpLayer();
-
 //ILayer interface
 	///Sends data to client
 	void Send(unsigned char* buffer, int size);

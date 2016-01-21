@@ -10,6 +10,13 @@ RootManager::RootManager()
 	clientSessionsMutex = CreateMutex(NULL, FALSE, NULL);
 }
 
+RootManager::ClientSessionObjects::~ClientSessionObjects()
+{
+	delete clientSession;
+	delete cipher;
+	delete tcpLayer;
+	delete rawTcpLayer;
+}
 
 RootManager::~RootManager()
 {
@@ -20,9 +27,6 @@ RootManager::~RootManager()
 	while (clientSessions.size() > 0)
 	{
 		ClientSessionObjects* clientSession = clientSessions[clientSessions.size() - 1];
-		delete clientSession->cipher;
-		delete clientSession->clientSession;
-		delete clientSession->tcpLayer;
 		delete clientSession;
 		clientSessions.pop_back();
 	}
@@ -47,7 +51,7 @@ void RootManager::End()
 	isClosingDown = true;
 	for (int i = clientSessions.size() - 1; i >= 0; --i)
 	{
-		clientSessions[i]->tcpLayer->End();
+		clientSessions[i]->rawTcpLayer->End();
 	}
 	ReleaseMutex(clientSessionsMutex);
 
@@ -57,7 +61,6 @@ void RootManager::End()
 	for (int i = clientSessions.size() - 1; i >= 0; --i)
 	{
 		WaitForSingleObject(clientSessions[i]->thread, INFINITE);
-		clientSessions[i]->tcpLayer->CloseSocket();
 	}
 	ReleaseMutex(clientSessionsMutex);
 }
@@ -66,6 +69,7 @@ DWORD WINAPI RootManager::StartSmtpLayer(LPVOID lpParam)
 {
 	SmtpLayer* smtpLayer = (SmtpLayer*)lpParam;
 	smtpLayer->Start();
+	delete lpParam;
 	return 0;
 }
 
@@ -73,6 +77,7 @@ DWORD WINAPI RootManager::StartSessionsListener(LPVOID lpParam)
 {
 	SessionListener* sessionsLister = (SessionListener*)lpParam;
 	sessionsLister->Start();
+	delete lpParam;
 	return 0;
 }
 
@@ -85,8 +90,10 @@ void RootManager::CreateClientAsync(int socketfd, struct sockaddr_in newClientAd
 	{
 		ClientSessionObjects* sessionObjects = new ClientSessionObjects();
 
-		SessionState initialState = clientSessions.size() < 1000 ? SessionState::Unauthorized : SessionState::Busy;
-		sessionObjects->tcpLayer = new TcpLayer(socketfd);
+		SessionState initialState = clientSessions.size() < Configuration::getConfiguration().getMaxSession()
+			? SessionState::Unauthorized : SessionState::Busy;
+		sessionObjects->rawTcpLayer = new RawTcpLayer(socketfd);
+		sessionObjects->tcpLayer = new TcpLayer(*sessionObjects->rawTcpLayer);
 		sessionObjects->cipher = new Cipher(*sessionObjects->tcpLayer);
 		sessionObjects->clientSession = new ClientSession(*sessionObjects->cipher, *messagesQueue, initialState, *dataAccessLayer, *this);
 		sessionObjects->connectionId = connectionIdHighWaterMark++;
@@ -105,6 +112,7 @@ DWORD WINAPI RootManager::CreateClient(LPVOID lpParam)
 	ClientSessionObjects& sessionObjects = params->objectsToUpdate;
 
 	sessionObjects.clientSession->Start();
+	delete lpParam;
 	return 0;
 }
 
@@ -134,25 +142,17 @@ DWORD WINAPI RootManager::WaitForClientThreadToEnd(LPVOID lpParam)
 	HANDLE threadHandle = params->thread;
 	WaitForSingleObject(params->thread, INFINITE);
 
-	int id;
-
 	WaitForSingleObject(rootManager.clientSessionsMutex, INFINITE);
 	for (unsigned int i = 0; i < rootManager.clientSessions.size(); ++i)
 	{
 		if (threadHandle == rootManager.clientSessions[i]->thread)
 		{
-			id = rootManager.clientSessions[i]->connectionId;
-
-			rootManager.clientSessions[i]->tcpLayer->CloseSocket();
-			delete rootManager.clientSessions[i]->cipher;
-			delete rootManager.clientSessions[i]->clientSession;
-			delete rootManager.clientSessions[i]->tcpLayer;
 			delete rootManager.clientSessions[i];
 			rootManager.clientSessions.erase(rootManager.clientSessions.begin() + i);
 		}
 	}
 	ReleaseMutex(rootManager.clientSessionsMutex);
-	delete params;
+	delete lpParam;
 	return 0;
 }
 
@@ -208,7 +208,7 @@ bool RootManager::EndClientSession(unsigned clientSessionViewId)
 				throw "Not implemented";
 			}
 
-			clientSessions[i]->tcpLayer->End();
+			clientSessions[i]->rawTcpLayer->End();
 			clientSessions[i]->state = ClientSessionState::Ending;
 			DWORD dwThreadId;
 			WaitForClientThreadToEndParamsPointer threadParams

@@ -126,9 +126,6 @@
     <ClInclude Include="Header Files\Interfaces\ISmtpLayer.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Interfaces\ITcpLayerManager.h">
-      <Filter>Header Files\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Header Files\Shared\AddressModel.h">
       <Filter>Header Files\Shared</Filter>
     </ClInclude>
@@ -336,6 +333,9 @@
     <ClInclude Include="Header Files\Components\RawTcpLayer\RawTcpLayer.h">
       <Filter>Header Files\Components\RawTcpLayer</Filter>
     </ClInclude>
+    <ClInclude Include="Header Files\Interfaces\ITcpLayerManager.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Components\Cipher\Cipher.cpp">
@@ -475,9 +475,6 @@
     </ClCompile>
     <ClCompile Include="Source Files\Components\SmtpLayer\CSmtp.cpp">
       <Filter>Source Files\Components\SmtpLayer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source Files\Shared\Configuration.cpp">
-      <Filter>Source Files\Shared</Filter>
     </ClCompile>
     <ClCompile Include="Source Files\Components\RawTcpLayer\RawTcpLayer.cpp">
       <Filter>Source Files\Components\RawTcpLayer</Filter>
