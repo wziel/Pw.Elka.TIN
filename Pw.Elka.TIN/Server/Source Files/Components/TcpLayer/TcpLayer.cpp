@@ -36,7 +36,6 @@ void TcpLayer::Receive(unsigned char* &buffer, int &size)	//receive data from cl
 	bottomLayer->Receive(buffer, mySize);
 	
 	size = mySize;
-
 }
 
 TcpLayer::~TcpLayer()
