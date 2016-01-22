@@ -18,14 +18,7 @@
 #define COUNTER_VALUE	100		// how many times program will try to receive data
 
 
-#define WP_SERVER		"smtp.wp.pl"
-#define WP_LOGIN		"rozsylaczmaili@wp.pl"
-#define WP_PWD			"zaq12345"
-#define WP_ENCODED_LOGIN "cm96c3lsYWN6bWFpbGlAd3AucGw="
-#define ENCODED_PWD		"emFxMTIzNDU="
-#define SERVER		WP_SERVER
-#define LOGIN		WP_LOGIN
-#define PWD 		WP_PWD 
+
 
 const char BOUNDARY_TEXT[] = "__MESSAGE__ID__54yg6f6h6y456345";
 
