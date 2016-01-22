@@ -1,19 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64CBB83B-44C6-406D-98A6-60DE5D1DEF43}"
 	ProjectSection(SolutionItems) = preProject
-		16.01.2016 - błędy do poprawy.txt = 16.01.2016 - błędy do poprawy.txt
 		dokumentacja.docx = dokumentacja.docx
-		przepływy wstępne.jpg = przepływy wstępne.jpg
-		Rady dra Gawkowskiego.docx = Rady dra Gawkowskiego.docx
-		Rady-dra-Gawkowskiego-2.docx = Rady-dra-Gawkowskiego-2.docx
-		regulamin.docx = regulamin.docx
-		Scenariusze testowe.docx = Scenariusze testowe.docx
-		SMTP sequence diagram.vsdx = SMTP sequence diagram.vsdx
-		TINuseCase.docx = TINuseCase.docx
 		VisioDiagrams.vsdx = VisioDiagrams.vsdx
 	EndProjectSection
 EndProject
